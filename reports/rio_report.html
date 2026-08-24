@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DPX-Haskell: Architecture & Pattern Dashboard</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-purple: #9333ea;
+            --accent-blue: #38bdf8;
+            --accent-green: #22c55e;
+            --accent-yellow: #eab308;
+            --accent-red: #ef4444;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 24px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+        }
+        .title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a855f7 0%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+        }
+        .card-num {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-blue);
+        }
+        .card-label {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-top: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th {
+            background-color: #0b1120;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .badge.very_high { background-color: rgba(34, 197, 94, 0.2); color: var(--accent-green); border: 1px solid var(--accent-green); }
+        .badge.high { background-color: rgba(56, 189, 248, 0.2); color: var(--accent-blue); border: 1px solid var(--accent-blue); }
+        .badge.medium { background-color: rgba(234, 179, 8, 0.2); color: var(--accent-yellow); border: 1px solid var(--accent-yellow); }
+        .badge.low { background-color: rgba(239, 68, 68, 0.2); color: var(--accent-red); border: 1px solid var(--accent-red); }
+        .cat-badge {
+            background-color: rgba(147, 51, 234, 0.2);
+            color: #d8b4fe;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+        code {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            color: #f472b6;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <div class="title">DPX-Haskell Architecture Report</div>
+            <div style="color: var(--text-muted); margin-top: 4px;">Target: <code>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio</code></div>
+        </div>
+        <div style="text-align: right; color: var(--text-muted); font-size: 0.875rem;">
+            Scanned in <strong>0.0366s</strong>
+        </div>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <div class="card-num">86</div>
+            <div class="card-label">Files Scanned</div>
+        </div>
+        <div class="card">
+            <div class="card-num">42</div>
+            <div class="card-label">Total Detections</div>
+        </div>
+        <div class="card">
+            <div class="card-num">9</div>
+            <div class="card-label">Typeclass & Polymorphism</div>
+        </div>
+        <div class="card">
+            <div class="card-num">3</div>
+            <div class="card-label">Monads & ReaderT</div>
+        </div>
+        <div class="card">
+            <div class="card-num">1</div>
+            <div class="card-label">STM & Async Concurrency</div>
+        </div>
+        <div class="card">
+            <div class="card-num">2</div>
+            <div class="card-label">Safety & Space Leak Hazards</div>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Pattern / Rule</th>
+                <th>Category</th>
+                <th>Target</th>
+                <th>Confidence</th>
+                <th>Location</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+                <tr class="detection-row" data-category="typeclass_system" data-level="very_high">
+                    <td>#1</td>
+                    <td><strong><code>typeclass_adapter</code></strong></td>
+                    <td><span class="cat-badge">typeclass_system</span></td>
+                    <td><code>RIO.Process.HasProcessContext</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:217:1</small></td>
+                    <td>Typeclass &#x27;HasProcessContext&#x27; in &#x27;RIO.Process&#x27; defines an ad-hoc polymorphic Adapter interface with 1 method(s)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="typeclass_system" data-level="very_high">
+                    <td>#2</td>
+                    <td><strong><code>typeclass_adapter</code></strong></td>
+                    <td><span class="cat-badge">typeclass_system</span></td>
+                    <td><code>RIO.Prelude.RIO.HasStateRef</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/RIO.hs:114:1</small></td>
+                    <td>Typeclass &#x27;HasStateRef&#x27; in &#x27;RIO.Prelude.RIO&#x27; defines an ad-hoc polymorphic Adapter interface with 1 method(s)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="typeclass_system" data-level="very_high">
+                    <td>#3</td>
+                    <td><strong><code>typeclass_adapter</code></strong></td>
+                    <td><span class="cat-badge">typeclass_system</span></td>
+                    <td><code>RIO.Prelude.Display.Display</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Display.hs:58:1</small></td>
+                    <td>Typeclass &#x27;Display&#x27; in &#x27;RIO.Prelude.Display&#x27; defines an ad-hoc polymorphic Adapter interface with 2 method(s)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="typeclass_system" data-level="very_high">
+                    <td>#4</td>
+                    <td><strong><code>typeclass_adapter</code></strong></td>
+                    <td><span class="cat-badge">typeclass_system</span></td>
+                    <td><code>RIO.Prelude.Logger.HasLogFunc</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:117:1</small></td>
+                    <td>Typeclass &#x27;HasLogFunc&#x27; in &#x27;RIO.Prelude.Logger&#x27; defines an ad-hoc polymorphic Adapter interface with 1 method(s)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="typeclass_system" data-level="very_high">
+                    <td>#5</td>
+                    <td><strong><code>typeclass_adapter</code></strong></td>
+                    <td><span class="cat-badge">typeclass_system</span></td>
+                    <td><code>RIO.Prelude.Logger.HasGLogFunc</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:893:1</small></td>
+                    <td>Typeclass &#x27;HasGLogFunc&#x27; in &#x27;RIO.Prelude.Logger&#x27; defines an ad-hoc polymorphic Adapter interface with 1 method(s)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="typeclass_system" data-level="very_high">
+                    <td>#6</td>
+                    <td><strong><code>typeclass_adapter</code></strong></td>
+                    <td><span class="cat-badge">typeclass_system</span></td>
+                    <td><code>RIO.Prelude.Logger.HasLogLevel</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:987:1</small></td>
+                    <td>Typeclass &#x27;HasLogLevel&#x27; in &#x27;RIO.Prelude.Logger&#x27; defines an ad-hoc polymorphic Adapter interface with 1 method(s)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="typeclass_system" data-level="very_high">
+                    <td>#7</td>
+                    <td><strong><code>typeclass_adapter</code></strong></td>
+                    <td><span class="cat-badge">typeclass_system</span></td>
+                    <td><code>RIO.Prelude.Logger.HasLogSource</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:995:1</small></td>
+                    <td>Typeclass &#x27;HasLogSource&#x27; in &#x27;RIO.Prelude.Logger&#x27; defines an ad-hoc polymorphic Adapter interface with 1 method(s)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="typeclass_system" data-level="very_high">
+                    <td>#8</td>
+                    <td><strong><code>typeclass_adapter</code></strong></td>
+                    <td><span class="cat-badge">typeclass_system</span></td>
+                    <td><code>RIO.Orphans.HasResourceMap</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio-orphans/src/RIO/Orphans.hs:101:1</small></td>
+                    <td>Typeclass &#x27;HasResourceMap&#x27; in &#x27;RIO.Orphans&#x27; defines an ad-hoc polymorphic Adapter interface with 1 method(s)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="typeclass_system" data-level="very_high">
+                    <td>#9</td>
+                    <td><strong><code>type_family_associated</code></strong></td>
+                    <td><span class="cat-badge">typeclass_system</span></td>
+                    <td><code>RIO.Prelude.Logger</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:1:1</small></td>
+                    <td>Module &#x27;RIO.Prelude.Logger&#x27; implements Type Families / Associated Types for type-level computation and indexed type mappings</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="monad_architecture" data-level="very_high">
+                    <td>#10</td>
+                    <td><strong><code>reader_t_design_pattern</code></strong></td>
+                    <td><span class="cat-badge">monad_architecture</span></td>
+                    <td><code>RIO.Prelude.RIO</code></td>
+                    <td><span class="badge very_high">90% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/RIO.hs:1:1</small></td>
+                    <td>Module &#x27;RIO.Prelude.RIO&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="monad_architecture" data-level="very_high">
+                    <td>#11</td>
+                    <td><strong><code>monad_transformer_stack</code></strong></td>
+                    <td><span class="cat-badge">monad_architecture</span></td>
+                    <td><code>RIO.Prelude.RIO</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/RIO.hs:1:1</small></td>
+                    <td>Module &#x27;RIO.Prelude.RIO&#x27; layers a Monad Transformer Stack combining 1 distinct computational capabilities (ReaderT)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="monad_architecture" data-level="very_high">
+                    <td>#12</td>
+                    <td><strong><code>monad_transformer_stack</code></strong></td>
+                    <td><span class="cat-badge">monad_architecture</span></td>
+                    <td><code>RIO.Prelude.Types</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Types.hs:1:1</small></td>
+                    <td>Module &#x27;RIO.Prelude.Types&#x27; layers a Monad Transformer Stack combining 1 distinct computational capabilities (ReaderT)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#13</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Main.main</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/etc/template/app/Main.hs:11:1</small></td>
+                    <td>Function &#x27;main&#x27; in &#x27;Main&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#14</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RIO.LoggerSpec.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/LoggerSpec.hs:9:1</small></td>
+                    <td>Function &#x27;spec&#x27; in &#x27;RIO.LoggerSpec&#x27; chains a 22-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#15</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RIO.DequeSpec.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/DequeSpec.hs:41:1</small></td>
+                    <td>Function &#x27;spec&#x27; in &#x27;RIO.DequeSpec&#x27; chains a 8-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#16</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RIO.DequeSpec.same</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/DequeSpec.hs:112:1</small></td>
+                    <td>Function &#x27;same&#x27; in &#x27;RIO.DequeSpec&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#17</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RIO.PreludeSpec.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/PreludeSpec.hs:8:1</small></td>
+                    <td>Function &#x27;spec&#x27; in &#x27;RIO.PreludeSpec&#x27; chains a 8-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#18</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RIO.FileSpec.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/FileSpec.hs:16:1</small></td>
+                    <td>Function &#x27;spec&#x27; in &#x27;RIO.FileSpec&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#19</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RIO.Prelude.RIOSpec.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/Prelude/RIOSpec.hs:10:1</small></td>
+                    <td>Function &#x27;spec&#x27; in &#x27;RIO.Prelude.RIOSpec&#x27; chains a 14-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#20</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RIO.Process.preProcess</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:379:1</small></td>
+                    <td>Function &#x27;preProcess&#x27; in &#x27;RIO.Process&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#21</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RIO.Process.withProcessTimeLog</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:394:1</small></td>
+                    <td>Function &#x27;withProcessTimeLog&#x27; in &#x27;RIO.Process&#x27; chains a 5-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#22</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RIO.Process.proc</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:439:1</small></td>
+                    <td>Function &#x27;proc&#x27; in &#x27;RIO.Process&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#23</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RIO.Process.exec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:547:1</small></td>
+                    <td>Function &#x27;exec&#x27; in &#x27;RIO.Process&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#24</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RIO.Process.findExecutable</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:590:1</small></td>
+                    <td>Function &#x27;findExecutable&#x27; in &#x27;RIO.Process&#x27; chains a 5-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#25</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RIO.Deque.foldlDeque</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Deque.hs:203:1</small></td>
+                    <td>Function &#x27;foldlDeque&#x27; in &#x27;RIO.Deque&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#26</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RIO.Deque.foldrDeque</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Deque.hs:227:1</small></td>
+                    <td>Function &#x27;foldrDeque&#x27; in &#x27;RIO.Deque&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#27</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RIO.Prelude.Simple.runSimpleApp</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Simple.hs:56:1</small></td>
+                    <td>Function &#x27;runSimpleApp&#x27; in &#x27;RIO.Prelude.Simple&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#28</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RIO.Prelude.Logger.logOptionsHandle</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:357:1</small></td>
+                    <td>Function &#x27;logOptionsHandle&#x27; in &#x27;RIO.Prelude.Logger&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#29</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RIO.Prelude.Logger.simpleLogFunc</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:635:1</small></td>
+                    <td>Function &#x27;simpleLogFunc&#x27; in &#x27;RIO.Prelude.Logger&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#30</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RIO.OrphansSpec.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio-orphans/test/RIO/OrphansSpec.hs:9:1</small></td>
+                    <td>Function &#x27;spec&#x27; in &#x27;RIO.OrphansSpec&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="optics_lenses" data-level="very_high">
+                    <td>#31</td>
+                    <td><strong><code>lens_prism_optics</code></strong></td>
+                    <td><span class="cat-badge">optics_lenses</span></td>
+                    <td><code>RIO.Prelude.Lens</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Lens.hs:1:1</small></td>
+                    <td>Module &#x27;RIO.Prelude.Lens&#x27; integrates Functional Optics (Lenses/Prisms) for composable immutable data access and transformation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="optics_lenses" data-level="very_high">
+                    <td>#32</td>
+                    <td><strong><code>lens_prism_optics</code></strong></td>
+                    <td><span class="cat-badge">optics_lenses</span></td>
+                    <td><code>RIO.Prelude.Types</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Types.hs:1:1</small></td>
+                    <td>Module &#x27;RIO.Prelude.Types&#x27; integrates Functional Optics (Lenses/Prisms) for composable immutable data access and transformation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#33</td>
+                    <td><strong><code>smart_constructor_module</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RIO.Prelude.Simple.mkSimpleApp</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Simple.hs:40:1</small></td>
+                    <td>Function &#x27;mkSimpleApp&#x27; in &#x27;RIO.Prelude.Simple&#x27; implements Smart Constructor pattern enforcing domain validation invariants</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#34</td>
+                    <td><strong><code>async_concurrent_flow</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>RIO.Prelude.Trace</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Trace.hs:1:1</small></td>
+                    <td>Module &#x27;RIO.Prelude.Trace&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="very_high">
+                    <td>#35</td>
+                    <td><strong><code>stream_processing_pipeline</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Make-template</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/etc/make-template.hs:1:1</small></td>
+                    <td>Module &#x27;Make-template&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="very_high">
+                    <td>#36</td>
+                    <td><strong><code>stream_processing_pipeline</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RIO.Prelude</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude.hs:1:1</small></td>
+                    <td>Module &#x27;RIO.Prelude&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="very_high">
+                    <td>#37</td>
+                    <td><strong><code>stream_processing_pipeline</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RIO.Seq</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Seq.hs:1:1</small></td>
+                    <td>Module &#x27;RIO.Seq&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="resilience" data-level="high">
+                    <td>#38</td>
+                    <td><strong><code>lazy_space_leak_risk</code></strong></td>
+                    <td><span class="cat-badge">resilience</span></td>
+                    <td><code>RIO.Prelude.RIO.ioRefToSomeRef</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/RIO.hs:102:1</small></td>
+                    <td>Resilience Risk (Lazy Space Leak): Function &#x27;ioRefToSomeRef&#x27; in &#x27;RIO.Prelude.RIO&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="resilience" data-level="very_high">
+                    <td>#39</td>
+                    <td><strong><code>catch_all_some_exception</code></strong></td>
+                    <td><span class="cat-badge">resilience</span></td>
+                    <td><code>RIO.Prelude.Logger.getCanUseUnicode</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:397:1</small></td>
+                    <td>Resilience Anti-Pattern: Function &#x27;getCanUseUnicode&#x27; in &#x27;RIO.Prelude.Logger&#x27; catches `SomeException` without rethrowing async exceptions (`ThreadKilled`); use `Control.Exception.Safe`</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="very_high">
+                    <td>#40</td>
+                    <td><strong><code>god_module_srp</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>RIO.Process</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:1:1</small></td>
+                    <td>SRP Violation (God Module): Module &#x27;RIO.Process&#x27; contains 40 declarations across 712 lines of code; decompose into focused domain modules</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="very_high">
+                    <td>#41</td>
+                    <td><strong><code>god_module_srp</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>RIO.Prelude.Logger</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:1:1</small></td>
+                    <td>SRP Violation (God Module): Module &#x27;RIO.Prelude.Logger&#x27; contains 64 declarations across 1009 lines of code; decompose into focused domain modules</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#42</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>RIO.Prelude.Logger.simpleLogFunc</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:635:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;simpleLogFunc&#x27; in &#x27;RIO.Prelude.Logger&#x27; has cyclomatic complexity of 16; refactor complex pattern branches</td>
+                </tr>
+                
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DPX-Haskell: Architecture & Pattern Dashboard</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-purple: #9333ea;
+            --accent-blue: #38bdf8;
+            --accent-green: #22c55e;
+            --accent-yellow: #eab308;
+            --accent-red: #ef4444;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 24px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+        }
+        .title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a855f7 0%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+        }
+        .card-num {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-blue);
+        }
+        .card-label {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-top: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th {
+            background-color: #0b1120;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .badge.very_high { background-color: rgba(34, 197, 94, 0.2); color: var(--accent-green); border: 1px solid var(--accent-green); }
+        .badge.high { background-color: rgba(56, 189, 248, 0.2); color: var(--accent-blue); border: 1px solid var(--accent-blue); }
+        .badge.medium { background-color: rgba(234, 179, 8, 0.2); color: var(--accent-yellow); border: 1px solid var(--accent-yellow); }
+        .badge.low { background-color: rgba(239, 68, 68, 0.2); color: var(--accent-red); border: 1px solid var(--accent-red); }
+        .cat-badge {
+            background-color: rgba(147, 51, 234, 0.2);
+            color: #d8b4fe;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+        code {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            color: #f472b6;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <div class="title">DPX-Haskell Architecture Report</div>
+            <div style="color: var(--text-muted); margin-top: 4px;">Target: <code>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec</code></div>
+        </div>
+        <div style="text-align: right; color: var(--text-muted); font-size: 0.875rem;">
+            Scanned in <strong>0.0581s</strong>
+        </div>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <div class="card-num">42</div>
+            <div class="card-label">Files Scanned</div>
+        </div>
+        <div class="card">
+            <div class="card-num">64</div>
+            <div class="card-label">Total Detections</div>
+        </div>
+        <div class="card">
+            <div class="card-num">11</div>
+            <div class="card-label">Typeclass & Polymorphism</div>
+        </div>
+        <div class="card">
+            <div class="card-num">9</div>
+            <div class="card-label">Monads & ReaderT</div>
+        </div>
+        <div class="card">
+            <div class="card-num">1</div>
+            <div class="card-label">STM & Async Concurrency</div>
+        </div>
+        <div class="card">
+            <div class="card-num">5</div>
+            <div class="card-label">Safety & Space Leak Hazards</div>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Pattern / Rule</th>
+                <th>Category</th>
+                <th>Target</th>
+                <th>Confidence</th>
+                <th>Location</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+                <tr class="detection-row" data-category="typeclass_system" data-level="very_high">
+                    <td>#1</td>
+                    <td><strong><code>typeclass_adapter</code></strong></td>
+                    <td><span class="cat-badge">typeclass_system</span></td>
+                    <td><code>Text.Megaparsec.Class.MonadParsec</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Class.hs:50:1</small></td>
+                    <td>Typeclass &#x27;MonadParsec&#x27; in &#x27;Text.Megaparsec.Class&#x27; defines an ad-hoc polymorphic Adapter interface with 17 method(s)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="typeclass_system" data-level="very_high">
+                    <td>#2</td>
+                    <td><strong><code>typeclass_adapter</code></strong></td>
+                    <td><span class="cat-badge">typeclass_system</span></td>
+                    <td><code>Text.Megaparsec.Debug.MonadParsecDbg</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Debug.hs:48:1</small></td>
+                    <td>Typeclass &#x27;MonadParsecDbg&#x27; in &#x27;Text.Megaparsec.Debug&#x27; defines an ad-hoc polymorphic Adapter interface with 1 method(s)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="typeclass_system" data-level="very_high">
+                    <td>#3</td>
+                    <td><strong><code>typeclass_adapter</code></strong></td>
+                    <td><span class="cat-badge">typeclass_system</span></td>
+                    <td><code>Text.Megaparsec.Error.ShowErrorComponent</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Error.hs:332:1</small></td>
+                    <td>Typeclass &#x27;ShowErrorComponent&#x27; in &#x27;Text.Megaparsec.Error&#x27; defines an ad-hoc polymorphic Adapter interface with 2 method(s)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="typeclass_system" data-level="very_high">
+                    <td>#4</td>
+                    <td><strong><code>typeclass_adapter</code></strong></td>
+                    <td><span class="cat-badge">typeclass_system</span></td>
+                    <td><code>Text.Megaparsec.Stream.Stream</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:68:1</small></td>
+                    <td>Typeclass &#x27;Stream&#x27; in &#x27;Text.Megaparsec.Stream&#x27; defines an ad-hoc polymorphic Adapter interface with 8 method(s)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="typeclass_system" data-level="very_high">
+                    <td>#5</td>
+                    <td><strong><code>typeclass_adapter</code></strong></td>
+                    <td><span class="cat-badge">typeclass_system</span></td>
+                    <td><code>Text.Megaparsec.Stream.VisualStream</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:414:1</small></td>
+                    <td>Typeclass &#x27;VisualStream&#x27; in &#x27;Text.Megaparsec.Stream&#x27; defines an ad-hoc polymorphic Adapter interface with 2 method(s)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="typeclass_system" data-level="very_high">
+                    <td>#6</td>
+                    <td><strong><code>typeclass_adapter</code></strong></td>
+                    <td><span class="cat-badge">typeclass_system</span></td>
+                    <td><code>Text.Megaparsec.Stream.TraversableStream</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:450:1</small></td>
+                    <td>Typeclass &#x27;TraversableStream&#x27; in &#x27;Text.Megaparsec.Stream&#x27; defines an ad-hoc polymorphic Adapter interface with 2 method(s)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="typeclass_system" data-level="very_high">
+                    <td>#7</td>
+                    <td><strong><code>typeclass_adapter</code></strong></td>
+                    <td><span class="cat-badge">typeclass_system</span></td>
+                    <td><code>Text.Megaparsec.Byte.Binary.BinaryChunk</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Binary.hs:54:1</small></td>
+                    <td>Typeclass &#x27;BinaryChunk&#x27; in &#x27;Text.Megaparsec.Byte.Binary&#x27; defines an ad-hoc polymorphic Adapter interface with 2 method(s)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="typeclass_system" data-level="very_high">
+                    <td>#8</td>
+                    <td><strong><code>type_family_associated</code></strong></td>
+                    <td><span class="cat-badge">typeclass_system</span></td>
+                    <td><code>Text.Megaparsec.Stream</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:1:1</small></td>
+                    <td>Module &#x27;Text.Megaparsec.Stream&#x27; implements Type Families / Associated Types for type-level computation and indexed type mappings</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="typeclass_system" data-level="high">
+                    <td>#9</td>
+                    <td><strong><code>newtype_strong_typing</code></strong></td>
+                    <td><span class="cat-badge">typeclass_system</span></td>
+                    <td><code>Text.Megaparsec.Internal</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Internal.hs:1:1</small></td>
+                    <td>Module &#x27;Text.Megaparsec.Internal&#x27; enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="typeclass_system" data-level="high">
+                    <td>#10</td>
+                    <td><strong><code>newtype_strong_typing</code></strong></td>
+                    <td><span class="cat-badge">typeclass_system</span></td>
+                    <td><code>Text.Megaparsec.Pos</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Pos.hs:1:1</small></td>
+                    <td>Module &#x27;Text.Megaparsec.Pos&#x27; enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="typeclass_system" data-level="high">
+                    <td>#11</td>
+                    <td><strong><code>newtype_strong_typing</code></strong></td>
+                    <td><span class="cat-badge">typeclass_system</span></td>
+                    <td><code>Text.Megaparsec.Stream</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:1:1</small></td>
+                    <td>Module &#x27;Text.Megaparsec.Stream&#x27; enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="monad_architecture" data-level="very_high">
+                    <td>#12</td>
+                    <td><strong><code>reader_t_design_pattern</code></strong></td>
+                    <td><span class="cat-badge">monad_architecture</span></td>
+                    <td><code>Text.MegaparsecSpec</code></td>
+                    <td><span class="badge very_high">90% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1</small></td>
+                    <td>Module &#x27;Text.MegaparsecSpec&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="monad_architecture" data-level="very_high">
+                    <td>#13</td>
+                    <td><strong><code>monad_transformer_stack</code></strong></td>
+                    <td><span class="cat-badge">monad_architecture</span></td>
+                    <td><code>Text.Megaparsec.Class</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Class.hs:1:1</small></td>
+                    <td>Module &#x27;Text.Megaparsec.Class&#x27; layers a Monad Transformer Stack combining 5 distinct computational capabilities (IdentityT, RWST, ReaderT, StateT, WriterT)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="monad_architecture" data-level="very_high">
+                    <td>#14</td>
+                    <td><strong><code>monad_transformer_stack</code></strong></td>
+                    <td><span class="cat-badge">monad_architecture</span></td>
+                    <td><code>Text.Megaparsec.Debug</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Debug.hs:1:1</small></td>
+                    <td>Module &#x27;Text.Megaparsec.Debug&#x27; layers a Monad Transformer Stack combining 5 distinct computational capabilities (IdentityT, RWST, ReaderT, StateT, WriterT)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="monad_architecture" data-level="very_high">
+                    <td>#15</td>
+                    <td><strong><code>monad_transformer_stack</code></strong></td>
+                    <td><span class="cat-badge">monad_architecture</span></td>
+                    <td><code>Text.MegaparsecSpec</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1</small></td>
+                    <td>Module &#x27;Text.MegaparsecSpec&#x27; layers a Monad Transformer Stack combining 4 distinct computational capabilities (RWST, ReaderT, StateT, WriterT)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="monad_architecture" data-level="very_high">
+                    <td>#16</td>
+                    <td><strong><code>monad_transformer_stack</code></strong></td>
+                    <td><span class="cat-badge">monad_architecture</span></td>
+                    <td><code>Text.Megaparsec.DebugSpec</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/DebugSpec.hs:1:1</small></td>
+                    <td>Module &#x27;Text.Megaparsec.DebugSpec&#x27; layers a Monad Transformer Stack combining 3 distinct computational capabilities (RWST, StateT, WriterT)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="monad_architecture" data-level="very_high">
+                    <td>#17</td>
+                    <td><strong><code>monad_transformer_stack</code></strong></td>
+                    <td><span class="cat-badge">monad_architecture</span></td>
+                    <td><code>Test.Hspec.Megaparsec.AdHoc</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/src/Test/Hspec/Megaparsec/AdHoc.hs:1:1</small></td>
+                    <td>Module &#x27;Test.Hspec.Megaparsec.AdHoc&#x27; layers a Monad Transformer Stack combining 2 distinct computational capabilities (RWST, WriterT)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="monad_architecture" data-level="very_high">
+                    <td>#18</td>
+                    <td><strong><code>tagless_final_style</code></strong></td>
+                    <td><span class="cat-badge">monad_architecture</span></td>
+                    <td><code>Text.Megaparsec.Class.MonadParsec</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Class.hs:50:1</small></td>
+                    <td>Typeclass &#x27;MonadParsec&#x27; in &#x27;Text.Megaparsec.Class&#x27; adopts Tagless Final / MTL capability pattern providing polymorphic monadic effects</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#19</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Text.Megaparsec.match</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec.hs:577:1</small></td>
+                    <td>Function &#x27;match&#x27; in &#x27;Text.Megaparsec&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#20</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Text.Megaparsec.Char.Lexer.indentBlock</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:236:1</small></td>
+                    <td>Function &#x27;indentBlock&#x27; in &#x27;Text.Megaparsec.Char.Lexer&#x27; chains a 7-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#21</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Text.Megaparsec.Char.Lexer.scientific</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:469:1</small></td>
+                    <td>Function &#x27;scientific&#x27; in &#x27;Text.Megaparsec.Char.Lexer&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#22</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Text.Megaparsec.Char.Lexer.float</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:493:1</small></td>
+                    <td>Function &#x27;float&#x27; in &#x27;Text.Megaparsec.Char.Lexer&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#23</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Text.Megaparsec.Byte.Lexer.scientific</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Lexer.hs:219:1</small></td>
+                    <td>Function &#x27;scientific&#x27; in &#x27;Text.Megaparsec.Byte.Lexer&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#24</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Text.Megaparsec.Byte.Lexer.float</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Lexer.hs:239:1</small></td>
+                    <td>Function &#x27;float&#x27; in &#x27;Text.Megaparsec.Byte.Lexer&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#25</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Text.MegaparsecSpec.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1</small></td>
+                    <td>Function &#x27;spec&#x27; in &#x27;Text.MegaparsecSpec&#x27; chains a 16-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#26</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Text.Megaparsec.Char.LexerSpec.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/Char/LexerSpec.hs:24:1</small></td>
+                    <td>Function &#x27;spec&#x27; in &#x27;Text.Megaparsec.Char.LexerSpec&#x27; chains a 12-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#27</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>ParsersBench.Json.Megaparsec.commaSeparated</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Json/Megaparsec.hs:75:1</small></td>
+                    <td>Function &#x27;commaSeparated&#x27; in &#x27;ParsersBench.Json.Megaparsec&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#28</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>ParsersBench.Json.Attoparsec.commaSeparated</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Json/Attoparsec.hs:71:1</small></td>
+                    <td>Function &#x27;commaSeparated&#x27; in &#x27;ParsersBench.Json.Attoparsec&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#29</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>ParsersBench.Log.Megaparsec.parseIP</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs:27:1</small></td>
+                    <td>Function &#x27;parseIP&#x27; in &#x27;ParsersBench.Log.Megaparsec&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#30</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>ParsersBench.Log.Megaparsec.timeParser</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs:38:1</small></td>
+                    <td>Function &#x27;timeParser&#x27; in &#x27;ParsersBench.Log.Megaparsec&#x27; chains a 6-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#31</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>ParsersBench.Log.Megaparsec.logEntryParser</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs:64:1</small></td>
+                    <td>Function &#x27;logEntryParser&#x27; in &#x27;ParsersBench.Log.Megaparsec&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#32</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>ParsersBench.Log.Attoparsec.parseIP</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Attoparsec.hs:23:1</small></td>
+                    <td>Function &#x27;parseIP&#x27; in &#x27;ParsersBench.Log.Attoparsec&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#33</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>ParsersBench.Log.Attoparsec.timeParser</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Attoparsec.hs:34:1</small></td>
+                    <td>Function &#x27;timeParser&#x27; in &#x27;ParsersBench.Log.Attoparsec&#x27; chains a 6-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#34</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>ParsersBench.Log.Attoparsec.logEntryParser</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Attoparsec.hs:60:1</small></td>
+                    <td>Function &#x27;logEntryParser&#x27; in &#x27;ParsersBench.Log.Attoparsec&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="monad_architecture" data-level="very_high">
+                    <td>#35</td>
+                    <td><strong><code>continuation_monad</code></strong></td>
+                    <td><span class="cat-badge">monad_architecture</span></td>
+                    <td><code>Text.Megaparsec.Internal</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Internal.hs:1:1</small></td>
+                    <td>Module &#x27;Text.Megaparsec.Internal&#x27; employs Continuation Monad (`ContT`/`callCC`) for non-local control transfer and coroutine composition</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="monad_architecture" data-level="very_high">
+                    <td>#36</td>
+                    <td><strong><code>continuation_monad</code></strong></td>
+                    <td><span class="cat-badge">monad_architecture</span></td>
+                    <td><code>Text.MegaparsecSpec</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1</small></td>
+                    <td>Module &#x27;Text.MegaparsecSpec&#x27; employs Continuation Monad (`ContT`/`callCC`) for non-local control transfer and coroutine composition</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#37</td>
+                    <td><strong><code>async_concurrent_flow</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>Text.Megaparsec.Debug</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Debug.hs:1:1</small></td>
+                    <td>Module &#x27;Text.Megaparsec.Debug&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="very_high">
+                    <td>#38</td>
+                    <td><strong><code>stream_processing_pipeline</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Text.Megaparsec.Byte.Binary</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Binary.hs:1:1</small></td>
+                    <td>Module &#x27;Text.Megaparsec.Byte.Binary&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="type_safety" data-level="very_high">
+                    <td>#39</td>
+                    <td><strong><code>unchecked_bottom_error</code></strong></td>
+                    <td><span class="cat-badge">type_safety</span></td>
+                    <td><code>Text.Megaparsec.Byte.Binary.finiteByteSize</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Binary.hs:188:1</small></td>
+                    <td>Type Safety Hazard: Function &#x27;finiteByteSize&#x27; in &#x27;Text.Megaparsec.Byte.Binary&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="type_safety" data-level="very_high">
+                    <td>#40</td>
+                    <td><strong><code>unchecked_from_just</code></strong></td>
+                    <td><span class="cat-badge">type_safety</span></td>
+                    <td><code>Text.Megaparsec.match</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec.hs:577:1</small></td>
+                    <td>Type Safety Hazard: Function &#x27;match&#x27; in &#x27;Text.Megaparsec&#x27; calls partial `fromJust` which throws an uncatchable exception on `Nothing`; use `fromMaybe` or pattern match</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="resilience" data-level="high">
+                    <td>#41</td>
+                    <td><strong><code>lazy_space_leak_risk</code></strong></td>
+                    <td><span class="cat-badge">resilience</span></td>
+                    <td><code>Text.Megaparsec.Error.errorBundlePrettyWith</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Error.hs:351:1</small></td>
+                    <td>Resilience Risk (Lazy Space Leak): Function &#x27;errorBundlePrettyWith&#x27; in &#x27;Text.Megaparsec.Error&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="resilience" data-level="high">
+                    <td>#42</td>
+                    <td><strong><code>lazy_space_leak_risk</code></strong></td>
+                    <td><span class="cat-badge">resilience</span></td>
+                    <td><code>Text.MegaparsecSpec.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1</small></td>
+                    <td>Resilience Risk (Lazy Space Leak): Function &#x27;spec&#x27; in &#x27;Text.MegaparsecSpec&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="resilience" data-level="very_high">
+                    <td>#43</td>
+                    <td><strong><code>catch_all_some_exception</code></strong></td>
+                    <td><span class="cat-badge">resilience</span></td>
+                    <td><code>Text.MegaparsecSpec.spec</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1</small></td>
+                    <td>Resilience Anti-Pattern: Function &#x27;spec&#x27; in &#x27;Text.MegaparsecSpec&#x27; catches `SomeException` without rethrowing async exceptions (`ThreadKilled`); use `Control.Exception.Safe`</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="very_high">
+                    <td>#44</td>
+                    <td><strong><code>god_module_srp</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Text.Megaparsec</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec.hs:1:1</small></td>
+                    <td>SRP Violation (God Module): Module &#x27;Text.Megaparsec&#x27; contains 32 declarations across 665 lines of code; decompose into focused domain modules</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="very_high">
+                    <td>#45</td>
+                    <td><strong><code>god_module_srp</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Text.Megaparsec.Internal</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Internal.hs:1:1</small></td>
+                    <td>SRP Violation (God Module): Module &#x27;Text.Megaparsec.Internal&#x27; contains 38 declarations across 769 lines of code; decompose into focused domain modules</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="very_high">
+                    <td>#46</td>
+                    <td><strong><code>god_module_srp</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Text.Megaparsec.Char</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char.hs:1:1</small></td>
+                    <td>SRP Violation (God Module): Module &#x27;Text.Megaparsec.Char&#x27; contains 31 declarations across 319 lines of code; decompose into focused domain modules</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="very_high">
+                    <td>#47</td>
+                    <td><strong><code>god_module_srp</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Text.MegaparsecSpec</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1</small></td>
+                    <td>SRP Violation (God Module): Module &#x27;Text.MegaparsecSpec&#x27; contains 5 declarations across 1855 lines of code; decompose into focused domain modules</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#48</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Text.Megaparsec.Stream.charPretty&#x27;</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:718:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;charPretty&#x27;&#x27; in &#x27;Text.Megaparsec.Stream&#x27; has cyclomatic complexity of 18; refactor complex pattern branches</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#49</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Text.Megaparsec.Char.categoryName</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char.hs:252:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;categoryName&#x27; in &#x27;Text.Megaparsec.Char&#x27; has cyclomatic complexity of 19; refactor complex pattern branches</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#50</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Text.MegaparsecSpec.spec</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;spec&#x27; in &#x27;Text.MegaparsecSpec&#x27; has cyclomatic complexity of 126; refactor complex pattern branches</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#51</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Text.Megaparsec.StreamSpec.spec</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/StreamSpec.hs:24:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;spec&#x27; in &#x27;Text.Megaparsec.StreamSpec&#x27; has cyclomatic complexity of 26; refactor complex pattern branches</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#52</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Text.Megaparsec.ErrorSpec.spec</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/ErrorSpec.hs:17:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;spec&#x27; in &#x27;Text.Megaparsec.ErrorSpec&#x27; has cyclomatic complexity of 47; refactor complex pattern branches</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#53</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Text.Megaparsec.CharSpec.spec</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/CharSpec.hs:14:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;spec&#x27; in &#x27;Text.Megaparsec.CharSpec&#x27; has cyclomatic complexity of 16; refactor complex pattern branches</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#54</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Text.Megaparsec.Char.LexerSpec.spec</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/Char/LexerSpec.hs:24:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;spec&#x27; in &#x27;Text.Megaparsec.Char.LexerSpec&#x27; has cyclomatic complexity of 49; refactor complex pattern branches</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#55</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Text.Megaparsec.Byte.LexerSpec.spec</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/Byte/LexerSpec.hs:23:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;spec&#x27; in &#x27;Text.Megaparsec.Byte.LexerSpec&#x27; has cyclomatic complexity of 16; refactor complex pattern branches</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#56</td>
+                    <td><strong><code>duplicate_code_dry</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Text.Megaparsec.Byte.eol</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:77:1</small></td>
+                    <td>DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.eol, Text.Megaparsec.Char.eol</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#57</td>
+                    <td><strong><code>duplicate_code_dry</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Text.Megaparsec.Byte.space</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:92:1</small></td>
+                    <td>DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.space, Text.Megaparsec.Char.space</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#58</td>
+                    <td><strong><code>duplicate_code_dry</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Text.Megaparsec.Byte.hspace</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:99:1</small></td>
+                    <td>DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.hspace, Text.Megaparsec.Char.hspace</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#59</td>
+                    <td><strong><code>duplicate_code_dry</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Text.Megaparsec.Byte.space1</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:106:1</small></td>
+                    <td>DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.space1, Text.Megaparsec.Char.space1</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#60</td>
+                    <td><strong><code>duplicate_code_dry</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Text.Megaparsec.Byte.hspace1</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:113:1</small></td>
+                    <td>DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.hspace1, Text.Megaparsec.Char.hspace1</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#61</td>
+                    <td><strong><code>duplicate_code_dry</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Text.Megaparsec.Byte.spaceChar</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:127:1</small></td>
+                    <td>DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.spaceChar, Text.Megaparsec.Char.spaceChar</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#62</td>
+                    <td><strong><code>duplicate_code_dry</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Text.Megaparsec.Char.Lexer.scientific</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:469:1</small></td>
+                    <td>DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Char.Lexer.scientific, Text.Megaparsec.Byte.Lexer.scientific</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#63</td>
+                    <td><strong><code>duplicate_code_dry</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Text.Megaparsec.Char.Lexer.float</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:493:1</small></td>
+                    <td>DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Char.Lexer.float, Text.Megaparsec.Byte.Lexer.float</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#64</td>
+                    <td><strong><code>duplicate_code_dry</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>ParsersBench.Log.Megaparsec.productParser</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs:57:1</small></td>
+                    <td>DRY Violation: Identical function logic duplicated across 2 location(s): ParsersBench.Log.Megaparsec.productParser, ParsersBench.Log.Attoparsec.productParser</td>
+                </tr>
+                
+        </tbody>
+    </table>
+</body>
+</html>

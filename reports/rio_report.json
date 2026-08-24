@@ -2,7 +2,7 @@
   "project_path": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio",
   "scanned_files_count": 86,
   "total_detections_count": 42,
-  "elapsed_seconds": 0.0224,
+  "elapsed_seconds": 0.0366,
   "summary_by_category": {
     "typeclass_system": 9,
     "monad_architecture": 3,

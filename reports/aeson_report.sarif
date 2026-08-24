@@ -1,0 +1,3238 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "DPX-Haskell",
+          "semanticVersion": "0.1.0",
+          "informationUri": "https://github.com/bivex/DPX-Haskell",
+          "rules": []
+        }
+      },
+      "results": [
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'ShrinkMetric' in 'PropertyQC' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/PropertyQC.hs"
+                },
+                "region": {
+                  "startLine": 50,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'ApproxEq' in 'Types' defines an ad-hoc polymorphic Adapter interface with 0 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/Types.hs"
+                },
+                "region": {
+                  "startLine": 65,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'ToJSON' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 5 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs"
+                },
+                "region": {
+                  "startLine": 292,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'KeyValue' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs"
+                },
+                "region": {
+                  "startLine": 343,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'KeyValueOmit' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs"
+                },
+                "region": {
+                  "startLine": 379,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'ToJSONKey' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 2 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs"
+                },
+                "region": {
+                  "startLine": 519,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'ToJSON1' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 5 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs"
+                },
+                "region": {
+                  "startLine": 649,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'ToJSON2' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 5 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs"
+                },
+                "region": {
+                  "startLine": 701,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'SumToJSON' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs"
+                },
+                "region": {
+                  "startLine": 928,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'TaggedObject' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs"
+                },
+                "region": {
+                  "startLine": 986,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'GetConName' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 0 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs"
+                },
+                "region": {
+                  "startLine": 1045,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'ConsToJSON' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs"
+                },
+                "region": {
+                  "startLine": 1113,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'RecordToPairs' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs"
+                },
+                "region": {
+                  "startLine": 1154,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'WriteProduct' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 0 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs"
+                },
+                "region": {
+                  "startLine": 1225,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'EncodeProduct' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 0 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs"
+                },
+                "region": {
+                  "startLine": 1253,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'FromPairs' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs"
+                },
+                "region": {
+                  "startLine": 2805,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'KeyValuePair' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs"
+                },
+                "region": {
+                  "startLine": 2819,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'GFromJSON' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs"
+                },
+                "region": {
+                  "startLine": 253,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'FromJSON' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 3 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs"
+                },
+                "region": {
+                  "startLine": 390,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'FromJSONKey' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 2 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs"
+                },
+                "region": {
+                  "startLine": 435,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'GFromJSONKey' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 0 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs"
+                },
+                "region": {
+                  "startLine": 528,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'FromJSON1' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 3 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs"
+                },
+                "region": {
+                  "startLine": 621,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'FromJSON2' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 3 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs"
+                },
+                "region": {
+                  "startLine": 655,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'ParseSum' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 0 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs"
+                },
+                "region": {
+                  "startLine": 1104,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'SumFromString' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 0 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs"
+                },
+                "region": {
+                  "startLine": 1153,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'ConstructorNames' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs"
+                },
+                "region": {
+                  "startLine": 1181,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'FromTaggedObject' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 0 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs"
+                },
+                "region": {
+                  "startLine": 1264,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'ConsFromJSON' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 0 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs"
+                },
+                "region": {
+                  "startLine": 1326,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'FieldNames' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 0 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs"
+                },
+                "region": {
+                  "startLine": 1384,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'RecordFromJSON' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs"
+                },
+                "region": {
+                  "startLine": 1397,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'ProductFromJSON' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 0 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs"
+                },
+                "region": {
+                  "startLine": 1508,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'FromPair' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 0 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs"
+                },
+                "region": {
+                  "startLine": 1531,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'FromUntaggedValue' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs"
+                },
+                "region": {
+                  "startLine": 1558,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'ProductSize' in 'Data.Aeson.Types.Generic' defines an ad-hoc polymorphic Adapter interface with 0 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/Generic.hs"
+                },
+                "region": {
+                  "startLine": 79,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'MonadFix_' in 'Data.Aeson.Internal.TH' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/TH.hs"
+                },
+                "region": {
+                  "startLine": 61,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'AsError' in 'Data.Aeson.Decoding.Internal' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/Internal.hs"
+                },
+                "region": {
+                  "startLine": 6,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "type_family_associated",
+          "level": "note",
+          "message": {
+            "text": "Module 'UnitTests' implements Type Families / Associated Types for type-level computation and indexed type mappings"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "type_family_associated",
+          "level": "note",
+          "message": {
+            "text": "Module 'DataFamilies.Types' implements Type Families / Associated Types for type-level computation and indexed type mappings"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/DataFamilies/Types.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "type_family_associated",
+          "level": "note",
+          "message": {
+            "text": "Module 'Data.Aeson.TH' implements Type Families / Associated Types for type-level computation and indexed type mappings"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "gadts_type_safe_ast",
+          "level": "note",
+          "message": {
+            "text": "Data type 'Example' in 'SerializationFormatSpec' implements Generalized Algebraic Data Type (GADT) ensuring compile-time type preservation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/SerializationFormatSpec.hs"
+                },
+                "region": {
+                  "startLine": 306,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "gadts_type_safe_ast",
+          "level": "note",
+          "message": {
+            "text": "Data type 'GADT' in 'Types' implements Generalized Algebraic Data Type (GADT) ensuring compile-time type preservation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/Types.hs"
+                },
+                "region": {
+                  "startLine": 94,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "gadts_type_safe_ast",
+          "level": "note",
+          "message": {
+            "text": "Data type 'ToArgs' in 'Data.Aeson.Types.ToJSON' implements Generalized Algebraic Data Type (GADT) ensuring compile-time type preservation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs"
+                },
+                "region": {
+                  "startLine": 172,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "gadts_type_safe_ast",
+          "level": "note",
+          "message": {
+            "text": "Data type 'FromArgs' in 'Data.Aeson.Types.FromJSON' implements Generalized Algebraic Data Type (GADT) ensuring compile-time type preservation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs"
+                },
+                "region": {
+                  "startLine": 262,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "gadts_type_safe_ast",
+          "level": "note",
+          "message": {
+            "text": "Data type 'FromJSONKeyFunction' in 'Data.Aeson.Types.FromJSON' implements Generalized Algebraic Data Type (GADT) ensuring compile-time type preservation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs"
+                },
+                "region": {
+                  "startLine": 455,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "newtype_strong_typing",
+          "level": "note",
+          "message": {
+            "text": "Module 'Types' enforces DDD Value Object strong typing via 6 newtype wrapper(s) at zero runtime cost"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/Types.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "newtype_strong_typing",
+          "level": "note",
+          "message": {
+            "text": "Module 'UnitTests' enforces DDD Value Object strong typing via 10 newtype wrapper(s) at zero runtime cost"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "newtype_strong_typing",
+          "level": "note",
+          "message": {
+            "text": "Module 'UnitTests.OptionalFields' enforces DDD Value Object strong typing via 3 newtype wrapper(s) at zero runtime cost"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/OptionalFields.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "newtype_strong_typing",
+          "level": "note",
+          "message": {
+            "text": "Module 'UnitTests.OptionalFields.Common' enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/OptionalFields/Common.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "newtype_strong_typing",
+          "level": "note",
+          "message": {
+            "text": "Module 'GitHub' enforces DDD Value Object strong typing via 4 newtype wrapper(s) at zero runtime cost"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/examples/src/GitHub.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "newtype_strong_typing",
+          "level": "note",
+          "message": {
+            "text": "Module 'AesonMap' enforces DDD Value Object strong typing via 3 newtype wrapper(s) at zero runtime cost"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/AesonMap.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "newtype_strong_typing",
+          "level": "note",
+          "message": {
+            "text": "Module 'AesonFoldable' enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/AesonFoldable.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "newtype_strong_typing",
+          "level": "note",
+          "message": {
+            "text": "Module 'Data.Aeson.Types.Internal' enforces DDD Value Object strong typing via 3 newtype wrapper(s) at zero runtime cost"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/Internal.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "deriving_strategies",
+          "level": "note",
+          "message": {
+            "text": "Module 'Data.Aeson.Key' explicitly specifies Deriving Strategies (stock/newtype/anyclass) ensuring deterministic typeclass derivation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Key.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "free_monad_interpreter",
+          "level": "note",
+          "message": {
+            "text": "Module 'Data.Aeson.Encoding.Builder' implements Free Monad DSL Interpreter separating program description from operational interpretation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Encoding/Builder.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "tagless_final_style",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'MonadFix_' in 'Data.Aeson.Internal.TH' adopts Tagless Final / MTL capability pattern providing polymorphic monadic effects"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/TH.hs"
+                },
+                "region": {
+                  "startLine": 61,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'objectValues' in 'Data.Aeson.Parser.Internal' chains a 4-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-aeson/src/Data/Aeson/Parser/Internal.hs"
+                },
+                "region": {
+                  "startLine": 140,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'arrayValues' in 'Data.Aeson.Parser.Internal' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-aeson/src/Data/Aeson/Parser/Internal.hs"
+                },
+                "region": {
+                  "startLine": 175,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'jsonWith'' in 'Data.Aeson.Parser.Internal' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-aeson/src/Data/Aeson/Parser/Internal.hs"
+                },
+                "region": {
+                  "startLine": 280,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'scientific' in 'Data.Aeson.Parser.Internal' chains a 4-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-aeson/src/Data/Aeson/Parser/Internal.hs"
+                },
+                "region": {
+                  "startLine": 457,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'jsonTestSuiteTest' in 'JSONTestSuite' chains a 10-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/JSONTestSuite.hs"
+                },
+                "region": {
+                  "startLine": 26,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'utcTimeGood' in 'UnitTests.UTCTime' chains a 14-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/UTCTime.hs"
+                },
+                "region": {
+                  "startLine": 16,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'monadFixParserA' in 'UnitTests.MonadFix' chains a 4-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/MonadFix.hs"
+                },
+                "region": {
+                  "startLine": 59,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'monadFixParserB' in 'UnitTests.MonadFix' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/MonadFix.hs"
+                },
+                "region": {
+                  "startLine": 78,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'day' in 'Data.Attoparsec.Time' chains a 4-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs"
+                },
+                "region": {
+                  "startLine": 49,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'month' in 'Data.Attoparsec.Time' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs"
+                },
+                "region": {
+                  "startLine": 60,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'quarter' in 'Data.Attoparsec.Time' chains a 4-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs"
+                },
+                "region": {
+                  "startLine": 70,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'timeOfDay' in 'Data.Attoparsec.Time' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs"
+                },
+                "region": {
+                  "startLine": 105,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'seconds' in 'Data.Attoparsec.Time' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs"
+                },
+                "region": {
+                  "startLine": 118,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'timeZone' in 'Data.Attoparsec.Time' chains a 4-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs"
+                },
+                "region": {
+                  "startLine": 139,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'unescapeText'' in 'UnescapePureText2' chains a 6-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs"
+                },
+                "region": {
+                  "startLine": 142,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'unescapeText'' in 'UnescapePureText1' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText1.hs"
+                },
+                "region": {
+                  "startLine": 131,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'consToValue' in 'Data.Aeson.TH' chains a 6-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs"
+                },
+                "region": {
+                  "startLine": 227,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'consFromJSON' in 'Data.Aeson.TH' chains a 23-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs"
+                },
+                "region": {
+                  "startLine": 562,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'unescapeTextIO' in 'Data.Aeson.Internal.Unescape' chains a 20-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/Unescape.hs"
+                },
+                "region": {
+                  "startLine": 51,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'letrecE' in 'Data.Aeson.Internal.TH' chains a 7-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/TH.hs"
+                },
+                "region": {
+                  "startLine": 16,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "stream_processing_pipeline",
+          "level": "note",
+          "message": {
+            "text": "Module 'DoubleToScientific' constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/DoubleToScientific.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "stream_processing_pipeline",
+          "level": "note",
+          "message": {
+            "text": "Module 'UnescapePureText2' constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "stream_processing_pipeline",
+          "level": "note",
+          "message": {
+            "text": "Module 'UnescapePureText1' constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText1.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "stream_processing_pipeline",
+          "level": "note",
+          "message": {
+            "text": "Module 'Data.Aeson.Internal.UnescapeFromText' constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/UnescapeFromText.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "stream_processing_pipeline",
+          "level": "note",
+          "message": {
+            "text": "Module 'Data.Aeson.Internal.Unescape' constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/Unescape.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'escapeBench' in 'Main' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/aeson-benchmark-suite.hs"
+                },
+                "region": {
+                  "startLine": 82,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'goodProducer' in 'UnitTests' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests.hs"
+                },
+                "region": {
+                  "startLine": 112,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'unescapeString' in 'UnitTests' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests.hs"
+                },
+                "region": {
+                  "startLine": 230,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'pr455' in 'UnitTests' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests.hs"
+                },
+                "region": {
+                  "startLine": 268,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'utcTimeGood' in 'UnitTests.UTCTime' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/UTCTime.hs"
+                },
+                "region": {
+                  "startLine": 16,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'timeZone' in 'Data.Attoparsec.Time' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs"
+                },
+                "region": {
+                  "startLine": 139,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'decode' in 'CompareWithHermes' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithHermes.hs"
+                },
+                "region": {
+                  "startLine": 23,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'decode'' in 'CompareWithHermes' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithHermes.hs"
+                },
+                "region": {
+                  "startLine": 26,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'decodeS' in 'CompareWithHermes' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithHermes.hs"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'decodeTS' in 'CompareWithHermes' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithHermes.hs"
+                },
+                "region": {
+                  "startLine": 32,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'decodeIP' in 'CompareWithHermes' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithHermes.hs"
+                },
+                "region": {
+                  "startLine": 35,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'decodeJ' in 'CompareWithJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs"
+                },
+                "region": {
+                  "startLine": 39,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'decode' in 'CompareWithJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs"
+                },
+                "region": {
+                  "startLine": 45,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'decode'' in 'CompareWithJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs"
+                },
+                "region": {
+                  "startLine": 48,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'decodeS' in 'CompareWithJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs"
+                },
+                "region": {
+                  "startLine": 51,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'decodeS'' in 'CompareWithJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs"
+                },
+                "region": {
+                  "startLine": 54,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'decodeT' in 'CompareWithJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs"
+                },
+                "region": {
+                  "startLine": 57,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'decodeTviaBS' in 'CompareWithJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs"
+                },
+                "region": {
+                  "startLine": 60,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'decodeAtto' in 'CompareWithJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs"
+                },
+                "region": {
+                  "startLine": 63,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'decodeAtto'' in 'CompareWithJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs"
+                },
+                "region": {
+                  "startLine": 67,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'decodeAttoS' in 'CompareWithJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs"
+                },
+                "region": {
+                  "startLine": 71,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'decodeAttoS'' in 'CompareWithJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs"
+                },
+                "region": {
+                  "startLine": 75,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'consFromJSON' in 'Data.Aeson.TH' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs"
+                },
+                "region": {
+                  "startLine": 562,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'nonEmpty' in 'Data.Aeson.TH' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs"
+                },
+                "region": {
+                  "startLine": 880,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'varTToName' in 'Data.Aeson.TH' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs"
+                },
+                "region": {
+                  "startLine": 1462,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'recordParseJSONImpl' in 'Data.Aeson.Types.FromJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs"
+                },
+                "region": {
+                  "startLine": 1468,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'aesonQQ' in 'Data.Aeson.QQ.Simple' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/QQ/Simple.hs"
+                },
+                "region": {
+                  "startLine": 22,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_from_just",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'nullaryConstructors' in 'UnitTests.NullaryConstructors' calls partial `fromJust` which throws an uncatchable exception on `Nothing`; use `fromMaybe` or pattern match"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/NullaryConstructors.hs"
+                },
+                "region": {
+                  "startLine": 23,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "lazy_space_leak_risk",
+          "level": "error",
+          "message": {
+            "text": "Resilience Risk (Lazy Space Leak): Function 'parseTypeMismatch' in 'Data.Aeson.TH' uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl'` / `Control.Monad.State.Strict`"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs"
+                },
+                "region": {
+                  "startLine": 1032,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "lazy_space_leak_risk",
+          "level": "error",
+          "message": {
+            "text": "Resilience Risk (Lazy Space Leak): Function 'foldl' in 'Data.Aeson.KeyMap' uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl'` / `Control.Monad.State.Strict`"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/KeyMap.hs"
+                },
+                "region": {
+                  "startLine": 423,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "god_module_srp",
+          "level": "note",
+          "message": {
+            "text": "SRP Violation (God Module): Module 'Data.Aeson.Parser.Internal' contains 35 declarations across 482 lines of code; decompose into focused domain modules"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-aeson/src/Data/Aeson/Parser/Internal.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "god_module_srp",
+          "level": "note",
+          "message": {
+            "text": "SRP Violation (God Module): Module 'UnitTests' contains 45 declarations across 584 lines of code; decompose into focused domain modules"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "god_module_srp",
+          "level": "note",
+          "message": {
+            "text": "SRP Violation (God Module): Module 'Encoders' contains 125 declarations across 461 lines of code; decompose into focused domain modules"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/Encoders.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "god_module_srp",
+          "level": "note",
+          "message": {
+            "text": "SRP Violation (God Module): Module 'DataFamilies.Encoders' contains 60 declarations across 240 lines of code; decompose into focused domain modules"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/DataFamilies/Encoders.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "god_module_srp",
+          "level": "note",
+          "message": {
+            "text": "SRP Violation (God Module): Module 'UnitTests.OptionalFields.Common' contains 31 declarations across 215 lines of code; decompose into focused domain modules"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/OptionalFields/Common.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "god_module_srp",
+          "level": "note",
+          "message": {
+            "text": "SRP Violation (God Module): Module 'Data.Time.FromText' contains 40 declarations across 562 lines of code; decompose into focused domain modules"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/text-iso8601/src/Data/Time/FromText.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "god_module_srp",
+          "level": "note",
+          "message": {
+            "text": "SRP Violation (God Module): Module 'Data.Aeson.TH' contains 128 declarations across 2013 lines of code; decompose into focused domain modules"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "god_module_srp",
+          "level": "note",
+          "message": {
+            "text": "SRP Violation (God Module): Module 'Data.Aeson.KeyMap' contains 51 declarations across 750 lines of code; decompose into focused domain modules"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/KeyMap.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "god_module_srp",
+          "level": "note",
+          "message": {
+            "text": "SRP Violation (God Module): Module 'Data.Aeson.Types.ToJSON' contains 50 declarations across 2829 lines of code; decompose into focused domain modules"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "god_module_srp",
+          "level": "note",
+          "message": {
+            "text": "SRP Violation (God Module): Module 'Data.Aeson.Types.Internal' contains 48 declarations across 934 lines of code; decompose into focused domain modules"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/Internal.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "god_module_srp",
+          "level": "note",
+          "message": {
+            "text": "SRP Violation (God Module): Module 'Data.Aeson.Types.FromJSON' contains 89 declarations across 2876 lines of code; decompose into focused domain modules"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "god_module_srp",
+          "level": "note",
+          "message": {
+            "text": "SRP Violation (God Module): Module 'Data.Aeson.Encoding.Builder' contains 33 declarations across 319 lines of code; decompose into focused domain modules"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Encoding/Builder.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "god_module_srp",
+          "level": "note",
+          "message": {
+            "text": "SRP Violation (God Module): Module 'Data.Aeson.Encoding.Internal' contains 70 declarations across 441 lines of code; decompose into focused domain modules"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Encoding/Internal.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'generateShortestDigits' in 'DoubleToScientific' has cyclomatic complexity of 16; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/DoubleToScientific.hs"
+                },
+                "region": {
+                  "startLine": 153,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'jsonTestSuiteTest' in 'JSONTestSuite' has cyclomatic complexity of 15; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/JSONTestSuite.hs"
+                },
+                "region": {
+                  "startLine": 26,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'unknownFields' in 'UnitTests' has cyclomatic complexity of 12; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests.hs"
+                },
+                "region": {
+                  "startLine": 352,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'parseYear_' in 'Data.Time.FromText' has cyclomatic complexity of 24; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/text-iso8601/src/Data/Time/FromText.hs"
+                },
+                "region": {
+                  "startLine": 266,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'parseTimeZone__' in 'Data.Time.FromText' has cyclomatic complexity of 16; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/text-iso8601/src/Data/Time/FromText.hs"
+                },
+                "region": {
+                  "startLine": 469,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'timeZone' in 'Data.Attoparsec.Time' has cyclomatic complexity of 13; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs"
+                },
+                "region": {
+                  "startLine": 139,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'unescapeText'' in 'UnescapePureText2' has cyclomatic complexity of 15; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs"
+                },
+                "region": {
+                  "startLine": 142,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'unescapeText'' in 'UnescapePureText1' has cyclomatic complexity of 12; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText1.hs"
+                },
+                "region": {
+                  "startLine": 131,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'consFromJSON' in 'Data.Aeson.TH' has cyclomatic complexity of 13; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs"
+                },
+                "region": {
+                  "startLine": 562,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'parseNonAllNullarySum' in 'Data.Aeson.Types.FromJSON' has cyclomatic complexity of 13; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs"
+                },
+                "region": {
+                  "startLine": 1209,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'unescapeFromTextIO' in 'Data.Aeson.Internal.UnescapeFromText' has cyclomatic complexity of 119; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/UnescapeFromText.hs"
+                },
+                "region": {
+                  "startLine": 42,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'scanScientific'' in 'Data.Aeson.Internal.Scientific' has cyclomatic complexity of 59; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/Scientific.hs"
+                },
+                "region": {
+                  "startLine": 32,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'unescapeTextIO' in 'Data.Aeson.Internal.Unescape' has cyclomatic complexity of 181; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/Unescape.hs"
+                },
+                "region": {
+                  "startLine": 51,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'textToTokens' in 'Data.Aeson.Decoding.Text' has cyclomatic complexity of 33; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/Text.hs"
+                },
+                "region": {
+                  "startLine": 43,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'scanStringLiteral' in 'Data.Aeson.Decoding.Text' has cyclomatic complexity of 19; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/Text.hs"
+                },
+                "region": {
+                  "startLine": 141,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'scanNumberLiteral' in 'Data.Aeson.Decoding.Text' has cyclomatic complexity of 68; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/Text.hs"
+                },
+                "region": {
+                  "startLine": 192,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'bsToTokens' in 'Data.Aeson.Decoding.ByteString' has cyclomatic complexity of 33; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/ByteString.hs"
+                },
+                "region": {
+                  "startLine": 32,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'scanStringLiteral' in 'Data.Aeson.Decoding.ByteString' has cyclomatic complexity of 20; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/ByteString.hs"
+                },
+                "region": {
+                  "startLine": 132,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'scanNumberLiteral' in 'Data.Aeson.Decoding.ByteString' has cyclomatic complexity of 68; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/ByteString.hs"
+                },
+                "region": {
+                  "startLine": 182,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'lbsToTokens' in 'Data.Aeson.Decoding.ByteString.Lazy' has cyclomatic complexity of 33; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/ByteString/Lazy.hs"
+                },
+                "region": {
+                  "startLine": 32,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'scanStringLiteral' in 'Data.Aeson.Decoding.ByteString.Lazy' has cyclomatic complexity of 20; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/ByteString/Lazy.hs"
+                },
+                "region": {
+                  "startLine": 138,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'scanNumberLiteral' in 'Data.Aeson.Decoding.ByteString.Lazy' has cyclomatic complexity of 68; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/ByteString/Lazy.hs"
+                },
+                "region": {
+                  "startLine": 188,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): UnescapePureText2.setByte1, UnescapePureText1.setByte1"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs"
+                },
+                "region": {
+                  "startLine": 70,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): UnescapePureText2.setByte2, UnescapePureText1.setByte2"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs"
+                },
+                "region": {
+                  "startLine": 74,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): UnescapePureText2.setByte2Top, UnescapePureText1.setByte2Top"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs"
+                },
+                "region": {
+                  "startLine": 78,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): UnescapePureText2.setByte3, UnescapePureText1.setByte3"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs"
+                },
+                "region": {
+                  "startLine": 82,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): UnescapePureText2.setByte3Top, UnescapePureText1.setByte3Top"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs"
+                },
+                "region": {
+                  "startLine": 86,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): UnescapePureText2.setByte4, UnescapePureText1.setByte4"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs"
+                },
+                "region": {
+                  "startLine": 90,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): UnescapePureText2.decode, UnescapePureText1.decode"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs"
+                },
+                "region": {
+                  "startLine": 94,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): UnescapePureText2.throwDecodeError, UnescapePureText1.throwDecodeError"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs"
+                },
+                "region": {
+                  "startLine": 274,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): CompareWithHermes.decodeS, CompareWithJSON.decodeS'"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithHermes.hs"
+                },
+                "region": {
+                  "startLine": 29,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): CompareWithHermes.decodeIP, CompareWithJSON.decodeAtto"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithHermes.hs"
+                },
+                "region": {
+                  "startLine": 35,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): Auto.G.BigRecord.bigRecord, Auto.T.BigRecord.bigRecord"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/Auto/G/BigRecord.hs"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): Auto.G.BigProduct.bigProduct, Auto.T.BigProduct.bigProduct"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/Auto/G/BigProduct.hs"
+                },
+                "region": {
+                  "startLine": 28,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): Auto.G.D.d, Auto.T.D.d"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/Auto/G/D.hs"
+                },
+                "region": {
+                  "startLine": 34,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): Data.Aeson.Internal.UnescapeFromText.throwDecodeError, Data.Aeson.Internal.Unescape.throwDecodeError"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/UnescapeFromText.hs"
+                },
+                "region": {
+                  "startLine": 31,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 3 location(s): Data.Aeson.Decoding.Text.tkErrEOF, Data.Aeson.Decoding.ByteString.tkErrEOF, Data.Aeson.Decoding.ByteString.Lazy.tkErrEOF"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/Text.hs"
+                },
+                "region": {
+                  "startLine": 127,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 3 location(s): Data.Aeson.Decoding.Text.tkErrBS, Data.Aeson.Decoding.ByteString.tkErrBS, Data.Aeson.Decoding.ByteString.Lazy.tkErrBS"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/Text.hs"
+                },
+                "region": {
+                  "startLine": 132,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

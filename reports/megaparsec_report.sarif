@@ -1,0 +1,1298 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "DPX-Haskell",
+          "semanticVersion": "0.1.0",
+          "informationUri": "https://github.com/bivex/DPX-Haskell",
+          "rules": []
+        }
+      },
+      "results": [
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'MonadParsec' in 'Text.Megaparsec.Class' defines an ad-hoc polymorphic Adapter interface with 17 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Class.hs"
+                },
+                "region": {
+                  "startLine": 50,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'MonadParsecDbg' in 'Text.Megaparsec.Debug' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Debug.hs"
+                },
+                "region": {
+                  "startLine": 48,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'ShowErrorComponent' in 'Text.Megaparsec.Error' defines an ad-hoc polymorphic Adapter interface with 2 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Error.hs"
+                },
+                "region": {
+                  "startLine": 332,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'Stream' in 'Text.Megaparsec.Stream' defines an ad-hoc polymorphic Adapter interface with 8 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs"
+                },
+                "region": {
+                  "startLine": 68,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'VisualStream' in 'Text.Megaparsec.Stream' defines an ad-hoc polymorphic Adapter interface with 2 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs"
+                },
+                "region": {
+                  "startLine": 414,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'TraversableStream' in 'Text.Megaparsec.Stream' defines an ad-hoc polymorphic Adapter interface with 2 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs"
+                },
+                "region": {
+                  "startLine": 450,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'BinaryChunk' in 'Text.Megaparsec.Byte.Binary' defines an ad-hoc polymorphic Adapter interface with 2 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Binary.hs"
+                },
+                "region": {
+                  "startLine": 54,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "type_family_associated",
+          "level": "note",
+          "message": {
+            "text": "Module 'Text.Megaparsec.Stream' implements Type Families / Associated Types for type-level computation and indexed type mappings"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "newtype_strong_typing",
+          "level": "note",
+          "message": {
+            "text": "Module 'Text.Megaparsec.Internal' enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Internal.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "newtype_strong_typing",
+          "level": "note",
+          "message": {
+            "text": "Module 'Text.Megaparsec.Pos' enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Pos.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "newtype_strong_typing",
+          "level": "note",
+          "message": {
+            "text": "Module 'Text.Megaparsec.Stream' enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "reader_t_design_pattern",
+          "level": "note",
+          "message": {
+            "text": "Module 'Text.MegaparsecSpec' adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "monad_transformer_stack",
+          "level": "note",
+          "message": {
+            "text": "Module 'Text.Megaparsec.Class' layers a Monad Transformer Stack combining 5 distinct computational capabilities (IdentityT, RWST, ReaderT, StateT, WriterT)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Class.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "monad_transformer_stack",
+          "level": "note",
+          "message": {
+            "text": "Module 'Text.Megaparsec.Debug' layers a Monad Transformer Stack combining 5 distinct computational capabilities (IdentityT, RWST, ReaderT, StateT, WriterT)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Debug.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "monad_transformer_stack",
+          "level": "note",
+          "message": {
+            "text": "Module 'Text.MegaparsecSpec' layers a Monad Transformer Stack combining 4 distinct computational capabilities (RWST, ReaderT, StateT, WriterT)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "monad_transformer_stack",
+          "level": "note",
+          "message": {
+            "text": "Module 'Text.Megaparsec.DebugSpec' layers a Monad Transformer Stack combining 3 distinct computational capabilities (RWST, StateT, WriterT)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/DebugSpec.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "monad_transformer_stack",
+          "level": "note",
+          "message": {
+            "text": "Module 'Test.Hspec.Megaparsec.AdHoc' layers a Monad Transformer Stack combining 2 distinct computational capabilities (RWST, WriterT)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/src/Test/Hspec/Megaparsec/AdHoc.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "tagless_final_style",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'MonadParsec' in 'Text.Megaparsec.Class' adopts Tagless Final / MTL capability pattern providing polymorphic monadic effects"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Class.hs"
+                },
+                "region": {
+                  "startLine": 50,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'match' in 'Text.Megaparsec' chains a 4-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec.hs"
+                },
+                "region": {
+                  "startLine": 577,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'indentBlock' in 'Text.Megaparsec.Char.Lexer' chains a 7-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs"
+                },
+                "region": {
+                  "startLine": 236,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'scientific' in 'Text.Megaparsec.Char.Lexer' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs"
+                },
+                "region": {
+                  "startLine": 469,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'float' in 'Text.Megaparsec.Char.Lexer' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs"
+                },
+                "region": {
+                  "startLine": 493,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'scientific' in 'Text.Megaparsec.Byte.Lexer' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Lexer.hs"
+                },
+                "region": {
+                  "startLine": 219,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'float' in 'Text.Megaparsec.Byte.Lexer' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Lexer.hs"
+                },
+                "region": {
+                  "startLine": 239,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'spec' in 'Text.MegaparsecSpec' chains a 16-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs"
+                },
+                "region": {
+                  "startLine": 48,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'spec' in 'Text.Megaparsec.Char.LexerSpec' chains a 12-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/Char/LexerSpec.hs"
+                },
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'commaSeparated' in 'ParsersBench.Json.Megaparsec' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Json/Megaparsec.hs"
+                },
+                "region": {
+                  "startLine": 75,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'commaSeparated' in 'ParsersBench.Json.Attoparsec' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Json/Attoparsec.hs"
+                },
+                "region": {
+                  "startLine": 71,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'parseIP' in 'ParsersBench.Log.Megaparsec' chains a 4-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs"
+                },
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'timeParser' in 'ParsersBench.Log.Megaparsec' chains a 6-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs"
+                },
+                "region": {
+                  "startLine": 38,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'logEntryParser' in 'ParsersBench.Log.Megaparsec' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs"
+                },
+                "region": {
+                  "startLine": 64,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'parseIP' in 'ParsersBench.Log.Attoparsec' chains a 4-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Attoparsec.hs"
+                },
+                "region": {
+                  "startLine": 23,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'timeParser' in 'ParsersBench.Log.Attoparsec' chains a 6-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Attoparsec.hs"
+                },
+                "region": {
+                  "startLine": 34,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'logEntryParser' in 'ParsersBench.Log.Attoparsec' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Attoparsec.hs"
+                },
+                "region": {
+                  "startLine": 60,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "continuation_monad",
+          "level": "note",
+          "message": {
+            "text": "Module 'Text.Megaparsec.Internal' employs Continuation Monad (`ContT`/`callCC`) for non-local control transfer and coroutine composition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Internal.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "continuation_monad",
+          "level": "note",
+          "message": {
+            "text": "Module 'Text.MegaparsecSpec' employs Continuation Monad (`ContT`/`callCC`) for non-local control transfer and coroutine composition"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "async_concurrent_flow",
+          "level": "note",
+          "message": {
+            "text": "Module 'Text.Megaparsec.Debug' manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Debug.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "stream_processing_pipeline",
+          "level": "note",
+          "message": {
+            "text": "Module 'Text.Megaparsec.Byte.Binary' constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Binary.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_bottom_error",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'finiteByteSize' in 'Text.Megaparsec.Byte.Binary' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Binary.hs"
+                },
+                "region": {
+                  "startLine": 188,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "unchecked_from_just",
+          "level": "error",
+          "message": {
+            "text": "Type Safety Hazard: Function 'match' in 'Text.Megaparsec' calls partial `fromJust` which throws an uncatchable exception on `Nothing`; use `fromMaybe` or pattern match"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec.hs"
+                },
+                "region": {
+                  "startLine": 577,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "lazy_space_leak_risk",
+          "level": "error",
+          "message": {
+            "text": "Resilience Risk (Lazy Space Leak): Function 'errorBundlePrettyWith' in 'Text.Megaparsec.Error' uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl'` / `Control.Monad.State.Strict`"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Error.hs"
+                },
+                "region": {
+                  "startLine": 351,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "lazy_space_leak_risk",
+          "level": "error",
+          "message": {
+            "text": "Resilience Risk (Lazy Space Leak): Function 'spec' in 'Text.MegaparsecSpec' uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl'` / `Control.Monad.State.Strict`"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs"
+                },
+                "region": {
+                  "startLine": 48,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "catch_all_some_exception",
+          "level": "error",
+          "message": {
+            "text": "Resilience Anti-Pattern: Function 'spec' in 'Text.MegaparsecSpec' catches `SomeException` without rethrowing async exceptions (`ThreadKilled`); use `Control.Exception.Safe`"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs"
+                },
+                "region": {
+                  "startLine": 48,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "god_module_srp",
+          "level": "note",
+          "message": {
+            "text": "SRP Violation (God Module): Module 'Text.Megaparsec' contains 32 declarations across 665 lines of code; decompose into focused domain modules"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "god_module_srp",
+          "level": "note",
+          "message": {
+            "text": "SRP Violation (God Module): Module 'Text.Megaparsec.Internal' contains 38 declarations across 769 lines of code; decompose into focused domain modules"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Internal.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "god_module_srp",
+          "level": "note",
+          "message": {
+            "text": "SRP Violation (God Module): Module 'Text.Megaparsec.Char' contains 31 declarations across 319 lines of code; decompose into focused domain modules"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "god_module_srp",
+          "level": "note",
+          "message": {
+            "text": "SRP Violation (God Module): Module 'Text.MegaparsecSpec' contains 5 declarations across 1855 lines of code; decompose into focused domain modules"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'charPretty'' in 'Text.Megaparsec.Stream' has cyclomatic complexity of 18; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs"
+                },
+                "region": {
+                  "startLine": 718,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'categoryName' in 'Text.Megaparsec.Char' has cyclomatic complexity of 19; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char.hs"
+                },
+                "region": {
+                  "startLine": 252,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'spec' in 'Text.MegaparsecSpec' has cyclomatic complexity of 126; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs"
+                },
+                "region": {
+                  "startLine": 48,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'spec' in 'Text.Megaparsec.StreamSpec' has cyclomatic complexity of 26; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/StreamSpec.hs"
+                },
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'spec' in 'Text.Megaparsec.ErrorSpec' has cyclomatic complexity of 47; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/ErrorSpec.hs"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'spec' in 'Text.Megaparsec.CharSpec' has cyclomatic complexity of 16; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/CharSpec.hs"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'spec' in 'Text.Megaparsec.Char.LexerSpec' has cyclomatic complexity of 49; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/Char/LexerSpec.hs"
+                },
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'spec' in 'Text.Megaparsec.Byte.LexerSpec' has cyclomatic complexity of 16; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/Byte/LexerSpec.hs"
+                },
+                "region": {
+                  "startLine": 23,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.eol, Text.Megaparsec.Char.eol"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs"
+                },
+                "region": {
+                  "startLine": 77,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.space, Text.Megaparsec.Char.space"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs"
+                },
+                "region": {
+                  "startLine": 92,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.hspace, Text.Megaparsec.Char.hspace"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs"
+                },
+                "region": {
+                  "startLine": 99,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.space1, Text.Megaparsec.Char.space1"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs"
+                },
+                "region": {
+                  "startLine": 106,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.hspace1, Text.Megaparsec.Char.hspace1"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs"
+                },
+                "region": {
+                  "startLine": 113,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.spaceChar, Text.Megaparsec.Char.spaceChar"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs"
+                },
+                "region": {
+                  "startLine": 127,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Char.Lexer.scientific, Text.Megaparsec.Byte.Lexer.scientific"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs"
+                },
+                "region": {
+                  "startLine": 469,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Char.Lexer.float, Text.Megaparsec.Byte.Lexer.float"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs"
+                },
+                "region": {
+                  "startLine": 493,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "duplicate_code_dry",
+          "level": "note",
+          "message": {
+            "text": "DRY Violation: Identical function logic duplicated across 2 location(s): ParsersBench.Log.Megaparsec.productParser, ParsersBench.Log.Attoparsec.productParser"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs"
+                },
+                "region": {
+                  "startLine": 57,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

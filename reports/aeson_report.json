@@ -2,7 +2,7 @@
   "project_path": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson",
   "scanned_files_count": 129,
   "total_detections_count": 161,
-  "elapsed_seconds": 0.1173,
+  "elapsed_seconds": 0.1394,
   "summary_by_category": {
     "typeclass_system": 53,
     "monad_architecture": 2,

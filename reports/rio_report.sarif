@@ -1,0 +1,858 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "DPX-Haskell",
+          "semanticVersion": "0.1.0",
+          "informationUri": "https://github.com/bivex/DPX-Haskell",
+          "rules": []
+        }
+      },
+      "results": [
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'HasProcessContext' in 'RIO.Process' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs"
+                },
+                "region": {
+                  "startLine": 217,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'HasStateRef' in 'RIO.Prelude.RIO' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/RIO.hs"
+                },
+                "region": {
+                  "startLine": 114,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'Display' in 'RIO.Prelude.Display' defines an ad-hoc polymorphic Adapter interface with 2 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Display.hs"
+                },
+                "region": {
+                  "startLine": 58,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'HasLogFunc' in 'RIO.Prelude.Logger' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs"
+                },
+                "region": {
+                  "startLine": 117,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'HasGLogFunc' in 'RIO.Prelude.Logger' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs"
+                },
+                "region": {
+                  "startLine": 893,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'HasLogLevel' in 'RIO.Prelude.Logger' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs"
+                },
+                "region": {
+                  "startLine": 987,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'HasLogSource' in 'RIO.Prelude.Logger' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs"
+                },
+                "region": {
+                  "startLine": 995,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "typeclass_adapter",
+          "level": "note",
+          "message": {
+            "text": "Typeclass 'HasResourceMap' in 'RIO.Orphans' defines an ad-hoc polymorphic Adapter interface with 1 method(s)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio-orphans/src/RIO/Orphans.hs"
+                },
+                "region": {
+                  "startLine": 101,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "type_family_associated",
+          "level": "note",
+          "message": {
+            "text": "Module 'RIO.Prelude.Logger' implements Type Families / Associated Types for type-level computation and indexed type mappings"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "reader_t_design_pattern",
+          "level": "note",
+          "message": {
+            "text": "Module 'RIO.Prelude.RIO' adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/RIO.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "monad_transformer_stack",
+          "level": "note",
+          "message": {
+            "text": "Module 'RIO.Prelude.RIO' layers a Monad Transformer Stack combining 1 distinct computational capabilities (ReaderT)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/RIO.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "monad_transformer_stack",
+          "level": "note",
+          "message": {
+            "text": "Module 'RIO.Prelude.Types' layers a Monad Transformer Stack combining 1 distinct computational capabilities (ReaderT)"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Types.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'main' in 'Main' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/etc/template/app/Main.hs"
+                },
+                "region": {
+                  "startLine": 11,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'spec' in 'RIO.LoggerSpec' chains a 22-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/LoggerSpec.hs"
+                },
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'spec' in 'RIO.DequeSpec' chains a 8-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/DequeSpec.hs"
+                },
+                "region": {
+                  "startLine": 41,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'same' in 'RIO.DequeSpec' chains a 4-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/DequeSpec.hs"
+                },
+                "region": {
+                  "startLine": 112,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'spec' in 'RIO.PreludeSpec' chains a 8-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/PreludeSpec.hs"
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'spec' in 'RIO.FileSpec' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/FileSpec.hs"
+                },
+                "region": {
+                  "startLine": 16,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'spec' in 'RIO.Prelude.RIOSpec' chains a 14-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/Prelude/RIOSpec.hs"
+                },
+                "region": {
+                  "startLine": 10,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'preProcess' in 'RIO.Process' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs"
+                },
+                "region": {
+                  "startLine": 379,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'withProcessTimeLog' in 'RIO.Process' chains a 5-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs"
+                },
+                "region": {
+                  "startLine": 394,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'proc' in 'RIO.Process' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs"
+                },
+                "region": {
+                  "startLine": 439,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'exec' in 'RIO.Process' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs"
+                },
+                "region": {
+                  "startLine": 547,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'findExecutable' in 'RIO.Process' chains a 5-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs"
+                },
+                "region": {
+                  "startLine": 590,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'foldlDeque' in 'RIO.Deque' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Deque.hs"
+                },
+                "region": {
+                  "startLine": 203,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'foldrDeque' in 'RIO.Deque' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Deque.hs"
+                },
+                "region": {
+                  "startLine": 227,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'runSimpleApp' in 'RIO.Prelude.Simple' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Simple.hs"
+                },
+                "region": {
+                  "startLine": 56,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'logOptionsHandle' in 'RIO.Prelude.Logger' chains a 3-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs"
+                },
+                "region": {
+                  "startLine": 357,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'simpleLogFunc' in 'RIO.Prelude.Logger' chains a 4-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs"
+                },
+                "region": {
+                  "startLine": 635,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "railway_do_notation",
+          "level": "note",
+          "message": {
+            "text": "Function 'spec' in 'RIO.OrphansSpec' chains a 4-step Monadic Railway flow in `do` notation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio-orphans/test/RIO/OrphansSpec.hs"
+                },
+                "region": {
+                  "startLine": 9,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "lens_prism_optics",
+          "level": "note",
+          "message": {
+            "text": "Module 'RIO.Prelude.Lens' integrates Functional Optics (Lenses/Prisms) for composable immutable data access and transformation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Lens.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "lens_prism_optics",
+          "level": "note",
+          "message": {
+            "text": "Module 'RIO.Prelude.Types' integrates Functional Optics (Lenses/Prisms) for composable immutable data access and transformation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Types.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "smart_constructor_module",
+          "level": "note",
+          "message": {
+            "text": "Function 'mkSimpleApp' in 'RIO.Prelude.Simple' implements Smart Constructor pattern enforcing domain validation invariants"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Simple.hs"
+                },
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "async_concurrent_flow",
+          "level": "note",
+          "message": {
+            "text": "Module 'RIO.Prelude.Trace' manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Trace.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "stream_processing_pipeline",
+          "level": "note",
+          "message": {
+            "text": "Module 'Make-template' constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/etc/make-template.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "stream_processing_pipeline",
+          "level": "note",
+          "message": {
+            "text": "Module 'RIO.Prelude' constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "stream_processing_pipeline",
+          "level": "note",
+          "message": {
+            "text": "Module 'RIO.Seq' constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Seq.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "lazy_space_leak_risk",
+          "level": "error",
+          "message": {
+            "text": "Resilience Risk (Lazy Space Leak): Function 'ioRefToSomeRef' in 'RIO.Prelude.RIO' uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl'` / `Control.Monad.State.Strict`"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/RIO.hs"
+                },
+                "region": {
+                  "startLine": 102,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "catch_all_some_exception",
+          "level": "error",
+          "message": {
+            "text": "Resilience Anti-Pattern: Function 'getCanUseUnicode' in 'RIO.Prelude.Logger' catches `SomeException` without rethrowing async exceptions (`ThreadKilled`); use `Control.Exception.Safe`"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs"
+                },
+                "region": {
+                  "startLine": 397,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "god_module_srp",
+          "level": "note",
+          "message": {
+            "text": "SRP Violation (God Module): Module 'RIO.Process' contains 40 declarations across 712 lines of code; decompose into focused domain modules"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "god_module_srp",
+          "level": "note",
+          "message": {
+            "text": "SRP Violation (God Module): Module 'RIO.Prelude.Logger' contains 64 declarations across 1009 lines of code; decompose into focused domain modules"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs"
+                },
+                "region": {
+                  "startLine": 1,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "cyclomatic_complexity_kiss",
+          "level": "note",
+          "message": {
+            "text": "KISS Violation (High Complexity): Function 'simpleLogFunc' in 'RIO.Prelude.Logger' has cyclomatic complexity of 16; refactor complex pattern branches"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs"
+                },
+                "region": {
+                  "startLine": 635,
+                  "startColumn": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DPX-Haskell: Architecture & Pattern Dashboard</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --border-color: #334155;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-purple: #9333ea;
+            --accent-blue: #38bdf8;
+            --accent-green: #22c55e;
+            --accent-yellow: #eab308;
+            --accent-red: #ef4444;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 24px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+        }
+        .title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a855f7 0%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+        }
+        .card-num {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-blue);
+        }
+        .card-label {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-top: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+        th, td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        th {
+            background-color: #0b1120;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+        .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .badge.very_high { background-color: rgba(34, 197, 94, 0.2); color: var(--accent-green); border: 1px solid var(--accent-green); }
+        .badge.high { background-color: rgba(56, 189, 248, 0.2); color: var(--accent-blue); border: 1px solid var(--accent-blue); }
+        .badge.medium { background-color: rgba(234, 179, 8, 0.2); color: var(--accent-yellow); border: 1px solid var(--accent-yellow); }
+        .badge.low { background-color: rgba(239, 68, 68, 0.2); color: var(--accent-red); border: 1px solid var(--accent-red); }
+        .cat-badge {
+            background-color: rgba(147, 51, 234, 0.2);
+            color: #d8b4fe;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+        code {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            color: #f472b6;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <div class="title">DPX-Haskell Architecture Report</div>
+            <div style="color: var(--text-muted); margin-top: 4px;">Target: <code>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai</code></div>
+        </div>
+        <div style="text-align: right; color: var(--text-muted); font-size: 0.875rem;">
+            Scanned in <strong>0.1346s</strong>
+        </div>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <div class="card-num">204</div>
+            <div class="card-label">Files Scanned</div>
+        </div>
+        <div class="card">
+            <div class="card-num">166</div>
+            <div class="card-label">Total Detections</div>
+        </div>
+        <div class="card">
+            <div class="card-num">2</div>
+            <div class="card-label">Typeclass & Polymorphism</div>
+        </div>
+        <div class="card">
+            <div class="card-num">5</div>
+            <div class="card-label">Monads & ReaderT</div>
+        </div>
+        <div class="card">
+            <div class="card-num">23</div>
+            <div class="card-label">STM & Async Concurrency</div>
+        </div>
+        <div class="card">
+            <div class="card-num">16</div>
+            <div class="card-label">Safety & Space Leak Hazards</div>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Pattern / Rule</th>
+                <th>Category</th>
+                <th>Target</th>
+                <th>Confidence</th>
+                <th>Location</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+                <tr class="detection-row" data-category="typeclass_system" data-level="very_high">
+                    <td>#1</td>
+                    <td><strong><code>typeclass_adapter</code></strong></td>
+                    <td><span class="cat-badge">typeclass_system</span></td>
+                    <td><code>Network.Wai.UrlMap.ToApplication</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/UrlMap.hs:93:1</small></td>
+                    <td>Typeclass &#x27;ToApplication&#x27; in &#x27;Network.Wai.UrlMap&#x27; defines an ad-hoc polymorphic Adapter interface with 1 method(s)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="typeclass_system" data-level="high">
+                    <td>#2</td>
+                    <td><strong><code>newtype_strong_typing</code></strong></td>
+                    <td><span class="cat-badge">typeclass_system</span></td>
+                    <td><code>Network.Wai.Handler.Warp.FdCache</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/FdCache.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.Handler.Warp.FdCache&#x27; enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="monad_architecture" data-level="very_high">
+                    <td>#3</td>
+                    <td><strong><code>reader_t_design_pattern</code></strong></td>
+                    <td><span class="cat-badge">monad_architecture</span></td>
+                    <td><code>Network.Wai.Test</code></td>
+                    <td><span class="badge very_high">90% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Test.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.Test&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="monad_architecture" data-level="very_high">
+                    <td>#4</td>
+                    <td><strong><code>reader_t_design_pattern</code></strong></td>
+                    <td><span class="cat-badge">monad_architecture</span></td>
+                    <td><code>Network.Wai.Test.Internal</code></td>
+                    <td><span class="badge very_high">90% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Test/Internal.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.Test.Internal&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="monad_architecture" data-level="very_high">
+                    <td>#5</td>
+                    <td><strong><code>monad_transformer_stack</code></strong></td>
+                    <td><span class="cat-badge">monad_architecture</span></td>
+                    <td><code>Network.Wai.Test.Internal</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Test/Internal.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.Test.Internal&#x27; layers a Monad Transformer Stack combining 2 distinct computational capabilities (ReaderT, StateT)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="monad_architecture" data-level="very_high">
+                    <td>#6</td>
+                    <td><strong><code>free_monad_interpreter</code></strong></td>
+                    <td><span class="cat-badge">monad_architecture</span></td>
+                    <td><code>Network.Wai.Handler.Warp.Run</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Run.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.Handler.Warp.Run&#x27; implements Free Monad DSL Interpreter separating program description from operational interpretation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="monad_architecture" data-level="very_high">
+                    <td>#7</td>
+                    <td><strong><code>free_monad_interpreter</code></strong></td>
+                    <td><span class="cat-badge">monad_architecture</span></td>
+                    <td><code>Network.Wai.Handler.Warp.Types</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Types.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.Handler.Warp.Types&#x27; implements Free Monad DSL Interpreter separating program description from operational interpretation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#8</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>WaiAppStaticTest.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-app-static/test/WaiAppStaticTest.hs:35:1</small></td>
+                    <td>Function &#x27;spec&#x27; in &#x27;WaiAppStaticTest&#x27; chains a 15-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#9</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>WaiAppEmbeddedTest.embSpec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-app-static/test/WaiAppEmbeddedTest.hs:18:1</small></td>
+                    <td>Function &#x27;embSpec&#x27; in &#x27;WaiAppEmbeddedTest&#x27; chains a 8-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#10</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Application.Static.checkPieces</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-app-static/Network/Wai/Application/Static.hs:115:1</small></td>
+                    <td>Function &#x27;checkPieces&#x27; in &#x27;Network.Wai.Application.Static&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#11</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>WaiAppStatic.Storage.Filesystem.fileSystemLookup</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-app-static/WaiAppStatic/Storage/Filesystem.hs:172:1</small></td>
+                    <td>Function &#x27;fileSystemLookup&#x27; in &#x27;WaiAppStatic.Storage.Filesystem&#x27; chains a 6-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#12</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Control.DebounceSpec.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/auto-update/test/Control/DebounceSpec.hs:33:1</small></td>
+                    <td>Function &#x27;spec&#x27; in &#x27;Control.DebounceSpec&#x27; chains a 11-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#13</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Control.Reaper.mkReaper</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/auto-update/Control/Reaper.hs:132:1</small></td>
+                    <td>Function &#x27;mkReaper&#x27; in &#x27;Control.Reaper&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#14</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Control.Reaper.reaper</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/auto-update/Control/Reaper.hs:195:1</small></td>
+                    <td>Function &#x27;reaper&#x27; in &#x27;Control.Reaper&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#15</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Control.Debounce.Internal.mkDebounceInternal</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/auto-update/Control/Debounce/Internal.hs:165:1</small></td>
+                    <td>Function &#x27;mkDebounceInternal&#x27; in &#x27;Control.Debounce.Internal&#x27; chains a 12-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#16</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Control.AutoUpdate.Thread.mkAutoUpdateHelper</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/auto-update/Control/AutoUpdate/Thread.hs:44:1</small></td>
+                    <td>Function &#x27;mkAutoUpdateHelper&#x27; in &#x27;Control.AutoUpdate.Thread&#x27; chains a 8-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#17</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Graceful-pong.child</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp-tls/graceful-pong.hs:44:1</small></td>
+                    <td>Function &#x27;child&#x27; in &#x27;Graceful-pong&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#18</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Graceful-pong.parent</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp-tls/graceful-pong.hs:53:1</small></td>
+                    <td>Function &#x27;parent&#x27; in &#x27;Graceful-pong&#x27; chains a 6-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#19</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.WarpTLS.loadCredentials</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp-tls/Network/Wai/Handler/WarpTLS.hs:236:1</small></td>
+                    <td>Function &#x27;loadCredentials&#x27; in &#x27;Network.Wai.Handler.WarpTLS&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#20</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.WarpTLS.httpOverTls</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp-tls/Network/Wai/Handler/WarpTLS.hs:379:1</small></td>
+                    <td>Function &#x27;httpOverTls&#x27; in &#x27;Network.Wai.Handler.WarpTLS&#x27; chains a 7-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#21</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.WarpTLS.attachConn</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp-tls/Network/Wai/Handler/WarpTLS.hs:440:1</small></td>
+                    <td>Function &#x27;attachConn&#x27; in &#x27;Network.Wai.Handler.WarpTLS&#x27; chains a 9-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#22</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.WarpTLS.getTLSinfo</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp-tls/Network/Wai/Handler/WarpTLS.hs:509:1</small></td>
+                    <td>Function &#x27;getTLSinfo&#x27; in &#x27;Network.Wai.Handler.WarpTLS&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#23</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Middleware.Push.Referer.pushOnReferer</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-http2-extra/Network/Wai/Middleware/Push/Referer.hs:39:1</small></td>
+                    <td>Function &#x27;pushOnReferer&#x27; in &#x27;Network.Wai.Middleware.Push.Referer&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#24</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Middleware.Push.Referer.ParseURL.parseUrl&#x27;</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-http2-extra/Network/Wai/Middleware/Push/Referer/ParseURL.hs:43:1</small></td>
+                    <td>Function &#x27;parseUrl&#x27;&#x27; in &#x27;Network.Wai.Middleware.Push.Referer.ParseURL&#x27; chains a 5-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#25</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>System.TimeManager.resume</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/time-manager/System/TimeManager.hs:172:1</small></td>
+                    <td>Function &#x27;resume&#x27; in &#x27;System.TimeManager&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#26</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>System.TimeManager.registerKillThread</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/time-manager/System/TimeManager.hs:200:1</small></td>
+                    <td>Function &#x27;registerKillThread&#x27; in &#x27;System.TimeManager&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#27</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>System.ThreadManager.stopAfterWithResult</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/time-manager/System/ThreadManager.hs:126:1</small></td>
+                    <td>Function &#x27;stopAfterWithResult&#x27; in &#x27;System.ThreadManager&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#28</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>WaiExtraSpec.caseGzip</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/test/WaiExtraSpec.hs:223:1</small></td>
+                    <td>Function &#x27;caseGzip&#x27; in &#x27;WaiExtraSpec&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#29</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>WaiExtraSpec.caseGzipFiles</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/test/WaiExtraSpec.hs:270:1</small></td>
+                    <td>Function &#x27;caseGzipFiles&#x27; in &#x27;WaiExtraSpec&#x27; chains a 17-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#30</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>WaiExtraSpec.caseDebugRequestBody</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/test/WaiExtraSpec.hs:536:1</small></td>
+                    <td>Function &#x27;caseDebugRequestBody&#x27; in &#x27;WaiExtraSpec&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#31</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>WaiExtraSpec.casesUrlMap</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/test/WaiExtraSpec.hs:618:1</small></td>
+                    <td>Function &#x27;casesUrlMap&#x27; in &#x27;WaiExtraSpec&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#32</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>WaiExtraSpec.caseModifyPostParamsInLogs</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/test/WaiExtraSpec.hs:676:1</small></td>
+                    <td>Function &#x27;caseModifyPostParamsInLogs&#x27; in &#x27;WaiExtraSpec&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#33</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>WaiExtraSpec.caseFilterRequestsInLogs</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/test/WaiExtraSpec.hs:715:1</small></td>
+                    <td>Function &#x27;caseFilterRequestsInLogs&#x27; in &#x27;WaiExtraSpec&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#34</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.ParseSpec.caseParseRequestBody</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/test/Network/Wai/ParseSpec.hs:85:1</small></td>
+                    <td>Function &#x27;caseParseRequestBody&#x27; in &#x27;Network.Wai.ParseSpec&#x27; chains a 21-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#35</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.TestSpec.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/test/Network/Wai/TestSpec.hs:26:1</small></td>
+                    <td>Function &#x27;spec&#x27; in &#x27;Network.Wai.TestSpec&#x27; chains a 11-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#36</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.RequestSpec.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/test/Network/Wai/RequestSpec.hs:25:1</small></td>
+                    <td>Function &#x27;spec&#x27; in &#x27;Network.Wai.RequestSpec&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#37</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Middleware.RequestSizeLimitSpec.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/test/Network/Wai/Middleware/RequestSizeLimitSpec.hs:22:1</small></td>
+                    <td>Function &#x27;spec&#x27; in &#x27;Network.Wai.Middleware.RequestSizeLimitSpec&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#38</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Middleware.RealIpSpec.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/test/Network/Wai/Middleware/RealIpSpec.hs:16:1</small></td>
+                    <td>Function &#x27;spec&#x27; in &#x27;Network.Wai.Middleware.RealIpSpec&#x27; chains a 13-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#39</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Middleware.TimeoutSpec.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/test/Network/Wai/Middleware/TimeoutSpec.hs:15:1</small></td>
+                    <td>Function &#x27;spec&#x27; in &#x27;Network.Wai.Middleware.TimeoutSpec&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#40</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Parse.tempFileBackEndOpts</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Parse.hs:139:1</small></td>
+                    <td>Function &#x27;tempFileBackEndOpts&#x27; in &#x27;Network.Wai.Parse&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#41</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Parse.parsePiecesEx</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Parse.hs:554:1</small></td>
+                    <td>Function &#x27;parsePiecesEx&#x27; in &#x27;Network.Wai.Parse&#x27; chains a 6-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#42</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Parse.sinkTillBound&#x27;</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Parse.hs:702:1</small></td>
+                    <td>Function &#x27;sinkTillBound&#x27;&#x27; in &#x27;Network.Wai.Parse&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#43</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Parse.wrapTillBound</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Parse.hs:719:1</small></td>
+                    <td>Function &#x27;wrapTillBound&#x27; in &#x27;Network.Wai.Parse&#x27; chains a 7-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#44</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Parse.sinkTillBound</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Parse.hs:779:1</small></td>
+                    <td>Function &#x27;sinkTillBound&#x27; in &#x27;Network.Wai.Parse&#x27; chains a 5-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#45</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Test.request</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Test.hs:119:1</small></td>
+                    <td>Function &#x27;request&#x27; in &#x27;Network.Wai.Test&#x27; chains a 5-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#46</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Test.addCookiesToRequest</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Test.hs:150:1</small></td>
+                    <td>Function &#x27;addCookiesToRequest&#x27; in &#x27;Network.Wai.Test&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#47</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.SCGI.runOne</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Handler/SCGI.hs:28:1</small></td>
+                    <td>Function &#x27;runOne&#x27; in &#x27;Network.Wai.Handler.SCGI&#x27; chains a 6-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#48</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.SCGI.readNetstring</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Handler/SCGI.hs:76:1</small></td>
+                    <td>Function &#x27;readNetstring&#x27; in &#x27;Network.Wai.Handler.SCGI&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#49</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.CGI.runGeneric</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Handler/CGI.hs:82:1</small></td>
+                    <td>Function &#x27;runGeneric&#x27; in &#x27;Network.Wai.Handler.CGI&#x27; chains a 6-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#50</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.CGI.requestBodyFunc</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Handler/CGI.hs:203:1</small></td>
+                    <td>Function &#x27;requestBodyFunc&#x27; in &#x27;Network.Wai.Handler.CGI&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#51</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Middleware.RequestLogger.mkRequestLogger</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Middleware/RequestLogger.hs:294:1</small></td>
+                    <td>Function &#x27;mkRequestLogger&#x27; in &#x27;Network.Wai.Middleware.RequestLogger&#x27; chains a 6-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#52</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Middleware.RequestLogger.customMiddlewareWithDetails</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Middleware/RequestLogger.hs:347:1</small></td>
+                    <td>Function &#x27;customMiddlewareWithDetails&#x27; in &#x27;Network.Wai.Middleware.RequestLogger&#x27; chains a 7-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#53</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Middleware.RequestLogger.customMiddlewareWithDetailsAndHeaders</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Middleware/RequestLogger.hs:366:1</small></td>
+                    <td>Function &#x27;customMiddlewareWithDetailsAndHeaders&#x27; in &#x27;Network.Wai.Middleware.RequestLogger&#x27; chains a 9-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#54</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Middleware.RequestLogger.getRequestBody</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Middleware/RequestLogger.hs:469:1</small></td>
+                    <td>Function &#x27;getRequestBody&#x27; in &#x27;Network.Wai.Middleware.RequestLogger&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#55</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Middleware.RequestLogger.detailedMiddleware&#x27;</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Middleware/RequestLogger.hs:497:1</small></td>
+                    <td>Function &#x27;detailedMiddleware&#x27;&#x27; in &#x27;Network.Wai.Middleware.RequestLogger&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#56</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Middleware.HttpAuth.basicAuth&#x27;</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Middleware/HttpAuth.hs:59:1</small></td>
+                    <td>Function &#x27;basicAuth&#x27;&#x27; in &#x27;Network.Wai.Middleware.HttpAuth&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#57</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Middleware.Gzip.compressFile</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Middleware/Gzip.hs:333:1</small></td>
+                    <td>Function &#x27;compressFile&#x27; in &#x27;Network.Wai.Middleware.Gzip&#x27; chains a 8-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#58</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Middleware.Gzip.compressE</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Middleware/Gzip.hs:394:1</small></td>
+                    <td>Function &#x27;compressE&#x27; in &#x27;Network.Wai.Middleware.Gzip&#x27; chains a 6-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#59</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.WaiSpec.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai/test/Network/WaiSpec.hs:15:1</small></td>
+                    <td>Function &#x27;spec&#x27; in &#x27;Network.WaiSpec&#x27; chains a 11-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#60</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>BufferPoolSpec.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/recv/test/BufferPoolSpec.hs:20:1</small></td>
+                    <td>Function &#x27;spec&#x27; in &#x27;BufferPoolSpec&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#61</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>HTTP.sendGETwH</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/HTTP.hs:21:1</small></td>
+                    <td>Function &#x27;sendGETwH&#x27; in &#x27;HTTP&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#62</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>HTTP.sendHEADwH</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/HTTP.hs:32:1</small></td>
+                    <td>Function &#x27;sendHEADwH&#x27; in &#x27;HTTP&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#63</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>ConduitSpec.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/ConduitSpec.hs:15:1</small></td>
+                    <td>Function &#x27;spec&#x27; in &#x27;ConduitSpec&#x27; chains a 18-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#64</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RunSpec.withApp</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/RunSpec.hs:137:1</small></td>
+                    <td>Function &#x27;withApp&#x27; in &#x27;RunSpec&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#65</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RunSpec.runTest</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/RunSpec.hs:159:1</small></td>
+                    <td>Function &#x27;runTest&#x27; in &#x27;RunSpec&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#66</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RunSpec.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/RunSpec.hs:205:1</small></td>
+                    <td>Function &#x27;spec&#x27; in &#x27;RunSpec&#x27; chains a 32-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#67</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>BufferSpec.toBufIOWithBuilder</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/BufferSpec.hs:32:1</small></td>
+                    <td>Function &#x27;toBufIOWithBuilder&#x27; in &#x27;BufferSpec&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#68</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>ServerStateSpec.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/ServerStateSpec.hs:21:1</small></td>
+                    <td>Function &#x27;spec&#x27; in &#x27;ServerStateSpec&#x27; chains a 8-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#69</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>GracefulShutdownSpec.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/GracefulShutdownSpec.hs:19:1</small></td>
+                    <td>Function &#x27;spec&#x27; in &#x27;GracefulShutdownSpec&#x27; chains a 8-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#70</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RequestSpec.spec</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/RequestSpec.hs:27:1</small></td>
+                    <td>Function &#x27;spec&#x27; in &#x27;RequestSpec&#x27; chains a 16-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#71</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>RequestSpec.headerLinesList&#x27;</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/RequestSpec.hs:127:1</small></td>
+                    <td>Function &#x27;headerLinesList&#x27;&#x27; in &#x27;RequestSpec&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#72</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.Warp.Conduit.readCSource</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Conduit.hs:77:1</small></td>
+                    <td>Function &#x27;readCSource&#x27; in &#x27;Network.Wai.Handler.Warp.Conduit&#x27; chains a 6-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#73</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.Warp.HTTP1.http1</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/HTTP1.hs:31:1</small></td>
+                    <td>Function &#x27;http1&#x27; in &#x27;Network.Wai.Handler.Warp.HTTP1&#x27; chains a 8-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#74</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.Warp.HTTP1.processRequest</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/HTTP1.hs:174:1</small></td>
+                    <td>Function &#x27;processRequest&#x27; in &#x27;Network.Wai.Handler.Warp.HTTP1&#x27; chains a 8-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#75</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.Warp.RequestHeader.parseRequestLine</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/RequestHeader.hs:57:1</small></td>
+                    <td>Function &#x27;parseRequestLine&#x27; in &#x27;Network.Wai.Handler.Warp.RequestHeader&#x27; chains a 7-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#76</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.Warp.SendFile.readSendFile</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/SendFile.hs:119:1</small></td>
+                    <td>Function &#x27;readSendFile&#x27; in &#x27;Network.Wai.Handler.Warp.SendFile&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#77</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.Warp.Run.socketConnection</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Run.hs:73:1</small></td>
+                    <td>Function &#x27;socketConnection&#x27; in &#x27;Network.Wai.Handler.Warp.Run&#x27; chains a 9-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#78</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.Warp.Run.runSettingsSocket</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Run.hs:214:1</small></td>
+                    <td>Function &#x27;runSettingsSocket&#x27; in &#x27;Network.Wai.Handler.Warp.Run&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#79</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.Warp.Run.acceptConnection</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Run.hs:309:1</small></td>
+                    <td>Function &#x27;acceptConnection&#x27; in &#x27;Network.Wai.Handler.Warp.Run&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#80</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.Warp.Run.serveConnection</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Run.hs:448:1</small></td>
+                    <td>Function &#x27;serveConnection&#x27; in &#x27;Network.Wai.Handler.Warp.Run&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#81</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.Warp.HTTP2.http2server</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/HTTP2.hs:90:1</small></td>
+                    <td>Function &#x27;http2server&#x27; in &#x27;Network.Wai.Handler.Warp.HTTP2&#x27; chains a 10-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#82</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.Warp.Response.sendResponse</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Response.hs:108:1</small></td>
+                    <td>Function &#x27;sendResponse&#x27; in &#x27;Network.Wai.Handler.Warp.Response&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#83</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.Warp.Request.recvRequest</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Request.hs:56:1</small></td>
+                    <td>Function &#x27;recvRequest&#x27; in &#x27;Network.Wai.Handler.Warp.Request&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#84</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.Warp.Request.timeoutBody</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Request.hs:190:1</small></td>
+                    <td>Function &#x27;timeoutBody&#x27; in &#x27;Network.Wai.Handler.Warp.Request&#x27; chains a 5-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#85</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.Warp.IO.toBufIOWith</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/IO.hs:12:1</small></td>
+                    <td>Function &#x27;toBufIOWith&#x27; in &#x27;Network.Wai.Handler.Warp.IO&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#86</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.Warp.HTTP2.Response.fromResponse</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/HTTP2/Response.hs:27:1</small></td>
+                    <td>Function &#x27;fromResponse&#x27; in &#x27;Network.Wai.Handler.Warp.HTTP2.Response&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#87</td>
+                    <td><strong><code>railway_do_notation</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Server-no-keepalive.main</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/attic/server-no-keepalive.hs:24:1</small></td>
+                    <td>Function &#x27;main&#x27; in &#x27;Server-no-keepalive&#x27; chains a 6-step Monadic Railway flow in `do` notation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#88</td>
+                    <td><strong><code>smart_constructor_module</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>EmbeddedTestEntries.mkEntries</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-app-static/test/EmbeddedTestEntries.hs:16:1</small></td>
+                    <td>Function &#x27;mkEntries&#x27; in &#x27;EmbeddedTestEntries&#x27; implements Smart Constructor pattern enforcing domain validation invariants</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#89</td>
+                    <td><strong><code>smart_constructor_module</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>WaiAppStatic.Storage.Embedded.TH.mkEntry</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-app-static/WaiAppStatic/Storage/Embedded/TH.hs:110:1</small></td>
+                    <td>Function &#x27;mkEntry&#x27; in &#x27;WaiAppStatic.Storage.Embedded.TH&#x27; implements Smart Constructor pattern enforcing domain validation invariants</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#90</td>
+                    <td><strong><code>smart_constructor_module</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Control.Reaper.mkReaper</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/auto-update/Control/Reaper.hs:132:1</small></td>
+                    <td>Function &#x27;mkReaper&#x27; in &#x27;Control.Reaper&#x27; implements Smart Constructor pattern enforcing domain validation invariants</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#91</td>
+                    <td><strong><code>smart_constructor_module</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Control.Reaper.mkListAction</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/auto-update/Control/Reaper.hs:234:1</small></td>
+                    <td>Function &#x27;mkListAction&#x27; in &#x27;Control.Reaper&#x27; implements Smart Constructor pattern enforcing domain validation invariants</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#92</td>
+                    <td><strong><code>smart_constructor_module</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Control.AutoUpdate.mkAutoUpdate</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/auto-update/Control/AutoUpdate.hs:57:1</small></td>
+                    <td>Function &#x27;mkAutoUpdate&#x27; in &#x27;Control.AutoUpdate&#x27; implements Smart Constructor pattern enforcing domain validation invariants</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#93</td>
+                    <td><strong><code>smart_constructor_module</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Control.AutoUpdate.mkAutoUpdateWithModify</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/auto-update/Control/AutoUpdate.hs:64:1</small></td>
+                    <td>Function &#x27;mkAutoUpdateWithModify&#x27; in &#x27;Control.AutoUpdate&#x27; implements Smart Constructor pattern enforcing domain validation invariants</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#94</td>
+                    <td><strong><code>smart_constructor_module</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Control.Debounce.Internal.mkDebounceInternal</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/auto-update/Control/Debounce/Internal.hs:165:1</small></td>
+                    <td>Function &#x27;mkDebounceInternal&#x27; in &#x27;Control.Debounce.Internal&#x27; implements Smart Constructor pattern enforcing domain validation invariants</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#95</td>
+                    <td><strong><code>smart_constructor_module</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Control.AutoUpdate.Thread.mkAutoUpdateWithModify</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/auto-update/Control/AutoUpdate/Thread.hs:41:1</small></td>
+                    <td>Function &#x27;mkAutoUpdateWithModify&#x27; in &#x27;Control.AutoUpdate.Thread&#x27; implements Smart Constructor pattern enforcing domain validation invariants</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#96</td>
+                    <td><strong><code>smart_constructor_module</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Control.AutoUpdate.Thread.mkAutoUpdateHelper</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/auto-update/Control/AutoUpdate/Thread.hs:44:1</small></td>
+                    <td>Function &#x27;mkAutoUpdateHelper&#x27; in &#x27;Control.AutoUpdate.Thread&#x27; implements Smart Constructor pattern enforcing domain validation invariants</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#97</td>
+                    <td><strong><code>smart_constructor_module</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.WarpTLS.mkConn</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp-tls/Network/Wai/Handler/WarpTLS.hs:346:1</small></td>
+                    <td>Function &#x27;mkConn&#x27; in &#x27;Network.Wai.Handler.WarpTLS&#x27; implements Smart Constructor pattern enforcing domain validation invariants</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="high">
+                    <td>#98</td>
+                    <td><strong><code>smart_constructor_module</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Middleware.RequestLogger.mkRequestLogger</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Middleware/RequestLogger.hs:294:1</small></td>
+                    <td>Function &#x27;mkRequestLogger&#x27; in &#x27;Network.Wai.Middleware.RequestLogger&#x27; implements Smart Constructor pattern enforcing domain validation invariants</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#99</td>
+                    <td><strong><code>stm_transactional_memory</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>Control.Debounce.Internal</code></td>
+                    <td><span class="badge very_high">90% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/auto-update/Control/Debounce/Internal.hs:1:1</small></td>
+                    <td>Module &#x27;Control.Debounce.Internal&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#100</td>
+                    <td><strong><code>stm_transactional_memory</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>Control.AutoUpdate.Event</code></td>
+                    <td><span class="badge very_high">90% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/auto-update/Control/AutoUpdate/Event.hs:1:1</small></td>
+                    <td>Module &#x27;Control.AutoUpdate.Event&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#101</td>
+                    <td><strong><code>stm_transactional_memory</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>Network.Wai.Handler.WarpTLS</code></td>
+                    <td><span class="badge very_high">90% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp-tls/Network/Wai/Handler/WarpTLS.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.Handler.WarpTLS&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#102</td>
+                    <td><strong><code>stm_transactional_memory</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>System.ThreadManager</code></td>
+                    <td><span class="badge very_high">90% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/time-manager/System/ThreadManager.hs:1:1</small></td>
+                    <td>Module &#x27;System.ThreadManager&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#103</td>
+                    <td><strong><code>stm_transactional_memory</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>Network.Wai.EventSource.EventStream</code></td>
+                    <td><span class="badge very_high">90% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/EventSource/EventStream.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.EventSource.EventStream&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#104</td>
+                    <td><strong><code>stm_transactional_memory</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>RunSpec</code></td>
+                    <td><span class="badge very_high">90% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/RunSpec.hs:1:1</small></td>
+                    <td>Module &#x27;RunSpec&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#105</td>
+                    <td><strong><code>stm_transactional_memory</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>Network.Wai.Handler.Warp.Settings</code></td>
+                    <td><span class="badge very_high">90% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Settings.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.Handler.Warp.Settings&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#106</td>
+                    <td><strong><code>stm_transactional_memory</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>Network.Wai.Handler.Warp.Counter</code></td>
+                    <td><span class="badge very_high">90% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Counter.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.Handler.Warp.Counter&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#107</td>
+                    <td><strong><code>stm_transactional_memory</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>Network.Wai.Handler.Warp.Run</code></td>
+                    <td><span class="badge very_high">90% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Run.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.Handler.Warp.Run&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#108</td>
+                    <td><strong><code>stm_transactional_memory</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>Network.Wai.Handler.Warp.Types</code></td>
+                    <td><span class="badge very_high">90% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Types.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.Handler.Warp.Types&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#109</td>
+                    <td><strong><code>stm_transactional_memory</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>Network.Wai.Handler.Warp.ShuttingDown</code></td>
+                    <td><span class="badge very_high">90% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/ShuttingDown.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.Handler.Warp.ShuttingDown&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#110</td>
+                    <td><strong><code>stm_transactional_memory</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>Network.Wai.Handler.Warp.IO</code></td>
+                    <td><span class="badge very_high">90% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/IO.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.Handler.Warp.IO&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#111</td>
+                    <td><strong><code>async_concurrent_flow</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>Control.Reaper</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/auto-update/Control/Reaper.hs:1:1</small></td>
+                    <td>Module &#x27;Control.Reaper&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#112</td>
+                    <td><strong><code>async_concurrent_flow</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>Control.AutoUpdate.Thread</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/auto-update/Control/AutoUpdate/Thread.hs:1:1</small></td>
+                    <td>Module &#x27;Control.AutoUpdate.Thread&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#113</td>
+                    <td><strong><code>async_concurrent_flow</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>System.ThreadManager</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/time-manager/System/ThreadManager.hs:1:1</small></td>
+                    <td>Module &#x27;System.ThreadManager&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#114</td>
+                    <td><strong><code>async_concurrent_flow</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>ExceptionSpec</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/ExceptionSpec.hs:1:1</small></td>
+                    <td>Module &#x27;ExceptionSpec&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#115</td>
+                    <td><strong><code>async_concurrent_flow</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>GracefulShutdownSpec</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/GracefulShutdownSpec.hs:1:1</small></td>
+                    <td>Module &#x27;GracefulShutdownSpec&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#116</td>
+                    <td><strong><code>async_concurrent_flow</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>Network.Wai.Handler.Warp.HTTP1</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/HTTP1.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.Handler.Warp.HTTP1&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#117</td>
+                    <td><strong><code>async_concurrent_flow</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>Network.Wai.Handler.Warp.Windows</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Windows.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.Handler.Warp.Windows&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#118</td>
+                    <td><strong><code>async_concurrent_flow</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>Network.Wai.Handler.Warp.WithApplication</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/WithApplication.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.Handler.Warp.WithApplication&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#119</td>
+                    <td><strong><code>async_concurrent_flow</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>Network.Wai.Handler.Warp.Run</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Run.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.Handler.Warp.Run&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#120</td>
+                    <td><strong><code>async_concurrent_flow</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>Network.Wai.Handler.Warp.IO</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/IO.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.Handler.Warp.IO&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="very_high">
+                    <td>#121</td>
+                    <td><strong><code>stream_processing_pipeline</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Main</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-conduit/example/Main.hs:1:1</small></td>
+                    <td>Module &#x27;Main&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="very_high">
+                    <td>#122</td>
+                    <td><strong><code>stream_processing_pipeline</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Pong</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/attic/pong.hs:1:1</small></td>
+                    <td>Module &#x27;Pong&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="very_high">
+                    <td>#123</td>
+                    <td><strong><code>stream_processing_pipeline</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Graceful-pong</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp-tls/graceful-pong.hs:1:1</small></td>
+                    <td>Module &#x27;Graceful-pong&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="very_high">
+                    <td>#124</td>
+                    <td><strong><code>stream_processing_pipeline</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai/Network/Wai.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="very_high">
+                    <td>#125</td>
+                    <td><strong><code>stream_processing_pipeline</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>ConduitSpec</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/ConduitSpec.hs:1:1</small></td>
+                    <td>Module &#x27;ConduitSpec&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="very_high">
+                    <td>#126</td>
+                    <td><strong><code>stream_processing_pipeline</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.Warp.Conduit</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Conduit.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.Handler.Warp.Conduit&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="very_high">
+                    <td>#127</td>
+                    <td><strong><code>stream_processing_pipeline</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Handler.Warp.Request</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Request.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.Handler.Warp.Request&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="very_high">
+                    <td>#128</td>
+                    <td><strong><code>stream_processing_pipeline</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Print-post</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/attic/print-post.hs:1:1</small></td>
+                    <td>Module &#x27;Print-post&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="functional_idiom" data-level="very_high">
+                    <td>#129</td>
+                    <td><strong><code>stream_processing_pipeline</code></strong></td>
+                    <td><span class="cat-badge">functional_idiom</span></td>
+                    <td><code>Network.Wai.Conduit</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-conduit/Network/Wai/Conduit.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.Conduit&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
+                    <td>#130</td>
+                    <td><strong><code>chan_mvar_mailbox</code></strong></td>
+                    <td><span class="cat-badge">concurrency_stm</span></td>
+                    <td><code>Network.Wai.EventSource</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/EventSource.hs:1:1</small></td>
+                    <td>Module &#x27;Network.Wai.EventSource&#x27; coordinates worker synchronization via Actor Mailbox Channel (`TQueue`/`TChan`/`Chan`)</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="type_safety" data-level="very_high">
+                    <td>#131</td>
+                    <td><strong><code>unchecked_bottom_error</code></strong></td>
+                    <td><span class="cat-badge">type_safety</span></td>
+                    <td><code>WaiAppStatic.Storage.Embedded.Runtime.embeddedSettings</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-app-static/WaiAppStatic/Storage/Embedded/Runtime.hs:26:1</small></td>
+                    <td>Type Safety Hazard: Function &#x27;embeddedSettings&#x27; in &#x27;WaiAppStatic.Storage.Embedded.Runtime&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="type_safety" data-level="very_high">
+                    <td>#132</td>
+                    <td><strong><code>unchecked_bottom_error</code></strong></td>
+                    <td><span class="cat-badge">type_safety</span></td>
+                    <td><code>Control.Reaper.reaper</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/auto-update/Control/Reaper.hs:195:1</small></td>
+                    <td>Type Safety Hazard: Function &#x27;reaper&#x27; in &#x27;Control.Reaper&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="type_safety" data-level="very_high">
+                    <td>#133</td>
+                    <td><strong><code>unchecked_bottom_error</code></strong></td>
+                    <td><span class="cat-badge">type_safety</span></td>
+                    <td><code>System.TimeManager.emptyHandle</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/time-manager/System/TimeManager.hs:71:1</small></td>
+                    <td>Type Safety Hazard: Function &#x27;emptyHandle&#x27; in &#x27;System.TimeManager&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="type_safety" data-level="very_high">
+                    <td>#134</td>
+                    <td><strong><code>unchecked_bottom_error</code></strong></td>
+                    <td><span class="cat-badge">type_safety</span></td>
+                    <td><code>Network.Wai.Middleware.CombineHeadersSpec.runApp</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/test/Network/Wai/Middleware/CombineHeadersSpec.hs:145:1</small></td>
+                    <td>Type Safety Hazard: Function &#x27;runApp&#x27; in &#x27;Network.Wai.Middleware.CombineHeadersSpec&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="type_safety" data-level="very_high">
+                    <td>#135</td>
+                    <td><strong><code>unchecked_bottom_error</code></strong></td>
+                    <td><span class="cat-badge">type_safety</span></td>
+                    <td><code>Network.Wai.Parse.wrapTillBound</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Parse.hs:719:1</small></td>
+                    <td>Type Safety Hazard: Function &#x27;wrapTillBound&#x27; in &#x27;Network.Wai.Parse&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="type_safety" data-level="very_high">
+                    <td>#136</td>
+                    <td><strong><code>unchecked_bottom_error</code></strong></td>
+                    <td><span class="cat-badge">type_safety</span></td>
+                    <td><code>Network.Wai.Test.request</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Test.hs:119:1</small></td>
+                    <td>Type Safety Hazard: Function &#x27;request&#x27; in &#x27;Network.Wai.Test&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="type_safety" data-level="very_high">
+                    <td>#137</td>
+                    <td><strong><code>unchecked_bottom_error</code></strong></td>
+                    <td><span class="cat-badge">type_safety</span></td>
+                    <td><code>Network.Wai.Handler.SCGI.readNetstring</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Handler/SCGI.hs:76:1</small></td>
+                    <td>Type Safety Hazard: Function &#x27;readNetstring&#x27; in &#x27;Network.Wai.Handler.SCGI&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="type_safety" data-level="very_high">
+                    <td>#138</td>
+                    <td><strong><code>unchecked_bottom_error</code></strong></td>
+                    <td><span class="cat-badge">type_safety</span></td>
+                    <td><code>Network.WaiSpec.spec</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai/test/Network/WaiSpec.hs:15:1</small></td>
+                    <td>Type Safety Hazard: Function &#x27;spec&#x27; in &#x27;Network.WaiSpec&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="type_safety" data-level="very_high">
+                    <td>#139</td>
+                    <td><strong><code>unchecked_bottom_error</code></strong></td>
+                    <td><span class="cat-badge">type_safety</span></td>
+                    <td><code>Network.Socket.BufferPool.Recv._iorefRecv</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/recv/Network/Socket/BufferPool/Recv.hs:95:1</small></td>
+                    <td>Type Safety Hazard: Function &#x27;_iorefRecv&#x27; in &#x27;Network.Socket.BufferPool.Recv&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="type_safety" data-level="very_high">
+                    <td>#140</td>
+                    <td><strong><code>unchecked_bottom_error</code></strong></td>
+                    <td><span class="cat-badge">type_safety</span></td>
+                    <td><code>RunSpec.withApp</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/RunSpec.hs:137:1</small></td>
+                    <td>Type Safety Hazard: Function &#x27;withApp&#x27; in &#x27;RunSpec&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="type_safety" data-level="very_high">
+                    <td>#141</td>
+                    <td><strong><code>unchecked_bottom_error</code></strong></td>
+                    <td><span class="cat-badge">type_safety</span></td>
+                    <td><code>RunSpec.spec</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/RunSpec.hs:205:1</small></td>
+                    <td>Type Safety Hazard: Function &#x27;spec&#x27; in &#x27;RunSpec&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="type_safety" data-level="very_high">
+                    <td>#142</td>
+                    <td><strong><code>unchecked_bottom_error</code></strong></td>
+                    <td><span class="cat-badge">type_safety</span></td>
+                    <td><code>RequestSpec.spec</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/RequestSpec.hs:27:1</small></td>
+                    <td>Type Safety Hazard: Function &#x27;spec&#x27; in &#x27;RequestSpec&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="type_safety" data-level="very_high">
+                    <td>#143</td>
+                    <td><strong><code>unchecked_bottom_error</code></strong></td>
+                    <td><span class="cat-badge">type_safety</span></td>
+                    <td><code>Network.Wai.Handler.Warp.HTTP1.processRequest</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/HTTP1.hs:174:1</small></td>
+                    <td>Type Safety Hazard: Function &#x27;processRequest&#x27; in &#x27;Network.Wai.Handler.Warp.HTTP1&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="type_safety" data-level="very_high">
+                    <td>#144</td>
+                    <td><strong><code>unchecked_bottom_error</code></strong></td>
+                    <td><span class="cat-badge">type_safety</span></td>
+                    <td><code>Network.Wai.Handler.Warp.HTTP2.Response.fromResponse</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/HTTP2/Response.hs:27:1</small></td>
+                    <td>Type Safety Hazard: Function &#x27;fromResponse&#x27; in &#x27;Network.Wai.Handler.Warp.HTTP2.Response&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="type_safety" data-level="very_high">
+                    <td>#145</td>
+                    <td><strong><code>unchecked_from_just</code></strong></td>
+                    <td><span class="cat-badge">type_safety</span></td>
+                    <td><code>Network.Wai.Handler.Warp.HTTP2.Request.toRequest&#x27;</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/HTTP2/Request.hs:53:1</small></td>
+                    <td>Type Safety Hazard: Function &#x27;toRequest&#x27;&#x27; in &#x27;Network.Wai.Handler.Warp.HTTP2.Request&#x27; calls partial `fromJust` which throws an uncatchable exception on `Nothing`; use `fromMaybe` or pattern match</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="resilience" data-level="high">
+                    <td>#146</td>
+                    <td><strong><code>lazy_space_leak_risk</code></strong></td>
+                    <td><span class="cat-badge">resilience</span></td>
+                    <td><code>Network.Wai.UrlMap.try</code></td>
+                    <td><span class="badge high">80% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/UrlMap.hs:81:1</small></td>
+                    <td>Resilience Risk (Lazy Space Leak): Function &#x27;try&#x27; in &#x27;Network.Wai.UrlMap&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="very_high">
+                    <td>#147</td>
+                    <td><strong><code>god_module_srp</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Network.Mime</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/mime-types/Network/Mime.hs:1:1</small></td>
+                    <td>SRP Violation (God Module): Module &#x27;Network.Mime&#x27; contains 12 declarations across 1152 lines of code; decompose into focused domain modules</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="very_high">
+                    <td>#148</td>
+                    <td><strong><code>god_module_srp</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>WaiExtraSpec</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/test/WaiExtraSpec.hs:1:1</small></td>
+                    <td>SRP Violation (God Module): Module &#x27;WaiExtraSpec&#x27; contains 53 declarations across 838 lines of code; decompose into focused domain modules</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="very_high">
+                    <td>#149</td>
+                    <td><strong><code>god_module_srp</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Network.Wai.Parse</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Parse.hs:1:1</small></td>
+                    <td>SRP Violation (God Module): Module &#x27;Network.Wai.Parse&#x27; contains 50 declarations across 836 lines of code; decompose into focused domain modules</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="very_high">
+                    <td>#150</td>
+                    <td><strong><code>god_module_srp</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Network.Wai.Middleware.RequestLogger</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Middleware/RequestLogger.hs:1:1</small></td>
+                    <td>SRP Violation (God Module): Module &#x27;Network.Wai.Middleware.RequestLogger&#x27; contains 31 declarations across 616 lines of code; decompose into focused domain modules</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="very_high">
+                    <td>#151</td>
+                    <td><strong><code>god_module_srp</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Network.Wai.Handler.Warp</code></td>
+                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp.hs:1:1</small></td>
+                    <td>SRP Violation (God Module): Module &#x27;Network.Wai.Handler.Warp&#x27; contains 42 declarations across 621 lines of code; decompose into focused domain modules</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#152</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Network.Wai.Application.Static.checkPieces</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-app-static/Network/Wai/Application/Static.hs:115:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;checkPieces&#x27; in &#x27;Network.Wai.Application.Static&#x27; has cyclomatic complexity of 20; refactor complex pattern branches</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#153</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>WaiAppStatic.Listing.renderDirectoryContentsTable</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-app-static/WaiAppStatic/Listing.hs:94:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;renderDirectoryContentsTable&#x27; in &#x27;WaiAppStatic.Listing&#x27; has cyclomatic complexity of 20; refactor complex pattern branches</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#154</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Control.Debounce.Internal.mkDebounceInternal</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/auto-update/Control/Debounce/Internal.hs:165:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;mkDebounceInternal&#x27; in &#x27;Control.Debounce.Internal&#x27; has cyclomatic complexity of 16; refactor complex pattern branches</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#155</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Network.Wai.Parse.parsePiecesEx</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Parse.hs:554:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;parsePiecesEx&#x27; in &#x27;Network.Wai.Parse&#x27; has cyclomatic complexity of 15; refactor complex pattern branches</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#156</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Network.Wai.Parse.wrapTillBound</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Parse.hs:719:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;wrapTillBound&#x27; in &#x27;Network.Wai.Parse&#x27; has cyclomatic complexity of 14; refactor complex pattern branches</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#157</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Network.Wai.Parse.parseContentDispositionAttrs</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Parse.hs:797:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;parseContentDispositionAttrs&#x27; in &#x27;Network.Wai.Parse&#x27; has cyclomatic complexity of 14; refactor complex pattern branches</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#158</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Network.Wai.Handler.CGI.runGeneric</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Handler/CGI.hs:82:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;runGeneric&#x27; in &#x27;Network.Wai.Handler.CGI&#x27; has cyclomatic complexity of 13; refactor complex pattern branches</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#159</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Network.Wai.Middleware.RequestLogger.detailedMiddleware&#x27;</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Middleware/RequestLogger.hs:497:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;detailedMiddleware&#x27;&#x27; in &#x27;Network.Wai.Middleware.RequestLogger&#x27; has cyclomatic complexity of 30; refactor complex pattern branches</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#160</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Network.Wai.Middleware.Jsonp.jsonp</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Middleware/Jsonp.hs:40:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;jsonp&#x27; in &#x27;Network.Wai.Middleware.Jsonp&#x27; has cyclomatic complexity of 14; refactor complex pattern branches</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#161</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>RunSpec.spec</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/RunSpec.hs:205:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;spec&#x27; in &#x27;RunSpec&#x27; has cyclomatic complexity of 18; refactor complex pattern branches</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#162</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Network.Wai.Handler.Warp.Conduit.readCSource</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Conduit.hs:77:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;readCSource&#x27; in &#x27;Network.Wai.Handler.Warp.Conduit&#x27; has cyclomatic complexity of 25; refactor complex pattern branches</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#163</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Network.Wai.Handler.Warp.HTTP1.http1</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/HTTP1.hs:31:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;http1&#x27; in &#x27;Network.Wai.Handler.Warp.HTTP1&#x27; has cyclomatic complexity of 15; refactor complex pattern branches</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#164</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Network.Wai.Handler.Warp.HTTP1.processRequest</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/HTTP1.hs:174:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;processRequest&#x27; in &#x27;Network.Wai.Handler.Warp.HTTP1&#x27; has cyclomatic complexity of 14; refactor complex pattern branches</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#165</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Network.Wai.Handler.Warp.Header.indexRequestHeader</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Header.hs:39:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;indexRequestHeader&#x27; in &#x27;Network.Wai.Handler.Warp.Header&#x27; has cyclomatic complexity of 22; refactor complex pattern branches</td>
+                </tr>
+                
+
+                <tr class="detection-row" data-category="principle" data-level="high">
+                    <td>#166</td>
+                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
+                    <td><span class="cat-badge">principle</span></td>
+                    <td><code>Network.Wai.Handler.Warp.Response.sendResponse</code></td>
+                    <td><span class="badge high">75% [HIGH]</span></td>
+                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Response.hs:108:1</small></td>
+                    <td>KISS Violation (High Complexity): Function &#x27;sendResponse&#x27; in &#x27;Network.Wai.Handler.Warp.Response&#x27; has cyclomatic complexity of 20; refactor complex pattern branches</td>
+                </tr>
+                
+        </tbody>
+    </table>
+</body>
+</html>
