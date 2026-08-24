@@ -1,4 +1,10 @@
-"""Standalone, high-visibility Semantic UI (Fomantic-UI) HTML dashboard formatter for Haskell Pattern Detector."""
+"""
+Elite, production-grade Cyber-Architectural HTML Dashboard Formatter for DPX-Haskell.
+Designed with Gemini 3 Pro + Claude frontend design principles:
+- Bold Aesthetic: Monadic Cyber-Blueprint & Deep Void Glassmorphism
+- Distinctive Typography: Syne (Display) + Plus Jakarta Sans (Body) + JetBrains Mono (Code)
+- Signature Element: Holographic Monad HUD, Live Reactive Pill Filters, Glassmorphic Cards
+"""
 
 from __future__ import annotations
 
@@ -14,377 +20,745 @@ from pattern_detector.domain.value_objects import (
 )
 from pattern_detector.ports.outbound import ReportFormatterPort
 
-CATEGORY_STYLES = {
+CATEGORY_THEMES = {
     PatternCategory.TYPECLASS_SYSTEM: {
-        "color": "purple",
-        "icon": "cubes",
         "name": "Typeclasses & Polymorphism",
-        "badge_bg": "rgba(168, 85, 247, 0.2)",
-        "badge_border": "rgba(168, 85, 247, 0.5)",
-        "badge_text": "#d8b4fe",
-        "accent": "#a855f7",
-        "label_color": "purple",
+        "icon": "⟨T⟩",
+        "accent": "#00f0ff",
+        "glow": "rgba(0, 240, 255, 0.25)",
+        "badge_bg": "rgba(0, 240, 255, 0.12)",
+        "border": "rgba(0, 240, 255, 0.35)",
+        "text": "#67e8f9",
     },
     PatternCategory.MONAD_ARCHITECTURE: {
-        "color": "violet",
-        "icon": "layer group",
         "name": "Monad Stacks & ReaderT",
-        "badge_bg": "rgba(139, 92, 246, 0.2)",
-        "badge_border": "rgba(139, 92, 246, 0.5)",
-        "badge_text": "#c4b5fd",
-        "accent": "#8b5cf6",
-        "label_color": "violet",
+        "icon": "λ⟦M⟧",
+        "accent": "#b026ff",
+        "glow": "rgba(176, 38, 255, 0.25)",
+        "badge_bg": "rgba(176, 38, 255, 0.12)",
+        "border": "rgba(176, 38, 255, 0.35)",
+        "text": "#d8b4fe",
     },
     PatternCategory.FUNCTIONAL_IDIOM: {
-        "color": "teal",
-        "icon": "code branch",
         "name": "Functional Idioms & GADTs",
-        "badge_bg": "rgba(20, 184, 166, 0.2)",
-        "badge_border": "rgba(20, 184, 166, 0.5)",
-        "badge_text": "#5eead4",
-        "accent": "#14b8a6",
-        "label_color": "teal",
+        "icon": "ƒ(x)",
+        "accent": "#2dd4bf",
+        "glow": "rgba(45, 212, 191, 0.25)",
+        "badge_bg": "rgba(45, 212, 191, 0.12)",
+        "border": "rgba(45, 212, 191, 0.35)",
+        "text": "#5eead4",
     },
     PatternCategory.CONCURRENCY_STM: {
-        "color": "blue",
-        "icon": "bolt",
         "name": "STM & Concurrency",
-        "badge_bg": "rgba(56, 189, 248, 0.2)",
-        "badge_border": "rgba(56, 189, 248, 0.5)",
-        "badge_text": "#7dd3fc",
-        "accent": "#0ea5e9",
-        "label_color": "blue",
+        "icon": "⚡STM",
+        "accent": "#38bdf8",
+        "glow": "rgba(56, 189, 248, 0.25)",
+        "badge_bg": "rgba(56, 189, 248, 0.12)",
+        "border": "rgba(56, 189, 248, 0.35)",
+        "text": "#7dd3fc",
     },
     PatternCategory.OPTICS_LENSES: {
-        "color": "pink",
-        "icon": "eye",
         "name": "Optics & Lenses",
-        "badge_bg": "rgba(236, 72, 153, 0.2)",
-        "badge_border": "rgba(236, 72, 153, 0.5)",
-        "badge_text": "#f9a8d4",
-        "accent": "#ec4899",
-        "label_color": "pink",
+        "icon": "⊙_⊙",
+        "accent": "#f472b6",
+        "glow": "rgba(244, 114, 182, 0.25)",
+        "badge_bg": "rgba(244, 114, 182, 0.12)",
+        "border": "rgba(244, 114, 182, 0.35)",
+        "text": "#f9a8d4",
     },
     PatternCategory.RESILIENCE: {
-        "color": "green",
-        "icon": "shield alternate",
         "name": "Resilience & Space Leaks",
-        "badge_bg": "rgba(34, 197, 94, 0.2)",
-        "badge_border": "rgba(34, 197, 94, 0.5)",
-        "badge_text": "#86efac",
-        "accent": "#22c55e",
-        "label_color": "green",
+        "icon": "🛡️Ω",
+        "accent": "#00ff9d",
+        "glow": "rgba(0, 255, 157, 0.25)",
+        "badge_bg": "rgba(0, 255, 157, 0.12)",
+        "border": "rgba(0, 255, 157, 0.35)",
+        "text": "#86efac",
     },
     PatternCategory.PRINCIPLE: {
-        "color": "yellow",
-        "icon": "balance scale",
         "name": "Principles & Quality",
-        "badge_bg": "rgba(234, 179, 8, 0.2)",
-        "badge_border": "rgba(234, 179, 8, 0.5)",
-        "badge_text": "#fde047",
-        "accent": "#eab308",
-        "label_color": "yellow",
+        "icon": "⚖️📐",
+        "accent": "#ffb700",
+        "glow": "rgba(255, 183, 0, 0.25)",
+        "badge_bg": "rgba(255, 183, 0, 0.12)",
+        "border": "rgba(255, 183, 0, 0.35)",
+        "text": "#fde047",
     },
     PatternCategory.TYPE_SAFETY: {
-        "color": "red",
-        "icon": "exclamation triangle",
         "name": "Type Safety Hazards",
-        "badge_bg": "rgba(239, 68, 68, 0.2)",
-        "badge_border": "rgba(239, 68, 68, 0.5)",
-        "badge_text": "#fca5a5",
-        "accent": "#ef4444",
-        "label_color": "red",
+        "icon": "⚠️⊥",
+        "accent": "#ff2a6d",
+        "glow": "rgba(255, 42, 109, 0.25)",
+        "badge_bg": "rgba(255, 42, 109, 0.12)",
+        "border": "rgba(255, 42, 109, 0.35)",
+        "text": "#fca5a5",
     },
 }
 
-_HTML_DASHBOARD_TEMPLATE = """<!DOCTYPE html>
+_HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔷 DPX-Haskell: Architecture & Pattern Dashboard - {project_name}</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.3/semantic.min.css">
+    <title>🔷 DPX-Haskell HUD — {project_name}</title>
+    <!-- Google Fonts: Syne, Plus Jakarta Sans, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;0,800;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+
     <style>
         :root {{
-            --bg-main: #060911;
-            --bg-card: #0f1523;
-            --bg-card-hover: #141c2e;
-            --border-color: #1e293b;
-            --border-hover: #38bdf8;
-            --text-primary: #ffffff;
+            --bg-void: #04060c;
+            --bg-surface: #090e1a;
+            --bg-surface-elevated: #0f172a;
+            --bg-card: rgba(13, 20, 36, 0.75);
+            --bg-card-hover: rgba(19, 29, 53, 0.9);
+            --border-dim: #182338;
+            --border-bright: #283958;
+            --cyan: #00f0ff;
+            --cyan-glow: rgba(0, 240, 255, 0.25);
+            --purple: #b026ff;
+            --purple-glow: rgba(176, 38, 255, 0.25);
+            --emerald: #00ff9d;
+            --emerald-glow: rgba(0, 255, 157, 0.25);
+            --rose: #ff2a6d;
+            --rose-glow: rgba(255, 42, 109, 0.25);
+            --amber: #ffb700;
+            --amber-glow: rgba(255, 183, 0, 0.25);
+            --text-pure: #ffffff;
+            --text-bright: #f1f5f9;
             --text-secondary: #94a3b8;
-            --text-muted: #64748b;
+            --text-dim: #64748b;
+            --font-display: 'Syne', sans-serif;
+            --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-code: 'JetBrains Mono', monospace;
         }}
-        * {{ box-sizing: border-box; }}
+
+        * {{
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }}
+
         body {{
-            background-color: var(--bg-main) !important;
-            color: var(--text-primary) !important;
-            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, sans-serif;
-            padding: 32px 20px;
-            line-height: 1.5;
+            background-color: var(--bg-void);
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(176, 38, 255, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(0, 240, 255, 0.08) 0%, transparent 40%),
+                linear-gradient(rgba(24, 35, 56, 0.15) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(24, 35, 56, 0.15) 1px, transparent 1px);
+            background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+            color: var(--text-bright);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            padding: 40px 24px 80px 24px;
+            min-height: 100vh;
         }}
-        .ui.container {{
-            max-width: 1440px !important;
+
+        .hud-container {{
+            max-width: 1440px;
+            margin: 0 auto;
         }}
-        .ui.inverted.segment {{
-            background-color: var(--bg-card) !important;
-            border: 1px solid var(--border-color) !important;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45) !important;
-            border-radius: 12px !important;
+
+        /* Header Cyberpunk HUD */
+        .hud-header {{
+            background: linear-gradient(135deg, rgba(13, 20, 36, 0.9) 0%, rgba(9, 14, 26, 0.95) 100%);
+            border: 1px solid var(--border-bright);
+            border-radius: 16px;
+            padding: 32px 36px;
+            margin-bottom: 32px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }}
-        .ui.inverted.card {{
-            background-color: var(--bg-card) !important;
-            border: 1px solid var(--border-color) !important;
-            border-radius: 10px !important;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
-            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+
+        .hud-header::before {{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--purple), var(--cyan), var(--emerald));
         }}
-        .ui.inverted.card:hover {{
-            background-color: var(--bg-card-hover) !important;
-            border-color: var(--border-hover) !important;
-            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.2) !important;
-            transform: translateY(-3px);
+
+        .header-flex {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
         }}
-        .header-title {{
-            font-size: 30px;
+
+        .header-brand {{
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }}
+
+        .monad-logo-badge {{
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(176, 38, 255, 0.2) 0%, rgba(0, 240, 255, 0.2) 100%);
+            border: 1px solid var(--cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            box-shadow: 0 0 20px var(--cyan-glow);
+        }}
+
+        .hud-title {{
+            font-family: var(--font-display);
+            font-size: 34px;
             font-weight: 900;
-            letter-spacing: -0.6px;
-            background: linear-gradient(135deg, #c084fc 0%, #38bdf8 50%, #4ade80 100%);
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, var(--cyan) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            display: inline-block;
-            white-space: nowrap;
+            line-height: 1.2;
         }}
-        .code-snippet {{
-            font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            background: #040711;
-            padding: 4px 10px;
-            border-radius: 6px;
-            border: 1px solid #1e293b;
-            color: #38bdf8;
-            font-size: 14px;
-            font-weight: 600;
-        }}
-        .code-snippet-large {{
-            font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            background: #040711;
-            padding: 5px 12px;
-            border-radius: 6px;
-            border: 1px solid #223049;
-            color: #67e8f9;
-            font-size: 14.5px;
-            font-weight: 700;
-            display: inline-block;
-            word-break: break-all;
-        }}
-        .evidence-box {{
-            background: #080d19;
-            border-left: 4px solid #38bdf8;
-            padding: 10px 14px;
-            margin-top: 8px;
-            border-radius: 0 6px 6px 0;
-            font-size: 13px;
-            color: #e2e8f0;
-            line-height: 1.5;
-            border-top: 1px solid #131d2e;
-            border-right: 1px solid #131d2e;
-            border-bottom: 1px solid #131d2e;
-        }}
-        .stat-value {{
-            font-size: 36px !important;
-            font-weight: 900 !important;
-            letter-spacing: -1px;
-            line-height: 1.1;
-        }}
-        .stat-desc {{
-            color: #94a3b8 !important;
-            font-size: 13.5px !important;
-            font-weight: 500;
+
+        .target-tag {{
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             margin-top: 6px;
+            font-size: 14.5px;
+            color: var(--text-secondary);
         }}
-        .filter-btn {{
-            font-size: 13px !important;
-            font-weight: 700 !important;
-            padding: 9px 15px !important;
-            border-radius: 8px !important;
-            transition: all 0.15s ease !important;
-        }}
-        .filter-btn.active {{
-            background-color: #2563eb !important;
-            color: #ffffff !important;
-            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4) !important;
-        }}
-        .location-pill {{
-            font-family: "JetBrains Mono", ui-monospace, monospace;
-            font-size: 12px;
-            color: #f472b6;
-            background: rgba(244, 114, 182, 0.1);
-            padding: 5px 10px;
+
+        .code-pill {{
+            font-family: var(--font-code);
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--cyan);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            padding: 3px 10px;
             border-radius: 6px;
-            border: 1px solid rgba(244, 114, 182, 0.3);
             font-weight: 600;
+            font-size: 13.5px;
+        }}
+
+        .meta-pills {{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }}
+
+        .meta-pill {{
+            font-family: var(--font-code);
+            font-size: 12.5px;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 8px;
+            background: rgba(24, 35, 56, 0.6);
+            border: 1px solid var(--border-bright);
+            color: var(--text-bright);
             display: inline-flex;
             align-items: center;
             gap: 6px;
+        }}
+
+        /* Holographic KPI Grid */
+        .kpi-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-bottom: 32px;
+        }}
+
+        .kpi-card {{
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 14px;
+            padding: 22px 24px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }}
+
+        .kpi-card:hover {{
+            transform: translateY(-3px);
+            border-color: var(--border-bright);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        }}
+
+        .kpi-card::after {{
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+        }}
+
+        .kpi-card.cyan::after {{ background: var(--cyan); box-shadow: 0 0 10px var(--cyan-glow); }}
+        .kpi-card.rose::after {{ background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }}
+        .kpi-card.purple::after {{ background: var(--purple); box-shadow: 0 0 10px var(--purple-glow); }}
+        .kpi-card.emerald::after {{ background: var(--emerald); box-shadow: 0 0 10px var(--emerald-glow); }}
+
+        .kpi-label {{
+            font-family: var(--font-code);
+            font-size: 11.5px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }}
+
+        .kpi-value {{
+            font-family: var(--font-display);
+            font-size: 40px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            margin: 6px 0;
+            line-height: 1.1;
+        }}
+
+        .kpi-desc {{
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }}
+
+        /* AI Prompt Banner */
+        .ai-banner {{
+            background: linear-gradient(135deg, rgba(176, 38, 255, 0.12) 0%, rgba(9, 14, 26, 0.8) 100%);
+            border: 1px solid rgba(176, 38, 255, 0.4);
+            border-left: 5px solid var(--purple);
+            border-radius: 14px;
+            padding: 24px 28px;
+            margin-bottom: 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 18px;
+            box-shadow: 0 8px 30px rgba(176, 38, 255, 0.1);
+        }}
+
+        .ai-title {{
+            font-family: var(--font-display);
+            font-size: 18px;
+            font-weight: 800;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }}
+
+        .ai-btn {{
+            font-family: var(--font-code);
+            background: linear-gradient(135deg, var(--purple) 0%, #7928ca 100%);
+            color: #ffffff;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 13.5px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 20px var(--purple-glow);
+            transition: all 0.2s ease;
+        }}
+
+        .ai-btn:hover {{
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(176, 38, 255, 0.5);
+        }}
+
+        /* Filter Controls */
+        .controls-bar {{
+            background: var(--bg-surface);
+            border: 1px solid var(--border-dim);
+            border-radius: 14px;
+            padding: 18px 22px;
+            margin-bottom: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }}
+
+        .category-pills {{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }}
+
+        .cat-pill-btn {{
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--border-bright);
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }}
+
+        .cat-pill-btn:hover {{
+            color: var(--text-pure);
+            border-color: var(--cyan);
+            background: rgba(0, 240, 255, 0.08);
+        }}
+
+        .cat-pill-btn.active {{
+            background: var(--cyan);
+            color: #04060c;
+            border-color: var(--cyan);
+            font-weight: 800;
+            box-shadow: 0 0 15px var(--cyan-glow);
+        }}
+
+        .search-box-wrap {{
+            position: relative;
+            width: 100%;
+        }}
+
+        .search-input {{
+            width: 100%;
+            background: var(--bg-void);
+            border: 1px solid var(--border-bright);
+            color: #ffffff;
+            font-family: var(--font-body);
+            font-size: 14.5px;
+            padding: 13px 20px 13px 44px;
+            border-radius: 10px;
+            outline: none;
+            transition: all 0.2s ease;
+        }}
+
+        .search-input:focus {{
+            border-color: var(--cyan);
+            box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.2);
+        }}
+
+        .search-icon {{
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--cyan);
+            font-size: 16px;
+        }}
+
+        /* Findings Cards Grid */
+        .cards-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(640px, 1fr));
+            gap: 20px;
+        }}
+
+        @media (max-width: 768px) {{
+            .cards-grid {{
+                grid-template-columns: 1fr;
+            }}
+        }}
+
+        .finding-card {{
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 14px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            backdrop-filter: blur(10px);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+        }}
+
+        .finding-card:hover {{
+            background: var(--bg-card-hover);
+            border-color: var(--border-bright);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+        }}
+
+        .card-top {{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }}
+
+        .card-idx-pattern {{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }}
+
+        .card-idx {{
+            font-family: var(--font-code);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dim);
+        }}
+
+        .card-pattern-title {{
+            font-family: var(--font-code);
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--cyan);
+        }}
+
+        .category-badge {{
+            font-family: var(--font-code);
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }}
+
+        .target-meta {{
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }}
+
+        .target-code {{
+            font-family: var(--font-code);
+            font-size: 14.5px;
+            font-weight: 700;
+            color: #ffffff;
+            background: rgba(4, 6, 12, 0.8);
+            border: 1px solid var(--border-bright);
+            padding: 4px 10px;
+            border-radius: 6px;
+            word-break: break-all;
+        }}
+
+        .kind-pill {{
+            font-family: var(--font-code);
+            font-size: 11.5px;
+            color: var(--text-dim);
+            background: rgba(24, 35, 56, 0.6);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }}
+
+        .card-summary {{
+            font-size: 14.5px;
+            line-height: 1.6;
+            color: var(--text-bright);
+            font-weight: 500;
+            margin-bottom: 16px;
+        }}
+
+        /* Evidence Box */
+        .evidence-trail-title {{
+            font-family: var(--font-code);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+        }}
+
+        .evidence-item {{
+            background: rgba(4, 6, 12, 0.7);
+            border-left: 3px solid var(--cyan);
+            padding: 8px 12px;
+            border-radius: 0 6px 6px 0;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #cbd5e1;
+            margin-bottom: 6px;
+            border-top: 1px solid rgba(24, 35, 56, 0.4);
+            border-right: 1px solid rgba(24, 35, 56, 0.4);
+            border-bottom: 1px solid rgba(24, 35, 56, 0.4);
+        }}
+
+        .card-footer {{
+            border-top: 1px solid var(--border-dim);
+            padding-top: 14px;
+            margin-top: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }}
+
+        .loc-pill {{
+            font-family: var(--font-code);
+            font-size: 12px;
+            color: var(--rose);
+            background: rgba(255, 42, 109, 0.08);
+            border: 1px solid rgba(255, 42, 109, 0.25);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: 600;
             max-width: 68%;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }}
+
         .conf-badge {{
-            flex-shrink: 0 !important;
-            white-space: nowrap !important;
-            font-weight: 800 !important;
-            font-size: 11.5px !important;
-            letter-spacing: 0.5px !important;
-            padding: 6px 11px !important;
-            border-radius: 6px !important;
+            font-family: var(--font-code);
+            font-size: 11.5px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 6px;
+            flex-shrink: 0;
+            white-space: nowrap;
         }}
-        .finding-summary {{
-            font-size: 14.5px;
-            line-height: 1.6;
-            color: #f1f5f9;
-            font-weight: 500;
+
+        .conf-very-high {{ background: rgba(0, 255, 157, 0.15); color: var(--emerald); border: 1px solid rgba(0, 255, 157, 0.4); }}
+        .conf-high {{ background: rgba(0, 240, 255, 0.15); color: var(--cyan); border: 1px solid rgba(0, 240, 255, 0.4); }}
+        .conf-medium {{ background: rgba(255, 183, 0, 0.15); color: var(--amber); border: 1px solid rgba(255, 183, 0, 0.4); }}
+
+        #copyToast {{
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--emerald);
+            color: var(--emerald);
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-family: var(--font-code);
+            font-weight: 700;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--emerald-glow);
+            z-index: 9999;
+            animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }}
-        #searchInput {{
-            background: #080d19 !important;
-            border: 1px solid #223049 !important;
-            color: #ffffff !important;
-            font-size: 14px !important;
-            padding: 11px 16px !important;
-            border-radius: 8px !important;
-        }}
-        #searchInput:focus {{
-            border-color: #38bdf8 !important;
-            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3) !important;
+
+        @keyframes slideIn {{
+            from {{ transform: translateY(20px); opacity: 0; }}
+            to {{ transform: translateY(0); opacity: 1; }}
         }}
     </style>
 </head>
 <body>
 
-<div class="ui container">
+<div class="hud-container">
 
     <!-- Header Section -->
-    <div class="ui inverted segment" style="margin-bottom: 28px; padding: 26px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-            <div>
-                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-                    <span style="font-size: 32px;">🔷</span>
-                    <span class="header-title">DPX-Haskell Architecture & Pattern Engine</span>
-                </div>
-                <div style="color: var(--text-secondary); font-size: 14.5px;">
-                    Target Codebase: <code class="code-snippet">{project_name}</code>
+    <header class="hud-header">
+        <div class="header-flex">
+            <div class="header-brand">
+                <div class="monad-logo-badge">λ</div>
+                <div>
+                    <h1 class="hud-title">DPX-Haskell Architecture HUD</h1>
+                    <div class="target-tag">
+                        Target Codebase: <span class="code-pill">{project_name}</span>
+                    </div>
                 </div>
             </div>
-            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                <div class="ui medium blue label" style="font-weight: 700;">
-                    <i class="layer group icon"></i> Hexagonal DDD
-                </div>
-                <div class="ui medium teal label" style="font-weight: 700;">
-                    <i class="clock outline icon"></i> {elapsed_seconds}s
-                </div>
-                <div class="ui medium purple label" style="font-weight: 700;">
-                    <i class="file alternate outline icon"></i> {scanned_files} files
-                </div>
+            <div class="meta-pills">
+                <span class="meta-pill" style="border-color: var(--cyan); color: var(--cyan);">
+                    ⚡ Hexagonal DDD Engine
+                </span>
+                <span class="meta-pill" style="border-color: var(--emerald); color: var(--emerald);">
+                    ⏱️ {elapsed_seconds}s
+                </span>
+                <span class="meta-pill" style="border-color: var(--purple); color: var(--purple);">
+                    📁 {scanned_files} files
+                </span>
             </div>
         </div>
-    </div>
+    </header>
 
-    <!-- KPI Statistics -->
-    <div class="ui four stackable cards" style="margin-bottom: 28px;">
-        <div class="ui inverted card" style="border-top: 3px solid #38bdf8 !important;">
-            <div class="content" style="padding: 20px;">
-                <div class="ui top right attached label blue mini" style="font-weight: 700;">TOTAL FINDINGS</div>
-                <div class="header stat-value" style="color: #38bdf8; margin-top: 8px;">{total_detections}</div>
-                <div class="description stat-desc">Total patterns & architecture findings</div>
-            </div>
+    <!-- Holographic KPI Cards -->
+    <section class="kpi-grid">
+        <div class="kpi-card cyan">
+            <div class="kpi-label">Total Findings</div>
+            <div class="kpi-value" style="color: var(--cyan);">{total_detections}</div>
+            <div class="kpi-desc">Architecture patterns & smells mapped</div>
         </div>
-        <div class="ui inverted card" style="border-top: 3px solid #f87171 !important;">
-            <div class="content" style="padding: 20px;">
-                <div class="ui top right attached label red mini" style="font-weight: 700;">ACTION REQUIRED</div>
-                <div class="header stat-value" style="color: #f87171; margin-top: 8px;">{total_violations}</div>
-                <div class="description stat-desc">Safety hazards, space leaks & smells</div>
-            </div>
+        <div class="kpi-card rose">
+            <div class="kpi-label">Action Required</div>
+            <div class="kpi-value" style="color: var(--rose);">{total_violations}</div>
+            <div class="kpi-desc">Safety hazards, space leaks & anti-patterns</div>
         </div>
-        <div class="ui inverted card" style="border-top: 3px solid #c084fc !important;">
-            <div class="content" style="padding: 20px;">
-                <div class="ui top right attached label purple mini" style="font-weight: 700;">TYPECLASSES & MONADS</div>
-                <div class="header stat-value" style="color: #c084fc; margin-top: 8px;">{total_typeclasses_and_monads}</div>
-                <div class="description stat-desc">Typeclasses, ReaderT & Transformer stacks</div>
-            </div>
+        <div class="kpi-card purple">
+            <div class="kpi-label">Typeclasses & Monads</div>
+            <div class="kpi-value" style="color: var(--purple);">{total_typeclasses_and_monads}</div>
+            <div class="kpi-desc">Typeclasses, ReaderT & Transformer stacks</div>
         </div>
-        <div class="ui inverted card" style="border-top: 3px solid #4ade80 !important;">
-            <div class="content" style="padding: 20px;">
-                <div class="ui top right attached label green mini" style="font-weight: 700;">CLEAN CODE & STM</div>
-                <div class="header stat-value" style="color: #4ade80; margin-top: 8px;">{total_adherences}</div>
-                <div class="description stat-desc">Clean functional idioms & STM transactions</div>
-            </div>
+        <div class="kpi-card emerald">
+            <div class="kpi-label">Clean Code & STM</div>
+            <div class="kpi-value" style="color: var(--emerald);">{total_adherences}</div>
+            <div class="kpi-desc">Clean functional idioms & STM transactions</div>
         </div>
-    </div>
+    </section>
 
-    <!-- AI Architecture Map & Prompt Banner -->
-    <div class="ui inverted segment" style="margin-bottom: 28px; padding: 22px; border-left: 5px solid #a855f7 !important;">
-        <div class="ui stackable grid items-center">
-            <div class="eleven wide column">
-                <h3 style="margin: 0; color: #ffffff; font-size: 17px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
-                    <i class="magic icon" style="color: #c084fc;"></i> AI / LLM Architectural Prompt Context
-                </h3>
-                <p style="color: #cbd5e1; margin-top: 6px; font-size: 14px; line-height: 1.5;">
-                    Generate instant refactoring recommendations, STM transaction reviews, and monad transformer optimizations formatted for Claude, ChatGPT, or Gemini.
-                </p>
-            </div>
-            <div class="five wide column right aligned">
-                <button class="ui medium purple button" id="copyLlmBtn" onclick="copyLlmContext()" style="font-weight: 800; padding: 12px 20px;">
-                    <i class="copy outline icon"></i> 📋 Copy Context for LLM
-                </button>
-            </div>
+    <!-- AI Architecture Prompt HUD Banner -->
+    <section class="ai-banner">
+        <div>
+            <h2 class="ai-title">🤖 AI / LLM Architectural Prompt Context</h2>
+            <p style="color: var(--text-secondary); margin-top: 4px; font-size: 14px;">
+                Instant token-optimized prompt for Claude, ChatGPT or Gemini to perform architectural review, ReaderT refactoring and space leak elimination.
+            </p>
         </div>
+        <button class="ai-btn" id="copyLlmBtn" onclick="copyLlmContext()">
+            📋 Copy Context for LLM
+        </button>
         <textarea id="llmContextData" style="display: none;">{llm_context_data}</textarea>
-    </div>
+    </section>
 
-    <!-- Filter Buttons Bar & Search -->
-    <div class="ui inverted segment" style="margin-bottom: 24px; padding: 16px 20px;">
-        <div class="ui stackable grid items-center">
-            <div class="eleven wide column">
-                <div class="ui inverted buttons" id="categoryFilterBar" style="display: flex; flex-wrap: wrap; gap: 8px;">
-                    <button class="ui button active filter-btn" data-filter="all">All Findings ({total_detections})</button>
-                    {category_filter_buttons}
-                </div>
-            </div>
-            <div class="five wide column right aligned">
-                <div class="ui fluid icon inverted input">
-                    <input type="text" id="searchInput" placeholder="🔎 Search findings, modules, functions...">
-                    <i class="search icon" style="color: #38bdf8;"></i>
-                </div>
-            </div>
+    <!-- Controls & Search Bar -->
+    <section class="controls-bar">
+        <div class="category-pills" id="categoryPillBar">
+            <button class="cat-pill-btn active" data-filter="all">All Findings ({total_detections})</button>
+            {category_filter_buttons}
         </div>
-    </div>
+        <div class="search-box-wrap">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" class="search-input" placeholder="Instant filter by pattern name, module, function, or rule (e.g. ReaderT, STM, GADT, kiss)...">
+        </div>
+    </section>
 
     <!-- Findings Grid -->
-    <div class="ui stackable cards" id="findingsContainer" style="margin: -0.5em;">
+    <main class="cards-grid" id="findingsGrid">
         {findings_cards_html}
-    </div>
+    </main>
 
 </div>
+
+<div id="copyToast">✓ Architectural Prompt Copied to Clipboard!</div>
 
 <script>
     const searchInput = document.getElementById('searchInput');
     const cards = document.querySelectorAll('.finding-card');
-    const filterBtns = document.querySelectorAll('.filter-btn');
+    const filterBtns = document.querySelectorAll('.cat-pill-btn');
 
-    let currentCategory = 'all';
+    let activeCategory = 'all';
 
-    function applyFilters() {{
-        const query = searchInput.value.toLowerCase().trim();
+    function filterFindings() {{
+        const q = searchInput.value.toLowerCase().trim();
 
         cards.forEach(card => {{
-            const category = card.dataset.category || '';
-            const text = card.textContent.toLowerCase();
+            const cat = card.dataset.category || '';
+            const txt = card.textContent.toLowerCase();
 
-            const matchesCategory = (currentCategory === 'all' || category === currentCategory);
-            const matchesSearch = (!query || text.includes(query));
+            const matchCat = (activeCategory === 'all' || cat === activeCategory);
+            const matchQuery = (!q || txt.includes(q));
 
-            if (matchesCategory && matchesSearch) {{
+            if (matchCat && matchQuery) {{
                 card.style.display = 'flex';
             }} else {{
                 card.style.display = 'none';
@@ -392,31 +766,29 @@ _HTML_DASHBOARD_TEMPLATE = """<!DOCTYPE html>
         }});
     }}
 
-    searchInput.addEventListener('input', applyFilters);
+    searchInput.addEventListener('input', filterFindings);
 
     filterBtns.forEach(btn => {{
         btn.addEventListener('click', () => {{
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            currentCategory = btn.dataset.filter;
-            applyFilters();
+            activeCategory = btn.dataset.filter;
+            filterFindings();
         }});
     }});
 
     function copyLlmContext() {{
         const raw = document.getElementById('llmContextData').value;
         const btn = document.getElementById('copyLlmBtn');
-        const oldHtml = btn.innerHTML;
+        const toast = document.getElementById('copyToast');
 
         navigator.clipboard.writeText(raw).then(() => {{
-            btn.innerHTML = '<i class="check icon"></i> Copied to Clipboard!';
-            btn.classList.remove('purple');
-            btn.classList.add('green');
+            btn.innerHTML = '✓ Copied!';
+            toast.style.display = 'block';
             setTimeout(() => {{
-                btn.innerHTML = oldHtml;
-                btn.classList.remove('green');
-                btn.classList.add('purple');
-            }}, 2200);
+                btn.innerHTML = '📋 Copy Context for LLM';
+                toast.style.display = 'none';
+            }}, 2400);
         }}).catch(() => {{
             const ta = document.createElement('textarea');
             ta.value = raw;
@@ -424,8 +796,12 @@ _HTML_DASHBOARD_TEMPLATE = """<!DOCTYPE html>
             ta.select();
             document.execCommand('copy');
             document.body.removeChild(ta);
-            btn.innerHTML = '<i class="check icon"></i> Copied!';
-            setTimeout(() => {{ btn.innerHTML = oldHtml; }}, 2200);
+            btn.innerHTML = '✓ Copied!';
+            toast.style.display = 'block';
+            setTimeout(() => {{
+                btn.innerHTML = '📋 Copy Context for LLM';
+                toast.style.display = 'none';
+            }}, 2400);
         }});
     }}
 </script>
@@ -436,12 +812,11 @@ _HTML_DASHBOARD_TEMPLATE = """<!DOCTYPE html>
 
 
 class HtmlReportFormatter(ReportFormatterPort):
-    """Generates an interactive, dark-themed Semantic UI (Fomantic-UI) dashboard for Haskell."""
+    """Generates an elite Cyber-Architectural HUD HTML dashboard for Haskell."""
 
     def format(self, report: DetectionReport) -> str:
         project_name = self._resolve_project_name(report.project_path)
 
-        # Classify violations vs adherences vs patterns
         violations_count = 0
         adherences_count = 0
         typeclasses_and_monads_count = 0
@@ -455,65 +830,69 @@ class HtmlReportFormatter(ReportFormatterPort):
                 adherences_count += 1
 
         filter_buttons = []
-        for cat, style in CATEGORY_STYLES.items():
+        for cat, theme in CATEGORY_THEMES.items():
             cnt = report.summary_by_category.get(cat.value, 0)
             if cnt > 0:
                 filter_buttons.append(
-                    f'<button class="ui button filter-btn" data-filter="{cat.value}"><i class="{style["icon"]} icon" style="color: {style["accent"]};"></i> {style["name"]} ({cnt})</button>'
+                    f'<button class="cat-pill-btn" data-filter="{cat.value}">{theme["icon"]} {theme["name"]} ({cnt})</button>'
                 )
 
         cards_html = []
         for idx, d in enumerate(report.detections, 1):
-            style = CATEGORY_STYLES.get(d.pattern_category, CATEGORY_STYLES[PatternCategory.FUNCTIONAL_IDIOM])
-            conf_color = "green" if d.level == ConfidenceLevel.VERY_HIGH else "teal" if d.level == ConfidenceLevel.HIGH else "orange"
+            theme = CATEGORY_THEMES.get(d.pattern_category, CATEGORY_THEMES[PatternCategory.FUNCTIONAL_IDIOM])
+            conf_class = (
+                "conf-very-high"
+                if d.level == ConfidenceLevel.VERY_HIGH
+                else "conf-high"
+                if d.level == ConfidenceLevel.HIGH
+                else "conf-medium"
+            )
             raw_loc = str(d.primary_location) if d.primary_location else "N/A"
             disp_loc, full_loc = self._format_display_location(raw_loc, report.project_path)
 
             evidences_html = "".join([
-                f'<div class="evidence-box" style="border-left-color: {style["accent"]};">'
-                f'<span style="color: {style["badge_text"]}; font-weight: 800; font-family: monospace;">+{int(ev.weight * 100)}%</span> '
-                f'<span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[{html.escape(ev.rule_code)}]</span> '
-                f'<span style="color: #f1f5f9;">{html.escape(ev.description)}</span>'
+                f'<div class="evidence-item" style="border-left-color: {theme["accent"]};">'
+                f'<strong style="color: {theme["text"]}; font-family: var(--font-code);">+{int(ev.weight * 100)}% [{html.escape(ev.rule_code)}]</strong> '
+                f'{html.escape(ev.description)}'
                 f'</div>'
                 for ev in d.evidences
             ])
 
             cards_html.append(
                 f"""
-                <div class="ui inverted card finding-card" data-category="{d.pattern_category.value}" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid {style['accent']} !important;">
-                    <div class="content" style="padding: 18px 20px;">
-                        <div class="ui top right attached label" style="background: {style['badge_bg']}; color: {style['badge_text']}; border: 1px solid {style['badge_border']}; font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
-                            <i class="{style['icon']} icon"></i> {style['name'].upper()}
-                        </div>
-                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#{idx}</span>
-                            <span style="color: #38bdf8;"><code>{html.escape(d.pattern_type.value)}</code></span>
-                        </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
-                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">{html.escape(d.target_name)}</code>
-                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">{html.escape(d.target_kind)}</span>
-                        </div>
-                        <div class="description finding-summary" style="margin-top: 12px;">
-                            {html.escape(d.summary)}
-                        </div>
-                        <div style="margin-top: 14px;">
-                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
-                                <i class="search icon"></i> Evidence Trail ({len(d.evidences)} heuristics):
+                <article class="finding-card" data-category="{d.pattern_category.value}" style="border-left: 4px solid {theme['accent']};">
+                    <div>
+                        <div class="card-top">
+                            <div class="card-idx-pattern">
+                                <span class="card-idx">#{idx}</span>
+                                <span class="card-pattern-title">{html.escape(d.pattern_type.value)}</span>
                             </div>
+                            <span class="category-badge" style="background: {theme['badge_bg']}; color: {theme['text']}; border: 1px solid {theme['border']};">
+                                {theme['icon']} {theme['name']}
+                            </span>
+                        </div>
+                        <div class="target-meta">
+                            <span>Target:</span>
+                            <code class="target-code">{html.escape(d.target_name)}</code>
+                            <span class="kind-pill">{html.escape(d.target_kind)}</span>
+                        </div>
+                        <p class="card-summary">{html.escape(d.summary)}</p>
+                        <div>
+                            <div class="evidence-trail-title">🔎 Evidence Trail ({len(d.evidences)} heuristics):</div>
                             {evidences_html}
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
-                        <span class="location-pill" title="{html.escape(full_loc)}"><i class="map marker alternate icon"></i> {html.escape(disp_loc)}</span>
-                        <span class="ui mini {conf_color} label conf-badge">{d.confidence.percentage_str} [{d.level.value.upper()}]</span>
-                    </div>
-                </div>
+                    <footer class="card-footer">
+                        <span class="loc-pill" title="{html.escape(full_loc)}">📍 {html.escape(disp_loc)}</span>
+                        <span class="conf-badge {conf_class}">{d.confidence.percentage_str} [{d.level.value.upper()}]</span>
+                    </footer>
+                </article>
                 """
             )
 
         llm_context = self._generate_llm_prompt(report, project_name)
 
-        return _HTML_DASHBOARD_TEMPLATE.format(
+        return _HTML_TEMPLATE.format(
             project_name=project_name,
             total_detections=report.total_detections_count,
             total_violations=violations_count,
@@ -527,7 +906,6 @@ class HtmlReportFormatter(ReportFormatterPort):
         )
 
     def _format_display_location(self, loc_str: str, project_path: str) -> tuple[str, str]:
-        """Formats location string to be concise for card display while preserving full path for tooltips."""
         if not loc_str or loc_str == "N/A":
             return "N/A", ""
 
@@ -537,7 +915,6 @@ class HtmlReportFormatter(ReportFormatterPort):
             rel = loc_str[len(clean_proj):].lstrip("/\\")
             return rel, full_loc
 
-        # If long absolute path, display trailing segments
         parts = loc_str.replace("\\", "/").split("/")
         if len(parts) > 4:
             short = ".../" + "/".join(parts[-3:])
