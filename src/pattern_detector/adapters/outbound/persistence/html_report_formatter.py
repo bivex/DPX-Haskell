@@ -1,4 +1,4 @@
-"""Standalone, interactive Semantic UI (Fomantic-UI) HTML dashboard formatter for Haskell Pattern Detector."""
+"""Standalone, high-visibility Semantic UI (Fomantic-UI) HTML dashboard formatter for Haskell Pattern Detector."""
 
 from __future__ import annotations
 
@@ -19,9 +19,9 @@ CATEGORY_STYLES = {
         "color": "purple",
         "icon": "cubes",
         "name": "Typeclasses & Polymorphism",
-        "badge_bg": "rgba(168, 85, 247, 0.15)",
-        "badge_border": "rgba(168, 85, 247, 0.4)",
-        "badge_text": "#c084fc",
+        "badge_bg": "rgba(168, 85, 247, 0.2)",
+        "badge_border": "rgba(168, 85, 247, 0.5)",
+        "badge_text": "#d8b4fe",
         "accent": "#a855f7",
         "label_color": "purple",
     },
@@ -29,9 +29,9 @@ CATEGORY_STYLES = {
         "color": "violet",
         "icon": "layer group",
         "name": "Monad Stacks & ReaderT",
-        "badge_bg": "rgba(139, 92, 246, 0.15)",
-        "badge_border": "rgba(139, 92, 246, 0.4)",
-        "badge_text": "#a78bfa",
+        "badge_bg": "rgba(139, 92, 246, 0.2)",
+        "badge_border": "rgba(139, 92, 246, 0.5)",
+        "badge_text": "#c4b5fd",
         "accent": "#8b5cf6",
         "label_color": "violet",
     },
@@ -39,9 +39,9 @@ CATEGORY_STYLES = {
         "color": "teal",
         "icon": "code branch",
         "name": "Functional Idioms & GADTs",
-        "badge_bg": "rgba(20, 184, 166, 0.15)",
-        "badge_border": "rgba(20, 184, 166, 0.4)",
-        "badge_text": "#2dd4bf",
+        "badge_bg": "rgba(20, 184, 166, 0.2)",
+        "badge_border": "rgba(20, 184, 166, 0.5)",
+        "badge_text": "#5eead4",
         "accent": "#14b8a6",
         "label_color": "teal",
     },
@@ -49,9 +49,9 @@ CATEGORY_STYLES = {
         "color": "blue",
         "icon": "bolt",
         "name": "STM & Concurrency",
-        "badge_bg": "rgba(56, 189, 248, 0.15)",
-        "badge_border": "rgba(56, 189, 248, 0.4)",
-        "badge_text": "#38bdf8",
+        "badge_bg": "rgba(56, 189, 248, 0.2)",
+        "badge_border": "rgba(56, 189, 248, 0.5)",
+        "badge_text": "#7dd3fc",
         "accent": "#0ea5e9",
         "label_color": "blue",
     },
@@ -59,9 +59,9 @@ CATEGORY_STYLES = {
         "color": "pink",
         "icon": "eye",
         "name": "Optics & Lenses",
-        "badge_bg": "rgba(236, 72, 153, 0.15)",
-        "badge_border": "rgba(236, 72, 153, 0.4)",
-        "badge_text": "#f472b6",
+        "badge_bg": "rgba(236, 72, 153, 0.2)",
+        "badge_border": "rgba(236, 72, 153, 0.5)",
+        "badge_text": "#f9a8d4",
         "accent": "#ec4899",
         "label_color": "pink",
     },
@@ -69,9 +69,9 @@ CATEGORY_STYLES = {
         "color": "green",
         "icon": "shield alternate",
         "name": "Resilience & Space Leaks",
-        "badge_bg": "rgba(34, 197, 94, 0.15)",
-        "badge_border": "rgba(34, 197, 94, 0.4)",
-        "badge_text": "#4ade80",
+        "badge_bg": "rgba(34, 197, 94, 0.2)",
+        "badge_border": "rgba(34, 197, 94, 0.5)",
+        "badge_text": "#86efac",
         "accent": "#22c55e",
         "label_color": "green",
     },
@@ -79,9 +79,9 @@ CATEGORY_STYLES = {
         "color": "yellow",
         "icon": "balance scale",
         "name": "Principles & Quality",
-        "badge_bg": "rgba(234, 179, 8, 0.15)",
-        "badge_border": "rgba(234, 179, 8, 0.4)",
-        "badge_text": "#facc15",
+        "badge_bg": "rgba(234, 179, 8, 0.2)",
+        "badge_border": "rgba(234, 179, 8, 0.5)",
+        "badge_text": "#fde047",
         "accent": "#eab308",
         "label_color": "yellow",
     },
@@ -89,9 +89,9 @@ CATEGORY_STYLES = {
         "color": "red",
         "icon": "exclamation triangle",
         "name": "Type Safety Hazards",
-        "badge_bg": "rgba(239, 68, 68, 0.15)",
-        "badge_border": "rgba(239, 68, 68, 0.4)",
-        "badge_text": "#f87171",
+        "badge_bg": "rgba(239, 68, 68, 0.2)",
+        "badge_border": "rgba(239, 68, 68, 0.5)",
+        "badge_text": "#fca5a5",
         "accent": "#ef4444",
         "label_color": "red",
     },
@@ -102,76 +102,146 @@ _HTML_DASHBOARD_TEMPLATE = """<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔷 DPX-Haskell: Typeclass Architecture & Monad Dashboard - {project_name}</title>
+    <title>🔷 DPX-Haskell: Architecture & Pattern Dashboard - {project_name}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.3/semantic.min.css">
     <style>
         :root {{
-            --bg-main: #0b0f19;
-            --bg-card: #151b2b;
-            --border-color: #232d42;
-            --text-primary: #f8fafc;
+            --bg-main: #060911;
+            --bg-card: #0f1523;
+            --bg-card-hover: #141c2e;
+            --border-color: #1e293b;
+            --border-hover: #38bdf8;
+            --text-primary: #ffffff;
             --text-secondary: #94a3b8;
+            --text-muted: #64748b;
         }}
+        * {{ box-sizing: border-box; }}
         body {{
             background-color: var(--bg-main) !important;
             color: var(--text-primary) !important;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            padding: 30px 15px;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, sans-serif;
+            padding: 32px 20px;
+            line-height: 1.5;
         }}
         .ui.container {{
-            max-width: 1400px !important;
+            max-width: 1440px !important;
         }}
         .ui.inverted.segment {{
             background-color: var(--bg-card) !important;
             border: 1px solid var(--border-color) !important;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
-            border-radius: 10px !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45) !important;
+            border-radius: 12px !important;
         }}
         .ui.inverted.card {{
             background-color: var(--bg-card) !important;
             border: 1px solid var(--border-color) !important;
-            border-radius: 8px !important;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25) !important;
+            border-radius: 10px !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
         }}
         .ui.inverted.card:hover {{
-            border-color: #3b82f6 !important;
-            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.15) !important;
-            transform: translateY(-2px);
-            transition: all 0.2s ease;
+            background-color: var(--bg-card-hover) !important;
+            border-color: var(--border-hover) !important;
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.2) !important;
+            transform: translateY(-3px);
         }}
         .header-title {{
-            font-size: 26px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #a855f7 0%, #38bdf8 100%);
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: -0.6px;
+            background: linear-gradient(135deg, #c084fc 0%, #38bdf8 50%, #4ade80 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
         }}
         .code-snippet {{
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            background: #080c14;
-            padding: 4px 8px;
-            border-radius: 4px;
+            font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            background: #040711;
+            padding: 4px 10px;
+            border-radius: 6px;
             border: 1px solid #1e293b;
             color: #38bdf8;
-            font-size: 13px;
+            font-size: 14px;
+            font-weight: 600;
+        }}
+        .code-snippet-large {{
+            font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            background: #040711;
+            padding: 5px 12px;
+            border-radius: 6px;
+            border: 1px solid #223049;
+            color: #67e8f9;
+            font-size: 15px;
+            font-weight: 700;
+            display: inline-block;
         }}
         .evidence-box {{
-            background: rgba(15, 23, 42, 0.7);
-            border-left: 3px solid #3b82f6;
-            padding: 8px 12px;
+            background: #080d19;
+            border-left: 4px solid #38bdf8;
+            padding: 10px 14px;
             margin-top: 8px;
-            border-radius: 0 4px 4px 0;
-            font-size: 12px;
-            color: #cbd5e1;
+            border-radius: 0 6px 6px 0;
+            font-size: 13px;
+            color: #e2e8f0;
+            line-height: 1.5;
+            border-top: 1px solid #131d2e;
+            border-right: 1px solid #131d2e;
+            border-bottom: 1px solid #131d2e;
         }}
         .stat-value {{
-            font-size: 28px !important;
-            font-weight: 800 !important;
+            font-size: 36px !important;
+            font-weight: 900 !important;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }}
+        .stat-desc {{
+            color: #94a3b8 !important;
+            font-size: 13.5px !important;
+            font-weight: 500;
+            margin-top: 6px;
+        }}
+        .filter-btn {{
+            font-size: 13.5px !important;
+            font-weight: 700 !important;
+            padding: 10px 16px !important;
+            border-radius: 8px !important;
+            transition: all 0.15s ease !important;
         }}
         .filter-btn.active {{
-            background-color: #3b82f6 !important;
+            background-color: #2563eb !important;
             color: #ffffff !important;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4) !important;
+        }}
+        .location-pill {{
+            font-family: "JetBrains Mono", ui-monospace, monospace;
+            font-size: 12.5px;
+            color: #f472b6;
+            background: rgba(244, 114, 182, 0.1);
+            padding: 4px 9px;
+            border-radius: 6px;
+            border: 1px solid rgba(244, 114, 182, 0.3);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }}
+        .finding-summary {{
+            font-size: 14.5px;
+            line-height: 1.6;
+            color: #f1f5f9;
+            font-weight: 500;
+        }}
+        #searchInput {{
+            background: #080d19 !important;
+            border: 1px solid #223049 !important;
+            color: #ffffff !important;
+            font-size: 14.5px !important;
+            padding: 12px 18px !important;
+            border-radius: 8px !important;
+        }}
+        #searchInput:focus {{
+            border-color: #38bdf8 !important;
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3) !important;
         }}
     </style>
 </head>
@@ -180,25 +250,25 @@ _HTML_DASHBOARD_TEMPLATE = """<!DOCTYPE html>
 <div class="ui container">
 
     <!-- Header Section -->
-    <div class="ui inverted segment" style="margin-bottom: 25px; padding: 25px;">
+    <div class="ui inverted segment" style="margin-bottom: 28px; padding: 28px;">
         <div class="ui stackable grid items-center">
             <div class="ten wide column">
-                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-                    <span style="font-size: 32px;">🔷</span>
+                <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 10px;">
+                    <span style="font-size: 36px;">🔷</span>
                     <span class="header-title">DPX-Haskell Architecture & Pattern Engine</span>
                 </div>
-                <div style="color: var(--text-secondary); font-size: 14px;">
+                <div style="color: var(--text-secondary); font-size: 15px;">
                     Target Codebase: <code class="code-snippet">{project_name}</code>
                 </div>
             </div>
             <div class="six wide column right aligned">
-                <div class="ui mini blue label">
+                <div class="ui medium blue label" style="font-weight: 700;">
                     <i class="layer group icon"></i> Hexagonal DDD
                 </div>
-                <div class="ui mini teal label">
+                <div class="ui medium teal label" style="font-weight: 700;">
                     <i class="clock outline icon"></i> {elapsed_seconds}s
                 </div>
-                <div class="ui mini purple label">
+                <div class="ui medium purple label" style="font-weight: 700;">
                     <i class="file alternate outline icon"></i> {scanned_files} files
                 </div>
             </div>
@@ -206,50 +276,50 @@ _HTML_DASHBOARD_TEMPLATE = """<!DOCTYPE html>
     </div>
 
     <!-- KPI Statistics -->
-    <div class="ui four stackable cards" style="margin-bottom: 25px;">
-        <div class="ui inverted card">
-            <div class="content">
-                <div class="ui top right attached label blue mini">TOTAL FINDINGS</div>
-                <div class="header stat-value" style="color: #38bdf8; margin-top: 10px;">{total_detections}</div>
-                <div class="description" style="color: var(--text-secondary);">Architecture patterns & smells identified</div>
+    <div class="ui four stackable cards" style="margin-bottom: 28px;">
+        <div class="ui inverted card" style="border-top: 3px solid #38bdf8 !important;">
+            <div class="content" style="padding: 20px;">
+                <div class="ui top right attached label blue mini" style="font-weight: 700;">TOTAL FINDINGS</div>
+                <div class="header stat-value" style="color: #38bdf8; margin-top: 8px;">{total_detections}</div>
+                <div class="description stat-desc">Total patterns & architecture findings</div>
             </div>
         </div>
-        <div class="ui inverted card">
-            <div class="content">
-                <div class="ui top right attached label red mini">ACTION REQUIRED</div>
-                <div class="header stat-value" style="color: #f87171; margin-top: 10px;">{total_violations}</div>
-                <div class="description" style="color: var(--text-secondary);">Safety hazards, space leaks & smells</div>
+        <div class="ui inverted card" style="border-top: 3px solid #f87171 !important;">
+            <div class="content" style="padding: 20px;">
+                <div class="ui top right attached label red mini" style="font-weight: 700;">ACTION REQUIRED</div>
+                <div class="header stat-value" style="color: #f87171; margin-top: 8px;">{total_violations}</div>
+                <div class="description stat-desc">Safety hazards, space leaks & smells</div>
             </div>
         </div>
-        <div class="ui inverted card">
-            <div class="content">
-                <div class="ui top right attached label purple mini">TYPECLASSES & MONADS</div>
-                <div class="header stat-value" style="color: #c084fc; margin-top: 10px;">{total_typeclasses_and_monads}</div>
-                <div class="description" style="color: var(--text-secondary);">Typeclasses, ReaderT & Transformer stacks</div>
+        <div class="ui inverted card" style="border-top: 3px solid #c084fc !important;">
+            <div class="content" style="padding: 20px;">
+                <div class="ui top right attached label purple mini" style="font-weight: 700;">TYPECLASSES & MONADS</div>
+                <div class="header stat-value" style="color: #c084fc; margin-top: 8px;">{total_typeclasses_and_monads}</div>
+                <div class="description stat-desc">Typeclasses, ReaderT & Transformer stacks</div>
             </div>
         </div>
-        <div class="ui inverted card">
-            <div class="content">
-                <div class="ui top right attached label green mini">CLEAN CODE</div>
-                <div class="header stat-value" style="color: #4ade80; margin-top: 10px;">{total_adherences}</div>
-                <div class="description" style="color: var(--text-secondary);">Clean functional structures & STM</div>
+        <div class="ui inverted card" style="border-top: 3px solid #4ade80 !important;">
+            <div class="content" style="padding: 20px;">
+                <div class="ui top right attached label green mini" style="font-weight: 700;">CLEAN CODE & STM</div>
+                <div class="header stat-value" style="color: #4ade80; margin-top: 8px;">{total_adherences}</div>
+                <div class="description stat-desc">Clean functional idioms & STM transactions</div>
             </div>
         </div>
     </div>
 
     <!-- AI Architecture Map & Prompt Banner -->
-    <div class="ui inverted segment" style="margin-bottom: 25px; border-left: 4px solid #a855f7 !important;">
+    <div class="ui inverted segment" style="margin-bottom: 28px; padding: 22px; border-left: 5px solid #a855f7 !important;">
         <div class="ui stackable grid items-center">
             <div class="eleven wide column">
-                <h4 style="margin: 0; color: #f8fafc;">
-                    <i class="magic icon" style="color: #a855f7;"></i> AI / LLM Architectural Prompt Context
-                </h4>
-                <p style="color: var(--text-secondary); margin-top: 6px; font-size: 13px;">
-                    Generate instant refactoring recommendations, STM transaction reviews, and monad transformer optimizations for Claude, ChatGPT or Gemini.
+                <h3 style="margin: 0; color: #ffffff; font-size: 17px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+                    <i class="magic icon" style="color: #c084fc;"></i> AI / LLM Architectural Prompt Context
+                </h3>
+                <p style="color: #cbd5e1; margin-top: 6px; font-size: 14px; line-height: 1.5;">
+                    Generate instant refactoring recommendations, STM transaction reviews, and monad transformer optimizations formatted for Claude, ChatGPT, or Gemini.
                 </p>
             </div>
             <div class="five wide column right aligned">
-                <button class="ui mini purple button" id="copyLlmBtn" onclick="copyLlmContext()">
+                <button class="ui medium purple button" id="copyLlmBtn" onclick="copyLlmContext()" style="font-weight: 800; padding: 12px 20px;">
                     <i class="copy outline icon"></i> 📋 Copy Context for LLM
                 </button>
             </div>
@@ -257,26 +327,26 @@ _HTML_DASHBOARD_TEMPLATE = """<!DOCTYPE html>
         <textarea id="llmContextData" style="display: none;">{llm_context_data}</textarea>
     </div>
 
-    <!-- Filter Buttons Bar -->
-    <div class="ui inverted segment" style="margin-bottom: 20px; padding: 12px;">
+    <!-- Filter Buttons Bar & Search -->
+    <div class="ui inverted segment" style="margin-bottom: 24px; padding: 16px 20px;">
         <div class="ui stackable grid items-center">
-            <div class="twelve wide column">
-                <div class="ui mini inverted buttons" id="categoryFilterBar">
-                    <button class="ui button active filter-btn" data-filter="all">All ({total_detections})</button>
+            <div class="eleven wide column">
+                <div class="ui inverted buttons" id="categoryFilterBar" style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    <button class="ui button active filter-btn" data-filter="all">All Findings ({total_detections})</button>
                     {category_filter_buttons}
                 </div>
             </div>
-            <div class="four wide column right aligned">
-                <div class="ui mini icon inverted input fluid">
-                    <input type="text" id="searchInput" placeholder="Search findings, modules, functions...">
-                    <i class="search icon"></i>
+            <div class="five wide column right aligned">
+                <div class="ui fluid icon inverted input">
+                    <input type="text" id="searchInput" placeholder="🔎 Search findings, modules, functions...">
+                    <i class="search icon" style="color: #38bdf8;"></i>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Findings Grid -->
-    <div class="ui stackable cards" id="findingsContainer">
+    <div class="ui stackable cards" id="findingsContainer" style="margin: -0.5em;">
         {findings_cards_html}
     </div>
 
@@ -331,7 +401,7 @@ _HTML_DASHBOARD_TEMPLATE = """<!DOCTYPE html>
                 btn.innerHTML = oldHtml;
                 btn.classList.remove('green');
                 btn.classList.add('purple');
-            }}, 2000);
+            }}, 2200);
         }}).catch(() => {{
             const ta = document.createElement('textarea');
             ta.value = raw;
@@ -340,7 +410,7 @@ _HTML_DASHBOARD_TEMPLATE = """<!DOCTYPE html>
             document.execCommand('copy');
             document.body.removeChild(ta);
             btn.innerHTML = '<i class="check icon"></i> Copied!';
-            setTimeout(() => {{ btn.innerHTML = oldHtml; }}, 2000);
+            setTimeout(() => {{ btn.innerHTML = oldHtml; }}, 2200);
         }});
     }}
 </script>
@@ -374,7 +444,7 @@ class HtmlReportFormatter(ReportFormatterPort):
             cnt = report.summary_by_category.get(cat.value, 0)
             if cnt > 0:
                 filter_buttons.append(
-                    f'<button class="ui button filter-btn" data-filter="{cat.value}"><i class="{style["icon"]} icon"></i> {style["name"]} ({cnt})</button>'
+                    f'<button class="ui button filter-btn" data-filter="{cat.value}"><i class="{style["icon"]} icon" style="color: {style["accent"]};"></i> {style["name"]} ({cnt})</button>'
                 )
 
         cards_html = []
@@ -384,33 +454,42 @@ class HtmlReportFormatter(ReportFormatterPort):
             loc_str = str(d.primary_location) if d.primary_location else "N/A"
 
             evidences_html = "".join([
-                f'<div class="evidence-box">'
-                f'<strong>+{int(ev.weight * 100)}% [{html.escape(ev.rule_code)}]</strong> {html.escape(ev.description)}'
+                f'<div class="evidence-box" style="border-left-color: {style["accent"]};">'
+                f'<span style="color: {style["badge_text"]}; font-weight: 800; font-family: monospace;">+{int(ev.weight * 100)}%</span> '
+                f'<span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[{html.escape(ev.rule_code)}]</span> '
+                f'<span style="color: #f1f5f9;">{html.escape(ev.description)}</span>'
                 f'</div>'
                 for ev in d.evidences
             ])
 
             cards_html.append(
                 f"""
-                <div class="ui inverted card finding-card" data-category="{d.pattern_category.value}" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: {style['badge_bg']}; color: {style['badge_text']}; border: 1px solid {style['badge_border']};">
+                <div class="ui inverted card finding-card" data-category="{d.pattern_category.value}" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid {style['accent']} !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: {style['badge_bg']}; color: {style['badge_text']}; border: 1px solid {style['badge_border']}; font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="{style['icon']} icon"></i> {style['name'].upper()}
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #{idx} <code>{html.escape(d.pattern_type.value)}</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#{idx}</span>
+                            <span style="color: #38bdf8;"><code>{html.escape(d.pattern_type.value)}</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">{html.escape(d.target_name)}</code> ({html.escape(d.target_kind)})
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">{html.escape(d.target_name)}</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">{html.escape(d.target_kind)}</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             {html.escape(d.summary)}
                         </div>
-                        {evidences_html}
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail ({len(d.evidences)} heuristics):
+                            </div>
+                            {evidences_html}
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> {html.escape(loc_str)}</span>
-                        <span class="ui mini {conf_color} label">{d.confidence.percentage_str} [{d.level.value.upper()}]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> {html.escape(loc_str)}</span>
+                        <span class="ui mini {conf_color} label" style="font-weight: 800; font-size: 11.5px;">{d.confidence.percentage_str} [{d.level.value.upper()}]</span>
                     </div>
                 </div>
                 """

@@ -3,76 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔷 DPX-Haskell: Typeclass Architecture & Monad Dashboard - scotty</title>
+    <title>🔷 DPX-Haskell: Architecture & Pattern Dashboard - scotty</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.3/semantic.min.css">
     <style>
         :root {
-            --bg-main: #0b0f19;
-            --bg-card: #151b2b;
-            --border-color: #232d42;
-            --text-primary: #f8fafc;
+            --bg-main: #060911;
+            --bg-card: #0f1523;
+            --bg-card-hover: #141c2e;
+            --border-color: #1e293b;
+            --border-hover: #38bdf8;
+            --text-primary: #ffffff;
             --text-secondary: #94a3b8;
+            --text-muted: #64748b;
         }
+        * { box-sizing: border-box; }
         body {
             background-color: var(--bg-main) !important;
             color: var(--text-primary) !important;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            padding: 30px 15px;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, sans-serif;
+            padding: 32px 20px;
+            line-height: 1.5;
         }
         .ui.container {
-            max-width: 1400px !important;
+            max-width: 1440px !important;
         }
         .ui.inverted.segment {
             background-color: var(--bg-card) !important;
             border: 1px solid var(--border-color) !important;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
-            border-radius: 10px !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45) !important;
+            border-radius: 12px !important;
         }
         .ui.inverted.card {
             background-color: var(--bg-card) !important;
             border: 1px solid var(--border-color) !important;
-            border-radius: 8px !important;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25) !important;
+            border-radius: 10px !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
         }
         .ui.inverted.card:hover {
-            border-color: #3b82f6 !important;
-            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.15) !important;
-            transform: translateY(-2px);
-            transition: all 0.2s ease;
+            background-color: var(--bg-card-hover) !important;
+            border-color: var(--border-hover) !important;
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.2) !important;
+            transform: translateY(-3px);
         }
         .header-title {
-            font-size: 26px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #a855f7 0%, #38bdf8 100%);
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: -0.6px;
+            background: linear-gradient(135deg, #c084fc 0%, #38bdf8 50%, #4ade80 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
         }
         .code-snippet {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            background: #080c14;
-            padding: 4px 8px;
-            border-radius: 4px;
+            font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            background: #040711;
+            padding: 4px 10px;
+            border-radius: 6px;
             border: 1px solid #1e293b;
             color: #38bdf8;
-            font-size: 13px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .code-snippet-large {
+            font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            background: #040711;
+            padding: 5px 12px;
+            border-radius: 6px;
+            border: 1px solid #223049;
+            color: #67e8f9;
+            font-size: 15px;
+            font-weight: 700;
+            display: inline-block;
         }
         .evidence-box {
-            background: rgba(15, 23, 42, 0.7);
-            border-left: 3px solid #3b82f6;
-            padding: 8px 12px;
+            background: #080d19;
+            border-left: 4px solid #38bdf8;
+            padding: 10px 14px;
             margin-top: 8px;
-            border-radius: 0 4px 4px 0;
-            font-size: 12px;
-            color: #cbd5e1;
+            border-radius: 0 6px 6px 0;
+            font-size: 13px;
+            color: #e2e8f0;
+            line-height: 1.5;
+            border-top: 1px solid #131d2e;
+            border-right: 1px solid #131d2e;
+            border-bottom: 1px solid #131d2e;
         }
         .stat-value {
-            font-size: 28px !important;
-            font-weight: 800 !important;
+            font-size: 36px !important;
+            font-weight: 900 !important;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+        .stat-desc {
+            color: #94a3b8 !important;
+            font-size: 13.5px !important;
+            font-weight: 500;
+            margin-top: 6px;
+        }
+        .filter-btn {
+            font-size: 13.5px !important;
+            font-weight: 700 !important;
+            padding: 10px 16px !important;
+            border-radius: 8px !important;
+            transition: all 0.15s ease !important;
         }
         .filter-btn.active {
-            background-color: #3b82f6 !important;
+            background-color: #2563eb !important;
             color: #ffffff !important;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4) !important;
+        }
+        .location-pill {
+            font-family: "JetBrains Mono", ui-monospace, monospace;
+            font-size: 12.5px;
+            color: #f472b6;
+            background: rgba(244, 114, 182, 0.1);
+            padding: 4px 9px;
+            border-radius: 6px;
+            border: 1px solid rgba(244, 114, 182, 0.3);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .finding-summary {
+            font-size: 14.5px;
+            line-height: 1.6;
+            color: #f1f5f9;
+            font-weight: 500;
+        }
+        #searchInput {
+            background: #080d19 !important;
+            border: 1px solid #223049 !important;
+            color: #ffffff !important;
+            font-size: 14.5px !important;
+            padding: 12px 18px !important;
+            border-radius: 8px !important;
+        }
+        #searchInput:focus {
+            border-color: #38bdf8 !important;
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3) !important;
         }
     </style>
 </head>
@@ -81,25 +151,25 @@
 <div class="ui container">
 
     <!-- Header Section -->
-    <div class="ui inverted segment" style="margin-bottom: 25px; padding: 25px;">
+    <div class="ui inverted segment" style="margin-bottom: 28px; padding: 28px;">
         <div class="ui stackable grid items-center">
             <div class="ten wide column">
-                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-                    <span style="font-size: 32px;">🔷</span>
+                <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 10px;">
+                    <span style="font-size: 36px;">🔷</span>
                     <span class="header-title">DPX-Haskell Architecture & Pattern Engine</span>
                 </div>
-                <div style="color: var(--text-secondary); font-size: 14px;">
+                <div style="color: var(--text-secondary); font-size: 15px;">
                     Target Codebase: <code class="code-snippet">scotty</code>
                 </div>
             </div>
             <div class="six wide column right aligned">
-                <div class="ui mini blue label">
+                <div class="ui medium blue label" style="font-weight: 700;">
                     <i class="layer group icon"></i> Hexagonal DDD
                 </div>
-                <div class="ui mini teal label">
-                    <i class="clock outline icon"></i> 0.026s
+                <div class="ui medium teal label" style="font-weight: 700;">
+                    <i class="clock outline icon"></i> 0.031s
                 </div>
-                <div class="ui mini purple label">
+                <div class="ui medium purple label" style="font-weight: 700;">
                     <i class="file alternate outline icon"></i> 31 files
                 </div>
             </div>
@@ -107,50 +177,50 @@
     </div>
 
     <!-- KPI Statistics -->
-    <div class="ui four stackable cards" style="margin-bottom: 25px;">
-        <div class="ui inverted card">
-            <div class="content">
-                <div class="ui top right attached label blue mini">TOTAL FINDINGS</div>
-                <div class="header stat-value" style="color: #38bdf8; margin-top: 10px;">27</div>
-                <div class="description" style="color: var(--text-secondary);">Architecture patterns & smells identified</div>
+    <div class="ui four stackable cards" style="margin-bottom: 28px;">
+        <div class="ui inverted card" style="border-top: 3px solid #38bdf8 !important;">
+            <div class="content" style="padding: 20px;">
+                <div class="ui top right attached label blue mini" style="font-weight: 700;">TOTAL FINDINGS</div>
+                <div class="header stat-value" style="color: #38bdf8; margin-top: 8px;">27</div>
+                <div class="description stat-desc">Total patterns & architecture findings</div>
             </div>
         </div>
-        <div class="ui inverted card">
-            <div class="content">
-                <div class="ui top right attached label red mini">ACTION REQUIRED</div>
-                <div class="header stat-value" style="color: #f87171; margin-top: 10px;">10</div>
-                <div class="description" style="color: var(--text-secondary);">Safety hazards, space leaks & smells</div>
+        <div class="ui inverted card" style="border-top: 3px solid #f87171 !important;">
+            <div class="content" style="padding: 20px;">
+                <div class="ui top right attached label red mini" style="font-weight: 700;">ACTION REQUIRED</div>
+                <div class="header stat-value" style="color: #f87171; margin-top: 8px;">10</div>
+                <div class="description stat-desc">Safety hazards, space leaks & smells</div>
             </div>
         </div>
-        <div class="ui inverted card">
-            <div class="content">
-                <div class="ui top right attached label purple mini">TYPECLASSES & MONADS</div>
-                <div class="header stat-value" style="color: #c084fc; margin-top: 10px;">7</div>
-                <div class="description" style="color: var(--text-secondary);">Typeclasses, ReaderT & Transformer stacks</div>
+        <div class="ui inverted card" style="border-top: 3px solid #c084fc !important;">
+            <div class="content" style="padding: 20px;">
+                <div class="ui top right attached label purple mini" style="font-weight: 700;">TYPECLASSES & MONADS</div>
+                <div class="header stat-value" style="color: #c084fc; margin-top: 8px;">7</div>
+                <div class="description stat-desc">Typeclasses, ReaderT & Transformer stacks</div>
             </div>
         </div>
-        <div class="ui inverted card">
-            <div class="content">
-                <div class="ui top right attached label green mini">CLEAN CODE</div>
-                <div class="header stat-value" style="color: #4ade80; margin-top: 10px;">10</div>
-                <div class="description" style="color: var(--text-secondary);">Clean functional structures & STM</div>
+        <div class="ui inverted card" style="border-top: 3px solid #4ade80 !important;">
+            <div class="content" style="padding: 20px;">
+                <div class="ui top right attached label green mini" style="font-weight: 700;">CLEAN CODE & STM</div>
+                <div class="header stat-value" style="color: #4ade80; margin-top: 8px;">10</div>
+                <div class="description stat-desc">Clean functional idioms & STM transactions</div>
             </div>
         </div>
     </div>
 
     <!-- AI Architecture Map & Prompt Banner -->
-    <div class="ui inverted segment" style="margin-bottom: 25px; border-left: 4px solid #a855f7 !important;">
+    <div class="ui inverted segment" style="margin-bottom: 28px; padding: 22px; border-left: 5px solid #a855f7 !important;">
         <div class="ui stackable grid items-center">
             <div class="eleven wide column">
-                <h4 style="margin: 0; color: #f8fafc;">
-                    <i class="magic icon" style="color: #a855f7;"></i> AI / LLM Architectural Prompt Context
-                </h4>
-                <p style="color: var(--text-secondary); margin-top: 6px; font-size: 13px;">
-                    Generate instant refactoring recommendations, STM transaction reviews, and monad transformer optimizations for Claude, ChatGPT or Gemini.
+                <h3 style="margin: 0; color: #ffffff; font-size: 17px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+                    <i class="magic icon" style="color: #c084fc;"></i> AI / LLM Architectural Prompt Context
+                </h3>
+                <p style="color: #cbd5e1; margin-top: 6px; font-size: 14px; line-height: 1.5;">
+                    Generate instant refactoring recommendations, STM transaction reviews, and monad transformer optimizations formatted for Claude, ChatGPT, or Gemini.
                 </p>
             </div>
             <div class="five wide column right aligned">
-                <button class="ui mini purple button" id="copyLlmBtn" onclick="copyLlmContext()">
+                <button class="ui medium purple button" id="copyLlmBtn" onclick="copyLlmContext()" style="font-weight: 800; padding: 12px 20px;">
                     <i class="copy outline icon"></i> 📋 Copy Context for LLM
                 </button>
             </div>
@@ -195,650 +265,839 @@
 4. Eliminate unforced space leaks (replace lazy `foldl` with strict `foldl&#x27;`) and unsafe `fromJust`/`error` panics.</textarea>
     </div>
 
-    <!-- Filter Buttons Bar -->
-    <div class="ui inverted segment" style="margin-bottom: 20px; padding: 12px;">
+    <!-- Filter Buttons Bar & Search -->
+    <div class="ui inverted segment" style="margin-bottom: 24px; padding: 16px 20px;">
         <div class="ui stackable grid items-center">
-            <div class="twelve wide column">
-                <div class="ui mini inverted buttons" id="categoryFilterBar">
-                    <button class="ui button active filter-btn" data-filter="all">All (27)</button>
-                    <button class="ui button filter-btn" data-filter="typeclass_system"><i class="cubes icon"></i> Typeclasses & Polymorphism (3)</button>
-<button class="ui button filter-btn" data-filter="monad_architecture"><i class="layer group icon"></i> Monad Stacks & ReaderT (4)</button>
-<button class="ui button filter-btn" data-filter="functional_idiom"><i class="code branch icon"></i> Functional Idioms & GADTs (6)</button>
-<button class="ui button filter-btn" data-filter="concurrency_stm"><i class="bolt icon"></i> STM & Concurrency (4)</button>
-<button class="ui button filter-btn" data-filter="resilience"><i class="shield alternate icon"></i> Resilience & Space Leaks (4)</button>
-<button class="ui button filter-btn" data-filter="principle"><i class="balance scale icon"></i> Principles & Quality (5)</button>
-<button class="ui button filter-btn" data-filter="type_safety"><i class="exclamation triangle icon"></i> Type Safety Hazards (1)</button>
+            <div class="eleven wide column">
+                <div class="ui inverted buttons" id="categoryFilterBar" style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    <button class="ui button active filter-btn" data-filter="all">All Findings (27)</button>
+                    <button class="ui button filter-btn" data-filter="typeclass_system"><i class="cubes icon" style="color: #a855f7;"></i> Typeclasses & Polymorphism (3)</button>
+<button class="ui button filter-btn" data-filter="monad_architecture"><i class="layer group icon" style="color: #8b5cf6;"></i> Monad Stacks & ReaderT (4)</button>
+<button class="ui button filter-btn" data-filter="functional_idiom"><i class="code branch icon" style="color: #14b8a6;"></i> Functional Idioms & GADTs (6)</button>
+<button class="ui button filter-btn" data-filter="concurrency_stm"><i class="bolt icon" style="color: #0ea5e9;"></i> STM & Concurrency (4)</button>
+<button class="ui button filter-btn" data-filter="resilience"><i class="shield alternate icon" style="color: #22c55e;"></i> Resilience & Space Leaks (4)</button>
+<button class="ui button filter-btn" data-filter="principle"><i class="balance scale icon" style="color: #eab308;"></i> Principles & Quality (5)</button>
+<button class="ui button filter-btn" data-filter="type_safety"><i class="exclamation triangle icon" style="color: #ef4444;"></i> Type Safety Hazards (1)</button>
                 </div>
             </div>
-            <div class="four wide column right aligned">
-                <div class="ui mini icon inverted input fluid">
-                    <input type="text" id="searchInput" placeholder="Search findings, modules, functions...">
-                    <i class="search icon"></i>
+            <div class="five wide column right aligned">
+                <div class="ui fluid icon inverted input">
+                    <input type="text" id="searchInput" placeholder="🔎 Search findings, modules, functions...">
+                    <i class="search icon" style="color: #38bdf8;"></i>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Findings Grid -->
-    <div class="ui stackable cards" id="findingsContainer">
+    <div class="ui stackable cards" id="findingsContainer" style="margin: -0.5em;">
         
-                <div class="ui inverted card finding-card" data-category="typeclass_system" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4);">
+                <div class="ui inverted card finding-card" data-category="typeclass_system" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #a855f7 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(168, 85, 247, 0.2); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="cubes icon"></i> TYPECLASSES & POLYMORPHISM
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #1 <code>typeclass_adapter</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#1</span>
+                            <span style="color: #38bdf8;"><code>typeclass_adapter</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.Scotty.Action.Parsable</code> (typeclass)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.Scotty.Action.Parsable</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">typeclass</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Typeclass &#x27;Parsable&#x27; in &#x27;Web.Scotty.Action&#x27; defines an ad-hoc polymorphic Adapter interface with 2 method(s)
                         </div>
-                        <div class="evidence-box"><strong>+85% [TYPECLASS_INTERFACE_ADAPTER]</strong> Typeclass &#x27;Parsable&#x27; in &#x27;Web.Scotty.Action&#x27; defines an ad-hoc polymorphic Adapter interface with 2 method(s)</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TYPECLASS_INTERFACE_ADAPTER]</span> <span style="color: #f1f5f9;">Typeclass &#x27;Parsable&#x27; in &#x27;Web.Scotty.Action&#x27; defines an ad-hoc polymorphic Adapter interface with 2 method(s)</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:626:1</span>
-                        <span class="ui mini green label">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:626:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="typeclass_system" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4);">
+                <div class="ui inverted card finding-card" data-category="typeclass_system" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #a855f7 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(168, 85, 247, 0.2); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="cubes icon"></i> TYPECLASSES & POLYMORPHISM
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #2 <code>newtype_strong_typing</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#2</span>
+                            <span style="color: #38bdf8;"><code>newtype_strong_typing</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.Scotty.Internal.Types</code> (newtype_domain_module)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.Scotty.Internal.Types</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">newtype_domain_module</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Module &#x27;Web.Scotty.Internal.Types&#x27; enforces DDD Value Object strong typing via 3 newtype wrapper(s) at zero runtime cost
                         </div>
-                        <div class="evidence-box"><strong>+80% [NEWTYPE_DOMAIN_VALUE_OBJECT]</strong> Module &#x27;Web.Scotty.Internal.Types&#x27; enforces DDD Value Object strong typing via 3 newtype wrapper(s) at zero runtime cost</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[NEWTYPE_DOMAIN_VALUE_OBJECT]</span> <span style="color: #f1f5f9;">Module &#x27;Web.Scotty.Internal.Types&#x27; enforces DDD Value Object strong typing via 3 newtype wrapper(s) at zero runtime cost</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</span>
-                        <span class="ui mini teal label">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</span>
+                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="typeclass_system" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4);">
+                <div class="ui inverted card finding-card" data-category="typeclass_system" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #a855f7 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(168, 85, 247, 0.2); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="cubes icon"></i> TYPECLASSES & POLYMORPHISM
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #3 <code>deriving_strategies</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#3</span>
+                            <span style="color: #38bdf8;"><code>deriving_strategies</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.Scotty.Internal.Types</code> (deriving_strategies_module)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.Scotty.Internal.Types</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">deriving_strategies_module</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Module &#x27;Web.Scotty.Internal.Types&#x27; explicitly specifies Deriving Strategies (stock/newtype/anyclass) ensuring deterministic typeclass derivation
                         </div>
-                        <div class="evidence-box"><strong>+80% [EXPLICIT_DERIVING_STRATEGIES]</strong> Module &#x27;Web.Scotty.Internal.Types&#x27; explicitly specifies Deriving Strategies (stock/newtype/anyclass) ensuring deterministic typeclass derivation</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[EXPLICIT_DERIVING_STRATEGIES]</span> <span style="color: #f1f5f9;">Module &#x27;Web.Scotty.Internal.Types&#x27; explicitly specifies Deriving Strategies (stock/newtype/anyclass) ensuring deterministic typeclass derivation</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</span>
-                        <span class="ui mini teal label">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</span>
+                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="monad_architecture" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.4);">
+                <div class="ui inverted card finding-card" data-category="monad_architecture" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #8b5cf6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="layer group icon"></i> MONAD STACKS & READERT
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #4 <code>reader_t_design_pattern</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#4</span>
+                            <span style="color: #38bdf8;"><code>reader_t_design_pattern</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.Scotty.Trans</code> (reader_t_architecture)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.Scotty.Trans</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">reader_t_architecture</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Module &#x27;Web.Scotty.Trans&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access
                         </div>
-                        <div class="evidence-box"><strong>+90% [READER_T_PATTERN_DI]</strong> Module &#x27;Web.Scotty.Trans&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #8b5cf6;"><span style="color: #c4b5fd; font-weight: 800; font-family: monospace;">+90%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[READER_T_PATTERN_DI]</span> <span style="color: #f1f5f9;">Module &#x27;Web.Scotty.Trans&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Trans.hs:1:1</span>
-                        <span class="ui mini green label">90% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Trans.hs:1:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">90% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="monad_architecture" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.4);">
+                <div class="ui inverted card finding-card" data-category="monad_architecture" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #8b5cf6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="layer group icon"></i> MONAD STACKS & READERT
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #5 <code>reader_t_design_pattern</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#5</span>
+                            <span style="color: #38bdf8;"><code>reader_t_design_pattern</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.Scotty.Action</code> (reader_t_architecture)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.Scotty.Action</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">reader_t_architecture</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Module &#x27;Web.Scotty.Action&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access
                         </div>
-                        <div class="evidence-box"><strong>+90% [READER_T_PATTERN_DI]</strong> Module &#x27;Web.Scotty.Action&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #8b5cf6;"><span style="color: #c4b5fd; font-weight: 800; font-family: monospace;">+90%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[READER_T_PATTERN_DI]</span> <span style="color: #f1f5f9;">Module &#x27;Web.Scotty.Action&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:1:1</span>
-                        <span class="ui mini green label">90% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:1:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">90% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="monad_architecture" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.4);">
+                <div class="ui inverted card finding-card" data-category="monad_architecture" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #8b5cf6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="layer group icon"></i> MONAD STACKS & READERT
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #6 <code>reader_t_design_pattern</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#6</span>
+                            <span style="color: #38bdf8;"><code>reader_t_design_pattern</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.Scotty.Internal.Types</code> (reader_t_architecture)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.Scotty.Internal.Types</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">reader_t_architecture</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Module &#x27;Web.Scotty.Internal.Types&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access
                         </div>
-                        <div class="evidence-box"><strong>+90% [READER_T_PATTERN_DI]</strong> Module &#x27;Web.Scotty.Internal.Types&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #8b5cf6;"><span style="color: #c4b5fd; font-weight: 800; font-family: monospace;">+90%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[READER_T_PATTERN_DI]</span> <span style="color: #f1f5f9;">Module &#x27;Web.Scotty.Internal.Types&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</span>
-                        <span class="ui mini green label">90% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">90% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="monad_architecture" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.4);">
+                <div class="ui inverted card finding-card" data-category="monad_architecture" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #8b5cf6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="layer group icon"></i> MONAD STACKS & READERT
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #7 <code>monad_transformer_stack</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#7</span>
+                            <span style="color: #38bdf8;"><code>monad_transformer_stack</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.Scotty.Internal.Types</code> (monad_transformer_module)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.Scotty.Internal.Types</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">monad_transformer_module</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Module &#x27;Web.Scotty.Internal.Types&#x27; layers a Monad Transformer Stack combining 1 distinct computational capabilities (ReaderT)
                         </div>
-                        <div class="evidence-box"><strong>+85% [MONAD_TRANSFORMER_LAYER_STACK]</strong> Module &#x27;Web.Scotty.Internal.Types&#x27; layers a Monad Transformer Stack combining 1 distinct computational capabilities (ReaderT)</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #8b5cf6;"><span style="color: #c4b5fd; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONAD_TRANSFORMER_LAYER_STACK]</span> <span style="color: #f1f5f9;">Module &#x27;Web.Scotty.Internal.Types&#x27; layers a Monad Transformer Stack combining 1 distinct computational capabilities (ReaderT)</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</span>
-                        <span class="ui mini green label">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(20, 184, 166, 0.15); color: #2dd4bf; border: 1px solid rgba(20, 184, 166, 0.4);">
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #14b8a6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; border: 1px solid rgba(20, 184, 166, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #8 <code>railway_do_notation</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#8</span>
+                            <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Main.main</code> (monadic_function)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Main.main</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">monadic_function</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Function &#x27;main&#x27; in &#x27;Main&#x27; chains a 5-step Monadic Railway flow in `do` notation
                         </div>
-                        <div class="evidence-box"><strong>+80% [MONADIC_DO_RAILWAY_PIPELINE]</strong> Function &#x27;main&#x27; in &#x27;Main&#x27; chains a 5-step Monadic Railway flow in `do` notation</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;main&#x27; in &#x27;Main&#x27; chains a 5-step Monadic Railway flow in `do` notation</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/examples/bodyecho.hs:12:1</span>
-                        <span class="ui mini teal label">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/examples/bodyecho.hs:12:1</span>
+                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(20, 184, 166, 0.15); color: #2dd4bf; border: 1px solid rgba(20, 184, 166, 0.4);">
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #14b8a6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; border: 1px solid rgba(20, 184, 166, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #9 <code>railway_do_notation</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#9</span>
+                            <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.ScottySpec.spec</code> (monadic_function)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.ScottySpec.spec</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">monadic_function</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; chains a 40-step Monadic Railway flow in `do` notation
                         </div>
-                        <div class="evidence-box"><strong>+80% [MONADIC_DO_RAILWAY_PIPELINE]</strong> Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; chains a 40-step Monadic Railway flow in `do` notation</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; chains a 40-step Monadic Railway flow in `do` notation</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1</span>
-                        <span class="ui mini teal label">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1</span>
+                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(20, 184, 166, 0.15); color: #2dd4bf; border: 1px solid rgba(20, 184, 166, 0.4);">
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #14b8a6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; border: 1px solid rgba(20, 184, 166, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #10 <code>railway_do_notation</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#10</span>
+                            <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.Scotty.Trans.scottyAppT</code> (monadic_function)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.Scotty.Trans.scottyAppT</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">monadic_function</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Function &#x27;scottyAppT&#x27; in &#x27;Web.Scotty.Trans&#x27; chains a 3-step Monadic Railway flow in `do` notation
                         </div>
-                        <div class="evidence-box"><strong>+80% [MONADIC_DO_RAILWAY_PIPELINE]</strong> Function &#x27;scottyAppT&#x27; in &#x27;Web.Scotty.Trans&#x27; chains a 3-step Monadic Railway flow in `do` notation</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;scottyAppT&#x27; in &#x27;Web.Scotty.Trans&#x27; chains a 3-step Monadic Railway flow in `do` notation</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Trans.hs:142:1</span>
-                        <span class="ui mini teal label">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Trans.hs:142:1</span>
+                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(20, 184, 166, 0.15); color: #2dd4bf; border: 1px solid rgba(20, 184, 166, 0.4);">
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #14b8a6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; border: 1px solid rgba(20, 184, 166, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #11 <code>railway_do_notation</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#11</span>
+                            <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.Scotty.Action.nested</code> (monadic_function)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.Scotty.Action.nested</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">monadic_function</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Function &#x27;nested&#x27; in &#x27;Web.Scotty.Action&#x27; chains a 4-step Monadic Railway flow in `do` notation
                         </div>
-                        <div class="evidence-box"><strong>+80% [MONADIC_DO_RAILWAY_PIPELINE]</strong> Function &#x27;nested&#x27; in &#x27;Web.Scotty.Action&#x27; chains a 4-step Monadic Railway flow in `do` notation</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;nested&#x27; in &#x27;Web.Scotty.Action&#x27; chains a 4-step Monadic Railway flow in `do` notation</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:778:1</span>
-                        <span class="ui mini teal label">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:778:1</span>
+                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(20, 184, 166, 0.15); color: #2dd4bf; border: 1px solid rgba(20, 184, 166, 0.4);">
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #14b8a6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; border: 1px solid rgba(20, 184, 166, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #12 <code>railway_do_notation</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#12</span>
+                            <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.Scotty.Route.route</code> (monadic_function)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.Scotty.Route.route</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">monadic_function</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Function &#x27;route&#x27; in &#x27;Web.Scotty.Route&#x27; chains a 3-step Monadic Railway flow in `do` notation
                         </div>
-                        <div class="evidence-box"><strong>+80% [MONADIC_DO_RAILWAY_PIPELINE]</strong> Function &#x27;route&#x27; in &#x27;Web.Scotty.Route&#x27; chains a 3-step Monadic Railway flow in `do` notation</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;route&#x27; in &#x27;Web.Scotty.Route&#x27; chains a 3-step Monadic Railway flow in `do` notation</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:84:1</span>
-                        <span class="ui mini teal label">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:84:1</span>
+                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(20, 184, 166, 0.15); color: #2dd4bf; border: 1px solid rgba(20, 184, 166, 0.4);">
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #14b8a6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; border: 1px solid rgba(20, 184, 166, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #13 <code>railway_do_notation</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#13</span>
+                            <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.Scotty.Util.readRequestBody</code> (monadic_function)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.Scotty.Util.readRequestBody</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">monadic_function</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Function &#x27;readRequestBody&#x27; in &#x27;Web.Scotty.Util&#x27; chains a 3-step Monadic Railway flow in `do` notation
                         </div>
-                        <div class="evidence-box"><strong>+80% [MONADIC_DO_RAILWAY_PIPELINE]</strong> Function &#x27;readRequestBody&#x27; in &#x27;Web.Scotty.Util&#x27; chains a 3-step Monadic Railway flow in `do` notation</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;readRequestBody&#x27; in &#x27;Web.Scotty.Util&#x27; chains a 3-step Monadic Railway flow in `do` notation</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Util.hs:75:1</span>
-                        <span class="ui mini teal label">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Util.hs:75:1</span>
+                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="concurrency_stm" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">
+                <div class="ui inverted card finding-card" data-category="concurrency_stm" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #0ea5e9 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(56, 189, 248, 0.2); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="bolt icon"></i> STM & CONCURRENCY
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #14 <code>stm_transactional_memory</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#14</span>
+                            <span style="color: #38bdf8;"><code>stm_transactional_memory</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.Scotty.Session</code> (stm_concurrency_module)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.Scotty.Session</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">stm_concurrency_module</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Module &#x27;Web.Scotty.Session&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity
                         </div>
-                        <div class="evidence-box"><strong>+90% [SOFTWARE_TRANSACTIONAL_MEMORY]</strong> Module &#x27;Web.Scotty.Session&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #0ea5e9;"><span style="color: #7dd3fc; font-weight: 800; font-family: monospace;">+90%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[SOFTWARE_TRANSACTIONAL_MEMORY]</span> <span style="color: #f1f5f9;">Module &#x27;Web.Scotty.Session&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Session.hs:1:1</span>
-                        <span class="ui mini green label">90% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Session.hs:1:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">90% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="concurrency_stm" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">
+                <div class="ui inverted card finding-card" data-category="concurrency_stm" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #0ea5e9 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(56, 189, 248, 0.2); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="bolt icon"></i> STM & CONCURRENCY
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #15 <code>stm_transactional_memory</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#15</span>
+                            <span style="color: #38bdf8;"><code>stm_transactional_memory</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.Scotty.Route</code> (stm_concurrency_module)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.Scotty.Route</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">stm_concurrency_module</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Module &#x27;Web.Scotty.Route&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity
                         </div>
-                        <div class="evidence-box"><strong>+90% [SOFTWARE_TRANSACTIONAL_MEMORY]</strong> Module &#x27;Web.Scotty.Route&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #0ea5e9;"><span style="color: #7dd3fc; font-weight: 800; font-family: monospace;">+90%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[SOFTWARE_TRANSACTIONAL_MEMORY]</span> <span style="color: #f1f5f9;">Module &#x27;Web.Scotty.Route&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:1:1</span>
-                        <span class="ui mini green label">90% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:1:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">90% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="concurrency_stm" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">
+                <div class="ui inverted card finding-card" data-category="concurrency_stm" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #0ea5e9 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(56, 189, 248, 0.2); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="bolt icon"></i> STM & CONCURRENCY
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #16 <code>stm_transactional_memory</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#16</span>
+                            <span style="color: #38bdf8;"><code>stm_transactional_memory</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.Scotty.Internal.Types</code> (stm_concurrency_module)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.Scotty.Internal.Types</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">stm_concurrency_module</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Module &#x27;Web.Scotty.Internal.Types&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity
                         </div>
-                        <div class="evidence-box"><strong>+90% [SOFTWARE_TRANSACTIONAL_MEMORY]</strong> Module &#x27;Web.Scotty.Internal.Types&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #0ea5e9;"><span style="color: #7dd3fc; font-weight: 800; font-family: monospace;">+90%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[SOFTWARE_TRANSACTIONAL_MEMORY]</span> <span style="color: #f1f5f9;">Module &#x27;Web.Scotty.Internal.Types&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</span>
-                        <span class="ui mini green label">90% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">90% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="concurrency_stm" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">
+                <div class="ui inverted card finding-card" data-category="concurrency_stm" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #0ea5e9 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(56, 189, 248, 0.2); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="bolt icon"></i> STM & CONCURRENCY
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #17 <code>async_concurrent_flow</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#17</span>
+                            <span style="color: #38bdf8;"><code>async_concurrent_flow</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.ScottySpec</code> (async_concurrency_module)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.ScottySpec</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">async_concurrency_module</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Module &#x27;Web.ScottySpec&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation
                         </div>
-                        <div class="evidence-box"><strong>+85% [STRUCTURED_ASYNC_CONCURRENCY]</strong> Module &#x27;Web.ScottySpec&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #0ea5e9;"><span style="color: #7dd3fc; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[STRUCTURED_ASYNC_CONCURRENCY]</span> <span style="color: #f1f5f9;">Module &#x27;Web.ScottySpec&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:1:1</span>
-                        <span class="ui mini green label">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:1:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="type_safety" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4);">
+                <div class="ui inverted card finding-card" data-category="type_safety" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #ef4444 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #18 <code>unchecked_bottom_error</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#18</span>
+                            <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.ScottySpec.spec</code> (unsafe_bottom_function)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.ScottySpec.spec</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">unsafe_bottom_function</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Type Safety Hazard: Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead
                         </div>
-                        <div class="evidence-box"><strong>+85% [UNCHECKED_BOTTOM_PANIC]</strong> Type Safety Hazard: Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #ef4444;"><span style="color: #fca5a5; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[UNCHECKED_BOTTOM_PANIC]</span> <span style="color: #f1f5f9;">Type Safety Hazard: Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1</span>
-                        <span class="ui mini green label">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.4);">
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #19 <code>lazy_space_leak_risk</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#19</span>
+                            <span style="color: #38bdf8;"><code>lazy_space_leak_risk</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.Scotty.Trans.applyAll</code> (space_leak_hazard_function)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.Scotty.Trans.applyAll</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">space_leak_hazard_function</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Resilience Risk (Lazy Space Leak): Function &#x27;applyAll&#x27; in &#x27;Web.Scotty.Trans&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`
                         </div>
-                        <div class="evidence-box"><strong>+80% [LAZY_SPACE_LEAK_ACCUMULATOR]</strong> Resilience Risk (Lazy Space Leak): Function &#x27;applyAll&#x27; in &#x27;Web.Scotty.Trans&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[LAZY_SPACE_LEAK_ACCUMULATOR]</span> <span style="color: #f1f5f9;">Resilience Risk (Lazy Space Leak): Function &#x27;applyAll&#x27; in &#x27;Web.Scotty.Trans&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Trans.hs:179:1</span>
-                        <span class="ui mini teal label">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Trans.hs:179:1</span>
+                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.4);">
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #20 <code>lazy_space_leak_risk</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#20</span>
+                            <span style="color: #38bdf8;"><code>lazy_space_leak_risk</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.Scotty.Route.matchAny</code> (space_leak_hazard_function)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.Scotty.Route.matchAny</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">space_leak_hazard_function</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Resilience Risk (Lazy Space Leak): Function &#x27;matchAny&#x27; in &#x27;Web.Scotty.Route&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`
                         </div>
-                        <div class="evidence-box"><strong>+80% [LAZY_SPACE_LEAK_ACCUMULATOR]</strong> Resilience Risk (Lazy Space Leak): Function &#x27;matchAny&#x27; in &#x27;Web.Scotty.Route&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[LAZY_SPACE_LEAK_ACCUMULATOR]</span> <span style="color: #f1f5f9;">Resilience Risk (Lazy Space Leak): Function &#x27;matchAny&#x27; in &#x27;Web.Scotty.Route&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:59:1</span>
-                        <span class="ui mini teal label">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:59:1</span>
+                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.4);">
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #21 <code>lazy_space_leak_risk</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#21</span>
+                            <span style="color: #38bdf8;"><code>lazy_space_leak_risk</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.Scotty.Route.addroute</code> (space_leak_hazard_function)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.Scotty.Route.addroute</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">space_leak_hazard_function</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Resilience Risk (Lazy Space Leak): Function &#x27;addroute&#x27; in &#x27;Web.Scotty.Route&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`
                         </div>
-                        <div class="evidence-box"><strong>+80% [LAZY_SPACE_LEAK_ACCUMULATOR]</strong> Resilience Risk (Lazy Space Leak): Function &#x27;addroute&#x27; in &#x27;Web.Scotty.Route&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[LAZY_SPACE_LEAK_ACCUMULATOR]</span> <span style="color: #f1f5f9;">Resilience Risk (Lazy Space Leak): Function &#x27;addroute&#x27; in &#x27;Web.Scotty.Route&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:74:1</span>
-                        <span class="ui mini teal label">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:74:1</span>
+                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.4);">
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #22 <code>catch_all_some_exception</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#22</span>
+                            <span style="color: #38bdf8;"><code>catch_all_some_exception</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.ScottySpec.spec</code> (defensive_catch_function)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.ScottySpec.spec</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">defensive_catch_function</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Resilience Anti-Pattern: Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; catches `SomeException` without rethrowing async exceptions (`ThreadKilled`); use `Control.Exception.Safe`
                         </div>
-                        <div class="evidence-box"><strong>+85% [CATCH_ALL_SOME_EXCEPTION]</strong> Resilience Anti-Pattern: Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; catches `SomeException` without rethrowing async exceptions (`ThreadKilled`); use `Control.Exception.Safe`</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[CATCH_ALL_SOME_EXCEPTION]</span> <span style="color: #f1f5f9;">Resilience Anti-Pattern: Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; catches `SomeException` without rethrowing async exceptions (`ThreadKilled`); use `Control.Exception.Safe`</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1</span>
-                        <span class="ui mini green label">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="principle" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.4);">
+                <div class="ui inverted card finding-card" data-category="principle" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #eab308 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(234, 179, 8, 0.2); color: #fde047; border: 1px solid rgba(234, 179, 8, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #23 <code>god_module_srp</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#23</span>
+                            <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.Scotty</code> (god_module)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.Scotty</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">god_module</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             SRP Violation (God Module): Module &#x27;Web.Scotty&#x27; contains 78 declarations across 615 lines of code; decompose into focused domain modules
                         </div>
-                        <div class="evidence-box"><strong>+85% [SRP_GOD_MODULE]</strong> SRP Violation (God Module): Module &#x27;Web.Scotty&#x27; contains 78 declarations across 615 lines of code; decompose into focused domain modules</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[SRP_GOD_MODULE]</span> <span style="color: #f1f5f9;">SRP Violation (God Module): Module &#x27;Web.Scotty&#x27; contains 78 declarations across 615 lines of code; decompose into focused domain modules</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty.hs:1:1</span>
-                        <span class="ui mini green label">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty.hs:1:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="principle" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.4);">
+                <div class="ui inverted card finding-card" data-category="principle" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #eab308 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(234, 179, 8, 0.2); color: #fde047; border: 1px solid rgba(234, 179, 8, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #24 <code>god_module_srp</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#24</span>
+                            <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.Scotty.Action</code> (god_module)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.Scotty.Action</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">god_module</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             SRP Violation (God Module): Module &#x27;Web.Scotty.Action&#x27; contains 60 declarations across 786 lines of code; decompose into focused domain modules
                         </div>
-                        <div class="evidence-box"><strong>+85% [SRP_GOD_MODULE]</strong> SRP Violation (God Module): Module &#x27;Web.Scotty.Action&#x27; contains 60 declarations across 786 lines of code; decompose into focused domain modules</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[SRP_GOD_MODULE]</span> <span style="color: #f1f5f9;">SRP Violation (God Module): Module &#x27;Web.Scotty.Action&#x27; contains 60 declarations across 786 lines of code; decompose into focused domain modules</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:1:1</span>
-                        <span class="ui mini green label">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:1:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="principle" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.4);">
+                <div class="ui inverted card finding-card" data-category="principle" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #eab308 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(234, 179, 8, 0.2); color: #fde047; border: 1px solid rgba(234, 179, 8, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #25 <code>god_module_srp</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#25</span>
+                            <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.Scotty.Internal.Types</code> (god_module)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.Scotty.Internal.Types</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">god_module</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             SRP Violation (God Module): Module &#x27;Web.Scotty.Internal.Types&#x27; contains 38 declarations across 289 lines of code; decompose into focused domain modules
                         </div>
-                        <div class="evidence-box"><strong>+85% [SRP_GOD_MODULE]</strong> SRP Violation (God Module): Module &#x27;Web.Scotty.Internal.Types&#x27; contains 38 declarations across 289 lines of code; decompose into focused domain modules</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[SRP_GOD_MODULE]</span> <span style="color: #f1f5f9;">SRP Violation (God Module): Module &#x27;Web.Scotty.Internal.Types&#x27; contains 38 declarations across 289 lines of code; decompose into focused domain modules</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</span>
-                        <span class="ui mini green label">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="principle" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.4);">
+                <div class="ui inverted card finding-card" data-category="principle" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #eab308 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(234, 179, 8, 0.2); color: #fde047; border: 1px solid rgba(234, 179, 8, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #26 <code>cyclomatic_complexity_kiss</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#26</span>
+                            <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.ScottySpec.spec</code> (complex_function)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.ScottySpec.spec</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">complex_function</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             KISS Violation (High Complexity): Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; has cyclomatic complexity of 43; refactor complex pattern branches
                         </div>
-                        <div class="evidence-box"><strong>+75% [KISS_HIGH_CYCLOMATIC_COMPLEXITY]</strong> KISS Violation (High Complexity): Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; has cyclomatic complexity of 43; refactor complex pattern branches</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+75%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[KISS_HIGH_CYCLOMATIC_COMPLEXITY]</span> <span style="color: #f1f5f9;">KISS Violation (High Complexity): Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; has cyclomatic complexity of 43; refactor complex pattern branches</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1</span>
-                        <span class="ui mini teal label">75% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1</span>
+                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">75% [HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="principle" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.4);">
+                <div class="ui inverted card finding-card" data-category="principle" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #eab308 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(234, 179, 8, 0.2); color: #fde047; border: 1px solid rgba(234, 179, 8, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #27 <code>cyclomatic_complexity_kiss</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#27</span>
+                            <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">Web.Scotty.Action.scottyExceptionHandler</code> (complex_function)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Web.Scotty.Action.scottyExceptionHandler</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">complex_function</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             KISS Violation (High Complexity): Function &#x27;scottyExceptionHandler&#x27; in &#x27;Web.Scotty.Action&#x27; has cyclomatic complexity of 20; refactor complex pattern branches
                         </div>
-                        <div class="evidence-box"><strong>+75% [KISS_HIGH_CYCLOMATIC_COMPLEXITY]</strong> KISS Violation (High Complexity): Function &#x27;scottyExceptionHandler&#x27; in &#x27;Web.Scotty.Action&#x27; has cyclomatic complexity of 20; refactor complex pattern branches</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+75%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[KISS_HIGH_CYCLOMATIC_COMPLEXITY]</span> <span style="color: #f1f5f9;">KISS Violation (High Complexity): Function &#x27;scottyExceptionHandler&#x27; in &#x27;Web.Scotty.Action&#x27; has cyclomatic complexity of 20; refactor complex pattern branches</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:146:1</span>
-                        <span class="ui mini teal label">75% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:146:1</span>
+                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">75% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -895,7 +1154,7 @@
                 btn.innerHTML = oldHtml;
                 btn.classList.remove('green');
                 btn.classList.add('purple');
-            }, 2000);
+            }, 2200);
         }).catch(() => {
             const ta = document.createElement('textarea');
             ta.value = raw;
@@ -904,7 +1163,7 @@
             document.execCommand('copy');
             document.body.removeChild(ta);
             btn.innerHTML = '<i class="check icon"></i> Copied!';
-            setTimeout(() => { btn.innerHTML = oldHtml; }, 2000);
+            setTimeout(() => { btn.innerHTML = oldHtml; }, 2200);
         });
     }
 </script>

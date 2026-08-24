@@ -3,76 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔷 DPX-Haskell: Typeclass Architecture & Monad Dashboard - examples</title>
+    <title>🔷 DPX-Haskell: Architecture & Pattern Dashboard - examples</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.3/semantic.min.css">
     <style>
         :root {
-            --bg-main: #0b0f19;
-            --bg-card: #151b2b;
-            --border-color: #232d42;
-            --text-primary: #f8fafc;
+            --bg-main: #060911;
+            --bg-card: #0f1523;
+            --bg-card-hover: #141c2e;
+            --border-color: #1e293b;
+            --border-hover: #38bdf8;
+            --text-primary: #ffffff;
             --text-secondary: #94a3b8;
+            --text-muted: #64748b;
         }
+        * { box-sizing: border-box; }
         body {
             background-color: var(--bg-main) !important;
             color: var(--text-primary) !important;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            padding: 30px 15px;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", "Segoe UI", Roboto, sans-serif;
+            padding: 32px 20px;
+            line-height: 1.5;
         }
         .ui.container {
-            max-width: 1400px !important;
+            max-width: 1440px !important;
         }
         .ui.inverted.segment {
             background-color: var(--bg-card) !important;
             border: 1px solid var(--border-color) !important;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
-            border-radius: 10px !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45) !important;
+            border-radius: 12px !important;
         }
         .ui.inverted.card {
             background-color: var(--bg-card) !important;
             border: 1px solid var(--border-color) !important;
-            border-radius: 8px !important;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25) !important;
+            border-radius: 10px !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+            transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
         }
         .ui.inverted.card:hover {
-            border-color: #3b82f6 !important;
-            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.15) !important;
-            transform: translateY(-2px);
-            transition: all 0.2s ease;
+            background-color: var(--bg-card-hover) !important;
+            border-color: var(--border-hover) !important;
+            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.2) !important;
+            transform: translateY(-3px);
         }
         .header-title {
-            font-size: 26px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #a855f7 0%, #38bdf8 100%);
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: -0.6px;
+            background: linear-gradient(135deg, #c084fc 0%, #38bdf8 50%, #4ade80 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
         }
         .code-snippet {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            background: #080c14;
-            padding: 4px 8px;
-            border-radius: 4px;
+            font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            background: #040711;
+            padding: 4px 10px;
+            border-radius: 6px;
             border: 1px solid #1e293b;
             color: #38bdf8;
-            font-size: 13px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .code-snippet-large {
+            font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            background: #040711;
+            padding: 5px 12px;
+            border-radius: 6px;
+            border: 1px solid #223049;
+            color: #67e8f9;
+            font-size: 15px;
+            font-weight: 700;
+            display: inline-block;
         }
         .evidence-box {
-            background: rgba(15, 23, 42, 0.7);
-            border-left: 3px solid #3b82f6;
-            padding: 8px 12px;
+            background: #080d19;
+            border-left: 4px solid #38bdf8;
+            padding: 10px 14px;
             margin-top: 8px;
-            border-radius: 0 4px 4px 0;
-            font-size: 12px;
-            color: #cbd5e1;
+            border-radius: 0 6px 6px 0;
+            font-size: 13px;
+            color: #e2e8f0;
+            line-height: 1.5;
+            border-top: 1px solid #131d2e;
+            border-right: 1px solid #131d2e;
+            border-bottom: 1px solid #131d2e;
         }
         .stat-value {
-            font-size: 28px !important;
-            font-weight: 800 !important;
+            font-size: 36px !important;
+            font-weight: 900 !important;
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+        .stat-desc {
+            color: #94a3b8 !important;
+            font-size: 13.5px !important;
+            font-weight: 500;
+            margin-top: 6px;
+        }
+        .filter-btn {
+            font-size: 13.5px !important;
+            font-weight: 700 !important;
+            padding: 10px 16px !important;
+            border-radius: 8px !important;
+            transition: all 0.15s ease !important;
         }
         .filter-btn.active {
-            background-color: #3b82f6 !important;
+            background-color: #2563eb !important;
             color: #ffffff !important;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4) !important;
+        }
+        .location-pill {
+            font-family: "JetBrains Mono", ui-monospace, monospace;
+            font-size: 12.5px;
+            color: #f472b6;
+            background: rgba(244, 114, 182, 0.1);
+            padding: 4px 9px;
+            border-radius: 6px;
+            border: 1px solid rgba(244, 114, 182, 0.3);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .finding-summary {
+            font-size: 14.5px;
+            line-height: 1.6;
+            color: #f1f5f9;
+            font-weight: 500;
+        }
+        #searchInput {
+            background: #080d19 !important;
+            border: 1px solid #223049 !important;
+            color: #ffffff !important;
+            font-size: 14.5px !important;
+            padding: 12px 18px !important;
+            border-radius: 8px !important;
+        }
+        #searchInput:focus {
+            border-color: #38bdf8 !important;
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3) !important;
         }
     </style>
 </head>
@@ -81,25 +151,25 @@
 <div class="ui container">
 
     <!-- Header Section -->
-    <div class="ui inverted segment" style="margin-bottom: 25px; padding: 25px;">
+    <div class="ui inverted segment" style="margin-bottom: 28px; padding: 28px;">
         <div class="ui stackable grid items-center">
             <div class="ten wide column">
-                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-                    <span style="font-size: 32px;">🔷</span>
+                <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 10px;">
+                    <span style="font-size: 36px;">🔷</span>
                     <span class="header-title">DPX-Haskell Architecture & Pattern Engine</span>
                 </div>
-                <div style="color: var(--text-secondary); font-size: 14px;">
+                <div style="color: var(--text-secondary); font-size: 15px;">
                     Target Codebase: <code class="code-snippet">examples</code>
                 </div>
             </div>
             <div class="six wide column right aligned">
-                <div class="ui mini blue label">
+                <div class="ui medium blue label" style="font-weight: 700;">
                     <i class="layer group icon"></i> Hexagonal DDD
                 </div>
-                <div class="ui mini teal label">
+                <div class="ui medium teal label" style="font-weight: 700;">
                     <i class="clock outline icon"></i> 0.002s
                 </div>
-                <div class="ui mini purple label">
+                <div class="ui medium purple label" style="font-weight: 700;">
                     <i class="file alternate outline icon"></i> 2 files
                 </div>
             </div>
@@ -107,50 +177,50 @@
     </div>
 
     <!-- KPI Statistics -->
-    <div class="ui four stackable cards" style="margin-bottom: 25px;">
-        <div class="ui inverted card">
-            <div class="content">
-                <div class="ui top right attached label blue mini">TOTAL FINDINGS</div>
-                <div class="header stat-value" style="color: #38bdf8; margin-top: 10px;">11</div>
-                <div class="description" style="color: var(--text-secondary);">Architecture patterns & smells identified</div>
+    <div class="ui four stackable cards" style="margin-bottom: 28px;">
+        <div class="ui inverted card" style="border-top: 3px solid #38bdf8 !important;">
+            <div class="content" style="padding: 20px;">
+                <div class="ui top right attached label blue mini" style="font-weight: 700;">TOTAL FINDINGS</div>
+                <div class="header stat-value" style="color: #38bdf8; margin-top: 8px;">11</div>
+                <div class="description stat-desc">Total patterns & architecture findings</div>
             </div>
         </div>
-        <div class="ui inverted card">
-            <div class="content">
-                <div class="ui top right attached label red mini">ACTION REQUIRED</div>
-                <div class="header stat-value" style="color: #f87171; margin-top: 10px;">0</div>
-                <div class="description" style="color: var(--text-secondary);">Safety hazards, space leaks & smells</div>
+        <div class="ui inverted card" style="border-top: 3px solid #f87171 !important;">
+            <div class="content" style="padding: 20px;">
+                <div class="ui top right attached label red mini" style="font-weight: 700;">ACTION REQUIRED</div>
+                <div class="header stat-value" style="color: #f87171; margin-top: 8px;">0</div>
+                <div class="description stat-desc">Safety hazards, space leaks & smells</div>
             </div>
         </div>
-        <div class="ui inverted card">
-            <div class="content">
-                <div class="ui top right attached label purple mini">TYPECLASSES & MONADS</div>
-                <div class="header stat-value" style="color: #c084fc; margin-top: 10px;">5</div>
-                <div class="description" style="color: var(--text-secondary);">Typeclasses, ReaderT & Transformer stacks</div>
+        <div class="ui inverted card" style="border-top: 3px solid #c084fc !important;">
+            <div class="content" style="padding: 20px;">
+                <div class="ui top right attached label purple mini" style="font-weight: 700;">TYPECLASSES & MONADS</div>
+                <div class="header stat-value" style="color: #c084fc; margin-top: 8px;">5</div>
+                <div class="description stat-desc">Typeclasses, ReaderT & Transformer stacks</div>
             </div>
         </div>
-        <div class="ui inverted card">
-            <div class="content">
-                <div class="ui top right attached label green mini">CLEAN CODE</div>
-                <div class="header stat-value" style="color: #4ade80; margin-top: 10px;">6</div>
-                <div class="description" style="color: var(--text-secondary);">Clean functional structures & STM</div>
+        <div class="ui inverted card" style="border-top: 3px solid #4ade80 !important;">
+            <div class="content" style="padding: 20px;">
+                <div class="ui top right attached label green mini" style="font-weight: 700;">CLEAN CODE & STM</div>
+                <div class="header stat-value" style="color: #4ade80; margin-top: 8px;">6</div>
+                <div class="description stat-desc">Clean functional idioms & STM transactions</div>
             </div>
         </div>
     </div>
 
     <!-- AI Architecture Map & Prompt Banner -->
-    <div class="ui inverted segment" style="margin-bottom: 25px; border-left: 4px solid #a855f7 !important;">
+    <div class="ui inverted segment" style="margin-bottom: 28px; padding: 22px; border-left: 5px solid #a855f7 !important;">
         <div class="ui stackable grid items-center">
             <div class="eleven wide column">
-                <h4 style="margin: 0; color: #f8fafc;">
-                    <i class="magic icon" style="color: #a855f7;"></i> AI / LLM Architectural Prompt Context
-                </h4>
-                <p style="color: var(--text-secondary); margin-top: 6px; font-size: 13px;">
-                    Generate instant refactoring recommendations, STM transaction reviews, and monad transformer optimizations for Claude, ChatGPT or Gemini.
+                <h3 style="margin: 0; color: #ffffff; font-size: 17px; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+                    <i class="magic icon" style="color: #c084fc;"></i> AI / LLM Architectural Prompt Context
+                </h3>
+                <p style="color: #cbd5e1; margin-top: 6px; font-size: 14px; line-height: 1.5;">
+                    Generate instant refactoring recommendations, STM transaction reviews, and monad transformer optimizations formatted for Claude, ChatGPT, or Gemini.
                 </p>
             </div>
             <div class="five wide column right aligned">
-                <button class="ui mini purple button" id="copyLlmBtn" onclick="copyLlmContext()">
+                <button class="ui medium purple button" id="copyLlmBtn" onclick="copyLlmContext()" style="font-weight: 800; padding: 12px 20px;">
                     <i class="copy outline icon"></i> 📋 Copy Context for LLM
                 </button>
             </div>
@@ -179,280 +249,357 @@
 4. Eliminate unforced space leaks (replace lazy `foldl` with strict `foldl&#x27;`) and unsafe `fromJust`/`error` panics.</textarea>
     </div>
 
-    <!-- Filter Buttons Bar -->
-    <div class="ui inverted segment" style="margin-bottom: 20px; padding: 12px;">
+    <!-- Filter Buttons Bar & Search -->
+    <div class="ui inverted segment" style="margin-bottom: 24px; padding: 16px 20px;">
         <div class="ui stackable grid items-center">
-            <div class="twelve wide column">
-                <div class="ui mini inverted buttons" id="categoryFilterBar">
-                    <button class="ui button active filter-btn" data-filter="all">All (11)</button>
-                    <button class="ui button filter-btn" data-filter="typeclass_system"><i class="cubes icon"></i> Typeclasses & Polymorphism (3)</button>
-<button class="ui button filter-btn" data-filter="monad_architecture"><i class="layer group icon"></i> Monad Stacks & ReaderT (2)</button>
-<button class="ui button filter-btn" data-filter="functional_idiom"><i class="code branch icon"></i> Functional Idioms & GADTs (1)</button>
-<button class="ui button filter-btn" data-filter="concurrency_stm"><i class="bolt icon"></i> STM & Concurrency (4)</button>
-<button class="ui button filter-btn" data-filter="optics_lenses"><i class="eye icon"></i> Optics & Lenses (1)</button>
+            <div class="eleven wide column">
+                <div class="ui inverted buttons" id="categoryFilterBar" style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    <button class="ui button active filter-btn" data-filter="all">All Findings (11)</button>
+                    <button class="ui button filter-btn" data-filter="typeclass_system"><i class="cubes icon" style="color: #a855f7;"></i> Typeclasses & Polymorphism (3)</button>
+<button class="ui button filter-btn" data-filter="monad_architecture"><i class="layer group icon" style="color: #8b5cf6;"></i> Monad Stacks & ReaderT (2)</button>
+<button class="ui button filter-btn" data-filter="functional_idiom"><i class="code branch icon" style="color: #14b8a6;"></i> Functional Idioms & GADTs (1)</button>
+<button class="ui button filter-btn" data-filter="concurrency_stm"><i class="bolt icon" style="color: #0ea5e9;"></i> STM & Concurrency (4)</button>
+<button class="ui button filter-btn" data-filter="optics_lenses"><i class="eye icon" style="color: #ec4899;"></i> Optics & Lenses (1)</button>
                 </div>
             </div>
-            <div class="four wide column right aligned">
-                <div class="ui mini icon inverted input fluid">
-                    <input type="text" id="searchInput" placeholder="Search findings, modules, functions...">
-                    <i class="search icon"></i>
+            <div class="five wide column right aligned">
+                <div class="ui fluid icon inverted input">
+                    <input type="text" id="searchInput" placeholder="🔎 Search findings, modules, functions...">
+                    <i class="search icon" style="color: #38bdf8;"></i>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Findings Grid -->
-    <div class="ui stackable cards" id="findingsContainer">
+    <div class="ui stackable cards" id="findingsContainer" style="margin: -0.5em;">
         
-                <div class="ui inverted card finding-card" data-category="typeclass_system" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4);">
+                <div class="ui inverted card finding-card" data-category="typeclass_system" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #a855f7 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(168, 85, 247, 0.2); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="cubes icon"></i> TYPECLASSES & POLYMORPHISM
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #1 <code>gadts_type_safe_ast</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#1</span>
+                            <span style="color: #38bdf8;"><code>gadts_type_safe_ast</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">BankApp.Transaction</code> (gadt_data_type)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">BankApp.Transaction</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">gadt_data_type</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Data type &#x27;Transaction&#x27; in &#x27;BankApp&#x27; implements Generalized Algebraic Data Type (GADT) ensuring compile-time type preservation
                         </div>
-                        <div class="evidence-box"><strong>+85% [GADT_TYPE_SAFE_AST]</strong> Data type &#x27;Transaction&#x27; in &#x27;BankApp&#x27; implements Generalized Algebraic Data Type (GADT) ensuring compile-time type preservation</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[GADT_TYPE_SAFE_AST]</span> <span style="color: #f1f5f9;">Data type &#x27;Transaction&#x27; in &#x27;BankApp&#x27; implements Generalized Algebraic Data Type (GADT) ensuring compile-time type preservation</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:30:1</span>
-                        <span class="ui mini green label">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:30:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="typeclass_system" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4);">
+                <div class="ui inverted card finding-card" data-category="typeclass_system" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #a855f7 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(168, 85, 247, 0.2); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="cubes icon"></i> TYPECLASSES & POLYMORPHISM
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #2 <code>newtype_strong_typing</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#2</span>
+                            <span style="color: #38bdf8;"><code>newtype_strong_typing</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">BankApp</code> (newtype_domain_module)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">BankApp</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">newtype_domain_module</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Module &#x27;BankApp&#x27; enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost
                         </div>
-                        <div class="evidence-box"><strong>+80% [NEWTYPE_DOMAIN_VALUE_OBJECT]</strong> Module &#x27;BankApp&#x27; enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[NEWTYPE_DOMAIN_VALUE_OBJECT]</span> <span style="color: #f1f5f9;">Module &#x27;BankApp&#x27; enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:1:1</span>
-                        <span class="ui mini teal label">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:1:1</span>
+                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="typeclass_system" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4);">
+                <div class="ui inverted card finding-card" data-category="typeclass_system" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #a855f7 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(168, 85, 247, 0.2); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="cubes icon"></i> TYPECLASSES & POLYMORPHISM
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #3 <code>deriving_strategies</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#3</span>
+                            <span style="color: #38bdf8;"><code>deriving_strategies</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">BankApp</code> (deriving_strategies_module)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">BankApp</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">deriving_strategies_module</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Module &#x27;BankApp&#x27; explicitly specifies Deriving Strategies (stock/newtype/anyclass) ensuring deterministic typeclass derivation
                         </div>
-                        <div class="evidence-box"><strong>+80% [EXPLICIT_DERIVING_STRATEGIES]</strong> Module &#x27;BankApp&#x27; explicitly specifies Deriving Strategies (stock/newtype/anyclass) ensuring deterministic typeclass derivation</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[EXPLICIT_DERIVING_STRATEGIES]</span> <span style="color: #f1f5f9;">Module &#x27;BankApp&#x27; explicitly specifies Deriving Strategies (stock/newtype/anyclass) ensuring deterministic typeclass derivation</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:1:1</span>
-                        <span class="ui mini teal label">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:1:1</span>
+                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="monad_architecture" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.4);">
+                <div class="ui inverted card finding-card" data-category="monad_architecture" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #8b5cf6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="layer group icon"></i> MONAD STACKS & READERT
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #4 <code>reader_t_design_pattern</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#4</span>
+                            <span style="color: #38bdf8;"><code>reader_t_design_pattern</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">BankApp</code> (reader_t_architecture)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">BankApp</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">reader_t_architecture</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Module &#x27;BankApp&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access
                         </div>
-                        <div class="evidence-box"><strong>+90% [READER_T_PATTERN_DI]</strong> Module &#x27;BankApp&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #8b5cf6;"><span style="color: #c4b5fd; font-weight: 800; font-family: monospace;">+90%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[READER_T_PATTERN_DI]</span> <span style="color: #f1f5f9;">Module &#x27;BankApp&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:1:1</span>
-                        <span class="ui mini green label">90% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:1:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">90% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="monad_architecture" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.4);">
+                <div class="ui inverted card finding-card" data-category="monad_architecture" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #8b5cf6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="layer group icon"></i> MONAD STACKS & READERT
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #5 <code>monad_transformer_stack</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#5</span>
+                            <span style="color: #38bdf8;"><code>monad_transformer_stack</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">BankApp</code> (monad_transformer_module)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">BankApp</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">monad_transformer_module</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Module &#x27;BankApp&#x27; layers a Monad Transformer Stack combining 2 distinct computational capabilities (ExceptT, ReaderT)
                         </div>
-                        <div class="evidence-box"><strong>+85% [MONAD_TRANSFORMER_LAYER_STACK]</strong> Module &#x27;BankApp&#x27; layers a Monad Transformer Stack combining 2 distinct computational capabilities (ExceptT, ReaderT)</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #8b5cf6;"><span style="color: #c4b5fd; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONAD_TRANSFORMER_LAYER_STACK]</span> <span style="color: #f1f5f9;">Module &#x27;BankApp&#x27; layers a Monad Transformer Stack combining 2 distinct computational capabilities (ExceptT, ReaderT)</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:1:1</span>
-                        <span class="ui mini green label">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:1:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="optics_lenses" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(236, 72, 153, 0.15); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.4);">
+                <div class="ui inverted card finding-card" data-category="optics_lenses" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #ec4899 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(236, 72, 153, 0.2); color: #f9a8d4; border: 1px solid rgba(236, 72, 153, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="eye icon"></i> OPTICS & LENSES
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #6 <code>lens_prism_optics</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#6</span>
+                            <span style="color: #38bdf8;"><code>lens_prism_optics</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">OpticsStreamService</code> (lens_optics_module)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">OpticsStreamService</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">lens_optics_module</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Module &#x27;OpticsStreamService&#x27; integrates Functional Optics (Lenses/Prisms) for composable immutable data access and transformation
                         </div>
-                        <div class="evidence-box"><strong>+85% [FUNCTIONAL_OPTICS_LENSES]</strong> Module &#x27;OpticsStreamService&#x27; integrates Functional Optics (Lenses/Prisms) for composable immutable data access and transformation</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #ec4899;"><span style="color: #f9a8d4; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[FUNCTIONAL_OPTICS_LENSES]</span> <span style="color: #f1f5f9;">Module &#x27;OpticsStreamService&#x27; integrates Functional Optics (Lenses/Prisms) for composable immutable data access and transformation</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:1:1</span>
-                        <span class="ui mini green label">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:1:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="concurrency_stm" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">
+                <div class="ui inverted card finding-card" data-category="concurrency_stm" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #0ea5e9 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(56, 189, 248, 0.2); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="bolt icon"></i> STM & CONCURRENCY
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #7 <code>stm_transactional_memory</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#7</span>
+                            <span style="color: #38bdf8;"><code>stm_transactional_memory</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">BankApp</code> (stm_concurrency_module)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">BankApp</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">stm_concurrency_module</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Module &#x27;BankApp&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity
                         </div>
-                        <div class="evidence-box"><strong>+90% [SOFTWARE_TRANSACTIONAL_MEMORY]</strong> Module &#x27;BankApp&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #0ea5e9;"><span style="color: #7dd3fc; font-weight: 800; font-family: monospace;">+90%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[SOFTWARE_TRANSACTIONAL_MEMORY]</span> <span style="color: #f1f5f9;">Module &#x27;BankApp&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:1:1</span>
-                        <span class="ui mini green label">90% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:1:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">90% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="concurrency_stm" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">
+                <div class="ui inverted card finding-card" data-category="concurrency_stm" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #0ea5e9 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(56, 189, 248, 0.2); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="bolt icon"></i> STM & CONCURRENCY
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #8 <code>stm_transactional_memory</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#8</span>
+                            <span style="color: #38bdf8;"><code>stm_transactional_memory</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">OpticsStreamService</code> (stm_concurrency_module)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">OpticsStreamService</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">stm_concurrency_module</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Module &#x27;OpticsStreamService&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity
                         </div>
-                        <div class="evidence-box"><strong>+90% [SOFTWARE_TRANSACTIONAL_MEMORY]</strong> Module &#x27;OpticsStreamService&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #0ea5e9;"><span style="color: #7dd3fc; font-weight: 800; font-family: monospace;">+90%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[SOFTWARE_TRANSACTIONAL_MEMORY]</span> <span style="color: #f1f5f9;">Module &#x27;OpticsStreamService&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:1:1</span>
-                        <span class="ui mini green label">90% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:1:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">90% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="concurrency_stm" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">
+                <div class="ui inverted card finding-card" data-category="concurrency_stm" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #0ea5e9 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(56, 189, 248, 0.2); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="bolt icon"></i> STM & CONCURRENCY
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #9 <code>async_concurrent_flow</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#9</span>
+                            <span style="color: #38bdf8;"><code>async_concurrent_flow</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">OpticsStreamService</code> (async_concurrency_module)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">OpticsStreamService</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">async_concurrency_module</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Module &#x27;OpticsStreamService&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation
                         </div>
-                        <div class="evidence-box"><strong>+85% [STRUCTURED_ASYNC_CONCURRENCY]</strong> Module &#x27;OpticsStreamService&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #0ea5e9;"><span style="color: #7dd3fc; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[STRUCTURED_ASYNC_CONCURRENCY]</span> <span style="color: #f1f5f9;">Module &#x27;OpticsStreamService&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:1:1</span>
-                        <span class="ui mini green label">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:1:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(20, 184, 166, 0.15); color: #2dd4bf; border: 1px solid rgba(20, 184, 166, 0.4);">
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #14b8a6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; border: 1px solid rgba(20, 184, 166, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #10 <code>stream_processing_pipeline</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#10</span>
+                            <span style="color: #38bdf8;"><code>stream_processing_pipeline</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">OpticsStreamService</code> (streaming_pipeline_module)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">OpticsStreamService</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">streaming_pipeline_module</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Module &#x27;OpticsStreamService&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees
                         </div>
-                        <div class="evidence-box"><strong>+85% [STREAM_PROCESSING_PIPELINE]</strong> Module &#x27;OpticsStreamService&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[STREAM_PROCESSING_PIPELINE]</span> <span style="color: #f1f5f9;">Module &#x27;OpticsStreamService&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:1:1</span>
-                        <span class="ui mini green label">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:1:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
 
-                <div class="ui inverted card finding-card" data-category="concurrency_stm" style="width: calc(50% - 1em); margin: 0.5em;">
-                    <div class="content">
-                        <div class="ui top right attached label mini" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">
+                <div class="ui inverted card finding-card" data-category="concurrency_stm" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #0ea5e9 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(56, 189, 248, 0.2); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="bolt icon"></i> STM & CONCURRENCY
                         </div>
-                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
-                            #11 <code>chan_mvar_mailbox</code>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#11</span>
+                            <span style="color: #38bdf8;"><code>chan_mvar_mailbox</code></span>
                         </div>
-                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
-                            Target: <code class="code-snippet">OpticsStreamService</code> (mailbox_channel_module)
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">OpticsStreamService</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">mailbox_channel_module</span>
                         </div>
-                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                        <div class="description finding-summary" style="margin-top: 12px;">
                             Module &#x27;OpticsStreamService&#x27; coordinates worker synchronization via Actor Mailbox Channel (`TQueue`/`TChan`/`Chan`)
                         </div>
-                        <div class="evidence-box"><strong>+85% [ACTOR_MAILBOX_CHANNEL]</strong> Module &#x27;OpticsStreamService&#x27; coordinates worker synchronization via Actor Mailbox Channel (`TQueue`/`TChan`/`Chan`)</div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #0ea5e9;"><span style="color: #7dd3fc; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[ACTOR_MAILBOX_CHANNEL]</span> <span style="color: #f1f5f9;">Module &#x27;OpticsStreamService&#x27; coordinates worker synchronization via Actor Mailbox Channel (`TQueue`/`TChan`/`Chan`)</span></div>
+                        </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:1:1</span>
-                        <span class="ui mini green label">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:1:1</span>
+                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -509,7 +656,7 @@
                 btn.innerHTML = oldHtml;
                 btn.classList.remove('green');
                 btn.classList.add('purple');
-            }, 2000);
+            }, 2200);
         }).catch(() => {
             const ta = document.createElement('textarea');
             ta.value = raw;
@@ -518,7 +665,7 @@
             document.execCommand('copy');
             document.body.removeChild(ta);
             btn.innerHTML = '<i class="check icon"></i> Copied!';
-            setTimeout(() => { btn.innerHTML = oldHtml; }, 2000);
+            setTimeout(() => { btn.innerHTML = oldHtml; }, 2200);
         });
     }
 </script>
