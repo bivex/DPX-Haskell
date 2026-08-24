@@ -146,13 +146,14 @@ _HTML_DASHBOARD_TEMPLATE = """<!DOCTYPE html>
             transform: translateY(-3px);
         }}
         .header-title {{
-            font-size: 32px;
+            font-size: 30px;
             font-weight: 900;
             letter-spacing: -0.6px;
             background: linear-gradient(135deg, #c084fc 0%, #38bdf8 50%, #4ade80 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
+            white-space: nowrap;
         }}
         .code-snippet {{
             font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -171,9 +172,10 @@ _HTML_DASHBOARD_TEMPLATE = """<!DOCTYPE html>
             border-radius: 6px;
             border: 1px solid #223049;
             color: #67e8f9;
-            font-size: 15px;
+            font-size: 14.5px;
             font-weight: 700;
             display: inline-block;
+            word-break: break-all;
         }}
         .evidence-box {{
             background: #080d19;
@@ -201,9 +203,9 @@ _HTML_DASHBOARD_TEMPLATE = """<!DOCTYPE html>
             margin-top: 6px;
         }}
         .filter-btn {{
-            font-size: 13.5px !important;
+            font-size: 13px !important;
             font-weight: 700 !important;
-            padding: 10px 16px !important;
+            padding: 9px 15px !important;
             border-radius: 8px !important;
             transition: all 0.15s ease !important;
         }}
@@ -214,16 +216,29 @@ _HTML_DASHBOARD_TEMPLATE = """<!DOCTYPE html>
         }}
         .location-pill {{
             font-family: "JetBrains Mono", ui-monospace, monospace;
-            font-size: 12.5px;
+            font-size: 12px;
             color: #f472b6;
             background: rgba(244, 114, 182, 0.1);
-            padding: 4px 9px;
+            padding: 5px 10px;
             border-radius: 6px;
             border: 1px solid rgba(244, 114, 182, 0.3);
             font-weight: 600;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+            max-width: 68%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }}
+        .conf-badge {{
+            flex-shrink: 0 !important;
+            white-space: nowrap !important;
+            font-weight: 800 !important;
+            font-size: 11.5px !important;
+            letter-spacing: 0.5px !important;
+            padding: 6px 11px !important;
+            border-radius: 6px !important;
         }}
         .finding-summary {{
             font-size: 14.5px;
@@ -235,8 +250,8 @@ _HTML_DASHBOARD_TEMPLATE = """<!DOCTYPE html>
             background: #080d19 !important;
             border: 1px solid #223049 !important;
             color: #ffffff !important;
-            font-size: 14.5px !important;
-            padding: 12px 18px !important;
+            font-size: 14px !important;
+            padding: 11px 16px !important;
             border-radius: 8px !important;
         }}
         #searchInput:focus {{
@@ -250,18 +265,18 @@ _HTML_DASHBOARD_TEMPLATE = """<!DOCTYPE html>
 <div class="ui container">
 
     <!-- Header Section -->
-    <div class="ui inverted segment" style="margin-bottom: 28px; padding: 28px;">
-        <div class="ui stackable grid items-center">
-            <div class="ten wide column">
-                <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 10px;">
-                    <span style="font-size: 36px;">🔷</span>
+    <div class="ui inverted segment" style="margin-bottom: 28px; padding: 26px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <div>
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                    <span style="font-size: 32px;">🔷</span>
                     <span class="header-title">DPX-Haskell Architecture & Pattern Engine</span>
                 </div>
-                <div style="color: var(--text-secondary); font-size: 15px;">
+                <div style="color: var(--text-secondary); font-size: 14.5px;">
                     Target Codebase: <code class="code-snippet">{project_name}</code>
                 </div>
             </div>
-            <div class="six wide column right aligned">
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
                 <div class="ui medium blue label" style="font-weight: 700;">
                     <i class="layer group icon"></i> Hexagonal DDD
                 </div>
@@ -451,7 +466,8 @@ class HtmlReportFormatter(ReportFormatterPort):
         for idx, d in enumerate(report.detections, 1):
             style = CATEGORY_STYLES.get(d.pattern_category, CATEGORY_STYLES[PatternCategory.FUNCTIONAL_IDIOM])
             conf_color = "green" if d.level == ConfidenceLevel.VERY_HIGH else "teal" if d.level == ConfidenceLevel.HIGH else "orange"
-            loc_str = str(d.primary_location) if d.primary_location else "N/A"
+            raw_loc = str(d.primary_location) if d.primary_location else "N/A"
+            disp_loc, full_loc = self._format_display_location(raw_loc, report.project_path)
 
             evidences_html = "".join([
                 f'<div class="evidence-box" style="border-left-color: {style["accent"]};">'
@@ -487,9 +503,9 @@ class HtmlReportFormatter(ReportFormatterPort):
                             {evidences_html}
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> {html.escape(loc_str)}</span>
-                        <span class="ui mini {conf_color} label" style="font-weight: 800; font-size: 11.5px;">{d.confidence.percentage_str} [{d.level.value.upper()}]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="{html.escape(full_loc)}"><i class="map marker alternate icon"></i> {html.escape(disp_loc)}</span>
+                        <span class="ui mini {conf_color} label conf-badge">{d.confidence.percentage_str} [{d.level.value.upper()}]</span>
                     </div>
                 </div>
                 """
@@ -509,6 +525,25 @@ class HtmlReportFormatter(ReportFormatterPort):
             findings_cards_html="\n".join(cards_html),
             llm_context_data=html.escape(llm_context),
         )
+
+    def _format_display_location(self, loc_str: str, project_path: str) -> tuple[str, str]:
+        """Formats location string to be concise for card display while preserving full path for tooltips."""
+        if not loc_str or loc_str == "N/A":
+            return "N/A", ""
+
+        full_loc = loc_str
+        clean_proj = project_path.rstrip("/\\")
+        if clean_proj and loc_str.startswith(clean_proj):
+            rel = loc_str[len(clean_proj):].lstrip("/\\")
+            return rel, full_loc
+
+        # If long absolute path, display trailing segments
+        parts = loc_str.replace("\\", "/").split("/")
+        if len(parts) > 4:
+            short = ".../" + "/".join(parts[-3:])
+            return short, full_loc
+
+        return loc_str, full_loc
 
     def _resolve_project_name(self, path: str) -> str:
         if not path or path == ".":

@@ -47,13 +47,14 @@
             transform: translateY(-3px);
         }
         .header-title {
-            font-size: 32px;
+            font-size: 30px;
             font-weight: 900;
             letter-spacing: -0.6px;
             background: linear-gradient(135deg, #c084fc 0%, #38bdf8 50%, #4ade80 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
+            white-space: nowrap;
         }
         .code-snippet {
             font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -72,9 +73,10 @@
             border-radius: 6px;
             border: 1px solid #223049;
             color: #67e8f9;
-            font-size: 15px;
+            font-size: 14.5px;
             font-weight: 700;
             display: inline-block;
+            word-break: break-all;
         }
         .evidence-box {
             background: #080d19;
@@ -102,9 +104,9 @@
             margin-top: 6px;
         }
         .filter-btn {
-            font-size: 13.5px !important;
+            font-size: 13px !important;
             font-weight: 700 !important;
-            padding: 10px 16px !important;
+            padding: 9px 15px !important;
             border-radius: 8px !important;
             transition: all 0.15s ease !important;
         }
@@ -115,16 +117,29 @@
         }
         .location-pill {
             font-family: "JetBrains Mono", ui-monospace, monospace;
-            font-size: 12.5px;
+            font-size: 12px;
             color: #f472b6;
             background: rgba(244, 114, 182, 0.1);
-            padding: 4px 9px;
+            padding: 5px 10px;
             border-radius: 6px;
             border: 1px solid rgba(244, 114, 182, 0.3);
             font-weight: 600;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+            max-width: 68%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .conf-badge {
+            flex-shrink: 0 !important;
+            white-space: nowrap !important;
+            font-weight: 800 !important;
+            font-size: 11.5px !important;
+            letter-spacing: 0.5px !important;
+            padding: 6px 11px !important;
+            border-radius: 6px !important;
         }
         .finding-summary {
             font-size: 14.5px;
@@ -136,8 +151,8 @@
             background: #080d19 !important;
             border: 1px solid #223049 !important;
             color: #ffffff !important;
-            font-size: 14.5px !important;
-            padding: 12px 18px !important;
+            font-size: 14px !important;
+            padding: 11px 16px !important;
             border-radius: 8px !important;
         }
         #searchInput:focus {
@@ -151,18 +166,18 @@
 <div class="ui container">
 
     <!-- Header Section -->
-    <div class="ui inverted segment" style="margin-bottom: 28px; padding: 28px;">
-        <div class="ui stackable grid items-center">
-            <div class="ten wide column">
-                <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 10px;">
-                    <span style="font-size: 36px;">🔷</span>
+    <div class="ui inverted segment" style="margin-bottom: 28px; padding: 26px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <div>
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                    <span style="font-size: 32px;">🔷</span>
                     <span class="header-title">DPX-Haskell Architecture & Pattern Engine</span>
                 </div>
-                <div style="color: var(--text-secondary); font-size: 15px;">
+                <div style="color: var(--text-secondary); font-size: 14.5px;">
                     Target Codebase: <code class="code-snippet">megaparsec</code>
                 </div>
             </div>
-            <div class="six wide column right aligned">
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
                 <div class="ui medium blue label" style="font-weight: 700;">
                     <i class="layer group icon"></i> Hexagonal DDD
                 </div>
@@ -352,9 +367,9 @@
                             <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TYPECLASS_INTERFACE_ADAPTER]</span> <span style="color: #f1f5f9;">Typeclass &#x27;MonadParsec&#x27; in &#x27;Text.Megaparsec.Class&#x27; defines an ad-hoc polymorphic Adapter interface with 17 method(s)</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Class.hs:50:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Class.hs:50:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Class.hs:50:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -382,9 +397,9 @@
                             <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TYPECLASS_INTERFACE_ADAPTER]</span> <span style="color: #f1f5f9;">Typeclass &#x27;MonadParsecDbg&#x27; in &#x27;Text.Megaparsec.Debug&#x27; defines an ad-hoc polymorphic Adapter interface with 1 method(s)</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Debug.hs:48:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Debug.hs:48:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Debug.hs:48:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -412,9 +427,9 @@
                             <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TYPECLASS_INTERFACE_ADAPTER]</span> <span style="color: #f1f5f9;">Typeclass &#x27;ShowErrorComponent&#x27; in &#x27;Text.Megaparsec.Error&#x27; defines an ad-hoc polymorphic Adapter interface with 2 method(s)</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Error.hs:332:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Error.hs:332:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Error.hs:332:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -442,9 +457,9 @@
                             <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TYPECLASS_INTERFACE_ADAPTER]</span> <span style="color: #f1f5f9;">Typeclass &#x27;Stream&#x27; in &#x27;Text.Megaparsec.Stream&#x27; defines an ad-hoc polymorphic Adapter interface with 8 method(s)</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:68:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:68:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Stream.hs:68:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -472,9 +487,9 @@
                             <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TYPECLASS_INTERFACE_ADAPTER]</span> <span style="color: #f1f5f9;">Typeclass &#x27;VisualStream&#x27; in &#x27;Text.Megaparsec.Stream&#x27; defines an ad-hoc polymorphic Adapter interface with 2 method(s)</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:414:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:414:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Stream.hs:414:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -502,9 +517,9 @@
                             <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TYPECLASS_INTERFACE_ADAPTER]</span> <span style="color: #f1f5f9;">Typeclass &#x27;TraversableStream&#x27; in &#x27;Text.Megaparsec.Stream&#x27; defines an ad-hoc polymorphic Adapter interface with 2 method(s)</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:450:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:450:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Stream.hs:450:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -532,9 +547,9 @@
                             <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TYPECLASS_INTERFACE_ADAPTER]</span> <span style="color: #f1f5f9;">Typeclass &#x27;BinaryChunk&#x27; in &#x27;Text.Megaparsec.Byte.Binary&#x27; defines an ad-hoc polymorphic Adapter interface with 2 method(s)</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Binary.hs:54:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Binary.hs:54:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Byte/Binary.hs:54:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -562,9 +577,9 @@
                             <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TYPE_FAMILY_ASSOCIATED_TYPES]</span> <span style="color: #f1f5f9;">Module &#x27;Text.Megaparsec.Stream&#x27; implements Type Families / Associated Types for type-level computation and indexed type mappings</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:1:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Stream.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -592,9 +607,9 @@
                             <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[NEWTYPE_DOMAIN_VALUE_OBJECT]</span> <span style="color: #f1f5f9;">Module &#x27;Text.Megaparsec.Internal&#x27; enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Internal.hs:1:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Internal.hs:1:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Internal.hs:1:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -622,9 +637,9 @@
                             <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[NEWTYPE_DOMAIN_VALUE_OBJECT]</span> <span style="color: #f1f5f9;">Module &#x27;Text.Megaparsec.Pos&#x27; enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Pos.hs:1:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Pos.hs:1:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Pos.hs:1:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -652,9 +667,9 @@
                             <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[NEWTYPE_DOMAIN_VALUE_OBJECT]</span> <span style="color: #f1f5f9;">Module &#x27;Text.Megaparsec.Stream&#x27; enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:1:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:1:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Stream.hs:1:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -682,9 +697,9 @@
                             <div class="evidence-box" style="border-left-color: #8b5cf6;"><span style="color: #c4b5fd; font-weight: 800; font-family: monospace;">+90%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[READER_T_PATTERN_DI]</span> <span style="color: #f1f5f9;">Module &#x27;Text.MegaparsecSpec&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">90% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1"><i class="map marker alternate icon"></i> megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">90% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -712,9 +727,9 @@
                             <div class="evidence-box" style="border-left-color: #8b5cf6;"><span style="color: #c4b5fd; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONAD_TRANSFORMER_LAYER_STACK]</span> <span style="color: #f1f5f9;">Module &#x27;Text.Megaparsec.Class&#x27; layers a Monad Transformer Stack combining 5 distinct computational capabilities (IdentityT, RWST, ReaderT, StateT, WriterT)</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Class.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Class.hs:1:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Class.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -742,9 +757,9 @@
                             <div class="evidence-box" style="border-left-color: #8b5cf6;"><span style="color: #c4b5fd; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONAD_TRANSFORMER_LAYER_STACK]</span> <span style="color: #f1f5f9;">Module &#x27;Text.Megaparsec.Debug&#x27; layers a Monad Transformer Stack combining 5 distinct computational capabilities (IdentityT, RWST, ReaderT, StateT, WriterT)</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Debug.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Debug.hs:1:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Debug.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -772,9 +787,9 @@
                             <div class="evidence-box" style="border-left-color: #8b5cf6;"><span style="color: #c4b5fd; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONAD_TRANSFORMER_LAYER_STACK]</span> <span style="color: #f1f5f9;">Module &#x27;Text.MegaparsecSpec&#x27; layers a Monad Transformer Stack combining 4 distinct computational capabilities (RWST, ReaderT, StateT, WriterT)</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1"><i class="map marker alternate icon"></i> megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -802,9 +817,9 @@
                             <div class="evidence-box" style="border-left-color: #8b5cf6;"><span style="color: #c4b5fd; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONAD_TRANSFORMER_LAYER_STACK]</span> <span style="color: #f1f5f9;">Module &#x27;Text.Megaparsec.DebugSpec&#x27; layers a Monad Transformer Stack combining 3 distinct computational capabilities (RWST, StateT, WriterT)</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/DebugSpec.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/DebugSpec.hs:1:1"><i class="map marker alternate icon"></i> megaparsec-tests/tests/Text/Megaparsec/DebugSpec.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -832,9 +847,9 @@
                             <div class="evidence-box" style="border-left-color: #8b5cf6;"><span style="color: #c4b5fd; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONAD_TRANSFORMER_LAYER_STACK]</span> <span style="color: #f1f5f9;">Module &#x27;Test.Hspec.Megaparsec.AdHoc&#x27; layers a Monad Transformer Stack combining 2 distinct computational capabilities (RWST, WriterT)</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/src/Test/Hspec/Megaparsec/AdHoc.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/src/Test/Hspec/Megaparsec/AdHoc.hs:1:1"><i class="map marker alternate icon"></i> megaparsec-tests/src/Test/Hspec/Megaparsec/AdHoc.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -862,9 +877,9 @@
                             <div class="evidence-box" style="border-left-color: #8b5cf6;"><span style="color: #c4b5fd; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TAGLESS_FINAL_CAPABILITY_CLASS]</span> <span style="color: #f1f5f9;">Typeclass &#x27;MonadParsec&#x27; in &#x27;Text.Megaparsec.Class&#x27; adopts Tagless Final / MTL capability pattern providing polymorphic monadic effects</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Class.hs:50:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Class.hs:50:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Class.hs:50:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -892,9 +907,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;match&#x27; in &#x27;Text.Megaparsec&#x27; chains a 4-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec.hs:577:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec.hs:577:1"><i class="map marker alternate icon"></i> Text/Megaparsec.hs:577:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -922,9 +937,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;indentBlock&#x27; in &#x27;Text.Megaparsec.Char.Lexer&#x27; chains a 7-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:236:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:236:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Char/Lexer.hs:236:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -952,9 +967,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;scientific&#x27; in &#x27;Text.Megaparsec.Char.Lexer&#x27; chains a 3-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:469:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:469:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Char/Lexer.hs:469:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -982,9 +997,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;float&#x27; in &#x27;Text.Megaparsec.Char.Lexer&#x27; chains a 3-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:493:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:493:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Char/Lexer.hs:493:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1012,9 +1027,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;scientific&#x27; in &#x27;Text.Megaparsec.Byte.Lexer&#x27; chains a 3-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Lexer.hs:219:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Lexer.hs:219:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Byte/Lexer.hs:219:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1042,9 +1057,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;float&#x27; in &#x27;Text.Megaparsec.Byte.Lexer&#x27; chains a 3-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Lexer.hs:239:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Lexer.hs:239:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Byte/Lexer.hs:239:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1072,9 +1087,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;spec&#x27; in &#x27;Text.MegaparsecSpec&#x27; chains a 16-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1"><i class="map marker alternate icon"></i> megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1102,9 +1117,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;spec&#x27; in &#x27;Text.Megaparsec.Char.LexerSpec&#x27; chains a 12-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/Char/LexerSpec.hs:24:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/Char/LexerSpec.hs:24:1"><i class="map marker alternate icon"></i> megaparsec-tests/tests/Text/Megaparsec/Char/LexerSpec.hs:24:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1132,9 +1147,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;commaSeparated&#x27; in &#x27;ParsersBench.Json.Megaparsec&#x27; chains a 3-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Json/Megaparsec.hs:75:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Json/Megaparsec.hs:75:1"><i class="map marker alternate icon"></i> parsers-bench/ParsersBench/Json/Megaparsec.hs:75:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1162,9 +1177,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;commaSeparated&#x27; in &#x27;ParsersBench.Json.Attoparsec&#x27; chains a 3-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Json/Attoparsec.hs:71:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Json/Attoparsec.hs:71:1"><i class="map marker alternate icon"></i> parsers-bench/ParsersBench/Json/Attoparsec.hs:71:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1192,9 +1207,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;parseIP&#x27; in &#x27;ParsersBench.Log.Megaparsec&#x27; chains a 4-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs:27:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs:27:1"><i class="map marker alternate icon"></i> parsers-bench/ParsersBench/Log/Megaparsec.hs:27:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1222,9 +1237,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;timeParser&#x27; in &#x27;ParsersBench.Log.Megaparsec&#x27; chains a 6-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs:38:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs:38:1"><i class="map marker alternate icon"></i> parsers-bench/ParsersBench/Log/Megaparsec.hs:38:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1252,9 +1267,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;logEntryParser&#x27; in &#x27;ParsersBench.Log.Megaparsec&#x27; chains a 3-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs:64:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs:64:1"><i class="map marker alternate icon"></i> parsers-bench/ParsersBench/Log/Megaparsec.hs:64:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1282,9 +1297,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;parseIP&#x27; in &#x27;ParsersBench.Log.Attoparsec&#x27; chains a 4-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Attoparsec.hs:23:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Attoparsec.hs:23:1"><i class="map marker alternate icon"></i> parsers-bench/ParsersBench/Log/Attoparsec.hs:23:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1312,9 +1327,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;timeParser&#x27; in &#x27;ParsersBench.Log.Attoparsec&#x27; chains a 6-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Attoparsec.hs:34:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Attoparsec.hs:34:1"><i class="map marker alternate icon"></i> parsers-bench/ParsersBench/Log/Attoparsec.hs:34:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1342,9 +1357,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;logEntryParser&#x27; in &#x27;ParsersBench.Log.Attoparsec&#x27; chains a 3-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Attoparsec.hs:60:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Attoparsec.hs:60:1"><i class="map marker alternate icon"></i> parsers-bench/ParsersBench/Log/Attoparsec.hs:60:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1372,9 +1387,9 @@
                             <div class="evidence-box" style="border-left-color: #8b5cf6;"><span style="color: #c4b5fd; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[CONTINUATION_MONAD_CALLCC]</span> <span style="color: #f1f5f9;">Module &#x27;Text.Megaparsec.Internal&#x27; employs Continuation Monad (`ContT`/`callCC`) for non-local control transfer and coroutine composition</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Internal.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Internal.hs:1:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Internal.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -1402,9 +1417,9 @@
                             <div class="evidence-box" style="border-left-color: #8b5cf6;"><span style="color: #c4b5fd; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[CONTINUATION_MONAD_CALLCC]</span> <span style="color: #f1f5f9;">Module &#x27;Text.MegaparsecSpec&#x27; employs Continuation Monad (`ContT`/`callCC`) for non-local control transfer and coroutine composition</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1"><i class="map marker alternate icon"></i> megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -1432,9 +1447,9 @@
                             <div class="evidence-box" style="border-left-color: #0ea5e9;"><span style="color: #7dd3fc; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[STRUCTURED_ASYNC_CONCURRENCY]</span> <span style="color: #f1f5f9;">Module &#x27;Text.Megaparsec.Debug&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Debug.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Debug.hs:1:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Debug.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -1462,9 +1477,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[STREAM_PROCESSING_PIPELINE]</span> <span style="color: #f1f5f9;">Module &#x27;Text.Megaparsec.Byte.Binary&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Binary.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Binary.hs:1:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Byte/Binary.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -1492,9 +1507,9 @@
                             <div class="evidence-box" style="border-left-color: #ef4444;"><span style="color: #fca5a5; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[UNCHECKED_BOTTOM_PANIC]</span> <span style="color: #f1f5f9;">Type Safety Hazard: Function &#x27;finiteByteSize&#x27; in &#x27;Text.Megaparsec.Byte.Binary&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Binary.hs:188:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Binary.hs:188:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Byte/Binary.hs:188:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -1522,9 +1537,9 @@
                             <div class="evidence-box" style="border-left-color: #ef4444;"><span style="color: #fca5a5; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[UNSAFE_FROM_JUST_CALL]</span> <span style="color: #f1f5f9;">Type Safety Hazard: Function &#x27;match&#x27; in &#x27;Text.Megaparsec&#x27; calls partial `fromJust` which throws an uncatchable exception on `Nothing`; use `fromMaybe` or pattern match</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec.hs:577:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec.hs:577:1"><i class="map marker alternate icon"></i> Text/Megaparsec.hs:577:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -1552,9 +1567,9 @@
                             <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[LAZY_SPACE_LEAK_ACCUMULATOR]</span> <span style="color: #f1f5f9;">Resilience Risk (Lazy Space Leak): Function &#x27;errorBundlePrettyWith&#x27; in &#x27;Text.Megaparsec.Error&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Error.hs:351:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Error.hs:351:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Error.hs:351:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1582,9 +1597,9 @@
                             <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[LAZY_SPACE_LEAK_ACCUMULATOR]</span> <span style="color: #f1f5f9;">Resilience Risk (Lazy Space Leak): Function &#x27;spec&#x27; in &#x27;Text.MegaparsecSpec&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1"><i class="map marker alternate icon"></i> megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1612,9 +1627,9 @@
                             <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[CATCH_ALL_SOME_EXCEPTION]</span> <span style="color: #f1f5f9;">Resilience Anti-Pattern: Function &#x27;spec&#x27; in &#x27;Text.MegaparsecSpec&#x27; catches `SomeException` without rethrowing async exceptions (`ThreadKilled`); use `Control.Exception.Safe`</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1"><i class="map marker alternate icon"></i> megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -1642,9 +1657,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[SRP_GOD_MODULE]</span> <span style="color: #f1f5f9;">SRP Violation (God Module): Module &#x27;Text.Megaparsec&#x27; contains 32 declarations across 665 lines of code; decompose into focused domain modules</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec.hs:1:1"><i class="map marker alternate icon"></i> Text/Megaparsec.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -1672,9 +1687,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[SRP_GOD_MODULE]</span> <span style="color: #f1f5f9;">SRP Violation (God Module): Module &#x27;Text.Megaparsec.Internal&#x27; contains 38 declarations across 769 lines of code; decompose into focused domain modules</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Internal.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Internal.hs:1:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Internal.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -1702,9 +1717,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[SRP_GOD_MODULE]</span> <span style="color: #f1f5f9;">SRP Violation (God Module): Module &#x27;Text.Megaparsec.Char&#x27; contains 31 declarations across 319 lines of code; decompose into focused domain modules</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char.hs:1:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Char.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -1732,9 +1747,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[SRP_GOD_MODULE]</span> <span style="color: #f1f5f9;">SRP Violation (God Module): Module &#x27;Text.MegaparsecSpec&#x27; contains 5 declarations across 1855 lines of code; decompose into focused domain modules</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1"><i class="map marker alternate icon"></i> megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -1762,9 +1777,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+75%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[KISS_HIGH_CYCLOMATIC_COMPLEXITY]</span> <span style="color: #f1f5f9;">KISS Violation (High Complexity): Function &#x27;charPretty&#x27;&#x27; in &#x27;Text.Megaparsec.Stream&#x27; has cyclomatic complexity of 18; refactor complex pattern branches</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:718:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">75% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:718:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Stream.hs:718:1</span>
+                        <span class="ui mini teal label conf-badge">75% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1792,9 +1807,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+75%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[KISS_HIGH_CYCLOMATIC_COMPLEXITY]</span> <span style="color: #f1f5f9;">KISS Violation (High Complexity): Function &#x27;categoryName&#x27; in &#x27;Text.Megaparsec.Char&#x27; has cyclomatic complexity of 19; refactor complex pattern branches</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char.hs:252:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">75% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char.hs:252:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Char.hs:252:1</span>
+                        <span class="ui mini teal label conf-badge">75% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1822,9 +1837,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+75%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[KISS_HIGH_CYCLOMATIC_COMPLEXITY]</span> <span style="color: #f1f5f9;">KISS Violation (High Complexity): Function &#x27;spec&#x27; in &#x27;Text.MegaparsecSpec&#x27; has cyclomatic complexity of 126; refactor complex pattern branches</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">75% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1"><i class="map marker alternate icon"></i> megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1</span>
+                        <span class="ui mini teal label conf-badge">75% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1852,9 +1867,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+75%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[KISS_HIGH_CYCLOMATIC_COMPLEXITY]</span> <span style="color: #f1f5f9;">KISS Violation (High Complexity): Function &#x27;spec&#x27; in &#x27;Text.Megaparsec.StreamSpec&#x27; has cyclomatic complexity of 26; refactor complex pattern branches</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/StreamSpec.hs:24:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">75% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/StreamSpec.hs:24:1"><i class="map marker alternate icon"></i> megaparsec-tests/tests/Text/Megaparsec/StreamSpec.hs:24:1</span>
+                        <span class="ui mini teal label conf-badge">75% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1882,9 +1897,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+75%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[KISS_HIGH_CYCLOMATIC_COMPLEXITY]</span> <span style="color: #f1f5f9;">KISS Violation (High Complexity): Function &#x27;spec&#x27; in &#x27;Text.Megaparsec.ErrorSpec&#x27; has cyclomatic complexity of 47; refactor complex pattern branches</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/ErrorSpec.hs:17:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">75% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/ErrorSpec.hs:17:1"><i class="map marker alternate icon"></i> megaparsec-tests/tests/Text/Megaparsec/ErrorSpec.hs:17:1</span>
+                        <span class="ui mini teal label conf-badge">75% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1912,9 +1927,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+75%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[KISS_HIGH_CYCLOMATIC_COMPLEXITY]</span> <span style="color: #f1f5f9;">KISS Violation (High Complexity): Function &#x27;spec&#x27; in &#x27;Text.Megaparsec.CharSpec&#x27; has cyclomatic complexity of 16; refactor complex pattern branches</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/CharSpec.hs:14:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">75% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/CharSpec.hs:14:1"><i class="map marker alternate icon"></i> megaparsec-tests/tests/Text/Megaparsec/CharSpec.hs:14:1</span>
+                        <span class="ui mini teal label conf-badge">75% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1942,9 +1957,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+75%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[KISS_HIGH_CYCLOMATIC_COMPLEXITY]</span> <span style="color: #f1f5f9;">KISS Violation (High Complexity): Function &#x27;spec&#x27; in &#x27;Text.Megaparsec.Char.LexerSpec&#x27; has cyclomatic complexity of 49; refactor complex pattern branches</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/Char/LexerSpec.hs:24:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">75% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/Char/LexerSpec.hs:24:1"><i class="map marker alternate icon"></i> megaparsec-tests/tests/Text/Megaparsec/Char/LexerSpec.hs:24:1</span>
+                        <span class="ui mini teal label conf-badge">75% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1972,9 +1987,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+75%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[KISS_HIGH_CYCLOMATIC_COMPLEXITY]</span> <span style="color: #f1f5f9;">KISS Violation (High Complexity): Function &#x27;spec&#x27; in &#x27;Text.Megaparsec.Byte.LexerSpec&#x27; has cyclomatic complexity of 16; refactor complex pattern branches</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/Byte/LexerSpec.hs:23:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">75% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/Byte/LexerSpec.hs:23:1"><i class="map marker alternate icon"></i> megaparsec-tests/tests/Text/Megaparsec/Byte/LexerSpec.hs:23:1</span>
+                        <span class="ui mini teal label conf-badge">75% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -2002,9 +2017,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[DRY_CODE_DUPLICATION]</span> <span style="color: #f1f5f9;">DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.eol, Text.Megaparsec.Char.eol</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:77:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:77:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Byte.hs:77:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -2032,9 +2047,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[DRY_CODE_DUPLICATION]</span> <span style="color: #f1f5f9;">DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.space, Text.Megaparsec.Char.space</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:92:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:92:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Byte.hs:92:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -2062,9 +2077,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[DRY_CODE_DUPLICATION]</span> <span style="color: #f1f5f9;">DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.hspace, Text.Megaparsec.Char.hspace</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:99:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:99:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Byte.hs:99:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -2092,9 +2107,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[DRY_CODE_DUPLICATION]</span> <span style="color: #f1f5f9;">DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.space1, Text.Megaparsec.Char.space1</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:106:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:106:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Byte.hs:106:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -2122,9 +2137,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[DRY_CODE_DUPLICATION]</span> <span style="color: #f1f5f9;">DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.hspace1, Text.Megaparsec.Char.hspace1</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:113:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:113:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Byte.hs:113:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -2152,9 +2167,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[DRY_CODE_DUPLICATION]</span> <span style="color: #f1f5f9;">DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.spaceChar, Text.Megaparsec.Char.spaceChar</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:127:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:127:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Byte.hs:127:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -2182,9 +2197,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[DRY_CODE_DUPLICATION]</span> <span style="color: #f1f5f9;">DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Char.Lexer.scientific, Text.Megaparsec.Byte.Lexer.scientific</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:469:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:469:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Char/Lexer.hs:469:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -2212,9 +2227,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[DRY_CODE_DUPLICATION]</span> <span style="color: #f1f5f9;">DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Char.Lexer.float, Text.Megaparsec.Byte.Lexer.float</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:493:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:493:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Char/Lexer.hs:493:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -2242,9 +2257,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[DRY_CODE_DUPLICATION]</span> <span style="color: #f1f5f9;">DRY Violation: Identical function logic duplicated across 2 location(s): ParsersBench.Log.Megaparsec.productParser, ParsersBench.Log.Attoparsec.productParser</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs:57:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs:57:1"><i class="map marker alternate icon"></i> parsers-bench/ParsersBench/Log/Megaparsec.hs:57:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 

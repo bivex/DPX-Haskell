@@ -47,13 +47,14 @@
             transform: translateY(-3px);
         }
         .header-title {
-            font-size: 32px;
+            font-size: 30px;
             font-weight: 900;
             letter-spacing: -0.6px;
             background: linear-gradient(135deg, #c084fc 0%, #38bdf8 50%, #4ade80 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
+            white-space: nowrap;
         }
         .code-snippet {
             font-family: "JetBrains Mono", "Fira Code", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -72,9 +73,10 @@
             border-radius: 6px;
             border: 1px solid #223049;
             color: #67e8f9;
-            font-size: 15px;
+            font-size: 14.5px;
             font-weight: 700;
             display: inline-block;
+            word-break: break-all;
         }
         .evidence-box {
             background: #080d19;
@@ -102,9 +104,9 @@
             margin-top: 6px;
         }
         .filter-btn {
-            font-size: 13.5px !important;
+            font-size: 13px !important;
             font-weight: 700 !important;
-            padding: 10px 16px !important;
+            padding: 9px 15px !important;
             border-radius: 8px !important;
             transition: all 0.15s ease !important;
         }
@@ -115,16 +117,29 @@
         }
         .location-pill {
             font-family: "JetBrains Mono", ui-monospace, monospace;
-            font-size: 12.5px;
+            font-size: 12px;
             color: #f472b6;
             background: rgba(244, 114, 182, 0.1);
-            padding: 4px 9px;
+            padding: 5px 10px;
             border-radius: 6px;
             border: 1px solid rgba(244, 114, 182, 0.3);
             font-weight: 600;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
+            max-width: 68%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .conf-badge {
+            flex-shrink: 0 !important;
+            white-space: nowrap !important;
+            font-weight: 800 !important;
+            font-size: 11.5px !important;
+            letter-spacing: 0.5px !important;
+            padding: 6px 11px !important;
+            border-radius: 6px !important;
         }
         .finding-summary {
             font-size: 14.5px;
@@ -136,8 +151,8 @@
             background: #080d19 !important;
             border: 1px solid #223049 !important;
             color: #ffffff !important;
-            font-size: 14.5px !important;
-            padding: 12px 18px !important;
+            font-size: 14px !important;
+            padding: 11px 16px !important;
             border-radius: 8px !important;
         }
         #searchInput:focus {
@@ -151,18 +166,18 @@
 <div class="ui container">
 
     <!-- Header Section -->
-    <div class="ui inverted segment" style="margin-bottom: 28px; padding: 28px;">
-        <div class="ui stackable grid items-center">
-            <div class="ten wide column">
-                <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 10px;">
-                    <span style="font-size: 36px;">🔷</span>
+    <div class="ui inverted segment" style="margin-bottom: 28px; padding: 26px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <div>
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                    <span style="font-size: 32px;">🔷</span>
                     <span class="header-title">DPX-Haskell Architecture & Pattern Engine</span>
                 </div>
-                <div style="color: var(--text-secondary); font-size: 15px;">
+                <div style="color: var(--text-secondary); font-size: 14.5px;">
                     Target Codebase: <code class="code-snippet">rio</code>
                 </div>
             </div>
-            <div class="six wide column right aligned">
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
                 <div class="ui medium blue label" style="font-weight: 700;">
                     <i class="layer group icon"></i> Hexagonal DDD
                 </div>
@@ -330,9 +345,9 @@
                             <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TYPECLASS_INTERFACE_ADAPTER]</span> <span style="color: #f1f5f9;">Typeclass &#x27;HasProcessContext&#x27; in &#x27;RIO.Process&#x27; defines an ad-hoc polymorphic Adapter interface with 1 method(s)</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:217:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:217:1"><i class="map marker alternate icon"></i> rio/src/RIO/Process.hs:217:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -360,9 +375,9 @@
                             <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TYPECLASS_INTERFACE_ADAPTER]</span> <span style="color: #f1f5f9;">Typeclass &#x27;HasStateRef&#x27; in &#x27;RIO.Prelude.RIO&#x27; defines an ad-hoc polymorphic Adapter interface with 1 method(s)</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/RIO.hs:114:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/RIO.hs:114:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/RIO.hs:114:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -390,9 +405,9 @@
                             <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TYPECLASS_INTERFACE_ADAPTER]</span> <span style="color: #f1f5f9;">Typeclass &#x27;Display&#x27; in &#x27;RIO.Prelude.Display&#x27; defines an ad-hoc polymorphic Adapter interface with 2 method(s)</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Display.hs:58:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Display.hs:58:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/Display.hs:58:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -420,9 +435,9 @@
                             <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TYPECLASS_INTERFACE_ADAPTER]</span> <span style="color: #f1f5f9;">Typeclass &#x27;HasLogFunc&#x27; in &#x27;RIO.Prelude.Logger&#x27; defines an ad-hoc polymorphic Adapter interface with 1 method(s)</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:117:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:117:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/Logger.hs:117:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -450,9 +465,9 @@
                             <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TYPECLASS_INTERFACE_ADAPTER]</span> <span style="color: #f1f5f9;">Typeclass &#x27;HasGLogFunc&#x27; in &#x27;RIO.Prelude.Logger&#x27; defines an ad-hoc polymorphic Adapter interface with 1 method(s)</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:893:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:893:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/Logger.hs:893:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -480,9 +495,9 @@
                             <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TYPECLASS_INTERFACE_ADAPTER]</span> <span style="color: #f1f5f9;">Typeclass &#x27;HasLogLevel&#x27; in &#x27;RIO.Prelude.Logger&#x27; defines an ad-hoc polymorphic Adapter interface with 1 method(s)</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:987:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:987:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/Logger.hs:987:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -510,9 +525,9 @@
                             <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TYPECLASS_INTERFACE_ADAPTER]</span> <span style="color: #f1f5f9;">Typeclass &#x27;HasLogSource&#x27; in &#x27;RIO.Prelude.Logger&#x27; defines an ad-hoc polymorphic Adapter interface with 1 method(s)</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:995:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:995:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/Logger.hs:995:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -540,9 +555,9 @@
                             <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TYPECLASS_INTERFACE_ADAPTER]</span> <span style="color: #f1f5f9;">Typeclass &#x27;HasResourceMap&#x27; in &#x27;RIO.Orphans&#x27; defines an ad-hoc polymorphic Adapter interface with 1 method(s)</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio-orphans/src/RIO/Orphans.hs:101:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio-orphans/src/RIO/Orphans.hs:101:1"><i class="map marker alternate icon"></i> rio-orphans/src/RIO/Orphans.hs:101:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -570,9 +585,9 @@
                             <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TYPE_FAMILY_ASSOCIATED_TYPES]</span> <span style="color: #f1f5f9;">Module &#x27;RIO.Prelude.Logger&#x27; implements Type Families / Associated Types for type-level computation and indexed type mappings</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:1:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/Logger.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -600,9 +615,9 @@
                             <div class="evidence-box" style="border-left-color: #8b5cf6;"><span style="color: #c4b5fd; font-weight: 800; font-family: monospace;">+90%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[READER_T_PATTERN_DI]</span> <span style="color: #f1f5f9;">Module &#x27;RIO.Prelude.RIO&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/RIO.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">90% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/RIO.hs:1:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/RIO.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">90% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -630,9 +645,9 @@
                             <div class="evidence-box" style="border-left-color: #8b5cf6;"><span style="color: #c4b5fd; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONAD_TRANSFORMER_LAYER_STACK]</span> <span style="color: #f1f5f9;">Module &#x27;RIO.Prelude.RIO&#x27; layers a Monad Transformer Stack combining 1 distinct computational capabilities (ReaderT)</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/RIO.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/RIO.hs:1:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/RIO.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -660,9 +675,9 @@
                             <div class="evidence-box" style="border-left-color: #8b5cf6;"><span style="color: #c4b5fd; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONAD_TRANSFORMER_LAYER_STACK]</span> <span style="color: #f1f5f9;">Module &#x27;RIO.Prelude.Types&#x27; layers a Monad Transformer Stack combining 1 distinct computational capabilities (ReaderT)</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Types.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Types.hs:1:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/Types.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -690,9 +705,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;main&#x27; in &#x27;Main&#x27; chains a 3-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/etc/template/app/Main.hs:11:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/etc/template/app/Main.hs:11:1"><i class="map marker alternate icon"></i> etc/template/app/Main.hs:11:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -720,9 +735,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;spec&#x27; in &#x27;RIO.LoggerSpec&#x27; chains a 22-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/LoggerSpec.hs:9:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/LoggerSpec.hs:9:1"><i class="map marker alternate icon"></i> rio/test/RIO/LoggerSpec.hs:9:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -750,9 +765,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;spec&#x27; in &#x27;RIO.DequeSpec&#x27; chains a 8-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/DequeSpec.hs:41:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/DequeSpec.hs:41:1"><i class="map marker alternate icon"></i> rio/test/RIO/DequeSpec.hs:41:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -780,9 +795,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;same&#x27; in &#x27;RIO.DequeSpec&#x27; chains a 4-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/DequeSpec.hs:112:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/DequeSpec.hs:112:1"><i class="map marker alternate icon"></i> rio/test/RIO/DequeSpec.hs:112:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -810,9 +825,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;spec&#x27; in &#x27;RIO.PreludeSpec&#x27; chains a 8-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/PreludeSpec.hs:8:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/PreludeSpec.hs:8:1"><i class="map marker alternate icon"></i> rio/test/RIO/PreludeSpec.hs:8:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -840,9 +855,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;spec&#x27; in &#x27;RIO.FileSpec&#x27; chains a 3-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/FileSpec.hs:16:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/FileSpec.hs:16:1"><i class="map marker alternate icon"></i> rio/test/RIO/FileSpec.hs:16:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -870,9 +885,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;spec&#x27; in &#x27;RIO.Prelude.RIOSpec&#x27; chains a 14-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/Prelude/RIOSpec.hs:10:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/Prelude/RIOSpec.hs:10:1"><i class="map marker alternate icon"></i> rio/test/RIO/Prelude/RIOSpec.hs:10:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -900,9 +915,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;preProcess&#x27; in &#x27;RIO.Process&#x27; chains a 3-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:379:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:379:1"><i class="map marker alternate icon"></i> rio/src/RIO/Process.hs:379:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -930,9 +945,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;withProcessTimeLog&#x27; in &#x27;RIO.Process&#x27; chains a 5-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:394:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:394:1"><i class="map marker alternate icon"></i> rio/src/RIO/Process.hs:394:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -960,9 +975,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;proc&#x27; in &#x27;RIO.Process&#x27; chains a 3-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:439:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:439:1"><i class="map marker alternate icon"></i> rio/src/RIO/Process.hs:439:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -990,9 +1005,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;exec&#x27; in &#x27;RIO.Process&#x27; chains a 3-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:547:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:547:1"><i class="map marker alternate icon"></i> rio/src/RIO/Process.hs:547:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1020,9 +1035,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;findExecutable&#x27; in &#x27;RIO.Process&#x27; chains a 5-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:590:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:590:1"><i class="map marker alternate icon"></i> rio/src/RIO/Process.hs:590:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1050,9 +1065,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;foldlDeque&#x27; in &#x27;RIO.Deque&#x27; chains a 3-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Deque.hs:203:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Deque.hs:203:1"><i class="map marker alternate icon"></i> rio/src/RIO/Deque.hs:203:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1080,9 +1095,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;foldrDeque&#x27; in &#x27;RIO.Deque&#x27; chains a 3-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Deque.hs:227:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Deque.hs:227:1"><i class="map marker alternate icon"></i> rio/src/RIO/Deque.hs:227:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1110,9 +1125,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;runSimpleApp&#x27; in &#x27;RIO.Prelude.Simple&#x27; chains a 3-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Simple.hs:56:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Simple.hs:56:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/Simple.hs:56:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1140,9 +1155,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;logOptionsHandle&#x27; in &#x27;RIO.Prelude.Logger&#x27; chains a 3-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:357:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:357:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/Logger.hs:357:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1170,9 +1185,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;simpleLogFunc&#x27; in &#x27;RIO.Prelude.Logger&#x27; chains a 4-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:635:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:635:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/Logger.hs:635:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1200,9 +1215,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[MONADIC_DO_RAILWAY_PIPELINE]</span> <span style="color: #f1f5f9;">Function &#x27;spec&#x27; in &#x27;RIO.OrphansSpec&#x27; chains a 4-step Monadic Railway flow in `do` notation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio-orphans/test/RIO/OrphansSpec.hs:9:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio-orphans/test/RIO/OrphansSpec.hs:9:1"><i class="map marker alternate icon"></i> rio-orphans/test/RIO/OrphansSpec.hs:9:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1230,9 +1245,9 @@
                             <div class="evidence-box" style="border-left-color: #ec4899;"><span style="color: #f9a8d4; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[FUNCTIONAL_OPTICS_LENSES]</span> <span style="color: #f1f5f9;">Module &#x27;RIO.Prelude.Lens&#x27; integrates Functional Optics (Lenses/Prisms) for composable immutable data access and transformation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Lens.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Lens.hs:1:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/Lens.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -1260,9 +1275,9 @@
                             <div class="evidence-box" style="border-left-color: #ec4899;"><span style="color: #f9a8d4; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[FUNCTIONAL_OPTICS_LENSES]</span> <span style="color: #f1f5f9;">Module &#x27;RIO.Prelude.Types&#x27; integrates Functional Optics (Lenses/Prisms) for composable immutable data access and transformation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Types.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Types.hs:1:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/Types.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -1290,9 +1305,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[SMART_CONSTRUCTOR_INVARIANT]</span> <span style="color: #f1f5f9;">Function &#x27;mkSimpleApp&#x27; in &#x27;RIO.Prelude.Simple&#x27; implements Smart Constructor pattern enforcing domain validation invariants</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Simple.hs:40:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Simple.hs:40:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/Simple.hs:40:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1320,9 +1335,9 @@
                             <div class="evidence-box" style="border-left-color: #0ea5e9;"><span style="color: #7dd3fc; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[STRUCTURED_ASYNC_CONCURRENCY]</span> <span style="color: #f1f5f9;">Module &#x27;RIO.Prelude.Trace&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Trace.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Trace.hs:1:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/Trace.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -1350,9 +1365,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[STREAM_PROCESSING_PIPELINE]</span> <span style="color: #f1f5f9;">Module &#x27;Make-template&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/etc/make-template.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/etc/make-template.hs:1:1"><i class="map marker alternate icon"></i> etc/make-template.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -1380,9 +1395,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[STREAM_PROCESSING_PIPELINE]</span> <span style="color: #f1f5f9;">Module &#x27;RIO.Prelude&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude.hs:1:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -1410,9 +1425,9 @@
                             <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[STREAM_PROCESSING_PIPELINE]</span> <span style="color: #f1f5f9;">Module &#x27;RIO.Seq&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Seq.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Seq.hs:1:1"><i class="map marker alternate icon"></i> rio/src/RIO/Seq.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -1440,9 +1455,9 @@
                             <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+80%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[LAZY_SPACE_LEAK_ACCUMULATOR]</span> <span style="color: #f1f5f9;">Resilience Risk (Lazy Space Leak): Function &#x27;ioRefToSomeRef&#x27; in &#x27;RIO.Prelude.RIO&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/RIO.hs:102:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">80% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/RIO.hs:102:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/RIO.hs:102:1</span>
+                        <span class="ui mini teal label conf-badge">80% [HIGH]</span>
                     </div>
                 </div>
                 
@@ -1470,9 +1485,9 @@
                             <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[CATCH_ALL_SOME_EXCEPTION]</span> <span style="color: #f1f5f9;">Resilience Anti-Pattern: Function &#x27;getCanUseUnicode&#x27; in &#x27;RIO.Prelude.Logger&#x27; catches `SomeException` without rethrowing async exceptions (`ThreadKilled`); use `Control.Exception.Safe`</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:397:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:397:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/Logger.hs:397:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -1500,9 +1515,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[SRP_GOD_MODULE]</span> <span style="color: #f1f5f9;">SRP Violation (God Module): Module &#x27;RIO.Process&#x27; contains 40 declarations across 712 lines of code; decompose into focused domain modules</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:1:1"><i class="map marker alternate icon"></i> rio/src/RIO/Process.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -1530,9 +1545,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[SRP_GOD_MODULE]</span> <span style="color: #f1f5f9;">SRP Violation (God Module): Module &#x27;RIO.Prelude.Logger&#x27; contains 64 declarations across 1009 lines of code; decompose into focused domain modules</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:1:1</span>
-                        <span class="ui mini green label" style="font-weight: 800; font-size: 11.5px;">85% [VERY_HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:1:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/Logger.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
                     </div>
                 </div>
                 
@@ -1560,9 +1575,9 @@
                             <div class="evidence-box" style="border-left-color: #eab308;"><span style="color: #fde047; font-weight: 800; font-family: monospace;">+75%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[KISS_HIGH_CYCLOMATIC_COMPLEXITY]</span> <span style="color: #f1f5f9;">KISS Violation (High Complexity): Function &#x27;simpleLogFunc&#x27; in &#x27;RIO.Prelude.Logger&#x27; has cyclomatic complexity of 16; refactor complex pattern branches</span></div>
                         </div>
                     </div>
-                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
-                        <span class="location-pill"><i class="map marker alternate icon"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:635:1</span>
-                        <span class="ui mini teal label" style="font-weight: 800; font-size: 11.5px;">75% [HIGH]</span>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:635:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/Logger.hs:635:1</span>
+                        <span class="ui mini teal label conf-badge">75% [HIGH]</span>
                     </div>
                 </div>
                 
