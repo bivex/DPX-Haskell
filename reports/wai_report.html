@@ -182,7 +182,7 @@
                     <i class="layer group icon"></i> Hexagonal DDD
                 </div>
                 <div class="ui medium teal label" style="font-weight: 700;">
-                    <i class="clock outline icon"></i> 0.134s
+                    <i class="clock outline icon"></i> 0.109s
                 </div>
                 <div class="ui medium purple label" style="font-weight: 700;">
                     <i class="file alternate outline icon"></i> 204 files
@@ -196,14 +196,14 @@
         <div class="ui inverted card" style="border-top: 3px solid #38bdf8 !important;">
             <div class="content" style="padding: 20px;">
                 <div class="ui top right attached label blue mini" style="font-weight: 700;">TOTAL FINDINGS</div>
-                <div class="header stat-value" style="color: #38bdf8; margin-top: 8px;">166</div>
+                <div class="header stat-value" style="color: #38bdf8; margin-top: 8px;">183</div>
                 <div class="description stat-desc">Total patterns & architecture findings</div>
             </div>
         </div>
         <div class="ui inverted card" style="border-top: 3px solid #f87171 !important;">
             <div class="content" style="padding: 20px;">
                 <div class="ui top right attached label red mini" style="font-weight: 700;">ACTION REQUIRED</div>
-                <div class="header stat-value" style="color: #f87171; margin-top: 8px;">36</div>
+                <div class="header stat-value" style="color: #f87171; margin-top: 8px;">53</div>
                 <div class="description stat-desc">Safety hazards, space leaks & smells</div>
             </div>
         </div>
@@ -242,7 +242,7 @@
         </div>
         <textarea id="llmContextData" style="display: none;"># 🔷 DPX-Haskell: Architectural Context &amp; Refactoring Prompt for wai
 - Scanned Files: 204
-- Total Detections: 166
+- Total Detections: 183
 
 ## Identified Patterns &amp; Smells:
 - [typeclass_system] typeclass_adapter on `Network.Wai.UrlMap.ToApplication` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/UrlMap.hs:93:1: Typeclass &#x27;ToApplication&#x27; in &#x27;Network.Wai.UrlMap&#x27; defines an ad-hoc polymorphic Adapter interface with 1 method(s)
@@ -391,6 +391,23 @@
 - [type_safety] unchecked_bottom_error on `Network.Wai.Handler.Warp.HTTP2.Response.fromResponse` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/HTTP2/Response.hs:27:1: Type Safety Hazard: Function &#x27;fromResponse&#x27; in &#x27;Network.Wai.Handler.Warp.HTTP2.Response&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead
 - [type_safety] unchecked_from_just on `Network.Wai.Handler.Warp.HTTP2.Request.toRequest&#x27;` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/HTTP2/Request.hs:53:1: Type Safety Hazard: Function &#x27;toRequest&#x27;&#x27; in &#x27;Network.Wai.Handler.Warp.HTTP2.Request&#x27; calls partial `fromJust` which throws an uncatchable exception on `Nothing`; use `fromMaybe` or pattern match
 - [resilience] lazy_space_leak_risk on `Network.Wai.UrlMap.try` (80%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/UrlMap.hs:81:1: Resilience Risk (Lazy Space Leak): Function &#x27;try&#x27; in &#x27;Network.Wai.UrlMap&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`
+- [resilience] bracket_resource_management on `Main` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-conduit/example/Main.hs:1:1: Module &#x27;Main&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+- [resilience] bracket_resource_management on `WaiAppStatic.Storage.Filesystem` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-app-static/WaiAppStatic/Storage/Filesystem.hs:1:1: Module &#x27;WaiAppStatic.Storage.Filesystem&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+- [resilience] bracket_resource_management on `Network.Wai.Handler.WarpTLS` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp-tls/Network/Wai/Handler/WarpTLS.hs:1:1: Module &#x27;Network.Wai.Handler.WarpTLS&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+- [resilience] bracket_resource_management on `Network.Wai.Handler.WebSockets` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-websockets/Network/Wai/Handler/WebSockets.hs:1:1: Module &#x27;Network.Wai.Handler.WebSockets&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+- [resilience] bracket_resource_management on `System.TimeManager` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/time-manager/System/TimeManager.hs:1:1: Module &#x27;System.TimeManager&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+- [resilience] bracket_resource_management on `System.ThreadManager` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/time-manager/System/ThreadManager.hs:1:1: Module &#x27;System.ThreadManager&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+- [resilience] bracket_resource_management on `Network.Wai.ParseSpec` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/test/Network/Wai/ParseSpec.hs:1:1: Module &#x27;Network.Wai.ParseSpec&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+- [resilience] bracket_resource_management on `Network.Wai.Middleware.Gzip` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Middleware/Gzip.hs:1:1: Module &#x27;Network.Wai.Middleware.Gzip&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+- [resilience] bracket_resource_management on `Network.Wai` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai/Network/Wai.hs:1:1: Module &#x27;Network.Wai&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+- [resilience] bracket_resource_management on `EarlyHintsSpec` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/EarlyHintsSpec.hs:1:1: Module &#x27;EarlyHintsSpec&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+- [resilience] bracket_resource_management on `RunSpec` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/RunSpec.hs:1:1: Module &#x27;RunSpec&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+- [resilience] bracket_resource_management on `SendFileSpec` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/SendFileSpec.hs:1:1: Module &#x27;SendFileSpec&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+- [resilience] bracket_resource_management on `GracefulShutdownSpec` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/GracefulShutdownSpec.hs:1:1: Module &#x27;GracefulShutdownSpec&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+- [resilience] bracket_resource_management on `Network.Wai.Handler.Warp.SendFile` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/SendFile.hs:1:1: Module &#x27;Network.Wai.Handler.Warp.SendFile&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+- [resilience] bracket_resource_management on `Network.Wai.Handler.Warp.FileInfoCache` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/FileInfoCache.hs:1:1: Module &#x27;Network.Wai.Handler.Warp.FileInfoCache&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+- [resilience] bracket_resource_management on `Network.Wai.Handler.Warp.WithApplication` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/WithApplication.hs:1:1: Module &#x27;Network.Wai.Handler.Warp.WithApplication&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+- [resilience] bracket_resource_management on `Network.Wai.Handler.Warp.Run` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Run.hs:1:1: Module &#x27;Network.Wai.Handler.Warp.Run&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
 - [principle] god_module_srp on `Network.Mime` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/mime-types/Network/Mime.hs:1:1: SRP Violation (God Module): Module &#x27;Network.Mime&#x27; contains 12 declarations across 1152 lines of code; decompose into focused domain modules
 - [principle] god_module_srp on `WaiExtraSpec` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/test/WaiExtraSpec.hs:1:1: SRP Violation (God Module): Module &#x27;WaiExtraSpec&#x27; contains 53 declarations across 838 lines of code; decompose into focused domain modules
 - [principle] god_module_srp on `Network.Wai.Parse` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Parse.hs:1:1: SRP Violation (God Module): Module &#x27;Network.Wai.Parse&#x27; contains 50 declarations across 836 lines of code; decompose into focused domain modules
@@ -424,12 +441,12 @@
         <div class="ui stackable grid items-center">
             <div class="eleven wide column">
                 <div class="ui inverted buttons" id="categoryFilterBar" style="display: flex; flex-wrap: wrap; gap: 8px;">
-                    <button class="ui button active filter-btn" data-filter="all">All Findings (166)</button>
+                    <button class="ui button active filter-btn" data-filter="all">All Findings (183)</button>
                     <button class="ui button filter-btn" data-filter="typeclass_system"><i class="cubes icon" style="color: #a855f7;"></i> Typeclasses & Polymorphism (2)</button>
 <button class="ui button filter-btn" data-filter="monad_architecture"><i class="layer group icon" style="color: #8b5cf6;"></i> Monad Stacks & ReaderT (5)</button>
 <button class="ui button filter-btn" data-filter="functional_idiom"><i class="code branch icon" style="color: #14b8a6;"></i> Functional Idioms & GADTs (100)</button>
 <button class="ui button filter-btn" data-filter="concurrency_stm"><i class="bolt icon" style="color: #0ea5e9;"></i> STM & Concurrency (23)</button>
-<button class="ui button filter-btn" data-filter="resilience"><i class="shield alternate icon" style="color: #22c55e;"></i> Resilience & Space Leaks (1)</button>
+<button class="ui button filter-btn" data-filter="resilience"><i class="shield alternate icon" style="color: #22c55e;"></i> Resilience & Space Leaks (18)</button>
 <button class="ui button filter-btn" data-filter="principle"><i class="balance scale icon" style="color: #eab308;"></i> Principles & Quality (20)</button>
 <button class="ui button filter-btn" data-filter="type_safety"><i class="exclamation triangle icon" style="color: #ef4444;"></i> Type Safety Hazards (15)</button>
                 </div>
@@ -4826,13 +4843,523 @@
                 </div>
                 
 
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#147</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Main</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;Main&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;Main&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-conduit/example/Main.hs:1:1"><i class="map marker alternate icon"></i> wai-conduit/example/Main.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#148</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">WaiAppStatic.Storage.Filesystem</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;WaiAppStatic.Storage.Filesystem&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;WaiAppStatic.Storage.Filesystem&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-app-static/WaiAppStatic/Storage/Filesystem.hs:1:1"><i class="map marker alternate icon"></i> wai-app-static/WaiAppStatic/Storage/Filesystem.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#149</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Network.Wai.Handler.WarpTLS</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;Network.Wai.Handler.WarpTLS&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;Network.Wai.Handler.WarpTLS&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp-tls/Network/Wai/Handler/WarpTLS.hs:1:1"><i class="map marker alternate icon"></i> warp-tls/Network/Wai/Handler/WarpTLS.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#150</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Network.Wai.Handler.WebSockets</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;Network.Wai.Handler.WebSockets&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;Network.Wai.Handler.WebSockets&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-websockets/Network/Wai/Handler/WebSockets.hs:1:1"><i class="map marker alternate icon"></i> wai-websockets/Network/Wai/Handler/WebSockets.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#151</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">System.TimeManager</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;System.TimeManager&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;System.TimeManager&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/time-manager/System/TimeManager.hs:1:1"><i class="map marker alternate icon"></i> time-manager/System/TimeManager.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#152</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">System.ThreadManager</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;System.ThreadManager&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;System.ThreadManager&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/time-manager/System/ThreadManager.hs:1:1"><i class="map marker alternate icon"></i> time-manager/System/ThreadManager.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#153</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Network.Wai.ParseSpec</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;Network.Wai.ParseSpec&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;Network.Wai.ParseSpec&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/test/Network/Wai/ParseSpec.hs:1:1"><i class="map marker alternate icon"></i> wai-extra/test/Network/Wai/ParseSpec.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#154</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Network.Wai.Middleware.Gzip</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;Network.Wai.Middleware.Gzip&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;Network.Wai.Middleware.Gzip&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai-extra/Network/Wai/Middleware/Gzip.hs:1:1"><i class="map marker alternate icon"></i> wai-extra/Network/Wai/Middleware/Gzip.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#155</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Network.Wai</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;Network.Wai&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;Network.Wai&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/wai/Network/Wai.hs:1:1"><i class="map marker alternate icon"></i> wai/Network/Wai.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#156</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">EarlyHintsSpec</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;EarlyHintsSpec&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;EarlyHintsSpec&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/EarlyHintsSpec.hs:1:1"><i class="map marker alternate icon"></i> warp/test/EarlyHintsSpec.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#157</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">RunSpec</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;RunSpec&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;RunSpec&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/RunSpec.hs:1:1"><i class="map marker alternate icon"></i> warp/test/RunSpec.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#158</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">SendFileSpec</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;SendFileSpec&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;SendFileSpec&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/SendFileSpec.hs:1:1"><i class="map marker alternate icon"></i> warp/test/SendFileSpec.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#159</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">GracefulShutdownSpec</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;GracefulShutdownSpec&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;GracefulShutdownSpec&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/test/GracefulShutdownSpec.hs:1:1"><i class="map marker alternate icon"></i> warp/test/GracefulShutdownSpec.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#160</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Network.Wai.Handler.Warp.SendFile</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;Network.Wai.Handler.Warp.SendFile&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;Network.Wai.Handler.Warp.SendFile&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/SendFile.hs:1:1"><i class="map marker alternate icon"></i> warp/Network/Wai/Handler/Warp/SendFile.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#161</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Network.Wai.Handler.Warp.FileInfoCache</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;Network.Wai.Handler.Warp.FileInfoCache&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;Network.Wai.Handler.Warp.FileInfoCache&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/FileInfoCache.hs:1:1"><i class="map marker alternate icon"></i> warp/Network/Wai/Handler/Warp/FileInfoCache.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#162</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Network.Wai.Handler.Warp.WithApplication</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;Network.Wai.Handler.Warp.WithApplication&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;Network.Wai.Handler.Warp.WithApplication&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/WithApplication.hs:1:1"><i class="map marker alternate icon"></i> warp/Network/Wai/Handler/Warp/WithApplication.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#163</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Network.Wai.Handler.Warp.Run</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;Network.Wai.Handler.Warp.Run&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;Network.Wai.Handler.Warp.Run&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/wai/warp/Network/Wai/Handler/Warp/Run.hs:1:1"><i class="map marker alternate icon"></i> warp/Network/Wai/Handler/Warp/Run.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
                 <div class="ui inverted card finding-card" data-category="principle" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #eab308 !important;">
                     <div class="content" style="padding: 18px 20px;">
                         <div class="ui top right attached label" style="background: rgba(234, 179, 8, 0.2); color: #fde047; border: 1px solid rgba(234, 179, 8, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#147</span>
+                            <span style="color: #64748b; font-size: 14px;">#164</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4862,7 +5389,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#148</span>
+                            <span style="color: #64748b; font-size: 14px;">#165</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4892,7 +5419,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#149</span>
+                            <span style="color: #64748b; font-size: 14px;">#166</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4922,7 +5449,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#150</span>
+                            <span style="color: #64748b; font-size: 14px;">#167</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4952,7 +5479,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#151</span>
+                            <span style="color: #64748b; font-size: 14px;">#168</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4982,7 +5509,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#152</span>
+                            <span style="color: #64748b; font-size: 14px;">#169</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5012,7 +5539,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#153</span>
+                            <span style="color: #64748b; font-size: 14px;">#170</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5042,7 +5569,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#154</span>
+                            <span style="color: #64748b; font-size: 14px;">#171</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5072,7 +5599,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#155</span>
+                            <span style="color: #64748b; font-size: 14px;">#172</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5102,7 +5629,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#156</span>
+                            <span style="color: #64748b; font-size: 14px;">#173</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5132,7 +5659,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#157</span>
+                            <span style="color: #64748b; font-size: 14px;">#174</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5162,7 +5689,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#158</span>
+                            <span style="color: #64748b; font-size: 14px;">#175</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5192,7 +5719,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#159</span>
+                            <span style="color: #64748b; font-size: 14px;">#176</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5222,7 +5749,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#160</span>
+                            <span style="color: #64748b; font-size: 14px;">#177</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5252,7 +5779,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#161</span>
+                            <span style="color: #64748b; font-size: 14px;">#178</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5282,7 +5809,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#162</span>
+                            <span style="color: #64748b; font-size: 14px;">#179</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5312,7 +5839,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#163</span>
+                            <span style="color: #64748b; font-size: 14px;">#180</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5342,7 +5869,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#164</span>
+                            <span style="color: #64748b; font-size: 14px;">#181</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5372,7 +5899,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#165</span>
+                            <span style="color: #64748b; font-size: 14px;">#182</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5402,7 +5929,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#166</span>
+                            <span style="color: #64748b; font-size: 14px;">#183</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">

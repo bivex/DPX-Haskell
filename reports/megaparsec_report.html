@@ -182,7 +182,7 @@
                     <i class="layer group icon"></i> Hexagonal DDD
                 </div>
                 <div class="ui medium teal label" style="font-weight: 700;">
-                    <i class="clock outline icon"></i> 0.059s
+                    <i class="clock outline icon"></i> 0.053s
                 </div>
                 <div class="ui medium purple label" style="font-weight: 700;">
                     <i class="file alternate outline icon"></i> 42 files
@@ -196,7 +196,7 @@
         <div class="ui inverted card" style="border-top: 3px solid #38bdf8 !important;">
             <div class="content" style="padding: 20px;">
                 <div class="ui top right attached label blue mini" style="font-weight: 700;">TOTAL FINDINGS</div>
-                <div class="header stat-value" style="color: #38bdf8; margin-top: 8px;">64</div>
+                <div class="header stat-value" style="color: #38bdf8; margin-top: 8px;">66</div>
                 <div class="description stat-desc">Total patterns & architecture findings</div>
             </div>
         </div>
@@ -217,7 +217,7 @@
         <div class="ui inverted card" style="border-top: 3px solid #4ade80 !important;">
             <div class="content" style="padding: 20px;">
                 <div class="ui top right attached label green mini" style="font-weight: 700;">CLEAN CODE & STM</div>
-                <div class="header stat-value" style="color: #4ade80; margin-top: 8px;">18</div>
+                <div class="header stat-value" style="color: #4ade80; margin-top: 8px;">20</div>
                 <div class="description stat-desc">Clean functional idioms & STM transactions</div>
             </div>
         </div>
@@ -242,7 +242,7 @@
         </div>
         <textarea id="llmContextData" style="display: none;"># 🔷 DPX-Haskell: Architectural Context &amp; Refactoring Prompt for megaparsec
 - Scanned Files: 42
-- Total Detections: 64
+- Total Detections: 66
 
 ## Identified Patterns &amp; Smells:
 - [typeclass_system] typeclass_adapter on `Text.Megaparsec.Class.MonadParsec` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Class.hs:50:1: Typeclass &#x27;MonadParsec&#x27; in &#x27;Text.Megaparsec.Class&#x27; defines an ad-hoc polymorphic Adapter interface with 17 method(s)
@@ -281,6 +281,8 @@
 - [functional_idiom] railway_do_notation on `ParsersBench.Log.Attoparsec.logEntryParser` (80%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Attoparsec.hs:60:1: Function &#x27;logEntryParser&#x27; in &#x27;ParsersBench.Log.Attoparsec&#x27; chains a 3-step Monadic Railway flow in `do` notation
 - [monad_architecture] continuation_monad on `Text.Megaparsec.Internal` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Internal.hs:1:1: Module &#x27;Text.Megaparsec.Internal&#x27; employs Continuation Monad (`ContT`/`callCC`) for non-local control transfer and coroutine composition
 - [monad_architecture] continuation_monad on `Text.MegaparsecSpec` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1: Module &#x27;Text.MegaparsecSpec&#x27; employs Continuation Monad (`ContT`/`callCC`) for non-local control transfer and coroutine composition
+- [functional_idiom] recursion_schemes on `Text.Megaparsec.Internal` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Internal.hs:1:1: Module &#x27;Text.Megaparsec.Internal&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
+- [functional_idiom] recursion_schemes on `Text.MegaparsecSpec` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1: Module &#x27;Text.MegaparsecSpec&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
 - [concurrency_stm] async_concurrent_flow on `Text.Megaparsec.Debug` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Debug.hs:1:1: Module &#x27;Text.Megaparsec.Debug&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation
 - [functional_idiom] stream_processing_pipeline on `Text.Megaparsec.Byte.Binary` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Binary.hs:1:1: Module &#x27;Text.Megaparsec.Byte.Binary&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees
 - [type_safety] unchecked_bottom_error on `Text.Megaparsec.Byte.Binary.finiteByteSize` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Binary.hs:188:1: Type Safety Hazard: Function &#x27;finiteByteSize&#x27; in &#x27;Text.Megaparsec.Byte.Binary&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead
@@ -322,10 +324,10 @@
         <div class="ui stackable grid items-center">
             <div class="eleven wide column">
                 <div class="ui inverted buttons" id="categoryFilterBar" style="display: flex; flex-wrap: wrap; gap: 8px;">
-                    <button class="ui button active filter-btn" data-filter="all">All Findings (64)</button>
+                    <button class="ui button active filter-btn" data-filter="all">All Findings (66)</button>
                     <button class="ui button filter-btn" data-filter="typeclass_system"><i class="cubes icon" style="color: #a855f7;"></i> Typeclasses & Polymorphism (11)</button>
 <button class="ui button filter-btn" data-filter="monad_architecture"><i class="layer group icon" style="color: #8b5cf6;"></i> Monad Stacks & ReaderT (9)</button>
-<button class="ui button filter-btn" data-filter="functional_idiom"><i class="code branch icon" style="color: #14b8a6;"></i> Functional Idioms & GADTs (17)</button>
+<button class="ui button filter-btn" data-filter="functional_idiom"><i class="code branch icon" style="color: #14b8a6;"></i> Functional Idioms & GADTs (19)</button>
 <button class="ui button filter-btn" data-filter="concurrency_stm"><i class="bolt icon" style="color: #0ea5e9;"></i> STM & Concurrency (1)</button>
 <button class="ui button filter-btn" data-filter="resilience"><i class="shield alternate icon" style="color: #22c55e;"></i> Resilience & Space Leaks (3)</button>
 <button class="ui button filter-btn" data-filter="principle"><i class="balance scale icon" style="color: #eab308;"></i> Principles & Quality (21)</button>
@@ -1424,13 +1426,73 @@
                 </div>
                 
 
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #14b8a6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; border: 1px solid rgba(20, 184, 166, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#37</span>
+                            <span style="color: #38bdf8;"><code>recursion_schemes</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Text.Megaparsec.Internal</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">recursion_schemes_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;Text.Megaparsec.Internal&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[RECURSION_SCHEMES_MORPHISM]</span> <span style="color: #f1f5f9;">Module &#x27;Text.Megaparsec.Internal&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Internal.hs:1:1"><i class="map marker alternate icon"></i> Text/Megaparsec/Internal.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #14b8a6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; border: 1px solid rgba(20, 184, 166, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#38</span>
+                            <span style="color: #38bdf8;"><code>recursion_schemes</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Text.MegaparsecSpec</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">recursion_schemes_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;Text.MegaparsecSpec&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[RECURSION_SCHEMES_MORPHISM]</span> <span style="color: #f1f5f9;">Module &#x27;Text.MegaparsecSpec&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1"><i class="map marker alternate icon"></i> megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
                 <div class="ui inverted card finding-card" data-category="concurrency_stm" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #0ea5e9 !important;">
                     <div class="content" style="padding: 18px 20px;">
                         <div class="ui top right attached label" style="background: rgba(56, 189, 248, 0.2); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="bolt icon"></i> STM & CONCURRENCY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#37</span>
+                            <span style="color: #64748b; font-size: 14px;">#39</span>
                             <span style="color: #38bdf8;"><code>async_concurrent_flow</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1460,7 +1522,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#38</span>
+                            <span style="color: #64748b; font-size: 14px;">#40</span>
                             <span style="color: #38bdf8;"><code>stream_processing_pipeline</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1490,7 +1552,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#39</span>
+                            <span style="color: #64748b; font-size: 14px;">#41</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1520,7 +1582,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#40</span>
+                            <span style="color: #64748b; font-size: 14px;">#42</span>
                             <span style="color: #38bdf8;"><code>unchecked_from_just</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1550,7 +1612,7 @@
                             <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#41</span>
+                            <span style="color: #64748b; font-size: 14px;">#43</span>
                             <span style="color: #38bdf8;"><code>lazy_space_leak_risk</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1580,7 +1642,7 @@
                             <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#42</span>
+                            <span style="color: #64748b; font-size: 14px;">#44</span>
                             <span style="color: #38bdf8;"><code>lazy_space_leak_risk</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1610,7 +1672,7 @@
                             <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#43</span>
+                            <span style="color: #64748b; font-size: 14px;">#45</span>
                             <span style="color: #38bdf8;"><code>catch_all_some_exception</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1640,7 +1702,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#44</span>
+                            <span style="color: #64748b; font-size: 14px;">#46</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1670,7 +1732,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#45</span>
+                            <span style="color: #64748b; font-size: 14px;">#47</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1700,7 +1762,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#46</span>
+                            <span style="color: #64748b; font-size: 14px;">#48</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1730,7 +1792,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#47</span>
+                            <span style="color: #64748b; font-size: 14px;">#49</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1760,7 +1822,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#48</span>
+                            <span style="color: #64748b; font-size: 14px;">#50</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1790,7 +1852,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#49</span>
+                            <span style="color: #64748b; font-size: 14px;">#51</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1820,7 +1882,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#50</span>
+                            <span style="color: #64748b; font-size: 14px;">#52</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1850,7 +1912,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#51</span>
+                            <span style="color: #64748b; font-size: 14px;">#53</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1880,7 +1942,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#52</span>
+                            <span style="color: #64748b; font-size: 14px;">#54</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1910,7 +1972,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#53</span>
+                            <span style="color: #64748b; font-size: 14px;">#55</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1940,7 +2002,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#54</span>
+                            <span style="color: #64748b; font-size: 14px;">#56</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1970,7 +2032,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#55</span>
+                            <span style="color: #64748b; font-size: 14px;">#57</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2000,7 +2062,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#56</span>
+                            <span style="color: #64748b; font-size: 14px;">#58</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2030,7 +2092,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#57</span>
+                            <span style="color: #64748b; font-size: 14px;">#59</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2060,7 +2122,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#58</span>
+                            <span style="color: #64748b; font-size: 14px;">#60</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2090,7 +2152,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#59</span>
+                            <span style="color: #64748b; font-size: 14px;">#61</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2120,7 +2182,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#60</span>
+                            <span style="color: #64748b; font-size: 14px;">#62</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2150,7 +2212,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#61</span>
+                            <span style="color: #64748b; font-size: 14px;">#63</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2180,7 +2242,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#62</span>
+                            <span style="color: #64748b; font-size: 14px;">#64</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2210,7 +2272,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#63</span>
+                            <span style="color: #64748b; font-size: 14px;">#65</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2240,7 +2302,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#64</span>
+                            <span style="color: #64748b; font-size: 14px;">#66</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">

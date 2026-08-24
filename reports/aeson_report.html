@@ -182,7 +182,7 @@
                     <i class="layer group icon"></i> Hexagonal DDD
                 </div>
                 <div class="ui medium teal label" style="font-weight: 700;">
-                    <i class="clock outline icon"></i> 0.140s
+                    <i class="clock outline icon"></i> 0.130s
                 </div>
                 <div class="ui medium purple label" style="font-weight: 700;">
                     <i class="file alternate outline icon"></i> 129 files
@@ -196,7 +196,7 @@
         <div class="ui inverted card" style="border-top: 3px solid #38bdf8 !important;">
             <div class="content" style="padding: 20px;">
                 <div class="ui top right attached label blue mini" style="font-weight: 700;">TOTAL FINDINGS</div>
-                <div class="header stat-value" style="color: #38bdf8; margin-top: 8px;">161</div>
+                <div class="header stat-value" style="color: #38bdf8; margin-top: 8px;">174</div>
                 <div class="description stat-desc">Total patterns & architecture findings</div>
             </div>
         </div>
@@ -210,14 +210,14 @@
         <div class="ui inverted card" style="border-top: 3px solid #c084fc !important;">
             <div class="content" style="padding: 20px;">
                 <div class="ui top right attached label purple mini" style="font-weight: 700;">TYPECLASSES & MONADS</div>
-                <div class="header stat-value" style="color: #c084fc; margin-top: 8px;">55</div>
+                <div class="header stat-value" style="color: #c084fc; margin-top: 8px;">59</div>
                 <div class="description stat-desc">Typeclasses, ReaderT & Transformer stacks</div>
             </div>
         </div>
         <div class="ui inverted card" style="border-top: 3px solid #4ade80 !important;">
             <div class="content" style="padding: 20px;">
                 <div class="ui top right attached label green mini" style="font-weight: 700;">CLEAN CODE & STM</div>
-                <div class="header stat-value" style="color: #4ade80; margin-top: 8px;">25</div>
+                <div class="header stat-value" style="color: #4ade80; margin-top: 8px;">34</div>
                 <div class="description stat-desc">Clean functional idioms & STM transactions</div>
             </div>
         </div>
@@ -242,7 +242,7 @@
         </div>
         <textarea id="llmContextData" style="display: none;"># 🔷 DPX-Haskell: Architectural Context &amp; Refactoring Prompt for aeson
 - Scanned Files: 129
-- Total Detections: 161
+- Total Detections: 174
 
 ## Identified Patterns &amp; Smells:
 - [typeclass_system] typeclass_adapter on `PropertyQC.ShrinkMetric` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/PropertyQC.hs:50:1: Typeclass &#x27;ShrinkMetric&#x27; in &#x27;PropertyQC&#x27; defines an ad-hoc polymorphic Adapter interface with 1 method(s)
@@ -298,6 +298,10 @@
 - [typeclass_system] newtype_strong_typing on `AesonFoldable` (80%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/AesonFoldable.hs:1:1: Module &#x27;AesonFoldable&#x27; enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost
 - [typeclass_system] newtype_strong_typing on `Data.Aeson.Types.Internal` (80%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/Internal.hs:1:1: Module &#x27;Data.Aeson.Types.Internal&#x27; enforces DDD Value Object strong typing via 3 newtype wrapper(s) at zero runtime cost
 - [typeclass_system] deriving_strategies on `Data.Aeson.Key` (80%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Key.hs:1:1: Module &#x27;Data.Aeson.Key&#x27; explicitly specifies Deriving Strategies (stock/newtype/anyclass) ensuring deterministic typeclass derivation
+- [typeclass_system] type_level_literals on `SerializationFormatSpec` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/SerializationFormatSpec.hs:1:1: Module &#x27;SerializationFormatSpec&#x27; implements Type-Level Programming (`DataKinds`/`GHC.TypeLits`) enforcing compile-time dimensionality and protocol invariants
+- [typeclass_system] type_level_literals on `DataFamilies.Types` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/DataFamilies/Types.hs:1:1: Module &#x27;DataFamilies.Types&#x27; implements Type-Level Programming (`DataKinds`/`GHC.TypeLits`) enforcing compile-time dimensionality and protocol invariants
+- [typeclass_system] type_level_literals on `Data.Aeson.Types.FromJSON` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1:1: Module &#x27;Data.Aeson.Types.FromJSON&#x27; implements Type-Level Programming (`DataKinds`/`GHC.TypeLits`) enforcing compile-time dimensionality and protocol invariants
+- [typeclass_system] type_level_literals on `Data.Aeson.Types.Generic` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/Generic.hs:1:1: Module &#x27;Data.Aeson.Types.Generic&#x27; implements Type-Level Programming (`DataKinds`/`GHC.TypeLits`) enforcing compile-time dimensionality and protocol invariants
 - [monad_architecture] free_monad_interpreter on `Data.Aeson.Encoding.Builder` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Encoding/Builder.hs:1:1: Module &#x27;Data.Aeson.Encoding.Builder&#x27; implements Free Monad DSL Interpreter separating program description from operational interpretation
 - [monad_architecture] tagless_final_style on `Data.Aeson.Internal.TH.MonadFix_` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/TH.hs:61:1: Typeclass &#x27;MonadFix_&#x27; in &#x27;Data.Aeson.Internal.TH&#x27; adopts Tagless Final / MTL capability pattern providing polymorphic monadic effects
 - [functional_idiom] railway_do_notation on `Data.Aeson.Parser.Internal.objectValues` (80%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-aeson/src/Data/Aeson/Parser/Internal.hs:140:1: Function &#x27;objectValues&#x27; in &#x27;Data.Aeson.Parser.Internal&#x27; chains a 4-step Monadic Railway flow in `do` notation
@@ -320,6 +324,15 @@
 - [functional_idiom] railway_do_notation on `Data.Aeson.TH.consFromJSON` (80%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs:562:1: Function &#x27;consFromJSON&#x27; in &#x27;Data.Aeson.TH&#x27; chains a 23-step Monadic Railway flow in `do` notation
 - [functional_idiom] railway_do_notation on `Data.Aeson.Internal.Unescape.unescapeTextIO` (80%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/Unescape.hs:51:1: Function &#x27;unescapeTextIO&#x27; in &#x27;Data.Aeson.Internal.Unescape&#x27; chains a 20-step Monadic Railway flow in `do` notation
 - [functional_idiom] railway_do_notation on `Data.Aeson.Internal.TH.letrecE` (80%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/TH.hs:16:1: Function &#x27;letrecE&#x27; in &#x27;Data.Aeson.Internal.TH&#x27; chains a 7-step Monadic Railway flow in `do` notation
+- [functional_idiom] recursion_schemes on `SerializationFormatSpec` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/SerializationFormatSpec.hs:1:1: Module &#x27;SerializationFormatSpec&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
+- [functional_idiom] recursion_schemes on `PropertyRoundTrip` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/PropertyRoundTrip.hs:1:1: Module &#x27;PropertyRoundTrip&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
+- [functional_idiom] recursion_schemes on `UnitTests.MonadFix` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/MonadFix.hs:1:1: Module &#x27;UnitTests.MonadFix&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
+- [functional_idiom] recursion_schemes on `Compare.JsonBench` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/Compare/JsonBench.hs:1:1: Module &#x27;Compare.JsonBench&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
+- [functional_idiom] recursion_schemes on `Data.Aeson.Types.ToJSON` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:1:1: Module &#x27;Data.Aeson.Types.ToJSON&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
+- [functional_idiom] recursion_schemes on `Data.Aeson.Types.Internal` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/Internal.hs:1:1: Module &#x27;Data.Aeson.Types.Internal&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
+- [functional_idiom] recursion_schemes on `Data.Aeson.Types.FromJSON` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1:1: Module &#x27;Data.Aeson.Types.FromJSON&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
+- [functional_idiom] recursion_schemes on `Data.Aeson.Internal.Prelude` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/Prelude.hs:1:1: Module &#x27;Data.Aeson.Internal.Prelude&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
+- [functional_idiom] recursion_schemes on `Data.Aeson.Internal.TH` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/TH.hs:1:1: Module &#x27;Data.Aeson.Internal.TH&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
 - [functional_idiom] stream_processing_pipeline on `DoubleToScientific` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/DoubleToScientific.hs:1:1: Module &#x27;DoubleToScientific&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees
 - [functional_idiom] stream_processing_pipeline on `UnescapePureText2` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:1:1: Module &#x27;UnescapePureText2&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees
 - [functional_idiom] stream_processing_pipeline on `UnescapePureText1` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText1.hs:1:1: Module &#x27;UnescapePureText1&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees
@@ -419,10 +432,10 @@
         <div class="ui stackable grid items-center">
             <div class="eleven wide column">
                 <div class="ui inverted buttons" id="categoryFilterBar" style="display: flex; flex-wrap: wrap; gap: 8px;">
-                    <button class="ui button active filter-btn" data-filter="all">All Findings (161)</button>
-                    <button class="ui button filter-btn" data-filter="typeclass_system"><i class="cubes icon" style="color: #a855f7;"></i> Typeclasses & Polymorphism (53)</button>
+                    <button class="ui button active filter-btn" data-filter="all">All Findings (174)</button>
+                    <button class="ui button filter-btn" data-filter="typeclass_system"><i class="cubes icon" style="color: #a855f7;"></i> Typeclasses & Polymorphism (57)</button>
 <button class="ui button filter-btn" data-filter="monad_architecture"><i class="layer group icon" style="color: #8b5cf6;"></i> Monad Stacks & ReaderT (2)</button>
-<button class="ui button filter-btn" data-filter="functional_idiom"><i class="code branch icon" style="color: #14b8a6;"></i> Functional Idioms & GADTs (25)</button>
+<button class="ui button filter-btn" data-filter="functional_idiom"><i class="code branch icon" style="color: #14b8a6;"></i> Functional Idioms & GADTs (34)</button>
 <button class="ui button filter-btn" data-filter="resilience"><i class="shield alternate icon" style="color: #22c55e;"></i> Resilience & Space Leaks (2)</button>
 <button class="ui button filter-btn" data-filter="principle"><i class="balance scale icon" style="color: #eab308;"></i> Principles & Quality (51)</button>
 <button class="ui button filter-btn" data-filter="type_safety"><i class="exclamation triangle icon" style="color: #ef4444;"></i> Type Safety Hazards (28)</button>
@@ -2030,13 +2043,133 @@
                 </div>
                 
 
+                <div class="ui inverted card finding-card" data-category="typeclass_system" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #a855f7 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(168, 85, 247, 0.2); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="cubes icon"></i> TYPECLASSES & POLYMORPHISM
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#54</span>
+                            <span style="color: #38bdf8;"><code>type_level_literals</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">SerializationFormatSpec</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">type_level_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;SerializationFormatSpec&#x27; implements Type-Level Programming (`DataKinds`/`GHC.TypeLits`) enforcing compile-time dimensionality and protocol invariants
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TYPE_LEVEL_LITERALS_DATAKINDS]</span> <span style="color: #f1f5f9;">Module &#x27;SerializationFormatSpec&#x27; implements Type-Level Programming (`DataKinds`/`GHC.TypeLits`) enforcing compile-time dimensionality and protocol invariants</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/SerializationFormatSpec.hs:1:1"><i class="map marker alternate icon"></i> tests/SerializationFormatSpec.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="typeclass_system" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #a855f7 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(168, 85, 247, 0.2); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="cubes icon"></i> TYPECLASSES & POLYMORPHISM
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#55</span>
+                            <span style="color: #38bdf8;"><code>type_level_literals</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">DataFamilies.Types</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">type_level_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;DataFamilies.Types&#x27; implements Type-Level Programming (`DataKinds`/`GHC.TypeLits`) enforcing compile-time dimensionality and protocol invariants
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TYPE_LEVEL_LITERALS_DATAKINDS]</span> <span style="color: #f1f5f9;">Module &#x27;DataFamilies.Types&#x27; implements Type-Level Programming (`DataKinds`/`GHC.TypeLits`) enforcing compile-time dimensionality and protocol invariants</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/DataFamilies/Types.hs:1:1"><i class="map marker alternate icon"></i> tests/DataFamilies/Types.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="typeclass_system" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #a855f7 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(168, 85, 247, 0.2); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="cubes icon"></i> TYPECLASSES & POLYMORPHISM
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#56</span>
+                            <span style="color: #38bdf8;"><code>type_level_literals</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Data.Aeson.Types.FromJSON</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">type_level_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;Data.Aeson.Types.FromJSON&#x27; implements Type-Level Programming (`DataKinds`/`GHC.TypeLits`) enforcing compile-time dimensionality and protocol invariants
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TYPE_LEVEL_LITERALS_DATAKINDS]</span> <span style="color: #f1f5f9;">Module &#x27;Data.Aeson.Types.FromJSON&#x27; implements Type-Level Programming (`DataKinds`/`GHC.TypeLits`) enforcing compile-time dimensionality and protocol invariants</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1:1"><i class="map marker alternate icon"></i> src/Data/Aeson/Types/FromJSON.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="typeclass_system" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #a855f7 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(168, 85, 247, 0.2); color: #d8b4fe; border: 1px solid rgba(168, 85, 247, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="cubes icon"></i> TYPECLASSES & POLYMORPHISM
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#57</span>
+                            <span style="color: #38bdf8;"><code>type_level_literals</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Data.Aeson.Types.Generic</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">type_level_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;Data.Aeson.Types.Generic&#x27; implements Type-Level Programming (`DataKinds`/`GHC.TypeLits`) enforcing compile-time dimensionality and protocol invariants
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #a855f7;"><span style="color: #d8b4fe; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[TYPE_LEVEL_LITERALS_DATAKINDS]</span> <span style="color: #f1f5f9;">Module &#x27;Data.Aeson.Types.Generic&#x27; implements Type-Level Programming (`DataKinds`/`GHC.TypeLits`) enforcing compile-time dimensionality and protocol invariants</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/Generic.hs:1:1"><i class="map marker alternate icon"></i> src/Data/Aeson/Types/Generic.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
                 <div class="ui inverted card finding-card" data-category="monad_architecture" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #8b5cf6 !important;">
                     <div class="content" style="padding: 18px 20px;">
                         <div class="ui top right attached label" style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="layer group icon"></i> MONAD STACKS & READERT
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#54</span>
+                            <span style="color: #64748b; font-size: 14px;">#58</span>
                             <span style="color: #38bdf8;"><code>free_monad_interpreter</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2066,7 +2199,7 @@
                             <i class="layer group icon"></i> MONAD STACKS & READERT
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#55</span>
+                            <span style="color: #64748b; font-size: 14px;">#59</span>
                             <span style="color: #38bdf8;"><code>tagless_final_style</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2096,7 +2229,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#56</span>
+                            <span style="color: #64748b; font-size: 14px;">#60</span>
                             <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2126,7 +2259,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#57</span>
+                            <span style="color: #64748b; font-size: 14px;">#61</span>
                             <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2156,7 +2289,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#58</span>
+                            <span style="color: #64748b; font-size: 14px;">#62</span>
                             <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2186,7 +2319,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#59</span>
+                            <span style="color: #64748b; font-size: 14px;">#63</span>
                             <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2216,7 +2349,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#60</span>
+                            <span style="color: #64748b; font-size: 14px;">#64</span>
                             <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2246,7 +2379,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#61</span>
+                            <span style="color: #64748b; font-size: 14px;">#65</span>
                             <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2276,7 +2409,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#62</span>
+                            <span style="color: #64748b; font-size: 14px;">#66</span>
                             <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2306,7 +2439,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#63</span>
+                            <span style="color: #64748b; font-size: 14px;">#67</span>
                             <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2336,7 +2469,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#64</span>
+                            <span style="color: #64748b; font-size: 14px;">#68</span>
                             <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2366,7 +2499,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#65</span>
+                            <span style="color: #64748b; font-size: 14px;">#69</span>
                             <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2396,7 +2529,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#66</span>
+                            <span style="color: #64748b; font-size: 14px;">#70</span>
                             <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2426,7 +2559,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#67</span>
+                            <span style="color: #64748b; font-size: 14px;">#71</span>
                             <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2456,7 +2589,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#68</span>
+                            <span style="color: #64748b; font-size: 14px;">#72</span>
                             <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2486,7 +2619,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#69</span>
+                            <span style="color: #64748b; font-size: 14px;">#73</span>
                             <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2516,7 +2649,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#70</span>
+                            <span style="color: #64748b; font-size: 14px;">#74</span>
                             <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2546,7 +2679,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#71</span>
+                            <span style="color: #64748b; font-size: 14px;">#75</span>
                             <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2576,7 +2709,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#72</span>
+                            <span style="color: #64748b; font-size: 14px;">#76</span>
                             <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2606,7 +2739,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#73</span>
+                            <span style="color: #64748b; font-size: 14px;">#77</span>
                             <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2636,7 +2769,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#74</span>
+                            <span style="color: #64748b; font-size: 14px;">#78</span>
                             <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2666,7 +2799,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#75</span>
+                            <span style="color: #64748b; font-size: 14px;">#79</span>
                             <span style="color: #38bdf8;"><code>railway_do_notation</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2696,7 +2829,277 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#76</span>
+                            <span style="color: #64748b; font-size: 14px;">#80</span>
+                            <span style="color: #38bdf8;"><code>recursion_schemes</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">SerializationFormatSpec</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">recursion_schemes_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;SerializationFormatSpec&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[RECURSION_SCHEMES_MORPHISM]</span> <span style="color: #f1f5f9;">Module &#x27;SerializationFormatSpec&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/SerializationFormatSpec.hs:1:1"><i class="map marker alternate icon"></i> tests/SerializationFormatSpec.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #14b8a6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; border: 1px solid rgba(20, 184, 166, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#81</span>
+                            <span style="color: #38bdf8;"><code>recursion_schemes</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">PropertyRoundTrip</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">recursion_schemes_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;PropertyRoundTrip&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[RECURSION_SCHEMES_MORPHISM]</span> <span style="color: #f1f5f9;">Module &#x27;PropertyRoundTrip&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/PropertyRoundTrip.hs:1:1"><i class="map marker alternate icon"></i> tests/PropertyRoundTrip.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #14b8a6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; border: 1px solid rgba(20, 184, 166, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#82</span>
+                            <span style="color: #38bdf8;"><code>recursion_schemes</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">UnitTests.MonadFix</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">recursion_schemes_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;UnitTests.MonadFix&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[RECURSION_SCHEMES_MORPHISM]</span> <span style="color: #f1f5f9;">Module &#x27;UnitTests.MonadFix&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/MonadFix.hs:1:1"><i class="map marker alternate icon"></i> tests/UnitTests/MonadFix.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #14b8a6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; border: 1px solid rgba(20, 184, 166, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#83</span>
+                            <span style="color: #38bdf8;"><code>recursion_schemes</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Compare.JsonBench</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">recursion_schemes_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;Compare.JsonBench&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[RECURSION_SCHEMES_MORPHISM]</span> <span style="color: #f1f5f9;">Module &#x27;Compare.JsonBench&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/Compare/JsonBench.hs:1:1"><i class="map marker alternate icon"></i> benchmarks/bench/Compare/JsonBench.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #14b8a6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; border: 1px solid rgba(20, 184, 166, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#84</span>
+                            <span style="color: #38bdf8;"><code>recursion_schemes</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Data.Aeson.Types.ToJSON</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">recursion_schemes_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;Data.Aeson.Types.ToJSON&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[RECURSION_SCHEMES_MORPHISM]</span> <span style="color: #f1f5f9;">Module &#x27;Data.Aeson.Types.ToJSON&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:1:1"><i class="map marker alternate icon"></i> src/Data/Aeson/Types/ToJSON.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #14b8a6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; border: 1px solid rgba(20, 184, 166, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#85</span>
+                            <span style="color: #38bdf8;"><code>recursion_schemes</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Data.Aeson.Types.Internal</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">recursion_schemes_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;Data.Aeson.Types.Internal&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[RECURSION_SCHEMES_MORPHISM]</span> <span style="color: #f1f5f9;">Module &#x27;Data.Aeson.Types.Internal&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/Internal.hs:1:1"><i class="map marker alternate icon"></i> src/Data/Aeson/Types/Internal.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #14b8a6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; border: 1px solid rgba(20, 184, 166, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#86</span>
+                            <span style="color: #38bdf8;"><code>recursion_schemes</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Data.Aeson.Types.FromJSON</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">recursion_schemes_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;Data.Aeson.Types.FromJSON&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[RECURSION_SCHEMES_MORPHISM]</span> <span style="color: #f1f5f9;">Module &#x27;Data.Aeson.Types.FromJSON&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1:1"><i class="map marker alternate icon"></i> src/Data/Aeson/Types/FromJSON.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #14b8a6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; border: 1px solid rgba(20, 184, 166, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#87</span>
+                            <span style="color: #38bdf8;"><code>recursion_schemes</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Data.Aeson.Internal.Prelude</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">recursion_schemes_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;Data.Aeson.Internal.Prelude&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[RECURSION_SCHEMES_MORPHISM]</span> <span style="color: #f1f5f9;">Module &#x27;Data.Aeson.Internal.Prelude&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/Prelude.hs:1:1"><i class="map marker alternate icon"></i> src/Data/Aeson/Internal/Prelude.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #14b8a6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; border: 1px solid rgba(20, 184, 166, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#88</span>
+                            <span style="color: #38bdf8;"><code>recursion_schemes</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">Data.Aeson.Internal.TH</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">recursion_schemes_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;Data.Aeson.Internal.TH&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[RECURSION_SCHEMES_MORPHISM]</span> <span style="color: #f1f5f9;">Module &#x27;Data.Aeson.Internal.TH&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/TH.hs:1:1"><i class="map marker alternate icon"></i> src/Data/Aeson/Internal/TH.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #14b8a6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; border: 1px solid rgba(20, 184, 166, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#89</span>
                             <span style="color: #38bdf8;"><code>stream_processing_pipeline</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2726,7 +3129,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#77</span>
+                            <span style="color: #64748b; font-size: 14px;">#90</span>
                             <span style="color: #38bdf8;"><code>stream_processing_pipeline</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2756,7 +3159,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#78</span>
+                            <span style="color: #64748b; font-size: 14px;">#91</span>
                             <span style="color: #38bdf8;"><code>stream_processing_pipeline</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2786,7 +3189,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#79</span>
+                            <span style="color: #64748b; font-size: 14px;">#92</span>
                             <span style="color: #38bdf8;"><code>stream_processing_pipeline</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2816,7 +3219,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#80</span>
+                            <span style="color: #64748b; font-size: 14px;">#93</span>
                             <span style="color: #38bdf8;"><code>stream_processing_pipeline</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2846,7 +3249,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#81</span>
+                            <span style="color: #64748b; font-size: 14px;">#94</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2876,7 +3279,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#82</span>
+                            <span style="color: #64748b; font-size: 14px;">#95</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2906,7 +3309,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#83</span>
+                            <span style="color: #64748b; font-size: 14px;">#96</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2936,7 +3339,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#84</span>
+                            <span style="color: #64748b; font-size: 14px;">#97</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2966,7 +3369,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#85</span>
+                            <span style="color: #64748b; font-size: 14px;">#98</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -2996,7 +3399,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#86</span>
+                            <span style="color: #64748b; font-size: 14px;">#99</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3026,7 +3429,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#87</span>
+                            <span style="color: #64748b; font-size: 14px;">#100</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3056,7 +3459,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#88</span>
+                            <span style="color: #64748b; font-size: 14px;">#101</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3086,7 +3489,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#89</span>
+                            <span style="color: #64748b; font-size: 14px;">#102</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3116,7 +3519,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#90</span>
+                            <span style="color: #64748b; font-size: 14px;">#103</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3146,7 +3549,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#91</span>
+                            <span style="color: #64748b; font-size: 14px;">#104</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3176,7 +3579,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#92</span>
+                            <span style="color: #64748b; font-size: 14px;">#105</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3206,7 +3609,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#93</span>
+                            <span style="color: #64748b; font-size: 14px;">#106</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3236,7 +3639,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#94</span>
+                            <span style="color: #64748b; font-size: 14px;">#107</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3266,7 +3669,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#95</span>
+                            <span style="color: #64748b; font-size: 14px;">#108</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3296,7 +3699,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#96</span>
+                            <span style="color: #64748b; font-size: 14px;">#109</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3326,7 +3729,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#97</span>
+                            <span style="color: #64748b; font-size: 14px;">#110</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3356,7 +3759,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#98</span>
+                            <span style="color: #64748b; font-size: 14px;">#111</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3386,7 +3789,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#99</span>
+                            <span style="color: #64748b; font-size: 14px;">#112</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3416,7 +3819,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#100</span>
+                            <span style="color: #64748b; font-size: 14px;">#113</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3446,7 +3849,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#101</span>
+                            <span style="color: #64748b; font-size: 14px;">#114</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3476,7 +3879,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#102</span>
+                            <span style="color: #64748b; font-size: 14px;">#115</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3506,7 +3909,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#103</span>
+                            <span style="color: #64748b; font-size: 14px;">#116</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3536,7 +3939,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#104</span>
+                            <span style="color: #64748b; font-size: 14px;">#117</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3566,7 +3969,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#105</span>
+                            <span style="color: #64748b; font-size: 14px;">#118</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3596,7 +3999,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#106</span>
+                            <span style="color: #64748b; font-size: 14px;">#119</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3626,7 +4029,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#107</span>
+                            <span style="color: #64748b; font-size: 14px;">#120</span>
                             <span style="color: #38bdf8;"><code>unchecked_bottom_error</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3656,7 +4059,7 @@
                             <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#108</span>
+                            <span style="color: #64748b; font-size: 14px;">#121</span>
                             <span style="color: #38bdf8;"><code>unchecked_from_just</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3686,7 +4089,7 @@
                             <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#109</span>
+                            <span style="color: #64748b; font-size: 14px;">#122</span>
                             <span style="color: #38bdf8;"><code>lazy_space_leak_risk</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3716,7 +4119,7 @@
                             <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#110</span>
+                            <span style="color: #64748b; font-size: 14px;">#123</span>
                             <span style="color: #38bdf8;"><code>lazy_space_leak_risk</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3746,7 +4149,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#111</span>
+                            <span style="color: #64748b; font-size: 14px;">#124</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3776,7 +4179,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#112</span>
+                            <span style="color: #64748b; font-size: 14px;">#125</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3806,7 +4209,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#113</span>
+                            <span style="color: #64748b; font-size: 14px;">#126</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3836,7 +4239,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#114</span>
+                            <span style="color: #64748b; font-size: 14px;">#127</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3866,7 +4269,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#115</span>
+                            <span style="color: #64748b; font-size: 14px;">#128</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3896,7 +4299,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#116</span>
+                            <span style="color: #64748b; font-size: 14px;">#129</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3926,7 +4329,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#117</span>
+                            <span style="color: #64748b; font-size: 14px;">#130</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3956,7 +4359,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#118</span>
+                            <span style="color: #64748b; font-size: 14px;">#131</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -3986,7 +4389,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#119</span>
+                            <span style="color: #64748b; font-size: 14px;">#132</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4016,7 +4419,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#120</span>
+                            <span style="color: #64748b; font-size: 14px;">#133</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4046,7 +4449,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#121</span>
+                            <span style="color: #64748b; font-size: 14px;">#134</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4076,7 +4479,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#122</span>
+                            <span style="color: #64748b; font-size: 14px;">#135</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4106,7 +4509,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#123</span>
+                            <span style="color: #64748b; font-size: 14px;">#136</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4136,7 +4539,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#124</span>
+                            <span style="color: #64748b; font-size: 14px;">#137</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4166,7 +4569,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#125</span>
+                            <span style="color: #64748b; font-size: 14px;">#138</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4196,7 +4599,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#126</span>
+                            <span style="color: #64748b; font-size: 14px;">#139</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4226,7 +4629,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#127</span>
+                            <span style="color: #64748b; font-size: 14px;">#140</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4256,7 +4659,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#128</span>
+                            <span style="color: #64748b; font-size: 14px;">#141</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4286,7 +4689,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#129</span>
+                            <span style="color: #64748b; font-size: 14px;">#142</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4316,7 +4719,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#130</span>
+                            <span style="color: #64748b; font-size: 14px;">#143</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4346,7 +4749,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#131</span>
+                            <span style="color: #64748b; font-size: 14px;">#144</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4376,7 +4779,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#132</span>
+                            <span style="color: #64748b; font-size: 14px;">#145</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4406,7 +4809,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#133</span>
+                            <span style="color: #64748b; font-size: 14px;">#146</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4436,7 +4839,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#134</span>
+                            <span style="color: #64748b; font-size: 14px;">#147</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4466,7 +4869,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#135</span>
+                            <span style="color: #64748b; font-size: 14px;">#148</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4496,7 +4899,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#136</span>
+                            <span style="color: #64748b; font-size: 14px;">#149</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4526,7 +4929,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#137</span>
+                            <span style="color: #64748b; font-size: 14px;">#150</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4556,7 +4959,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#138</span>
+                            <span style="color: #64748b; font-size: 14px;">#151</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4586,7 +4989,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#139</span>
+                            <span style="color: #64748b; font-size: 14px;">#152</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4616,7 +5019,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#140</span>
+                            <span style="color: #64748b; font-size: 14px;">#153</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4646,7 +5049,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#141</span>
+                            <span style="color: #64748b; font-size: 14px;">#154</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4676,7 +5079,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#142</span>
+                            <span style="color: #64748b; font-size: 14px;">#155</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4706,7 +5109,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#143</span>
+                            <span style="color: #64748b; font-size: 14px;">#156</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4736,7 +5139,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#144</span>
+                            <span style="color: #64748b; font-size: 14px;">#157</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4766,7 +5169,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#145</span>
+                            <span style="color: #64748b; font-size: 14px;">#158</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4796,7 +5199,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#146</span>
+                            <span style="color: #64748b; font-size: 14px;">#159</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4826,7 +5229,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#147</span>
+                            <span style="color: #64748b; font-size: 14px;">#160</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4856,7 +5259,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#148</span>
+                            <span style="color: #64748b; font-size: 14px;">#161</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4886,7 +5289,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#149</span>
+                            <span style="color: #64748b; font-size: 14px;">#162</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4916,7 +5319,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#150</span>
+                            <span style="color: #64748b; font-size: 14px;">#163</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4946,7 +5349,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#151</span>
+                            <span style="color: #64748b; font-size: 14px;">#164</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -4976,7 +5379,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#152</span>
+                            <span style="color: #64748b; font-size: 14px;">#165</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5006,7 +5409,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#153</span>
+                            <span style="color: #64748b; font-size: 14px;">#166</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5036,7 +5439,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#154</span>
+                            <span style="color: #64748b; font-size: 14px;">#167</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5066,7 +5469,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#155</span>
+                            <span style="color: #64748b; font-size: 14px;">#168</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5096,7 +5499,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#156</span>
+                            <span style="color: #64748b; font-size: 14px;">#169</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5126,7 +5529,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#157</span>
+                            <span style="color: #64748b; font-size: 14px;">#170</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5156,7 +5559,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#158</span>
+                            <span style="color: #64748b; font-size: 14px;">#171</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5186,7 +5589,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#159</span>
+                            <span style="color: #64748b; font-size: 14px;">#172</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5216,7 +5619,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#160</span>
+                            <span style="color: #64748b; font-size: 14px;">#173</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -5246,7 +5649,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#161</span>
+                            <span style="color: #64748b; font-size: 14px;">#174</span>
                             <span style="color: #38bdf8;"><code>duplicate_code_dry</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">

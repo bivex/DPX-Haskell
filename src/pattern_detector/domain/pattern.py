@@ -121,6 +121,35 @@ PATTERN_CATALOG: Mapping[PatternType, PatternCatalogEntry] = {
         description="Opaque data export with smart constructor validation function (`mkAge :: Int -> Either Error Age`) guaranteeing internal domain invariants.",
         idiomatic_example="module Age (Age, mkAge, unAge) where\nnewtype Age = Age Int\nmkAge n = if n >= 0 then Right (Age n) else Left \"Negative age\"",
     ),
+    PatternType.RECURSION_SCHEMES: PatternCatalogEntry(
+        pattern_type=PatternType.RECURSION_SCHEMES,
+        category=PatternCategory.FUNCTIONAL_IDIOM,
+        name="Recursion Schemes (Catamorphisms)",
+        description="Abstracting recursive data structure traversals into pure morphisms (`cata`, `ana`, `hylo`, `Data.Functor.Foldable`) eliminating explicit recursion boilerplate.",
+        idiomatic_example="evalAST = cata (\\case LitF n -> n; AddF a b -> a + b)",
+    ),
+    PatternType.BRACKET_RESOURCE_MANAGEMENT: PatternCatalogEntry(
+        pattern_type=PatternType.BRACKET_RESOURCE_MANAGEMENT,
+        category=PatternCategory.RESILIENCE,
+        name="Bracket Resource Management (RAII)",
+        description="Deterministic acquire-release resource life-cycle management (`bracket acquire release inside`) guaranteeing cleanup even under asynchronous thread interruption.",
+        idiomatic_example="withHandle h = bracket (openFile h ReadMode) hClose (\\handle -> ...)",
+    ),
+    PatternType.TYPE_LEVEL_LITERALS: PatternCatalogEntry(
+        pattern_type=PatternType.TYPE_LEVEL_LITERALS,
+        category=PatternCategory.TYPECLASS_SYSTEM,
+        name="Type-Level Computation (DataKinds/TypeLits)",
+        description="Compile-time numeric and string type-level computing (`KnownNat n`, `KnownSymbol s`, `DataKinds`) ensuring dimensional and protocol correctness.",
+        idiomatic_example="data Vector (n :: Nat) a = Vector [a]\naddVec :: KnownNat n => Vector n Double -> Vector n Double -> Vector n Double",
+    ),
+    PatternType.PHANTOM_TYPES: PatternCatalogEntry(
+        pattern_type=PatternType.PHANTOM_TYPES,
+        category=PatternCategory.TYPECLASS_SYSTEM,
+        name="Phantom Types Invariant Verification",
+        description="Parameterized types carrying phantom type variables (`newtype Query state = Query Text`) verifying state machine transitions at compile time.",
+        idiomatic_example="newtype Form state = Form Text\nvalidate :: Form Unvalidated -> Maybe (Form Validated)",
+    ),
+
 
     # Concurrency, Parallelism & Streams (4)
     PatternType.STM_TRANSACTIONAL_MEMORY: PatternCatalogEntry(

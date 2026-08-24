@@ -182,7 +182,7 @@
                     <i class="layer group icon"></i> Hexagonal DDD
                 </div>
                 <div class="ui medium teal label" style="font-weight: 700;">
-                    <i class="clock outline icon"></i> 0.037s
+                    <i class="clock outline icon"></i> 0.025s
                 </div>
                 <div class="ui medium purple label" style="font-weight: 700;">
                     <i class="file alternate outline icon"></i> 86 files
@@ -196,14 +196,14 @@
         <div class="ui inverted card" style="border-top: 3px solid #38bdf8 !important;">
             <div class="content" style="padding: 20px;">
                 <div class="ui top right attached label blue mini" style="font-weight: 700;">TOTAL FINDINGS</div>
-                <div class="header stat-value" style="color: #38bdf8; margin-top: 8px;">42</div>
+                <div class="header stat-value" style="color: #38bdf8; margin-top: 8px;">49</div>
                 <div class="description stat-desc">Total patterns & architecture findings</div>
             </div>
         </div>
         <div class="ui inverted card" style="border-top: 3px solid #f87171 !important;">
             <div class="content" style="padding: 20px;">
                 <div class="ui top right attached label red mini" style="font-weight: 700;">ACTION REQUIRED</div>
-                <div class="header stat-value" style="color: #f87171; margin-top: 8px;">5</div>
+                <div class="header stat-value" style="color: #f87171; margin-top: 8px;">11</div>
                 <div class="description stat-desc">Safety hazards, space leaks & smells</div>
             </div>
         </div>
@@ -217,7 +217,7 @@
         <div class="ui inverted card" style="border-top: 3px solid #4ade80 !important;">
             <div class="content" style="padding: 20px;">
                 <div class="ui top right attached label green mini" style="font-weight: 700;">CLEAN CODE & STM</div>
-                <div class="header stat-value" style="color: #4ade80; margin-top: 8px;">25</div>
+                <div class="header stat-value" style="color: #4ade80; margin-top: 8px;">26</div>
                 <div class="description stat-desc">Clean functional idioms & STM transactions</div>
             </div>
         </div>
@@ -242,7 +242,7 @@
         </div>
         <textarea id="llmContextData" style="display: none;"># 🔷 DPX-Haskell: Architectural Context &amp; Refactoring Prompt for rio
 - Scanned Files: 86
-- Total Detections: 42
+- Total Detections: 49
 
 ## Identified Patterns &amp; Smells:
 - [typeclass_system] typeclass_adapter on `RIO.Process.HasProcessContext` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:217:1: Typeclass &#x27;HasProcessContext&#x27; in &#x27;RIO.Process&#x27; defines an ad-hoc polymorphic Adapter interface with 1 method(s)
@@ -278,12 +278,19 @@
 - [optics_lenses] lens_prism_optics on `RIO.Prelude.Lens` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Lens.hs:1:1: Module &#x27;RIO.Prelude.Lens&#x27; integrates Functional Optics (Lenses/Prisms) for composable immutable data access and transformation
 - [optics_lenses] lens_prism_optics on `RIO.Prelude.Types` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Types.hs:1:1: Module &#x27;RIO.Prelude.Types&#x27; integrates Functional Optics (Lenses/Prisms) for composable immutable data access and transformation
 - [functional_idiom] smart_constructor_module on `RIO.Prelude.Simple.mkSimpleApp` (80%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Simple.hs:40:1: Function &#x27;mkSimpleApp&#x27; in &#x27;RIO.Prelude.Simple&#x27; implements Smart Constructor pattern enforcing domain validation invariants
+- [functional_idiom] recursion_schemes on `RIO.Process` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:1:1: Module &#x27;RIO.Process&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
 - [concurrency_stm] async_concurrent_flow on `RIO.Prelude.Trace` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Trace.hs:1:1: Module &#x27;RIO.Prelude.Trace&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation
 - [functional_idiom] stream_processing_pipeline on `Make-template` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/etc/make-template.hs:1:1: Module &#x27;Make-template&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees
 - [functional_idiom] stream_processing_pipeline on `RIO.Prelude` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude.hs:1:1: Module &#x27;RIO.Prelude&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees
 - [functional_idiom] stream_processing_pipeline on `RIO.Seq` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Seq.hs:1:1: Module &#x27;RIO.Seq&#x27; constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees
 - [resilience] lazy_space_leak_risk on `RIO.Prelude.RIO.ioRefToSomeRef` (80%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/RIO.hs:102:1: Resilience Risk (Lazy Space Leak): Function &#x27;ioRefToSomeRef&#x27; in &#x27;RIO.Prelude.RIO&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`
 - [resilience] catch_all_some_exception on `RIO.Prelude.Logger.getCanUseUnicode` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:397:1: Resilience Anti-Pattern: Function &#x27;getCanUseUnicode&#x27; in &#x27;RIO.Prelude.Logger&#x27; catches `SomeException` without rethrowing async exceptions (`ThreadKilled`); use `Control.Exception.Safe`
+- [resilience] bracket_resource_management on `RIO.FileSpec` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/FileSpec.hs:1:1: Module &#x27;RIO.FileSpec&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+- [resilience] bracket_resource_management on `RIO.File` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/File.hs:1:1: Module &#x27;RIO.File&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+- [resilience] bracket_resource_management on `RIO.Prelude.Display` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Display.hs:1:1: Module &#x27;RIO.Prelude.Display&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+- [resilience] bracket_resource_management on `RIO.Prelude.Logger` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:1:1: Module &#x27;RIO.Prelude.Logger&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+- [resilience] bracket_resource_management on `RIO.Prelude.IO` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/IO.hs:1:1: Module &#x27;RIO.Prelude.IO&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+- [resilience] bracket_resource_management on `RIO.Orphans` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio-orphans/src/RIO/Orphans.hs:1:1: Module &#x27;RIO.Orphans&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
 - [principle] god_module_srp on `RIO.Process` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:1:1: SRP Violation (God Module): Module &#x27;RIO.Process&#x27; contains 40 declarations across 712 lines of code; decompose into focused domain modules
 - [principle] god_module_srp on `RIO.Prelude.Logger` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:1:1: SRP Violation (God Module): Module &#x27;RIO.Prelude.Logger&#x27; contains 64 declarations across 1009 lines of code; decompose into focused domain modules
 - [principle] cyclomatic_complexity_kiss on `RIO.Prelude.Logger.simpleLogFunc` (75%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:635:1: KISS Violation (High Complexity): Function &#x27;simpleLogFunc&#x27; in &#x27;RIO.Prelude.Logger&#x27; has cyclomatic complexity of 16; refactor complex pattern branches
@@ -300,13 +307,13 @@
         <div class="ui stackable grid items-center">
             <div class="eleven wide column">
                 <div class="ui inverted buttons" id="categoryFilterBar" style="display: flex; flex-wrap: wrap; gap: 8px;">
-                    <button class="ui button active filter-btn" data-filter="all">All Findings (42)</button>
+                    <button class="ui button active filter-btn" data-filter="all">All Findings (49)</button>
                     <button class="ui button filter-btn" data-filter="typeclass_system"><i class="cubes icon" style="color: #a855f7;"></i> Typeclasses & Polymorphism (9)</button>
 <button class="ui button filter-btn" data-filter="monad_architecture"><i class="layer group icon" style="color: #8b5cf6;"></i> Monad Stacks & ReaderT (3)</button>
-<button class="ui button filter-btn" data-filter="functional_idiom"><i class="code branch icon" style="color: #14b8a6;"></i> Functional Idioms & GADTs (22)</button>
+<button class="ui button filter-btn" data-filter="functional_idiom"><i class="code branch icon" style="color: #14b8a6;"></i> Functional Idioms & GADTs (23)</button>
 <button class="ui button filter-btn" data-filter="concurrency_stm"><i class="bolt icon" style="color: #0ea5e9;"></i> STM & Concurrency (1)</button>
 <button class="ui button filter-btn" data-filter="optics_lenses"><i class="eye icon" style="color: #ec4899;"></i> Optics & Lenses (2)</button>
-<button class="ui button filter-btn" data-filter="resilience"><i class="shield alternate icon" style="color: #22c55e;"></i> Resilience & Space Leaks (2)</button>
+<button class="ui button filter-btn" data-filter="resilience"><i class="shield alternate icon" style="color: #22c55e;"></i> Resilience & Space Leaks (8)</button>
 <button class="ui button filter-btn" data-filter="principle"><i class="balance scale icon" style="color: #eab308;"></i> Principles & Quality (3)</button>
                 </div>
             </div>
@@ -1312,13 +1319,43 @@
                 </div>
                 
 
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #14b8a6 !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(20, 184, 166, 0.2); color: #5eead4; border: 1px solid rgba(20, 184, 166, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#34</span>
+                            <span style="color: #38bdf8;"><code>recursion_schemes</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">RIO.Process</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">recursion_schemes_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;RIO.Process&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #14b8a6;"><span style="color: #5eead4; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[RECURSION_SCHEMES_MORPHISM]</span> <span style="color: #f1f5f9;">Module &#x27;RIO.Process&#x27; adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Process.hs:1:1"><i class="map marker alternate icon"></i> rio/src/RIO/Process.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
                 <div class="ui inverted card finding-card" data-category="concurrency_stm" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #0ea5e9 !important;">
                     <div class="content" style="padding: 18px 20px;">
                         <div class="ui top right attached label" style="background: rgba(56, 189, 248, 0.2); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="bolt icon"></i> STM & CONCURRENCY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#34</span>
+                            <span style="color: #64748b; font-size: 14px;">#35</span>
                             <span style="color: #38bdf8;"><code>async_concurrent_flow</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1348,7 +1385,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#35</span>
+                            <span style="color: #64748b; font-size: 14px;">#36</span>
                             <span style="color: #38bdf8;"><code>stream_processing_pipeline</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1378,7 +1415,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#36</span>
+                            <span style="color: #64748b; font-size: 14px;">#37</span>
                             <span style="color: #38bdf8;"><code>stream_processing_pipeline</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1408,7 +1445,7 @@
                             <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#37</span>
+                            <span style="color: #64748b; font-size: 14px;">#38</span>
                             <span style="color: #38bdf8;"><code>stream_processing_pipeline</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1438,7 +1475,7 @@
                             <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#38</span>
+                            <span style="color: #64748b; font-size: 14px;">#39</span>
                             <span style="color: #38bdf8;"><code>lazy_space_leak_risk</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1468,7 +1505,7 @@
                             <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#39</span>
+                            <span style="color: #64748b; font-size: 14px;">#40</span>
                             <span style="color: #38bdf8;"><code>catch_all_some_exception</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1492,13 +1529,193 @@
                 </div>
                 
 
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#41</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">RIO.FileSpec</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;RIO.FileSpec&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;RIO.FileSpec&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/test/RIO/FileSpec.hs:1:1"><i class="map marker alternate icon"></i> rio/test/RIO/FileSpec.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#42</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">RIO.File</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;RIO.File&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;RIO.File&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/File.hs:1:1"><i class="map marker alternate icon"></i> rio/src/RIO/File.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#43</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">RIO.Prelude.Display</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;RIO.Prelude.Display&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;RIO.Prelude.Display&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Display.hs:1:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/Display.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#44</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">RIO.Prelude.Logger</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;RIO.Prelude.Logger&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;RIO.Prelude.Logger&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/Logger.hs:1:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/Logger.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#45</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">RIO.Prelude.IO</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;RIO.Prelude.IO&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;RIO.Prelude.IO&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio/src/RIO/Prelude/IO.hs:1:1"><i class="map marker alternate icon"></i> rio/src/RIO/Prelude/IO.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #22c55e !important;">
+                    <div class="content" style="padding: 18px 20px;">
+                        <div class="ui top right attached label" style="background: rgba(34, 197, 94, 0.2); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #64748b; font-size: 14px;">#46</span>
+                            <span style="color: #38bdf8;"><code>bracket_resource_management</code></span>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
+                            <span style="color: #94a3b8; font-weight: 600;">Target:</span> <code class="code-snippet-large">RIO.Orphans</code>
+                            <span class="ui mini label" style="background: #1e293b; color: #94a3b8; margin-left: 6px;">bracket_resource_module</span>
+                        </div>
+                        <div class="description finding-summary" style="margin-top: 12px;">
+                            Module &#x27;RIO.Orphans&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions
+                        </div>
+                        <div style="margin-top: 14px;">
+                            <div style="font-size: 11.5px; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;">
+                                <i class="search icon"></i> Evidence Trail (1 heuristics):
+                            </div>
+                            <div class="evidence-box" style="border-left-color: #22c55e;"><span style="color: #86efac; font-weight: 800; font-family: monospace;">+85%</span> <span style="color: #94a3b8; font-family: monospace; font-size: 11.5px; font-weight: 600;">[BRACKET_RESOURCE_MANAGEMENT]</span> <span style="color: #f1f5f9;">Module &#x27;RIO.Orphans&#x27; enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions</span></div>
+                        </div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); padding: 12px 20px; font-size: 13px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+                        <span class="location-pill" title="/Volumes/External/Code/DPX-Haskell/benchmarks_cache/rio/rio-orphans/src/RIO/Orphans.hs:1:1"><i class="map marker alternate icon"></i> rio-orphans/src/RIO/Orphans.hs:1:1</span>
+                        <span class="ui mini green label conf-badge">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
+                
+
                 <div class="ui inverted card finding-card" data-category="principle" style="width: calc(50% - 1em); margin: 0.5em; border-left: 5px solid #eab308 !important;">
                     <div class="content" style="padding: 18px 20px;">
                         <div class="ui top right attached label" style="background: rgba(234, 179, 8, 0.2); color: #fde047; border: 1px solid rgba(234, 179, 8, 0.5); font-weight: 800; font-size: 11px; letter-spacing: 0.5px;">
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#40</span>
+                            <span style="color: #64748b; font-size: 14px;">#47</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1528,7 +1745,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#41</span>
+                            <span style="color: #64748b; font-size: 14px;">#48</span>
                             <span style="color: #38bdf8;"><code>god_module_srp</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">
@@ -1558,7 +1775,7 @@
                             <i class="balance scale icon"></i> PRINCIPLES & QUALITY
                         </div>
                         <div class="header" style="color: #ffffff; font-size: 16px; font-weight: 800; margin-top: 4px; display: flex; align-items: center; gap: 8px;">
-                            <span style="color: #64748b; font-size: 14px;">#42</span>
+                            <span style="color: #64748b; font-size: 14px;">#49</span>
                             <span style="color: #38bdf8;"><code>cyclomatic_complexity_kiss</code></span>
                         </div>
                         <div class="meta" style="color: var(--text-secondary); margin-top: 8px; font-size: 13.5px;">

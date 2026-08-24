@@ -39,8 +39,13 @@ class PatternType(str, Enum):
     LENS_PRISM_OPTICS = "lens_prism_optics"
     CONTINUATION_MONAD = "continuation_monad"
     SMART_CONSTRUCTOR_MODULE = "smart_constructor_module"
+    RECURSION_SCHEMES = "recursion_schemes"
+    BRACKET_RESOURCE_MANAGEMENT = "bracket_resource_management"
+    TYPE_LEVEL_LITERALS = "type_level_literals"
+    PHANTOM_TYPES = "phantom_types"
 
     # Concurrency, Parallelism & Streams (4)
+
     STM_TRANSACTIONAL_MEMORY = "stm_transactional_memory"
     ASYNC_CONCURRENT_FLOW = "async_concurrent_flow"
     STREAM_PROCESSING_PIPELINE = "stream_processing_pipeline"
