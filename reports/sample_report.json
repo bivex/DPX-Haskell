@@ -1,0 +1,208 @@
+{
+  "project_path": "/Volumes/External/Code/DPX-Haskell/examples",
+  "scanned_files_count": 2,
+  "total_detections_count": 11,
+  "elapsed_seconds": 0.0014,
+  "summary_by_category": {
+    "typeclass_system": 3,
+    "monad_architecture": 2,
+    "optics_lenses": 1,
+    "concurrency_stm": 4,
+    "functional_idiom": 1
+  },
+  "summary_by_confidence_level": {
+    "low": 0,
+    "medium": 0,
+    "high": 2,
+    "very_high": 9
+  },
+  "detections": [
+    {
+      "pattern_type": "gadts_type_safe_ast",
+      "pattern_category": "typeclass_system",
+      "target_name": "BankApp.Transaction",
+      "target_kind": "gadt_data_type",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:30:1",
+      "evidences": [
+        {
+          "description": "Data type 'Transaction' in 'BankApp' implements Generalized Algebraic Data Type (GADT) ensuring compile-time type preservation",
+          "weight": 0.85,
+          "rule_code": "GADT_TYPE_SAFE_AST",
+          "location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:30:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "newtype_strong_typing",
+      "pattern_category": "typeclass_system",
+      "target_name": "BankApp",
+      "target_kind": "newtype_domain_module",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'BankApp' enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost",
+          "weight": 0.8,
+          "rule_code": "NEWTYPE_DOMAIN_VALUE_OBJECT",
+          "location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "deriving_strategies",
+      "pattern_category": "typeclass_system",
+      "target_name": "BankApp",
+      "target_kind": "deriving_strategies_module",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'BankApp' explicitly specifies Deriving Strategies (stock/newtype/anyclass) ensuring deterministic typeclass derivation",
+          "weight": 0.8,
+          "rule_code": "EXPLICIT_DERIVING_STRATEGIES",
+          "location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "reader_t_design_pattern",
+      "pattern_category": "monad_architecture",
+      "target_name": "BankApp",
+      "target_kind": "reader_t_architecture",
+      "confidence_score": 0.9,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'BankApp' adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access",
+          "weight": 0.9,
+          "rule_code": "READER_T_PATTERN_DI",
+          "location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "monad_transformer_stack",
+      "pattern_category": "monad_architecture",
+      "target_name": "BankApp",
+      "target_kind": "monad_transformer_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'BankApp' layers a Monad Transformer Stack combining 2 distinct computational capabilities (ExceptT, ReaderT)",
+          "weight": 0.85,
+          "rule_code": "MONAD_TRANSFORMER_LAYER_STACK",
+          "location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "lens_prism_optics",
+      "pattern_category": "optics_lenses",
+      "target_name": "OpticsStreamService",
+      "target_kind": "lens_optics_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'OpticsStreamService' integrates Functional Optics (Lenses/Prisms) for composable immutable data access and transformation",
+          "weight": 0.85,
+          "rule_code": "FUNCTIONAL_OPTICS_LENSES",
+          "location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "stm_transactional_memory",
+      "pattern_category": "concurrency_stm",
+      "target_name": "BankApp",
+      "target_kind": "stm_concurrency_module",
+      "confidence_score": 0.9,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'BankApp' coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity",
+          "weight": 0.9,
+          "rule_code": "SOFTWARE_TRANSACTIONAL_MEMORY",
+          "location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "stm_transactional_memory",
+      "pattern_category": "concurrency_stm",
+      "target_name": "OpticsStreamService",
+      "target_kind": "stm_concurrency_module",
+      "confidence_score": 0.9,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'OpticsStreamService' coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity",
+          "weight": 0.9,
+          "rule_code": "SOFTWARE_TRANSACTIONAL_MEMORY",
+          "location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "async_concurrent_flow",
+      "pattern_category": "concurrency_stm",
+      "target_name": "OpticsStreamService",
+      "target_kind": "async_concurrency_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'OpticsStreamService' manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation",
+          "weight": 0.85,
+          "rule_code": "STRUCTURED_ASYNC_CONCURRENCY",
+          "location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "stream_processing_pipeline",
+      "pattern_category": "functional_idiom",
+      "target_name": "OpticsStreamService",
+      "target_kind": "streaming_pipeline_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'OpticsStreamService' constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees",
+          "weight": 0.85,
+          "rule_code": "STREAM_PROCESSING_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "chan_mvar_mailbox",
+      "pattern_category": "concurrency_stm",
+      "target_name": "OpticsStreamService",
+      "target_kind": "mailbox_channel_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'OpticsStreamService' coordinates worker synchronization via Actor Mailbox Channel (`TQueue`/`TChan`/`Chan`)",
+          "weight": 0.85,
+          "rule_code": "ACTOR_MAILBOX_CHANNEL",
+          "location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:1:1"
+        }
+      ]
+    }
+  ]
+}

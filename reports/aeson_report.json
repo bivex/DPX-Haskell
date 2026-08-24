@@ -1,0 +1,2759 @@
+{
+  "project_path": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson",
+  "scanned_files_count": 129,
+  "total_detections_count": 161,
+  "elapsed_seconds": 0.1173,
+  "summary_by_category": {
+    "typeclass_system": 53,
+    "monad_architecture": 2,
+    "functional_idiom": 25,
+    "type_safety": 28,
+    "resilience": 2,
+    "principle": 51
+  },
+  "summary_by_confidence_level": {
+    "low": 0,
+    "medium": 0,
+    "high": 69,
+    "very_high": 92
+  },
+  "detections": [
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "PropertyQC.ShrinkMetric",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/PropertyQC.hs:50:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'ShrinkMetric' in 'PropertyQC' defines an ad-hoc polymorphic Adapter interface with 1 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/PropertyQC.hs:50:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Types.ApproxEq",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/Types.hs:65:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'ApproxEq' in 'Types' defines an ad-hoc polymorphic Adapter interface with 0 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/Types.hs:65:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.ToJSON.ToJSON",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:292:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'ToJSON' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 5 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:292:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.ToJSON.KeyValue",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:343:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'KeyValue' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:343:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.ToJSON.KeyValueOmit",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:379:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'KeyValueOmit' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:379:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.ToJSON.ToJSONKey",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:519:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'ToJSONKey' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 2 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:519:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.ToJSON.ToJSON1",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:649:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'ToJSON1' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 5 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:649:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.ToJSON.ToJSON2",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:701:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'ToJSON2' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 5 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:701:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.ToJSON.SumToJSON",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:928:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'SumToJSON' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:928:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.ToJSON.TaggedObject",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:986:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'TaggedObject' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:986:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.ToJSON.GetConName",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:1045:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'GetConName' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 0 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:1045:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.ToJSON.ConsToJSON",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:1113:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'ConsToJSON' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:1113:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.ToJSON.RecordToPairs",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:1154:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'RecordToPairs' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:1154:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.ToJSON.WriteProduct",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:1225:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'WriteProduct' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 0 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:1225:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.ToJSON.EncodeProduct",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:1253:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'EncodeProduct' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 0 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:1253:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.ToJSON.FromPairs",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:2805:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'FromPairs' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:2805:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.ToJSON.KeyValuePair",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:2819:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'KeyValuePair' in 'Data.Aeson.Types.ToJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:2819:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.FromJSON.GFromJSON",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:253:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'GFromJSON' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:253:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.FromJSON.FromJSON",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:390:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'FromJSON' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 3 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:390:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.FromJSON.FromJSONKey",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:435:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'FromJSONKey' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 2 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:435:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.FromJSON.GFromJSONKey",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:528:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'GFromJSONKey' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 0 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:528:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.FromJSON.FromJSON1",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:621:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'FromJSON1' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 3 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:621:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.FromJSON.FromJSON2",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:655:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'FromJSON2' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 3 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:655:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.FromJSON.ParseSum",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1104:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'ParseSum' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 0 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1104:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.FromJSON.SumFromString",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1153:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'SumFromString' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 0 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1153:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.FromJSON.ConstructorNames",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1181:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'ConstructorNames' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1181:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.FromJSON.FromTaggedObject",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1264:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'FromTaggedObject' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 0 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1264:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.FromJSON.ConsFromJSON",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1326:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'ConsFromJSON' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 0 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1326:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.FromJSON.FieldNames",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1384:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'FieldNames' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 0 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1384:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.FromJSON.RecordFromJSON",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1397:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'RecordFromJSON' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1397:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.FromJSON.ProductFromJSON",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1508:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'ProductFromJSON' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 0 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1508:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.FromJSON.FromPair",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1531:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'FromPair' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 0 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1531:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.FromJSON.FromUntaggedValue",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1558:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'FromUntaggedValue' in 'Data.Aeson.Types.FromJSON' defines an ad-hoc polymorphic Adapter interface with 1 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1558:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.Generic.ProductSize",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/Generic.hs:79:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'ProductSize' in 'Data.Aeson.Types.Generic' defines an ad-hoc polymorphic Adapter interface with 0 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/Generic.hs:79:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Internal.TH.MonadFix_",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/TH.hs:61:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'MonadFix_' in 'Data.Aeson.Internal.TH' defines an ad-hoc polymorphic Adapter interface with 1 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/TH.hs:61:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Decoding.Internal.AsError",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/Internal.hs:6:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'AsError' in 'Data.Aeson.Decoding.Internal' defines an ad-hoc polymorphic Adapter interface with 1 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/Internal.hs:6:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "type_family_associated",
+      "pattern_category": "typeclass_system",
+      "target_name": "UnitTests",
+      "target_kind": "type_family_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'UnitTests' implements Type Families / Associated Types for type-level computation and indexed type mappings",
+          "weight": 0.85,
+          "rule_code": "TYPE_FAMILY_ASSOCIATED_TYPES",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "type_family_associated",
+      "pattern_category": "typeclass_system",
+      "target_name": "DataFamilies.Types",
+      "target_kind": "type_family_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/DataFamilies/Types.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'DataFamilies.Types' implements Type Families / Associated Types for type-level computation and indexed type mappings",
+          "weight": 0.85,
+          "rule_code": "TYPE_FAMILY_ASSOCIATED_TYPES",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/DataFamilies/Types.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "type_family_associated",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.TH",
+      "target_kind": "type_family_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Data.Aeson.TH' implements Type Families / Associated Types for type-level computation and indexed type mappings",
+          "weight": 0.85,
+          "rule_code": "TYPE_FAMILY_ASSOCIATED_TYPES",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "gadts_type_safe_ast",
+      "pattern_category": "typeclass_system",
+      "target_name": "SerializationFormatSpec.Example",
+      "target_kind": "gadt_data_type",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/SerializationFormatSpec.hs:306:1",
+      "evidences": [
+        {
+          "description": "Data type 'Example' in 'SerializationFormatSpec' implements Generalized Algebraic Data Type (GADT) ensuring compile-time type preservation",
+          "weight": 0.85,
+          "rule_code": "GADT_TYPE_SAFE_AST",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/SerializationFormatSpec.hs:306:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "gadts_type_safe_ast",
+      "pattern_category": "typeclass_system",
+      "target_name": "Types.GADT",
+      "target_kind": "gadt_data_type",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/Types.hs:94:1",
+      "evidences": [
+        {
+          "description": "Data type 'GADT' in 'Types' implements Generalized Algebraic Data Type (GADT) ensuring compile-time type preservation",
+          "weight": 0.85,
+          "rule_code": "GADT_TYPE_SAFE_AST",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/Types.hs:94:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "gadts_type_safe_ast",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.ToJSON.ToArgs",
+      "target_kind": "gadt_data_type",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:172:1",
+      "evidences": [
+        {
+          "description": "Data type 'ToArgs' in 'Data.Aeson.Types.ToJSON' implements Generalized Algebraic Data Type (GADT) ensuring compile-time type preservation",
+          "weight": 0.85,
+          "rule_code": "GADT_TYPE_SAFE_AST",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:172:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "gadts_type_safe_ast",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.FromJSON.FromArgs",
+      "target_kind": "gadt_data_type",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:262:1",
+      "evidences": [
+        {
+          "description": "Data type 'FromArgs' in 'Data.Aeson.Types.FromJSON' implements Generalized Algebraic Data Type (GADT) ensuring compile-time type preservation",
+          "weight": 0.85,
+          "rule_code": "GADT_TYPE_SAFE_AST",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:262:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "gadts_type_safe_ast",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.FromJSON.FromJSONKeyFunction",
+      "target_kind": "gadt_data_type",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:455:1",
+      "evidences": [
+        {
+          "description": "Data type 'FromJSONKeyFunction' in 'Data.Aeson.Types.FromJSON' implements Generalized Algebraic Data Type (GADT) ensuring compile-time type preservation",
+          "weight": 0.85,
+          "rule_code": "GADT_TYPE_SAFE_AST",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:455:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "newtype_strong_typing",
+      "pattern_category": "typeclass_system",
+      "target_name": "Types",
+      "target_kind": "newtype_domain_module",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/Types.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Types' enforces DDD Value Object strong typing via 6 newtype wrapper(s) at zero runtime cost",
+          "weight": 0.8,
+          "rule_code": "NEWTYPE_DOMAIN_VALUE_OBJECT",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/Types.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "newtype_strong_typing",
+      "pattern_category": "typeclass_system",
+      "target_name": "UnitTests",
+      "target_kind": "newtype_domain_module",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'UnitTests' enforces DDD Value Object strong typing via 10 newtype wrapper(s) at zero runtime cost",
+          "weight": 0.8,
+          "rule_code": "NEWTYPE_DOMAIN_VALUE_OBJECT",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "newtype_strong_typing",
+      "pattern_category": "typeclass_system",
+      "target_name": "UnitTests.OptionalFields",
+      "target_kind": "newtype_domain_module",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/OptionalFields.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'UnitTests.OptionalFields' enforces DDD Value Object strong typing via 3 newtype wrapper(s) at zero runtime cost",
+          "weight": 0.8,
+          "rule_code": "NEWTYPE_DOMAIN_VALUE_OBJECT",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/OptionalFields.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "newtype_strong_typing",
+      "pattern_category": "typeclass_system",
+      "target_name": "UnitTests.OptionalFields.Common",
+      "target_kind": "newtype_domain_module",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/OptionalFields/Common.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'UnitTests.OptionalFields.Common' enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost",
+          "weight": 0.8,
+          "rule_code": "NEWTYPE_DOMAIN_VALUE_OBJECT",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/OptionalFields/Common.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "newtype_strong_typing",
+      "pattern_category": "typeclass_system",
+      "target_name": "GitHub",
+      "target_kind": "newtype_domain_module",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/examples/src/GitHub.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'GitHub' enforces DDD Value Object strong typing via 4 newtype wrapper(s) at zero runtime cost",
+          "weight": 0.8,
+          "rule_code": "NEWTYPE_DOMAIN_VALUE_OBJECT",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/examples/src/GitHub.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "newtype_strong_typing",
+      "pattern_category": "typeclass_system",
+      "target_name": "AesonMap",
+      "target_kind": "newtype_domain_module",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/AesonMap.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'AesonMap' enforces DDD Value Object strong typing via 3 newtype wrapper(s) at zero runtime cost",
+          "weight": 0.8,
+          "rule_code": "NEWTYPE_DOMAIN_VALUE_OBJECT",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/AesonMap.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "newtype_strong_typing",
+      "pattern_category": "typeclass_system",
+      "target_name": "AesonFoldable",
+      "target_kind": "newtype_domain_module",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/AesonFoldable.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'AesonFoldable' enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost",
+          "weight": 0.8,
+          "rule_code": "NEWTYPE_DOMAIN_VALUE_OBJECT",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/AesonFoldable.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "newtype_strong_typing",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Types.Internal",
+      "target_kind": "newtype_domain_module",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/Internal.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Data.Aeson.Types.Internal' enforces DDD Value Object strong typing via 3 newtype wrapper(s) at zero runtime cost",
+          "weight": 0.8,
+          "rule_code": "NEWTYPE_DOMAIN_VALUE_OBJECT",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/Internal.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "deriving_strategies",
+      "pattern_category": "typeclass_system",
+      "target_name": "Data.Aeson.Key",
+      "target_kind": "deriving_strategies_module",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Key.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Data.Aeson.Key' explicitly specifies Deriving Strategies (stock/newtype/anyclass) ensuring deterministic typeclass derivation",
+          "weight": 0.8,
+          "rule_code": "EXPLICIT_DERIVING_STRATEGIES",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Key.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "free_monad_interpreter",
+      "pattern_category": "monad_architecture",
+      "target_name": "Data.Aeson.Encoding.Builder",
+      "target_kind": "free_monad_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Encoding/Builder.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Data.Aeson.Encoding.Builder' implements Free Monad DSL Interpreter separating program description from operational interpretation",
+          "weight": 0.85,
+          "rule_code": "FREE_MONAD_DSL_INTERPRETER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Encoding/Builder.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "tagless_final_style",
+      "pattern_category": "monad_architecture",
+      "target_name": "Data.Aeson.Internal.TH.MonadFix_",
+      "target_kind": "tagless_final_capability",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/TH.hs:61:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'MonadFix_' in 'Data.Aeson.Internal.TH' adopts Tagless Final / MTL capability pattern providing polymorphic monadic effects",
+          "weight": 0.85,
+          "rule_code": "TAGLESS_FINAL_CAPABILITY_CLASS",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/TH.hs:61:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Data.Aeson.Parser.Internal.objectValues",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-aeson/src/Data/Aeson/Parser/Internal.hs:140:1",
+      "evidences": [
+        {
+          "description": "Function 'objectValues' in 'Data.Aeson.Parser.Internal' chains a 4-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-aeson/src/Data/Aeson/Parser/Internal.hs:140:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Data.Aeson.Parser.Internal.arrayValues",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-aeson/src/Data/Aeson/Parser/Internal.hs:175:1",
+      "evidences": [
+        {
+          "description": "Function 'arrayValues' in 'Data.Aeson.Parser.Internal' chains a 3-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-aeson/src/Data/Aeson/Parser/Internal.hs:175:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Data.Aeson.Parser.Internal.jsonWith'",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-aeson/src/Data/Aeson/Parser/Internal.hs:280:1",
+      "evidences": [
+        {
+          "description": "Function 'jsonWith'' in 'Data.Aeson.Parser.Internal' chains a 3-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-aeson/src/Data/Aeson/Parser/Internal.hs:280:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Data.Aeson.Parser.Internal.scientific",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-aeson/src/Data/Aeson/Parser/Internal.hs:457:1",
+      "evidences": [
+        {
+          "description": "Function 'scientific' in 'Data.Aeson.Parser.Internal' chains a 4-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-aeson/src/Data/Aeson/Parser/Internal.hs:457:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "JSONTestSuite.jsonTestSuiteTest",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/JSONTestSuite.hs:26:1",
+      "evidences": [
+        {
+          "description": "Function 'jsonTestSuiteTest' in 'JSONTestSuite' chains a 10-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/JSONTestSuite.hs:26:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "UnitTests.UTCTime.utcTimeGood",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/UTCTime.hs:16:1",
+      "evidences": [
+        {
+          "description": "Function 'utcTimeGood' in 'UnitTests.UTCTime' chains a 14-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/UTCTime.hs:16:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "UnitTests.MonadFix.monadFixParserA",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/MonadFix.hs:59:1",
+      "evidences": [
+        {
+          "description": "Function 'monadFixParserA' in 'UnitTests.MonadFix' chains a 4-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/MonadFix.hs:59:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "UnitTests.MonadFix.monadFixParserB",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/MonadFix.hs:78:1",
+      "evidences": [
+        {
+          "description": "Function 'monadFixParserB' in 'UnitTests.MonadFix' chains a 3-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/MonadFix.hs:78:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Data.Attoparsec.Time.day",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs:49:1",
+      "evidences": [
+        {
+          "description": "Function 'day' in 'Data.Attoparsec.Time' chains a 4-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs:49:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Data.Attoparsec.Time.month",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs:60:1",
+      "evidences": [
+        {
+          "description": "Function 'month' in 'Data.Attoparsec.Time' chains a 3-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs:60:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Data.Attoparsec.Time.quarter",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs:70:1",
+      "evidences": [
+        {
+          "description": "Function 'quarter' in 'Data.Attoparsec.Time' chains a 4-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs:70:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Data.Attoparsec.Time.timeOfDay",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs:105:1",
+      "evidences": [
+        {
+          "description": "Function 'timeOfDay' in 'Data.Attoparsec.Time' chains a 3-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs:105:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Data.Attoparsec.Time.seconds",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs:118:1",
+      "evidences": [
+        {
+          "description": "Function 'seconds' in 'Data.Attoparsec.Time' chains a 3-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs:118:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Data.Attoparsec.Time.timeZone",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs:139:1",
+      "evidences": [
+        {
+          "description": "Function 'timeZone' in 'Data.Attoparsec.Time' chains a 4-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs:139:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "UnescapePureText2.unescapeText'",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:142:1",
+      "evidences": [
+        {
+          "description": "Function 'unescapeText'' in 'UnescapePureText2' chains a 6-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:142:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "UnescapePureText1.unescapeText'",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText1.hs:131:1",
+      "evidences": [
+        {
+          "description": "Function 'unescapeText'' in 'UnescapePureText1' chains a 3-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText1.hs:131:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Data.Aeson.TH.consToValue",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs:227:1",
+      "evidences": [
+        {
+          "description": "Function 'consToValue' in 'Data.Aeson.TH' chains a 6-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs:227:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Data.Aeson.TH.consFromJSON",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs:562:1",
+      "evidences": [
+        {
+          "description": "Function 'consFromJSON' in 'Data.Aeson.TH' chains a 23-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs:562:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Data.Aeson.Internal.Unescape.unescapeTextIO",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/Unescape.hs:51:1",
+      "evidences": [
+        {
+          "description": "Function 'unescapeTextIO' in 'Data.Aeson.Internal.Unescape' chains a 20-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/Unescape.hs:51:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Data.Aeson.Internal.TH.letrecE",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/TH.hs:16:1",
+      "evidences": [
+        {
+          "description": "Function 'letrecE' in 'Data.Aeson.Internal.TH' chains a 7-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/TH.hs:16:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "stream_processing_pipeline",
+      "pattern_category": "functional_idiom",
+      "target_name": "DoubleToScientific",
+      "target_kind": "streaming_pipeline_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/DoubleToScientific.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'DoubleToScientific' constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees",
+          "weight": 0.85,
+          "rule_code": "STREAM_PROCESSING_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/DoubleToScientific.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "stream_processing_pipeline",
+      "pattern_category": "functional_idiom",
+      "target_name": "UnescapePureText2",
+      "target_kind": "streaming_pipeline_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'UnescapePureText2' constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees",
+          "weight": 0.85,
+          "rule_code": "STREAM_PROCESSING_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "stream_processing_pipeline",
+      "pattern_category": "functional_idiom",
+      "target_name": "UnescapePureText1",
+      "target_kind": "streaming_pipeline_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText1.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'UnescapePureText1' constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees",
+          "weight": 0.85,
+          "rule_code": "STREAM_PROCESSING_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText1.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "stream_processing_pipeline",
+      "pattern_category": "functional_idiom",
+      "target_name": "Data.Aeson.Internal.UnescapeFromText",
+      "target_kind": "streaming_pipeline_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/UnescapeFromText.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Data.Aeson.Internal.UnescapeFromText' constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees",
+          "weight": 0.85,
+          "rule_code": "STREAM_PROCESSING_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/UnescapeFromText.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "stream_processing_pipeline",
+      "pattern_category": "functional_idiom",
+      "target_name": "Data.Aeson.Internal.Unescape",
+      "target_kind": "streaming_pipeline_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/Unescape.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Data.Aeson.Internal.Unescape' constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees",
+          "weight": 0.85,
+          "rule_code": "STREAM_PROCESSING_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/Unescape.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "Main.escapeBench",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/aeson-benchmark-suite.hs:82:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'escapeBench' in 'Main' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/aeson-benchmark-suite.hs:82:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "UnitTests.goodProducer",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests.hs:112:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'goodProducer' in 'UnitTests' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests.hs:112:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "UnitTests.unescapeString",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests.hs:230:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'unescapeString' in 'UnitTests' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests.hs:230:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "UnitTests.pr455",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests.hs:268:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'pr455' in 'UnitTests' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests.hs:268:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "UnitTests.UTCTime.utcTimeGood",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/UTCTime.hs:16:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'utcTimeGood' in 'UnitTests.UTCTime' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/UTCTime.hs:16:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "Data.Attoparsec.Time.timeZone",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs:139:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'timeZone' in 'Data.Attoparsec.Time' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs:139:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "CompareWithHermes.decode",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithHermes.hs:23:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'decode' in 'CompareWithHermes' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithHermes.hs:23:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "CompareWithHermes.decode'",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithHermes.hs:26:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'decode'' in 'CompareWithHermes' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithHermes.hs:26:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "CompareWithHermes.decodeS",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithHermes.hs:29:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'decodeS' in 'CompareWithHermes' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithHermes.hs:29:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "CompareWithHermes.decodeTS",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithHermes.hs:32:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'decodeTS' in 'CompareWithHermes' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithHermes.hs:32:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "CompareWithHermes.decodeIP",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithHermes.hs:35:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'decodeIP' in 'CompareWithHermes' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithHermes.hs:35:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "CompareWithJSON.decodeJ",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs:39:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'decodeJ' in 'CompareWithJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs:39:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "CompareWithJSON.decode",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs:45:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'decode' in 'CompareWithJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs:45:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "CompareWithJSON.decode'",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs:48:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'decode'' in 'CompareWithJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs:48:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "CompareWithJSON.decodeS",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs:51:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'decodeS' in 'CompareWithJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs:51:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "CompareWithJSON.decodeS'",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs:54:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'decodeS'' in 'CompareWithJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs:54:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "CompareWithJSON.decodeT",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs:57:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'decodeT' in 'CompareWithJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs:57:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "CompareWithJSON.decodeTviaBS",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs:60:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'decodeTviaBS' in 'CompareWithJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs:60:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "CompareWithJSON.decodeAtto",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs:63:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'decodeAtto' in 'CompareWithJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs:63:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "CompareWithJSON.decodeAtto'",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs:67:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'decodeAtto'' in 'CompareWithJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs:67:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "CompareWithJSON.decodeAttoS",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs:71:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'decodeAttoS' in 'CompareWithJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs:71:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "CompareWithJSON.decodeAttoS'",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs:75:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'decodeAttoS'' in 'CompareWithJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithJSON.hs:75:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "Data.Aeson.TH.consFromJSON",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs:562:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'consFromJSON' in 'Data.Aeson.TH' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs:562:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "Data.Aeson.TH.nonEmpty",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs:880:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'nonEmpty' in 'Data.Aeson.TH' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs:880:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "Data.Aeson.TH.varTToName",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs:1462:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'varTToName' in 'Data.Aeson.TH' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs:1462:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "Data.Aeson.Types.FromJSON.recordParseJSONImpl",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1468:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'recordParseJSONImpl' in 'Data.Aeson.Types.FromJSON' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1468:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "Data.Aeson.QQ.Simple.aesonQQ",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/QQ/Simple.hs:22:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'aesonQQ' in 'Data.Aeson.QQ.Simple' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/QQ/Simple.hs:22:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_from_just",
+      "pattern_category": "type_safety",
+      "target_name": "UnitTests.NullaryConstructors.nullaryConstructors",
+      "target_kind": "unsafe_from_just_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/NullaryConstructors.hs:23:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'nullaryConstructors' in 'UnitTests.NullaryConstructors' calls partial `fromJust` which throws an uncatchable exception on `Nothing`; use `fromMaybe` or pattern match",
+          "weight": 0.85,
+          "rule_code": "UNSAFE_FROM_JUST_CALL",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/NullaryConstructors.hs:23:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "lazy_space_leak_risk",
+      "pattern_category": "resilience",
+      "target_name": "Data.Aeson.TH.parseTypeMismatch",
+      "target_kind": "space_leak_hazard_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs:1032:1",
+      "evidences": [
+        {
+          "description": "Resilience Risk (Lazy Space Leak): Function 'parseTypeMismatch' in 'Data.Aeson.TH' uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl'` / `Control.Monad.State.Strict`",
+          "weight": 0.8,
+          "rule_code": "LAZY_SPACE_LEAK_ACCUMULATOR",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs:1032:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "lazy_space_leak_risk",
+      "pattern_category": "resilience",
+      "target_name": "Data.Aeson.KeyMap.foldl",
+      "target_kind": "space_leak_hazard_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/KeyMap.hs:423:1",
+      "evidences": [
+        {
+          "description": "Resilience Risk (Lazy Space Leak): Function 'foldl' in 'Data.Aeson.KeyMap' uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl'` / `Control.Monad.State.Strict`",
+          "weight": 0.8,
+          "rule_code": "LAZY_SPACE_LEAK_ACCUMULATOR",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/KeyMap.hs:423:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "god_module_srp",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.Parser.Internal",
+      "target_kind": "god_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-aeson/src/Data/Aeson/Parser/Internal.hs:1:1",
+      "evidences": [
+        {
+          "description": "SRP Violation (God Module): Module 'Data.Aeson.Parser.Internal' contains 35 declarations across 482 lines of code; decompose into focused domain modules",
+          "weight": 0.85,
+          "rule_code": "SRP_GOD_MODULE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-aeson/src/Data/Aeson/Parser/Internal.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "god_module_srp",
+      "pattern_category": "principle",
+      "target_name": "UnitTests",
+      "target_kind": "god_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests.hs:1:1",
+      "evidences": [
+        {
+          "description": "SRP Violation (God Module): Module 'UnitTests' contains 45 declarations across 584 lines of code; decompose into focused domain modules",
+          "weight": 0.85,
+          "rule_code": "SRP_GOD_MODULE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "god_module_srp",
+      "pattern_category": "principle",
+      "target_name": "Encoders",
+      "target_kind": "god_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/Encoders.hs:1:1",
+      "evidences": [
+        {
+          "description": "SRP Violation (God Module): Module 'Encoders' contains 125 declarations across 461 lines of code; decompose into focused domain modules",
+          "weight": 0.85,
+          "rule_code": "SRP_GOD_MODULE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/Encoders.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "god_module_srp",
+      "pattern_category": "principle",
+      "target_name": "DataFamilies.Encoders",
+      "target_kind": "god_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/DataFamilies/Encoders.hs:1:1",
+      "evidences": [
+        {
+          "description": "SRP Violation (God Module): Module 'DataFamilies.Encoders' contains 60 declarations across 240 lines of code; decompose into focused domain modules",
+          "weight": 0.85,
+          "rule_code": "SRP_GOD_MODULE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/DataFamilies/Encoders.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "god_module_srp",
+      "pattern_category": "principle",
+      "target_name": "UnitTests.OptionalFields.Common",
+      "target_kind": "god_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/OptionalFields/Common.hs:1:1",
+      "evidences": [
+        {
+          "description": "SRP Violation (God Module): Module 'UnitTests.OptionalFields.Common' contains 31 declarations across 215 lines of code; decompose into focused domain modules",
+          "weight": 0.85,
+          "rule_code": "SRP_GOD_MODULE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests/OptionalFields/Common.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "god_module_srp",
+      "pattern_category": "principle",
+      "target_name": "Data.Time.FromText",
+      "target_kind": "god_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/text-iso8601/src/Data/Time/FromText.hs:1:1",
+      "evidences": [
+        {
+          "description": "SRP Violation (God Module): Module 'Data.Time.FromText' contains 40 declarations across 562 lines of code; decompose into focused domain modules",
+          "weight": 0.85,
+          "rule_code": "SRP_GOD_MODULE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/text-iso8601/src/Data/Time/FromText.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "god_module_srp",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.TH",
+      "target_kind": "god_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs:1:1",
+      "evidences": [
+        {
+          "description": "SRP Violation (God Module): Module 'Data.Aeson.TH' contains 128 declarations across 2013 lines of code; decompose into focused domain modules",
+          "weight": 0.85,
+          "rule_code": "SRP_GOD_MODULE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "god_module_srp",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.KeyMap",
+      "target_kind": "god_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/KeyMap.hs:1:1",
+      "evidences": [
+        {
+          "description": "SRP Violation (God Module): Module 'Data.Aeson.KeyMap' contains 51 declarations across 750 lines of code; decompose into focused domain modules",
+          "weight": 0.85,
+          "rule_code": "SRP_GOD_MODULE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/KeyMap.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "god_module_srp",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.Types.ToJSON",
+      "target_kind": "god_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:1:1",
+      "evidences": [
+        {
+          "description": "SRP Violation (God Module): Module 'Data.Aeson.Types.ToJSON' contains 50 declarations across 2829 lines of code; decompose into focused domain modules",
+          "weight": 0.85,
+          "rule_code": "SRP_GOD_MODULE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/ToJSON.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "god_module_srp",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.Types.Internal",
+      "target_kind": "god_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/Internal.hs:1:1",
+      "evidences": [
+        {
+          "description": "SRP Violation (God Module): Module 'Data.Aeson.Types.Internal' contains 48 declarations across 934 lines of code; decompose into focused domain modules",
+          "weight": 0.85,
+          "rule_code": "SRP_GOD_MODULE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/Internal.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "god_module_srp",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.Types.FromJSON",
+      "target_kind": "god_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1:1",
+      "evidences": [
+        {
+          "description": "SRP Violation (God Module): Module 'Data.Aeson.Types.FromJSON' contains 89 declarations across 2876 lines of code; decompose into focused domain modules",
+          "weight": 0.85,
+          "rule_code": "SRP_GOD_MODULE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "god_module_srp",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.Encoding.Builder",
+      "target_kind": "god_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Encoding/Builder.hs:1:1",
+      "evidences": [
+        {
+          "description": "SRP Violation (God Module): Module 'Data.Aeson.Encoding.Builder' contains 33 declarations across 319 lines of code; decompose into focused domain modules",
+          "weight": 0.85,
+          "rule_code": "SRP_GOD_MODULE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Encoding/Builder.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "god_module_srp",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.Encoding.Internal",
+      "target_kind": "god_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Encoding/Internal.hs:1:1",
+      "evidences": [
+        {
+          "description": "SRP Violation (God Module): Module 'Data.Aeson.Encoding.Internal' contains 70 declarations across 441 lines of code; decompose into focused domain modules",
+          "weight": 0.85,
+          "rule_code": "SRP_GOD_MODULE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Encoding/Internal.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "DoubleToScientific.generateShortestDigits",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/DoubleToScientific.hs:153:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'generateShortestDigits' in 'DoubleToScientific' has cyclomatic complexity of 16; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/DoubleToScientific.hs:153:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "JSONTestSuite.jsonTestSuiteTest",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/JSONTestSuite.hs:26:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'jsonTestSuiteTest' in 'JSONTestSuite' has cyclomatic complexity of 15; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/JSONTestSuite.hs:26:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "UnitTests.unknownFields",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests.hs:352:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'unknownFields' in 'UnitTests' has cyclomatic complexity of 12; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/tests/UnitTests.hs:352:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Data.Time.FromText.parseYear_",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/text-iso8601/src/Data/Time/FromText.hs:266:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'parseYear_' in 'Data.Time.FromText' has cyclomatic complexity of 24; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/text-iso8601/src/Data/Time/FromText.hs:266:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Data.Time.FromText.parseTimeZone__",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/text-iso8601/src/Data/Time/FromText.hs:469:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'parseTimeZone__' in 'Data.Time.FromText' has cyclomatic complexity of 16; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/text-iso8601/src/Data/Time/FromText.hs:469:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Data.Attoparsec.Time.timeZone",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs:139:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'timeZone' in 'Data.Attoparsec.Time' has cyclomatic complexity of 13; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/attoparsec-iso8601/src/Data/Attoparsec/Time.hs:139:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "UnescapePureText2.unescapeText'",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:142:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'unescapeText'' in 'UnescapePureText2' has cyclomatic complexity of 15; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:142:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "UnescapePureText1.unescapeText'",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText1.hs:131:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'unescapeText'' in 'UnescapePureText1' has cyclomatic complexity of 12; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText1.hs:131:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.TH.consFromJSON",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs:562:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'consFromJSON' in 'Data.Aeson.TH' has cyclomatic complexity of 13; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/TH.hs:562:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.Types.FromJSON.parseNonAllNullarySum",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1209:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'parseNonAllNullarySum' in 'Data.Aeson.Types.FromJSON' has cyclomatic complexity of 13; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Types/FromJSON.hs:1209:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.Internal.UnescapeFromText.unescapeFromTextIO",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/UnescapeFromText.hs:42:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'unescapeFromTextIO' in 'Data.Aeson.Internal.UnescapeFromText' has cyclomatic complexity of 119; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/UnescapeFromText.hs:42:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.Internal.Scientific.scanScientific'",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/Scientific.hs:32:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'scanScientific'' in 'Data.Aeson.Internal.Scientific' has cyclomatic complexity of 59; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/Scientific.hs:32:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.Internal.Unescape.unescapeTextIO",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/Unescape.hs:51:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'unescapeTextIO' in 'Data.Aeson.Internal.Unescape' has cyclomatic complexity of 181; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/Unescape.hs:51:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.Decoding.Text.textToTokens",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/Text.hs:43:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'textToTokens' in 'Data.Aeson.Decoding.Text' has cyclomatic complexity of 33; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/Text.hs:43:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.Decoding.Text.scanStringLiteral",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/Text.hs:141:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'scanStringLiteral' in 'Data.Aeson.Decoding.Text' has cyclomatic complexity of 19; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/Text.hs:141:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.Decoding.Text.scanNumberLiteral",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/Text.hs:192:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'scanNumberLiteral' in 'Data.Aeson.Decoding.Text' has cyclomatic complexity of 68; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/Text.hs:192:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.Decoding.ByteString.bsToTokens",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/ByteString.hs:32:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'bsToTokens' in 'Data.Aeson.Decoding.ByteString' has cyclomatic complexity of 33; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/ByteString.hs:32:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.Decoding.ByteString.scanStringLiteral",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/ByteString.hs:132:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'scanStringLiteral' in 'Data.Aeson.Decoding.ByteString' has cyclomatic complexity of 20; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/ByteString.hs:132:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.Decoding.ByteString.scanNumberLiteral",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/ByteString.hs:182:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'scanNumberLiteral' in 'Data.Aeson.Decoding.ByteString' has cyclomatic complexity of 68; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/ByteString.hs:182:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.Decoding.ByteString.Lazy.lbsToTokens",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/ByteString/Lazy.hs:32:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'lbsToTokens' in 'Data.Aeson.Decoding.ByteString.Lazy' has cyclomatic complexity of 33; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/ByteString/Lazy.hs:32:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.Decoding.ByteString.Lazy.scanStringLiteral",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/ByteString/Lazy.hs:138:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'scanStringLiteral' in 'Data.Aeson.Decoding.ByteString.Lazy' has cyclomatic complexity of 20; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/ByteString/Lazy.hs:138:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.Decoding.ByteString.Lazy.scanNumberLiteral",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/ByteString/Lazy.hs:188:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'scanNumberLiteral' in 'Data.Aeson.Decoding.ByteString.Lazy' has cyclomatic complexity of 68; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/ByteString/Lazy.hs:188:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "UnescapePureText2.setByte1",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:70:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): UnescapePureText2.setByte1, UnescapePureText1.setByte1",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:70:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "UnescapePureText2.setByte2",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:74:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): UnescapePureText2.setByte2, UnescapePureText1.setByte2",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:74:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "UnescapePureText2.setByte2Top",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:78:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): UnescapePureText2.setByte2Top, UnescapePureText1.setByte2Top",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:78:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "UnescapePureText2.setByte3",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:82:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): UnescapePureText2.setByte3, UnescapePureText1.setByte3",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:82:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "UnescapePureText2.setByte3Top",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:86:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): UnescapePureText2.setByte3Top, UnescapePureText1.setByte3Top",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:86:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "UnescapePureText2.setByte4",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:90:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): UnescapePureText2.setByte4, UnescapePureText1.setByte4",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:90:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "UnescapePureText2.decode",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:94:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): UnescapePureText2.decode, UnescapePureText1.decode",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:94:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "UnescapePureText2.throwDecodeError",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:274:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): UnescapePureText2.throwDecodeError, UnescapePureText1.throwDecodeError",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/UnescapePureText2.hs:274:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "CompareWithHermes.decodeS",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithHermes.hs:29:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): CompareWithHermes.decodeS, CompareWithJSON.decodeS'",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithHermes.hs:29:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "CompareWithHermes.decodeIP",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithHermes.hs:35:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): CompareWithHermes.decodeIP, CompareWithJSON.decodeAtto",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/CompareWithHermes.hs:35:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "Auto.G.BigRecord.bigRecord",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/Auto/G/BigRecord.hs:28:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): Auto.G.BigRecord.bigRecord, Auto.T.BigRecord.bigRecord",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/Auto/G/BigRecord.hs:28:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "Auto.G.BigProduct.bigProduct",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/Auto/G/BigProduct.hs:28:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): Auto.G.BigProduct.bigProduct, Auto.T.BigProduct.bigProduct",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/Auto/G/BigProduct.hs:28:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "Auto.G.D.d",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/Auto/G/D.hs:34:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): Auto.G.D.d, Auto.T.D.d",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/benchmarks/bench/Auto/G/D.hs:34:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.Internal.UnescapeFromText.throwDecodeError",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/UnescapeFromText.hs:31:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): Data.Aeson.Internal.UnescapeFromText.throwDecodeError, Data.Aeson.Internal.Unescape.throwDecodeError",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Internal/UnescapeFromText.hs:31:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.Decoding.Text.tkErrEOF",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/Text.hs:127:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 3 location(s): Data.Aeson.Decoding.Text.tkErrEOF, Data.Aeson.Decoding.ByteString.tkErrEOF, Data.Aeson.Decoding.ByteString.Lazy.tkErrEOF",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/Text.hs:127:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "Data.Aeson.Decoding.Text.tkErrBS",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/Text.hs:132:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 3 location(s): Data.Aeson.Decoding.Text.tkErrBS, Data.Aeson.Decoding.ByteString.tkErrBS, Data.Aeson.Decoding.ByteString.Lazy.tkErrBS",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/aeson/src/Data/Aeson/Decoding/Text.hs:132:1"
+        }
+      ]
+    }
+  ]
+}

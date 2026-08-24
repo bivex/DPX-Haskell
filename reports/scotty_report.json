@@ -1,0 +1,482 @@
+{
+  "project_path": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty",
+  "scanned_files_count": 31,
+  "total_detections_count": 27,
+  "elapsed_seconds": 0.0203,
+  "summary_by_category": {
+    "typeclass_system": 3,
+    "monad_architecture": 4,
+    "functional_idiom": 6,
+    "concurrency_stm": 4,
+    "type_safety": 1,
+    "resilience": 4,
+    "principle": 5
+  },
+  "summary_by_confidence_level": {
+    "low": 0,
+    "medium": 0,
+    "high": 13,
+    "very_high": 14
+  },
+  "detections": [
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Web.Scotty.Action.Parsable",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:626:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'Parsable' in 'Web.Scotty.Action' defines an ad-hoc polymorphic Adapter interface with 2 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:626:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "newtype_strong_typing",
+      "pattern_category": "typeclass_system",
+      "target_name": "Web.Scotty.Internal.Types",
+      "target_kind": "newtype_domain_module",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Web.Scotty.Internal.Types' enforces DDD Value Object strong typing via 3 newtype wrapper(s) at zero runtime cost",
+          "weight": 0.8,
+          "rule_code": "NEWTYPE_DOMAIN_VALUE_OBJECT",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "deriving_strategies",
+      "pattern_category": "typeclass_system",
+      "target_name": "Web.Scotty.Internal.Types",
+      "target_kind": "deriving_strategies_module",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Web.Scotty.Internal.Types' explicitly specifies Deriving Strategies (stock/newtype/anyclass) ensuring deterministic typeclass derivation",
+          "weight": 0.8,
+          "rule_code": "EXPLICIT_DERIVING_STRATEGIES",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "reader_t_design_pattern",
+      "pattern_category": "monad_architecture",
+      "target_name": "Web.Scotty.Trans",
+      "target_kind": "reader_t_architecture",
+      "confidence_score": 0.9,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Trans.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Web.Scotty.Trans' adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access",
+          "weight": 0.9,
+          "rule_code": "READER_T_PATTERN_DI",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Trans.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "reader_t_design_pattern",
+      "pattern_category": "monad_architecture",
+      "target_name": "Web.Scotty.Action",
+      "target_kind": "reader_t_architecture",
+      "confidence_score": 0.9,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Web.Scotty.Action' adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access",
+          "weight": 0.9,
+          "rule_code": "READER_T_PATTERN_DI",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "reader_t_design_pattern",
+      "pattern_category": "monad_architecture",
+      "target_name": "Web.Scotty.Internal.Types",
+      "target_kind": "reader_t_architecture",
+      "confidence_score": 0.9,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Web.Scotty.Internal.Types' adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access",
+          "weight": 0.9,
+          "rule_code": "READER_T_PATTERN_DI",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "monad_transformer_stack",
+      "pattern_category": "monad_architecture",
+      "target_name": "Web.Scotty.Internal.Types",
+      "target_kind": "monad_transformer_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Web.Scotty.Internal.Types' layers a Monad Transformer Stack combining 1 distinct computational capabilities (ReaderT)",
+          "weight": 0.85,
+          "rule_code": "MONAD_TRANSFORMER_LAYER_STACK",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Main.main",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/examples/bodyecho.hs:12:1",
+      "evidences": [
+        {
+          "description": "Function 'main' in 'Main' chains a 5-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/examples/bodyecho.hs:12:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Web.ScottySpec.spec",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1",
+      "evidences": [
+        {
+          "description": "Function 'spec' in 'Web.ScottySpec' chains a 40-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Web.Scotty.Trans.scottyAppT",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Trans.hs:142:1",
+      "evidences": [
+        {
+          "description": "Function 'scottyAppT' in 'Web.Scotty.Trans' chains a 3-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Trans.hs:142:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Web.Scotty.Action.nested",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:778:1",
+      "evidences": [
+        {
+          "description": "Function 'nested' in 'Web.Scotty.Action' chains a 4-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:778:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Web.Scotty.Route.route",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:84:1",
+      "evidences": [
+        {
+          "description": "Function 'route' in 'Web.Scotty.Route' chains a 3-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:84:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Web.Scotty.Util.readRequestBody",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Util.hs:75:1",
+      "evidences": [
+        {
+          "description": "Function 'readRequestBody' in 'Web.Scotty.Util' chains a 3-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Util.hs:75:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "stm_transactional_memory",
+      "pattern_category": "concurrency_stm",
+      "target_name": "Web.Scotty.Session",
+      "target_kind": "stm_concurrency_module",
+      "confidence_score": 0.9,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Session.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Web.Scotty.Session' coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity",
+          "weight": 0.9,
+          "rule_code": "SOFTWARE_TRANSACTIONAL_MEMORY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Session.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "stm_transactional_memory",
+      "pattern_category": "concurrency_stm",
+      "target_name": "Web.Scotty.Route",
+      "target_kind": "stm_concurrency_module",
+      "confidence_score": 0.9,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Web.Scotty.Route' coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity",
+          "weight": 0.9,
+          "rule_code": "SOFTWARE_TRANSACTIONAL_MEMORY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "stm_transactional_memory",
+      "pattern_category": "concurrency_stm",
+      "target_name": "Web.Scotty.Internal.Types",
+      "target_kind": "stm_concurrency_module",
+      "confidence_score": 0.9,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Web.Scotty.Internal.Types' coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity",
+          "weight": 0.9,
+          "rule_code": "SOFTWARE_TRANSACTIONAL_MEMORY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "async_concurrent_flow",
+      "pattern_category": "concurrency_stm",
+      "target_name": "Web.ScottySpec",
+      "target_kind": "async_concurrency_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Web.ScottySpec' manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation",
+          "weight": 0.85,
+          "rule_code": "STRUCTURED_ASYNC_CONCURRENCY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "Web.ScottySpec.spec",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'spec' in 'Web.ScottySpec' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "lazy_space_leak_risk",
+      "pattern_category": "resilience",
+      "target_name": "Web.Scotty.Trans.applyAll",
+      "target_kind": "space_leak_hazard_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Trans.hs:179:1",
+      "evidences": [
+        {
+          "description": "Resilience Risk (Lazy Space Leak): Function 'applyAll' in 'Web.Scotty.Trans' uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl'` / `Control.Monad.State.Strict`",
+          "weight": 0.8,
+          "rule_code": "LAZY_SPACE_LEAK_ACCUMULATOR",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Trans.hs:179:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "lazy_space_leak_risk",
+      "pattern_category": "resilience",
+      "target_name": "Web.Scotty.Route.matchAny",
+      "target_kind": "space_leak_hazard_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:59:1",
+      "evidences": [
+        {
+          "description": "Resilience Risk (Lazy Space Leak): Function 'matchAny' in 'Web.Scotty.Route' uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl'` / `Control.Monad.State.Strict`",
+          "weight": 0.8,
+          "rule_code": "LAZY_SPACE_LEAK_ACCUMULATOR",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:59:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "lazy_space_leak_risk",
+      "pattern_category": "resilience",
+      "target_name": "Web.Scotty.Route.addroute",
+      "target_kind": "space_leak_hazard_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:74:1",
+      "evidences": [
+        {
+          "description": "Resilience Risk (Lazy Space Leak): Function 'addroute' in 'Web.Scotty.Route' uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl'` / `Control.Monad.State.Strict`",
+          "weight": 0.8,
+          "rule_code": "LAZY_SPACE_LEAK_ACCUMULATOR",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:74:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "catch_all_some_exception",
+      "pattern_category": "resilience",
+      "target_name": "Web.ScottySpec.spec",
+      "target_kind": "defensive_catch_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1",
+      "evidences": [
+        {
+          "description": "Resilience Anti-Pattern: Function 'spec' in 'Web.ScottySpec' catches `SomeException` without rethrowing async exceptions (`ThreadKilled`); use `Control.Exception.Safe`",
+          "weight": 0.85,
+          "rule_code": "CATCH_ALL_SOME_EXCEPTION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "god_module_srp",
+      "pattern_category": "principle",
+      "target_name": "Web.Scotty",
+      "target_kind": "god_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty.hs:1:1",
+      "evidences": [
+        {
+          "description": "SRP Violation (God Module): Module 'Web.Scotty' contains 78 declarations across 615 lines of code; decompose into focused domain modules",
+          "weight": 0.85,
+          "rule_code": "SRP_GOD_MODULE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "god_module_srp",
+      "pattern_category": "principle",
+      "target_name": "Web.Scotty.Action",
+      "target_kind": "god_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:1:1",
+      "evidences": [
+        {
+          "description": "SRP Violation (God Module): Module 'Web.Scotty.Action' contains 60 declarations across 786 lines of code; decompose into focused domain modules",
+          "weight": 0.85,
+          "rule_code": "SRP_GOD_MODULE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "god_module_srp",
+      "pattern_category": "principle",
+      "target_name": "Web.Scotty.Internal.Types",
+      "target_kind": "god_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1",
+      "evidences": [
+        {
+          "description": "SRP Violation (God Module): Module 'Web.Scotty.Internal.Types' contains 38 declarations across 289 lines of code; decompose into focused domain modules",
+          "weight": 0.85,
+          "rule_code": "SRP_GOD_MODULE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Web.ScottySpec.spec",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'spec' in 'Web.ScottySpec' has cyclomatic complexity of 43; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Web.Scotty.Action.scottyExceptionHandler",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:146:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'scottyExceptionHandler' in 'Web.Scotty.Action' has cyclomatic complexity of 20; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:146:1"
+        }
+      ]
+    }
+  ]
+}

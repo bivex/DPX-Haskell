@@ -1,0 +1,1111 @@
+{
+  "project_path": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec",
+  "scanned_files_count": 42,
+  "total_detections_count": 64,
+  "elapsed_seconds": 0.0499,
+  "summary_by_category": {
+    "typeclass_system": 11,
+    "monad_architecture": 9,
+    "functional_idiom": 17,
+    "concurrency_stm": 1,
+    "type_safety": 2,
+    "resilience": 3,
+    "principle": 21
+  },
+  "summary_by_confidence_level": {
+    "low": 0,
+    "medium": 0,
+    "high": 38,
+    "very_high": 26
+  },
+  "detections": [
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Text.Megaparsec.Class.MonadParsec",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Class.hs:50:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'MonadParsec' in 'Text.Megaparsec.Class' defines an ad-hoc polymorphic Adapter interface with 17 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Class.hs:50:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Text.Megaparsec.Debug.MonadParsecDbg",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Debug.hs:48:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'MonadParsecDbg' in 'Text.Megaparsec.Debug' defines an ad-hoc polymorphic Adapter interface with 1 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Debug.hs:48:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Text.Megaparsec.Error.ShowErrorComponent",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Error.hs:332:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'ShowErrorComponent' in 'Text.Megaparsec.Error' defines an ad-hoc polymorphic Adapter interface with 2 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Error.hs:332:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Text.Megaparsec.Stream.Stream",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:68:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'Stream' in 'Text.Megaparsec.Stream' defines an ad-hoc polymorphic Adapter interface with 8 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:68:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Text.Megaparsec.Stream.VisualStream",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:414:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'VisualStream' in 'Text.Megaparsec.Stream' defines an ad-hoc polymorphic Adapter interface with 2 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:414:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Text.Megaparsec.Stream.TraversableStream",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:450:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'TraversableStream' in 'Text.Megaparsec.Stream' defines an ad-hoc polymorphic Adapter interface with 2 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:450:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "typeclass_adapter",
+      "pattern_category": "typeclass_system",
+      "target_name": "Text.Megaparsec.Byte.Binary.BinaryChunk",
+      "target_kind": "typeclass",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Binary.hs:54:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'BinaryChunk' in 'Text.Megaparsec.Byte.Binary' defines an ad-hoc polymorphic Adapter interface with 2 method(s)",
+          "weight": 0.85,
+          "rule_code": "TYPECLASS_INTERFACE_ADAPTER",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Binary.hs:54:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "type_family_associated",
+      "pattern_category": "typeclass_system",
+      "target_name": "Text.Megaparsec.Stream",
+      "target_kind": "type_family_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Text.Megaparsec.Stream' implements Type Families / Associated Types for type-level computation and indexed type mappings",
+          "weight": 0.85,
+          "rule_code": "TYPE_FAMILY_ASSOCIATED_TYPES",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "newtype_strong_typing",
+      "pattern_category": "typeclass_system",
+      "target_name": "Text.Megaparsec.Internal",
+      "target_kind": "newtype_domain_module",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Internal.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Text.Megaparsec.Internal' enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost",
+          "weight": 0.8,
+          "rule_code": "NEWTYPE_DOMAIN_VALUE_OBJECT",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Internal.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "newtype_strong_typing",
+      "pattern_category": "typeclass_system",
+      "target_name": "Text.Megaparsec.Pos",
+      "target_kind": "newtype_domain_module",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Pos.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Text.Megaparsec.Pos' enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost",
+          "weight": 0.8,
+          "rule_code": "NEWTYPE_DOMAIN_VALUE_OBJECT",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Pos.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "newtype_strong_typing",
+      "pattern_category": "typeclass_system",
+      "target_name": "Text.Megaparsec.Stream",
+      "target_kind": "newtype_domain_module",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Text.Megaparsec.Stream' enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost",
+          "weight": 0.8,
+          "rule_code": "NEWTYPE_DOMAIN_VALUE_OBJECT",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "reader_t_design_pattern",
+      "pattern_category": "monad_architecture",
+      "target_name": "Text.MegaparsecSpec",
+      "target_kind": "reader_t_architecture",
+      "confidence_score": 0.9,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Text.MegaparsecSpec' adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access",
+          "weight": 0.9,
+          "rule_code": "READER_T_PATTERN_DI",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "monad_transformer_stack",
+      "pattern_category": "monad_architecture",
+      "target_name": "Text.Megaparsec.Class",
+      "target_kind": "monad_transformer_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Class.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Text.Megaparsec.Class' layers a Monad Transformer Stack combining 5 distinct computational capabilities (IdentityT, RWST, ReaderT, StateT, WriterT)",
+          "weight": 0.85,
+          "rule_code": "MONAD_TRANSFORMER_LAYER_STACK",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Class.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "monad_transformer_stack",
+      "pattern_category": "monad_architecture",
+      "target_name": "Text.Megaparsec.Debug",
+      "target_kind": "monad_transformer_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Debug.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Text.Megaparsec.Debug' layers a Monad Transformer Stack combining 5 distinct computational capabilities (IdentityT, RWST, ReaderT, StateT, WriterT)",
+          "weight": 0.85,
+          "rule_code": "MONAD_TRANSFORMER_LAYER_STACK",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Debug.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "monad_transformer_stack",
+      "pattern_category": "monad_architecture",
+      "target_name": "Text.MegaparsecSpec",
+      "target_kind": "monad_transformer_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Text.MegaparsecSpec' layers a Monad Transformer Stack combining 4 distinct computational capabilities (RWST, ReaderT, StateT, WriterT)",
+          "weight": 0.85,
+          "rule_code": "MONAD_TRANSFORMER_LAYER_STACK",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "monad_transformer_stack",
+      "pattern_category": "monad_architecture",
+      "target_name": "Text.Megaparsec.DebugSpec",
+      "target_kind": "monad_transformer_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/DebugSpec.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Text.Megaparsec.DebugSpec' layers a Monad Transformer Stack combining 3 distinct computational capabilities (RWST, StateT, WriterT)",
+          "weight": 0.85,
+          "rule_code": "MONAD_TRANSFORMER_LAYER_STACK",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/DebugSpec.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "monad_transformer_stack",
+      "pattern_category": "monad_architecture",
+      "target_name": "Test.Hspec.Megaparsec.AdHoc",
+      "target_kind": "monad_transformer_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/src/Test/Hspec/Megaparsec/AdHoc.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Test.Hspec.Megaparsec.AdHoc' layers a Monad Transformer Stack combining 2 distinct computational capabilities (RWST, WriterT)",
+          "weight": 0.85,
+          "rule_code": "MONAD_TRANSFORMER_LAYER_STACK",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/src/Test/Hspec/Megaparsec/AdHoc.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "tagless_final_style",
+      "pattern_category": "monad_architecture",
+      "target_name": "Text.Megaparsec.Class.MonadParsec",
+      "target_kind": "tagless_final_capability",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Class.hs:50:1",
+      "evidences": [
+        {
+          "description": "Typeclass 'MonadParsec' in 'Text.Megaparsec.Class' adopts Tagless Final / MTL capability pattern providing polymorphic monadic effects",
+          "weight": 0.85,
+          "rule_code": "TAGLESS_FINAL_CAPABILITY_CLASS",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Class.hs:50:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Text.Megaparsec.match",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec.hs:577:1",
+      "evidences": [
+        {
+          "description": "Function 'match' in 'Text.Megaparsec' chains a 4-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec.hs:577:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Text.Megaparsec.Char.Lexer.indentBlock",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:236:1",
+      "evidences": [
+        {
+          "description": "Function 'indentBlock' in 'Text.Megaparsec.Char.Lexer' chains a 7-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:236:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Text.Megaparsec.Char.Lexer.scientific",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:469:1",
+      "evidences": [
+        {
+          "description": "Function 'scientific' in 'Text.Megaparsec.Char.Lexer' chains a 3-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:469:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Text.Megaparsec.Char.Lexer.float",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:493:1",
+      "evidences": [
+        {
+          "description": "Function 'float' in 'Text.Megaparsec.Char.Lexer' chains a 3-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:493:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Text.Megaparsec.Byte.Lexer.scientific",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Lexer.hs:219:1",
+      "evidences": [
+        {
+          "description": "Function 'scientific' in 'Text.Megaparsec.Byte.Lexer' chains a 3-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Lexer.hs:219:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Text.Megaparsec.Byte.Lexer.float",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Lexer.hs:239:1",
+      "evidences": [
+        {
+          "description": "Function 'float' in 'Text.Megaparsec.Byte.Lexer' chains a 3-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Lexer.hs:239:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Text.MegaparsecSpec.spec",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1",
+      "evidences": [
+        {
+          "description": "Function 'spec' in 'Text.MegaparsecSpec' chains a 16-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "Text.Megaparsec.Char.LexerSpec.spec",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/Char/LexerSpec.hs:24:1",
+      "evidences": [
+        {
+          "description": "Function 'spec' in 'Text.Megaparsec.Char.LexerSpec' chains a 12-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/Char/LexerSpec.hs:24:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "ParsersBench.Json.Megaparsec.commaSeparated",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Json/Megaparsec.hs:75:1",
+      "evidences": [
+        {
+          "description": "Function 'commaSeparated' in 'ParsersBench.Json.Megaparsec' chains a 3-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Json/Megaparsec.hs:75:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "ParsersBench.Json.Attoparsec.commaSeparated",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Json/Attoparsec.hs:71:1",
+      "evidences": [
+        {
+          "description": "Function 'commaSeparated' in 'ParsersBench.Json.Attoparsec' chains a 3-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Json/Attoparsec.hs:71:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "ParsersBench.Log.Megaparsec.parseIP",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs:27:1",
+      "evidences": [
+        {
+          "description": "Function 'parseIP' in 'ParsersBench.Log.Megaparsec' chains a 4-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs:27:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "ParsersBench.Log.Megaparsec.timeParser",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs:38:1",
+      "evidences": [
+        {
+          "description": "Function 'timeParser' in 'ParsersBench.Log.Megaparsec' chains a 6-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs:38:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "ParsersBench.Log.Megaparsec.logEntryParser",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs:64:1",
+      "evidences": [
+        {
+          "description": "Function 'logEntryParser' in 'ParsersBench.Log.Megaparsec' chains a 3-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs:64:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "ParsersBench.Log.Attoparsec.parseIP",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Attoparsec.hs:23:1",
+      "evidences": [
+        {
+          "description": "Function 'parseIP' in 'ParsersBench.Log.Attoparsec' chains a 4-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Attoparsec.hs:23:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "ParsersBench.Log.Attoparsec.timeParser",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Attoparsec.hs:34:1",
+      "evidences": [
+        {
+          "description": "Function 'timeParser' in 'ParsersBench.Log.Attoparsec' chains a 6-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Attoparsec.hs:34:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "railway_do_notation",
+      "pattern_category": "functional_idiom",
+      "target_name": "ParsersBench.Log.Attoparsec.logEntryParser",
+      "target_kind": "monadic_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Attoparsec.hs:60:1",
+      "evidences": [
+        {
+          "description": "Function 'logEntryParser' in 'ParsersBench.Log.Attoparsec' chains a 3-step Monadic Railway flow in `do` notation",
+          "weight": 0.8,
+          "rule_code": "MONADIC_DO_RAILWAY_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Attoparsec.hs:60:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "continuation_monad",
+      "pattern_category": "monad_architecture",
+      "target_name": "Text.Megaparsec.Internal",
+      "target_kind": "continuation_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Internal.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Text.Megaparsec.Internal' employs Continuation Monad (`ContT`/`callCC`) for non-local control transfer and coroutine composition",
+          "weight": 0.85,
+          "rule_code": "CONTINUATION_MONAD_CALLCC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Internal.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "continuation_monad",
+      "pattern_category": "monad_architecture",
+      "target_name": "Text.MegaparsecSpec",
+      "target_kind": "continuation_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Text.MegaparsecSpec' employs Continuation Monad (`ContT`/`callCC`) for non-local control transfer and coroutine composition",
+          "weight": 0.85,
+          "rule_code": "CONTINUATION_MONAD_CALLCC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "async_concurrent_flow",
+      "pattern_category": "concurrency_stm",
+      "target_name": "Text.Megaparsec.Debug",
+      "target_kind": "async_concurrency_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Debug.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Text.Megaparsec.Debug' manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation",
+          "weight": 0.85,
+          "rule_code": "STRUCTURED_ASYNC_CONCURRENCY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Debug.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "stream_processing_pipeline",
+      "pattern_category": "functional_idiom",
+      "target_name": "Text.Megaparsec.Byte.Binary",
+      "target_kind": "streaming_pipeline_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Binary.hs:1:1",
+      "evidences": [
+        {
+          "description": "Module 'Text.Megaparsec.Byte.Binary' constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees",
+          "weight": 0.85,
+          "rule_code": "STREAM_PROCESSING_PIPELINE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Binary.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_bottom_error",
+      "pattern_category": "type_safety",
+      "target_name": "Text.Megaparsec.Byte.Binary.finiteByteSize",
+      "target_kind": "unsafe_bottom_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Binary.hs:188:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'finiteByteSize' in 'Text.Megaparsec.Byte.Binary' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",
+          "weight": 0.85,
+          "rule_code": "UNCHECKED_BOTTOM_PANIC",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte/Binary.hs:188:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "unchecked_from_just",
+      "pattern_category": "type_safety",
+      "target_name": "Text.Megaparsec.match",
+      "target_kind": "unsafe_from_just_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec.hs:577:1",
+      "evidences": [
+        {
+          "description": "Type Safety Hazard: Function 'match' in 'Text.Megaparsec' calls partial `fromJust` which throws an uncatchable exception on `Nothing`; use `fromMaybe` or pattern match",
+          "weight": 0.85,
+          "rule_code": "UNSAFE_FROM_JUST_CALL",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec.hs:577:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "lazy_space_leak_risk",
+      "pattern_category": "resilience",
+      "target_name": "Text.Megaparsec.Error.errorBundlePrettyWith",
+      "target_kind": "space_leak_hazard_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Error.hs:351:1",
+      "evidences": [
+        {
+          "description": "Resilience Risk (Lazy Space Leak): Function 'errorBundlePrettyWith' in 'Text.Megaparsec.Error' uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl'` / `Control.Monad.State.Strict`",
+          "weight": 0.8,
+          "rule_code": "LAZY_SPACE_LEAK_ACCUMULATOR",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Error.hs:351:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "lazy_space_leak_risk",
+      "pattern_category": "resilience",
+      "target_name": "Text.MegaparsecSpec.spec",
+      "target_kind": "space_leak_hazard_function",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1",
+      "evidences": [
+        {
+          "description": "Resilience Risk (Lazy Space Leak): Function 'spec' in 'Text.MegaparsecSpec' uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl'` / `Control.Monad.State.Strict`",
+          "weight": 0.8,
+          "rule_code": "LAZY_SPACE_LEAK_ACCUMULATOR",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "catch_all_some_exception",
+      "pattern_category": "resilience",
+      "target_name": "Text.MegaparsecSpec.spec",
+      "target_kind": "defensive_catch_function",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1",
+      "evidences": [
+        {
+          "description": "Resilience Anti-Pattern: Function 'spec' in 'Text.MegaparsecSpec' catches `SomeException` without rethrowing async exceptions (`ThreadKilled`); use `Control.Exception.Safe`",
+          "weight": 0.85,
+          "rule_code": "CATCH_ALL_SOME_EXCEPTION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "god_module_srp",
+      "pattern_category": "principle",
+      "target_name": "Text.Megaparsec",
+      "target_kind": "god_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec.hs:1:1",
+      "evidences": [
+        {
+          "description": "SRP Violation (God Module): Module 'Text.Megaparsec' contains 32 declarations across 665 lines of code; decompose into focused domain modules",
+          "weight": 0.85,
+          "rule_code": "SRP_GOD_MODULE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "god_module_srp",
+      "pattern_category": "principle",
+      "target_name": "Text.Megaparsec.Internal",
+      "target_kind": "god_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Internal.hs:1:1",
+      "evidences": [
+        {
+          "description": "SRP Violation (God Module): Module 'Text.Megaparsec.Internal' contains 38 declarations across 769 lines of code; decompose into focused domain modules",
+          "weight": 0.85,
+          "rule_code": "SRP_GOD_MODULE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Internal.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "god_module_srp",
+      "pattern_category": "principle",
+      "target_name": "Text.Megaparsec.Char",
+      "target_kind": "god_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char.hs:1:1",
+      "evidences": [
+        {
+          "description": "SRP Violation (God Module): Module 'Text.Megaparsec.Char' contains 31 declarations across 319 lines of code; decompose into focused domain modules",
+          "weight": 0.85,
+          "rule_code": "SRP_GOD_MODULE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "god_module_srp",
+      "pattern_category": "principle",
+      "target_name": "Text.MegaparsecSpec",
+      "target_kind": "god_module",
+      "confidence_score": 0.85,
+      "confidence_level": "very_high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1",
+      "evidences": [
+        {
+          "description": "SRP Violation (God Module): Module 'Text.MegaparsecSpec' contains 5 declarations across 1855 lines of code; decompose into focused domain modules",
+          "weight": 0.85,
+          "rule_code": "SRP_GOD_MODULE",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:1:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Text.Megaparsec.Stream.charPretty'",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:718:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'charPretty'' in 'Text.Megaparsec.Stream' has cyclomatic complexity of 18; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Stream.hs:718:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Text.Megaparsec.Char.categoryName",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char.hs:252:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'categoryName' in 'Text.Megaparsec.Char' has cyclomatic complexity of 19; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char.hs:252:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Text.MegaparsecSpec.spec",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'spec' in 'Text.MegaparsecSpec' has cyclomatic complexity of 126; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/MegaparsecSpec.hs:48:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Text.Megaparsec.StreamSpec.spec",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/StreamSpec.hs:24:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'spec' in 'Text.Megaparsec.StreamSpec' has cyclomatic complexity of 26; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/StreamSpec.hs:24:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Text.Megaparsec.ErrorSpec.spec",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/ErrorSpec.hs:17:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'spec' in 'Text.Megaparsec.ErrorSpec' has cyclomatic complexity of 47; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/ErrorSpec.hs:17:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Text.Megaparsec.CharSpec.spec",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/CharSpec.hs:14:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'spec' in 'Text.Megaparsec.CharSpec' has cyclomatic complexity of 16; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/CharSpec.hs:14:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Text.Megaparsec.Char.LexerSpec.spec",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/Char/LexerSpec.hs:24:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'spec' in 'Text.Megaparsec.Char.LexerSpec' has cyclomatic complexity of 49; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/Char/LexerSpec.hs:24:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "cyclomatic_complexity_kiss",
+      "pattern_category": "principle",
+      "target_name": "Text.Megaparsec.Byte.LexerSpec.spec",
+      "target_kind": "complex_function",
+      "confidence_score": 0.75,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/Byte/LexerSpec.hs:23:1",
+      "evidences": [
+        {
+          "description": "KISS Violation (High Complexity): Function 'spec' in 'Text.Megaparsec.Byte.LexerSpec' has cyclomatic complexity of 16; refactor complex pattern branches",
+          "weight": 0.75,
+          "rule_code": "KISS_HIGH_CYCLOMATIC_COMPLEXITY",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/megaparsec-tests/tests/Text/Megaparsec/Byte/LexerSpec.hs:23:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "Text.Megaparsec.Byte.eol",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:77:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.eol, Text.Megaparsec.Char.eol",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:77:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "Text.Megaparsec.Byte.space",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:92:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.space, Text.Megaparsec.Char.space",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:92:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "Text.Megaparsec.Byte.hspace",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:99:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.hspace, Text.Megaparsec.Char.hspace",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:99:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "Text.Megaparsec.Byte.space1",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:106:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.space1, Text.Megaparsec.Char.space1",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:106:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "Text.Megaparsec.Byte.hspace1",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:113:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.hspace1, Text.Megaparsec.Char.hspace1",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:113:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "Text.Megaparsec.Byte.spaceChar",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:127:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Byte.spaceChar, Text.Megaparsec.Char.spaceChar",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Byte.hs:127:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "Text.Megaparsec.Char.Lexer.scientific",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:469:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Char.Lexer.scientific, Text.Megaparsec.Byte.Lexer.scientific",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:469:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "Text.Megaparsec.Char.Lexer.float",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:493:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): Text.Megaparsec.Char.Lexer.float, Text.Megaparsec.Byte.Lexer.float",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/Text/Megaparsec/Char/Lexer.hs:493:1"
+        }
+      ]
+    },
+    {
+      "pattern_type": "duplicate_code_dry",
+      "pattern_category": "principle",
+      "target_name": "ParsersBench.Log.Megaparsec.productParser",
+      "target_kind": "dry_duplicated_code",
+      "confidence_score": 0.8,
+      "confidence_level": "high",
+      "primary_location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs:57:1",
+      "evidences": [
+        {
+          "description": "DRY Violation: Identical function logic duplicated across 2 location(s): ParsersBench.Log.Megaparsec.productParser, ParsersBench.Log.Attoparsec.productParser",
+          "weight": 0.8,
+          "rule_code": "DRY_CODE_DUPLICATION",
+          "location": "/Volumes/External/Code/DPX-Haskell/benchmarks_cache/megaparsec/parsers-bench/ParsersBench/Log/Megaparsec.hs:57:1"
+        }
+      ]
+    }
+  ]
+}
