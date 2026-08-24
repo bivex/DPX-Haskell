@@ -3,457 +3,911 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DPX-Haskell: Architecture & Pattern Dashboard</title>
+    <title>🔷 DPX-Haskell: Typeclass Architecture & Monad Dashboard - scotty</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fomantic-ui/2.9.3/semantic.min.css">
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --border-color: #334155;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --accent-purple: #9333ea;
-            --accent-blue: #38bdf8;
-            --accent-green: #22c55e;
-            --accent-yellow: #eab308;
-            --accent-red: #ef4444;
+            --bg-main: #0b0f19;
+            --bg-card: #151b2b;
+            --border-color: #232d42;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
         }
         body {
+            background-color: var(--bg-main) !important;
+            color: var(--text-primary) !important;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            padding: 24px;
+            padding: 30px 15px;
         }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 16px;
-            margin-bottom: 24px;
+        .ui.container {
+            max-width: 1400px !important;
         }
-        .title {
-            font-size: 1.8rem;
-            font-weight: 700;
+        .ui.inverted.segment {
+            background-color: var(--bg-card) !important;
+            border: 1px solid var(--border-color) !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35) !important;
+            border-radius: 10px !important;
+        }
+        .ui.inverted.card {
+            background-color: var(--bg-card) !important;
+            border: 1px solid var(--border-color) !important;
+            border-radius: 8px !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25) !important;
+        }
+        .ui.inverted.card:hover {
+            border-color: #3b82f6 !important;
+            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.15) !important;
+            transform: translateY(-2px);
+            transition: all 0.2s ease;
+        }
+        .header-title {
+            font-size: 26px;
+            font-weight: 800;
             background: linear-gradient(135deg, #a855f7 0%, #38bdf8 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            display: inline-block;
         }
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-        .card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 16px;
-        }
-        .card-num {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--accent-blue);
-        }
-        .card-label {
-            color: var(--text-muted);
-            font-size: 0.875rem;
-            margin-top: 4px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-        }
-        th, td {
-            padding: 12px 16px;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-        th {
-            background-color: #0b1120;
-            color: var(--text-muted);
-            font-weight: 600;
-        }
-        tr:hover {
-            background-color: rgba(255, 255, 255, 0.02);
-        }
-        .badge {
+        .code-snippet {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            background: #080c14;
             padding: 4px 8px;
             border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
+            border: 1px solid #1e293b;
+            color: #38bdf8;
+            font-size: 13px;
         }
-        .badge.very_high { background-color: rgba(34, 197, 94, 0.2); color: var(--accent-green); border: 1px solid var(--accent-green); }
-        .badge.high { background-color: rgba(56, 189, 248, 0.2); color: var(--accent-blue); border: 1px solid var(--accent-blue); }
-        .badge.medium { background-color: rgba(234, 179, 8, 0.2); color: var(--accent-yellow); border: 1px solid var(--accent-yellow); }
-        .badge.low { background-color: rgba(239, 68, 68, 0.2); color: var(--accent-red); border: 1px solid var(--accent-red); }
-        .cat-badge {
-            background-color: rgba(147, 51, 234, 0.2);
-            color: #d8b4fe;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.75rem;
+        .evidence-box {
+            background: rgba(15, 23, 42, 0.7);
+            border-left: 3px solid #3b82f6;
+            padding: 8px 12px;
+            margin-top: 8px;
+            border-radius: 0 4px 4px 0;
+            font-size: 12px;
+            color: #cbd5e1;
         }
-        code {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            color: #f472b6;
+        .stat-value {
+            font-size: 28px !important;
+            font-weight: 800 !important;
+        }
+        .filter-btn.active {
+            background-color: #3b82f6 !important;
+            color: #ffffff !important;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div>
-            <div class="title">DPX-Haskell Architecture Report</div>
-            <div style="color: var(--text-muted); margin-top: 4px;">Target: <code>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty</code></div>
-        </div>
-        <div style="text-align: right; color: var(--text-muted); font-size: 0.875rem;">
-            Scanned in <strong>0.0262s</strong>
-        </div>
-    </div>
 
-    <div class="grid">
-        <div class="card">
-            <div class="card-num">31</div>
-            <div class="card-label">Files Scanned</div>
-        </div>
-        <div class="card">
-            <div class="card-num">27</div>
-            <div class="card-label">Total Detections</div>
-        </div>
-        <div class="card">
-            <div class="card-num">3</div>
-            <div class="card-label">Typeclass & Polymorphism</div>
-        </div>
-        <div class="card">
-            <div class="card-num">4</div>
-            <div class="card-label">Monads & ReaderT</div>
-        </div>
-        <div class="card">
-            <div class="card-num">4</div>
-            <div class="card-label">STM & Async Concurrency</div>
-        </div>
-        <div class="card">
-            <div class="card-num">5</div>
-            <div class="card-label">Safety & Space Leak Hazards</div>
+<div class="ui container">
+
+    <!-- Header Section -->
+    <div class="ui inverted segment" style="margin-bottom: 25px; padding: 25px;">
+        <div class="ui stackable grid items-center">
+            <div class="ten wide column">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                    <span style="font-size: 32px;">🔷</span>
+                    <span class="header-title">DPX-Haskell Architecture & Pattern Engine</span>
+                </div>
+                <div style="color: var(--text-secondary); font-size: 14px;">
+                    Target Codebase: <code class="code-snippet">scotty</code>
+                </div>
+            </div>
+            <div class="six wide column right aligned">
+                <div class="ui mini blue label">
+                    <i class="layer group icon"></i> Hexagonal DDD
+                </div>
+                <div class="ui mini teal label">
+                    <i class="clock outline icon"></i> 0.026s
+                </div>
+                <div class="ui mini purple label">
+                    <i class="file alternate outline icon"></i> 31 files
+                </div>
+            </div>
         </div>
     </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Pattern / Rule</th>
-                <th>Category</th>
-                <th>Target</th>
-                <th>Confidence</th>
-                <th>Location</th>
-                <th>Summary</th>
-            </tr>
-        </thead>
-        <tbody>
-            
-                <tr class="detection-row" data-category="typeclass_system" data-level="very_high">
-                    <td>#1</td>
-                    <td><strong><code>typeclass_adapter</code></strong></td>
-                    <td><span class="cat-badge">typeclass_system</span></td>
-                    <td><code>Web.Scotty.Action.Parsable</code></td>
-                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:626:1</small></td>
-                    <td>Typeclass &#x27;Parsable&#x27; in &#x27;Web.Scotty.Action&#x27; defines an ad-hoc polymorphic Adapter interface with 2 method(s)</td>
-                </tr>
+    <!-- KPI Statistics -->
+    <div class="ui four stackable cards" style="margin-bottom: 25px;">
+        <div class="ui inverted card">
+            <div class="content">
+                <div class="ui top right attached label blue mini">TOTAL FINDINGS</div>
+                <div class="header stat-value" style="color: #38bdf8; margin-top: 10px;">27</div>
+                <div class="description" style="color: var(--text-secondary);">Architecture patterns & smells identified</div>
+            </div>
+        </div>
+        <div class="ui inverted card">
+            <div class="content">
+                <div class="ui top right attached label red mini">ACTION REQUIRED</div>
+                <div class="header stat-value" style="color: #f87171; margin-top: 10px;">10</div>
+                <div class="description" style="color: var(--text-secondary);">Safety hazards, space leaks & smells</div>
+            </div>
+        </div>
+        <div class="ui inverted card">
+            <div class="content">
+                <div class="ui top right attached label purple mini">TYPECLASSES & MONADS</div>
+                <div class="header stat-value" style="color: #c084fc; margin-top: 10px;">7</div>
+                <div class="description" style="color: var(--text-secondary);">Typeclasses, ReaderT & Transformer stacks</div>
+            </div>
+        </div>
+        <div class="ui inverted card">
+            <div class="content">
+                <div class="ui top right attached label green mini">CLEAN CODE</div>
+                <div class="header stat-value" style="color: #4ade80; margin-top: 10px;">10</div>
+                <div class="description" style="color: var(--text-secondary);">Clean functional structures & STM</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Architecture Map & Prompt Banner -->
+    <div class="ui inverted segment" style="margin-bottom: 25px; border-left: 4px solid #a855f7 !important;">
+        <div class="ui stackable grid items-center">
+            <div class="eleven wide column">
+                <h4 style="margin: 0; color: #f8fafc;">
+                    <i class="magic icon" style="color: #a855f7;"></i> AI / LLM Architectural Prompt Context
+                </h4>
+                <p style="color: var(--text-secondary); margin-top: 6px; font-size: 13px;">
+                    Generate instant refactoring recommendations, STM transaction reviews, and monad transformer optimizations for Claude, ChatGPT or Gemini.
+                </p>
+            </div>
+            <div class="five wide column right aligned">
+                <button class="ui mini purple button" id="copyLlmBtn" onclick="copyLlmContext()">
+                    <i class="copy outline icon"></i> 📋 Copy Context for LLM
+                </button>
+            </div>
+        </div>
+        <textarea id="llmContextData" style="display: none;"># 🔷 DPX-Haskell: Architectural Context &amp; Refactoring Prompt for scotty
+- Scanned Files: 31
+- Total Detections: 27
+
+## Identified Patterns &amp; Smells:
+- [typeclass_system] typeclass_adapter on `Web.Scotty.Action.Parsable` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:626:1: Typeclass &#x27;Parsable&#x27; in &#x27;Web.Scotty.Action&#x27; defines an ad-hoc polymorphic Adapter interface with 2 method(s)
+- [typeclass_system] newtype_strong_typing on `Web.Scotty.Internal.Types` (80%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1: Module &#x27;Web.Scotty.Internal.Types&#x27; enforces DDD Value Object strong typing via 3 newtype wrapper(s) at zero runtime cost
+- [typeclass_system] deriving_strategies on `Web.Scotty.Internal.Types` (80%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1: Module &#x27;Web.Scotty.Internal.Types&#x27; explicitly specifies Deriving Strategies (stock/newtype/anyclass) ensuring deterministic typeclass derivation
+- [monad_architecture] reader_t_design_pattern on `Web.Scotty.Trans` (90%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Trans.hs:1:1: Module &#x27;Web.Scotty.Trans&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access
+- [monad_architecture] reader_t_design_pattern on `Web.Scotty.Action` (90%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:1:1: Module &#x27;Web.Scotty.Action&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access
+- [monad_architecture] reader_t_design_pattern on `Web.Scotty.Internal.Types` (90%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1: Module &#x27;Web.Scotty.Internal.Types&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access
+- [monad_architecture] monad_transformer_stack on `Web.Scotty.Internal.Types` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1: Module &#x27;Web.Scotty.Internal.Types&#x27; layers a Monad Transformer Stack combining 1 distinct computational capabilities (ReaderT)
+- [functional_idiom] railway_do_notation on `Main.main` (80%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/examples/bodyecho.hs:12:1: Function &#x27;main&#x27; in &#x27;Main&#x27; chains a 5-step Monadic Railway flow in `do` notation
+- [functional_idiom] railway_do_notation on `Web.ScottySpec.spec` (80%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1: Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; chains a 40-step Monadic Railway flow in `do` notation
+- [functional_idiom] railway_do_notation on `Web.Scotty.Trans.scottyAppT` (80%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Trans.hs:142:1: Function &#x27;scottyAppT&#x27; in &#x27;Web.Scotty.Trans&#x27; chains a 3-step Monadic Railway flow in `do` notation
+- [functional_idiom] railway_do_notation on `Web.Scotty.Action.nested` (80%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:778:1: Function &#x27;nested&#x27; in &#x27;Web.Scotty.Action&#x27; chains a 4-step Monadic Railway flow in `do` notation
+- [functional_idiom] railway_do_notation on `Web.Scotty.Route.route` (80%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:84:1: Function &#x27;route&#x27; in &#x27;Web.Scotty.Route&#x27; chains a 3-step Monadic Railway flow in `do` notation
+- [functional_idiom] railway_do_notation on `Web.Scotty.Util.readRequestBody` (80%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Util.hs:75:1: Function &#x27;readRequestBody&#x27; in &#x27;Web.Scotty.Util&#x27; chains a 3-step Monadic Railway flow in `do` notation
+- [concurrency_stm] stm_transactional_memory on `Web.Scotty.Session` (90%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Session.hs:1:1: Module &#x27;Web.Scotty.Session&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity
+- [concurrency_stm] stm_transactional_memory on `Web.Scotty.Route` (90%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:1:1: Module &#x27;Web.Scotty.Route&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity
+- [concurrency_stm] stm_transactional_memory on `Web.Scotty.Internal.Types` (90%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1: Module &#x27;Web.Scotty.Internal.Types&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity
+- [concurrency_stm] async_concurrent_flow on `Web.ScottySpec` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:1:1: Module &#x27;Web.ScottySpec&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation
+- [type_safety] unchecked_bottom_error on `Web.ScottySpec.spec` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1: Type Safety Hazard: Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead
+- [resilience] lazy_space_leak_risk on `Web.Scotty.Trans.applyAll` (80%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Trans.hs:179:1: Resilience Risk (Lazy Space Leak): Function &#x27;applyAll&#x27; in &#x27;Web.Scotty.Trans&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`
+- [resilience] lazy_space_leak_risk on `Web.Scotty.Route.matchAny` (80%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:59:1: Resilience Risk (Lazy Space Leak): Function &#x27;matchAny&#x27; in &#x27;Web.Scotty.Route&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`
+- [resilience] lazy_space_leak_risk on `Web.Scotty.Route.addroute` (80%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:74:1: Resilience Risk (Lazy Space Leak): Function &#x27;addroute&#x27; in &#x27;Web.Scotty.Route&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`
+- [resilience] catch_all_some_exception on `Web.ScottySpec.spec` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1: Resilience Anti-Pattern: Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; catches `SomeException` without rethrowing async exceptions (`ThreadKilled`); use `Control.Exception.Safe`
+- [principle] god_module_srp on `Web.Scotty` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty.hs:1:1: SRP Violation (God Module): Module &#x27;Web.Scotty&#x27; contains 78 declarations across 615 lines of code; decompose into focused domain modules
+- [principle] god_module_srp on `Web.Scotty.Action` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:1:1: SRP Violation (God Module): Module &#x27;Web.Scotty.Action&#x27; contains 60 declarations across 786 lines of code; decompose into focused domain modules
+- [principle] god_module_srp on `Web.Scotty.Internal.Types` (85%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1: SRP Violation (God Module): Module &#x27;Web.Scotty.Internal.Types&#x27; contains 38 declarations across 289 lines of code; decompose into focused domain modules
+- [principle] cyclomatic_complexity_kiss on `Web.ScottySpec.spec` (75%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1: KISS Violation (High Complexity): Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; has cyclomatic complexity of 43; refactor complex pattern branches
+- [principle] cyclomatic_complexity_kiss on `Web.Scotty.Action.scottyExceptionHandler` (75%) in /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:146:1: KISS Violation (High Complexity): Function &#x27;scottyExceptionHandler&#x27; in &#x27;Web.Scotty.Action&#x27; has cyclomatic complexity of 20; refactor complex pattern branches
+
+## Instructions for AI Architect:
+1. Review typeclass hierarchies, associated types, and GADTs for clean modularity.
+2. Audit ReaderT application stacks and eliminate unnecessary monad transformer layering.
+3. Inspect STM blocks (`TVar`/`atomically`) and verify retry loop termination.
+4. Eliminate unforced space leaks (replace lazy `foldl` with strict `foldl&#x27;`) and unsafe `fromJust`/`error` panics.</textarea>
+    </div>
+
+    <!-- Filter Buttons Bar -->
+    <div class="ui inverted segment" style="margin-bottom: 20px; padding: 12px;">
+        <div class="ui stackable grid items-center">
+            <div class="twelve wide column">
+                <div class="ui mini inverted buttons" id="categoryFilterBar">
+                    <button class="ui button active filter-btn" data-filter="all">All (27)</button>
+                    <button class="ui button filter-btn" data-filter="typeclass_system"><i class="cubes icon"></i> Typeclasses & Polymorphism (3)</button>
+<button class="ui button filter-btn" data-filter="monad_architecture"><i class="layer group icon"></i> Monad Stacks & ReaderT (4)</button>
+<button class="ui button filter-btn" data-filter="functional_idiom"><i class="code branch icon"></i> Functional Idioms & GADTs (6)</button>
+<button class="ui button filter-btn" data-filter="concurrency_stm"><i class="bolt icon"></i> STM & Concurrency (4)</button>
+<button class="ui button filter-btn" data-filter="resilience"><i class="shield alternate icon"></i> Resilience & Space Leaks (4)</button>
+<button class="ui button filter-btn" data-filter="principle"><i class="balance scale icon"></i> Principles & Quality (5)</button>
+<button class="ui button filter-btn" data-filter="type_safety"><i class="exclamation triangle icon"></i> Type Safety Hazards (1)</button>
+                </div>
+            </div>
+            <div class="four wide column right aligned">
+                <div class="ui mini icon inverted input fluid">
+                    <input type="text" id="searchInput" placeholder="Search findings, modules, functions...">
+                    <i class="search icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Findings Grid -->
+    <div class="ui stackable cards" id="findingsContainer">
+        
+                <div class="ui inverted card finding-card" data-category="typeclass_system" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4);">
+                            <i class="cubes icon"></i> TYPECLASSES & POLYMORPHISM
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #1 <code>typeclass_adapter</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.Scotty.Action.Parsable</code> (typeclass)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            Typeclass &#x27;Parsable&#x27; in &#x27;Web.Scotty.Action&#x27; defines an ad-hoc polymorphic Adapter interface with 2 method(s)
+                        </div>
+                        <div class="evidence-box"><strong>+85% [TYPECLASS_INTERFACE_ADAPTER]</strong> Typeclass &#x27;Parsable&#x27; in &#x27;Web.Scotty.Action&#x27; defines an ad-hoc polymorphic Adapter interface with 2 method(s)</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:626:1</span>
+                        <span class="ui mini green label">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="typeclass_system" data-level="high">
-                    <td>#2</td>
-                    <td><strong><code>newtype_strong_typing</code></strong></td>
-                    <td><span class="cat-badge">typeclass_system</span></td>
-                    <td><code>Web.Scotty.Internal.Types</code></td>
-                    <td><span class="badge high">80% [HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</small></td>
-                    <td>Module &#x27;Web.Scotty.Internal.Types&#x27; enforces DDD Value Object strong typing via 3 newtype wrapper(s) at zero runtime cost</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="typeclass_system" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4);">
+                            <i class="cubes icon"></i> TYPECLASSES & POLYMORPHISM
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #2 <code>newtype_strong_typing</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.Scotty.Internal.Types</code> (newtype_domain_module)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            Module &#x27;Web.Scotty.Internal.Types&#x27; enforces DDD Value Object strong typing via 3 newtype wrapper(s) at zero runtime cost
+                        </div>
+                        <div class="evidence-box"><strong>+80% [NEWTYPE_DOMAIN_VALUE_OBJECT]</strong> Module &#x27;Web.Scotty.Internal.Types&#x27; enforces DDD Value Object strong typing via 3 newtype wrapper(s) at zero runtime cost</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</span>
+                        <span class="ui mini teal label">80% [HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="typeclass_system" data-level="high">
-                    <td>#3</td>
-                    <td><strong><code>deriving_strategies</code></strong></td>
-                    <td><span class="cat-badge">typeclass_system</span></td>
-                    <td><code>Web.Scotty.Internal.Types</code></td>
-                    <td><span class="badge high">80% [HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</small></td>
-                    <td>Module &#x27;Web.Scotty.Internal.Types&#x27; explicitly specifies Deriving Strategies (stock/newtype/anyclass) ensuring deterministic typeclass derivation</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="typeclass_system" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4);">
+                            <i class="cubes icon"></i> TYPECLASSES & POLYMORPHISM
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #3 <code>deriving_strategies</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.Scotty.Internal.Types</code> (deriving_strategies_module)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            Module &#x27;Web.Scotty.Internal.Types&#x27; explicitly specifies Deriving Strategies (stock/newtype/anyclass) ensuring deterministic typeclass derivation
+                        </div>
+                        <div class="evidence-box"><strong>+80% [EXPLICIT_DERIVING_STRATEGIES]</strong> Module &#x27;Web.Scotty.Internal.Types&#x27; explicitly specifies Deriving Strategies (stock/newtype/anyclass) ensuring deterministic typeclass derivation</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</span>
+                        <span class="ui mini teal label">80% [HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="monad_architecture" data-level="very_high">
-                    <td>#4</td>
-                    <td><strong><code>reader_t_design_pattern</code></strong></td>
-                    <td><span class="cat-badge">monad_architecture</span></td>
-                    <td><code>Web.Scotty.Trans</code></td>
-                    <td><span class="badge very_high">90% [VERY_HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Trans.hs:1:1</small></td>
-                    <td>Module &#x27;Web.Scotty.Trans&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="monad_architecture" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.4);">
+                            <i class="layer group icon"></i> MONAD STACKS & READERT
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #4 <code>reader_t_design_pattern</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.Scotty.Trans</code> (reader_t_architecture)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            Module &#x27;Web.Scotty.Trans&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access
+                        </div>
+                        <div class="evidence-box"><strong>+90% [READER_T_PATTERN_DI]</strong> Module &#x27;Web.Scotty.Trans&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Trans.hs:1:1</span>
+                        <span class="ui mini green label">90% [VERY_HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="monad_architecture" data-level="very_high">
-                    <td>#5</td>
-                    <td><strong><code>reader_t_design_pattern</code></strong></td>
-                    <td><span class="cat-badge">monad_architecture</span></td>
-                    <td><code>Web.Scotty.Action</code></td>
-                    <td><span class="badge very_high">90% [VERY_HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:1:1</small></td>
-                    <td>Module &#x27;Web.Scotty.Action&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="monad_architecture" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.4);">
+                            <i class="layer group icon"></i> MONAD STACKS & READERT
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #5 <code>reader_t_design_pattern</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.Scotty.Action</code> (reader_t_architecture)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            Module &#x27;Web.Scotty.Action&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access
+                        </div>
+                        <div class="evidence-box"><strong>+90% [READER_T_PATTERN_DI]</strong> Module &#x27;Web.Scotty.Action&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:1:1</span>
+                        <span class="ui mini green label">90% [VERY_HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="monad_architecture" data-level="very_high">
-                    <td>#6</td>
-                    <td><strong><code>reader_t_design_pattern</code></strong></td>
-                    <td><span class="cat-badge">monad_architecture</span></td>
-                    <td><code>Web.Scotty.Internal.Types</code></td>
-                    <td><span class="badge very_high">90% [VERY_HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</small></td>
-                    <td>Module &#x27;Web.Scotty.Internal.Types&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="monad_architecture" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.4);">
+                            <i class="layer group icon"></i> MONAD STACKS & READERT
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #6 <code>reader_t_design_pattern</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.Scotty.Internal.Types</code> (reader_t_architecture)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            Module &#x27;Web.Scotty.Internal.Types&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access
+                        </div>
+                        <div class="evidence-box"><strong>+90% [READER_T_PATTERN_DI]</strong> Module &#x27;Web.Scotty.Internal.Types&#x27; adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</span>
+                        <span class="ui mini green label">90% [VERY_HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="monad_architecture" data-level="very_high">
-                    <td>#7</td>
-                    <td><strong><code>monad_transformer_stack</code></strong></td>
-                    <td><span class="cat-badge">monad_architecture</span></td>
-                    <td><code>Web.Scotty.Internal.Types</code></td>
-                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</small></td>
-                    <td>Module &#x27;Web.Scotty.Internal.Types&#x27; layers a Monad Transformer Stack combining 1 distinct computational capabilities (ReaderT)</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="monad_architecture" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(139, 92, 246, 0.15); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.4);">
+                            <i class="layer group icon"></i> MONAD STACKS & READERT
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #7 <code>monad_transformer_stack</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.Scotty.Internal.Types</code> (monad_transformer_module)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            Module &#x27;Web.Scotty.Internal.Types&#x27; layers a Monad Transformer Stack combining 1 distinct computational capabilities (ReaderT)
+                        </div>
+                        <div class="evidence-box"><strong>+85% [MONAD_TRANSFORMER_LAYER_STACK]</strong> Module &#x27;Web.Scotty.Internal.Types&#x27; layers a Monad Transformer Stack combining 1 distinct computational capabilities (ReaderT)</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</span>
+                        <span class="ui mini green label">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="functional_idiom" data-level="high">
-                    <td>#8</td>
-                    <td><strong><code>railway_do_notation</code></strong></td>
-                    <td><span class="cat-badge">functional_idiom</span></td>
-                    <td><code>Main.main</code></td>
-                    <td><span class="badge high">80% [HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/examples/bodyecho.hs:12:1</small></td>
-                    <td>Function &#x27;main&#x27; in &#x27;Main&#x27; chains a 5-step Monadic Railway flow in `do` notation</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(20, 184, 166, 0.15); color: #2dd4bf; border: 1px solid rgba(20, 184, 166, 0.4);">
+                            <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #8 <code>railway_do_notation</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Main.main</code> (monadic_function)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            Function &#x27;main&#x27; in &#x27;Main&#x27; chains a 5-step Monadic Railway flow in `do` notation
+                        </div>
+                        <div class="evidence-box"><strong>+80% [MONADIC_DO_RAILWAY_PIPELINE]</strong> Function &#x27;main&#x27; in &#x27;Main&#x27; chains a 5-step Monadic Railway flow in `do` notation</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/examples/bodyecho.hs:12:1</span>
+                        <span class="ui mini teal label">80% [HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="functional_idiom" data-level="high">
-                    <td>#9</td>
-                    <td><strong><code>railway_do_notation</code></strong></td>
-                    <td><span class="cat-badge">functional_idiom</span></td>
-                    <td><code>Web.ScottySpec.spec</code></td>
-                    <td><span class="badge high">80% [HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1</small></td>
-                    <td>Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; chains a 40-step Monadic Railway flow in `do` notation</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(20, 184, 166, 0.15); color: #2dd4bf; border: 1px solid rgba(20, 184, 166, 0.4);">
+                            <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #9 <code>railway_do_notation</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.ScottySpec.spec</code> (monadic_function)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; chains a 40-step Monadic Railway flow in `do` notation
+                        </div>
+                        <div class="evidence-box"><strong>+80% [MONADIC_DO_RAILWAY_PIPELINE]</strong> Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; chains a 40-step Monadic Railway flow in `do` notation</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1</span>
+                        <span class="ui mini teal label">80% [HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="functional_idiom" data-level="high">
-                    <td>#10</td>
-                    <td><strong><code>railway_do_notation</code></strong></td>
-                    <td><span class="cat-badge">functional_idiom</span></td>
-                    <td><code>Web.Scotty.Trans.scottyAppT</code></td>
-                    <td><span class="badge high">80% [HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Trans.hs:142:1</small></td>
-                    <td>Function &#x27;scottyAppT&#x27; in &#x27;Web.Scotty.Trans&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(20, 184, 166, 0.15); color: #2dd4bf; border: 1px solid rgba(20, 184, 166, 0.4);">
+                            <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #10 <code>railway_do_notation</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.Scotty.Trans.scottyAppT</code> (monadic_function)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            Function &#x27;scottyAppT&#x27; in &#x27;Web.Scotty.Trans&#x27; chains a 3-step Monadic Railway flow in `do` notation
+                        </div>
+                        <div class="evidence-box"><strong>+80% [MONADIC_DO_RAILWAY_PIPELINE]</strong> Function &#x27;scottyAppT&#x27; in &#x27;Web.Scotty.Trans&#x27; chains a 3-step Monadic Railway flow in `do` notation</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Trans.hs:142:1</span>
+                        <span class="ui mini teal label">80% [HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="functional_idiom" data-level="high">
-                    <td>#11</td>
-                    <td><strong><code>railway_do_notation</code></strong></td>
-                    <td><span class="cat-badge">functional_idiom</span></td>
-                    <td><code>Web.Scotty.Action.nested</code></td>
-                    <td><span class="badge high">80% [HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:778:1</small></td>
-                    <td>Function &#x27;nested&#x27; in &#x27;Web.Scotty.Action&#x27; chains a 4-step Monadic Railway flow in `do` notation</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(20, 184, 166, 0.15); color: #2dd4bf; border: 1px solid rgba(20, 184, 166, 0.4);">
+                            <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #11 <code>railway_do_notation</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.Scotty.Action.nested</code> (monadic_function)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            Function &#x27;nested&#x27; in &#x27;Web.Scotty.Action&#x27; chains a 4-step Monadic Railway flow in `do` notation
+                        </div>
+                        <div class="evidence-box"><strong>+80% [MONADIC_DO_RAILWAY_PIPELINE]</strong> Function &#x27;nested&#x27; in &#x27;Web.Scotty.Action&#x27; chains a 4-step Monadic Railway flow in `do` notation</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:778:1</span>
+                        <span class="ui mini teal label">80% [HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="functional_idiom" data-level="high">
-                    <td>#12</td>
-                    <td><strong><code>railway_do_notation</code></strong></td>
-                    <td><span class="cat-badge">functional_idiom</span></td>
-                    <td><code>Web.Scotty.Route.route</code></td>
-                    <td><span class="badge high">80% [HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:84:1</small></td>
-                    <td>Function &#x27;route&#x27; in &#x27;Web.Scotty.Route&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(20, 184, 166, 0.15); color: #2dd4bf; border: 1px solid rgba(20, 184, 166, 0.4);">
+                            <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #12 <code>railway_do_notation</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.Scotty.Route.route</code> (monadic_function)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            Function &#x27;route&#x27; in &#x27;Web.Scotty.Route&#x27; chains a 3-step Monadic Railway flow in `do` notation
+                        </div>
+                        <div class="evidence-box"><strong>+80% [MONADIC_DO_RAILWAY_PIPELINE]</strong> Function &#x27;route&#x27; in &#x27;Web.Scotty.Route&#x27; chains a 3-step Monadic Railway flow in `do` notation</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:84:1</span>
+                        <span class="ui mini teal label">80% [HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="functional_idiom" data-level="high">
-                    <td>#13</td>
-                    <td><strong><code>railway_do_notation</code></strong></td>
-                    <td><span class="cat-badge">functional_idiom</span></td>
-                    <td><code>Web.Scotty.Util.readRequestBody</code></td>
-                    <td><span class="badge high">80% [HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Util.hs:75:1</small></td>
-                    <td>Function &#x27;readRequestBody&#x27; in &#x27;Web.Scotty.Util&#x27; chains a 3-step Monadic Railway flow in `do` notation</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="functional_idiom" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(20, 184, 166, 0.15); color: #2dd4bf; border: 1px solid rgba(20, 184, 166, 0.4);">
+                            <i class="code branch icon"></i> FUNCTIONAL IDIOMS & GADTS
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #13 <code>railway_do_notation</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.Scotty.Util.readRequestBody</code> (monadic_function)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            Function &#x27;readRequestBody&#x27; in &#x27;Web.Scotty.Util&#x27; chains a 3-step Monadic Railway flow in `do` notation
+                        </div>
+                        <div class="evidence-box"><strong>+80% [MONADIC_DO_RAILWAY_PIPELINE]</strong> Function &#x27;readRequestBody&#x27; in &#x27;Web.Scotty.Util&#x27; chains a 3-step Monadic Railway flow in `do` notation</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Util.hs:75:1</span>
+                        <span class="ui mini teal label">80% [HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
-                    <td>#14</td>
-                    <td><strong><code>stm_transactional_memory</code></strong></td>
-                    <td><span class="cat-badge">concurrency_stm</span></td>
-                    <td><code>Web.Scotty.Session</code></td>
-                    <td><span class="badge very_high">90% [VERY_HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Session.hs:1:1</small></td>
-                    <td>Module &#x27;Web.Scotty.Session&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="concurrency_stm" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">
+                            <i class="bolt icon"></i> STM & CONCURRENCY
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #14 <code>stm_transactional_memory</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.Scotty.Session</code> (stm_concurrency_module)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            Module &#x27;Web.Scotty.Session&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity
+                        </div>
+                        <div class="evidence-box"><strong>+90% [SOFTWARE_TRANSACTIONAL_MEMORY]</strong> Module &#x27;Web.Scotty.Session&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Session.hs:1:1</span>
+                        <span class="ui mini green label">90% [VERY_HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
-                    <td>#15</td>
-                    <td><strong><code>stm_transactional_memory</code></strong></td>
-                    <td><span class="cat-badge">concurrency_stm</span></td>
-                    <td><code>Web.Scotty.Route</code></td>
-                    <td><span class="badge very_high">90% [VERY_HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:1:1</small></td>
-                    <td>Module &#x27;Web.Scotty.Route&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="concurrency_stm" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">
+                            <i class="bolt icon"></i> STM & CONCURRENCY
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #15 <code>stm_transactional_memory</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.Scotty.Route</code> (stm_concurrency_module)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            Module &#x27;Web.Scotty.Route&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity
+                        </div>
+                        <div class="evidence-box"><strong>+90% [SOFTWARE_TRANSACTIONAL_MEMORY]</strong> Module &#x27;Web.Scotty.Route&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:1:1</span>
+                        <span class="ui mini green label">90% [VERY_HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
-                    <td>#16</td>
-                    <td><strong><code>stm_transactional_memory</code></strong></td>
-                    <td><span class="cat-badge">concurrency_stm</span></td>
-                    <td><code>Web.Scotty.Internal.Types</code></td>
-                    <td><span class="badge very_high">90% [VERY_HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</small></td>
-                    <td>Module &#x27;Web.Scotty.Internal.Types&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="concurrency_stm" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">
+                            <i class="bolt icon"></i> STM & CONCURRENCY
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #16 <code>stm_transactional_memory</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.Scotty.Internal.Types</code> (stm_concurrency_module)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            Module &#x27;Web.Scotty.Internal.Types&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity
+                        </div>
+                        <div class="evidence-box"><strong>+90% [SOFTWARE_TRANSACTIONAL_MEMORY]</strong> Module &#x27;Web.Scotty.Internal.Types&#x27; coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</span>
+                        <span class="ui mini green label">90% [VERY_HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="concurrency_stm" data-level="very_high">
-                    <td>#17</td>
-                    <td><strong><code>async_concurrent_flow</code></strong></td>
-                    <td><span class="cat-badge">concurrency_stm</span></td>
-                    <td><code>Web.ScottySpec</code></td>
-                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:1:1</small></td>
-                    <td>Module &#x27;Web.ScottySpec&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="concurrency_stm" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4);">
+                            <i class="bolt icon"></i> STM & CONCURRENCY
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #17 <code>async_concurrent_flow</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.ScottySpec</code> (async_concurrency_module)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            Module &#x27;Web.ScottySpec&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation
+                        </div>
+                        <div class="evidence-box"><strong>+85% [STRUCTURED_ASYNC_CONCURRENCY]</strong> Module &#x27;Web.ScottySpec&#x27; manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:1:1</span>
+                        <span class="ui mini green label">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="type_safety" data-level="very_high">
-                    <td>#18</td>
-                    <td><strong><code>unchecked_bottom_error</code></strong></td>
-                    <td><span class="cat-badge">type_safety</span></td>
-                    <td><code>Web.ScottySpec.spec</code></td>
-                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1</small></td>
-                    <td>Type Safety Hazard: Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="type_safety" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4);">
+                            <i class="exclamation triangle icon"></i> TYPE SAFETY HAZARDS
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #18 <code>unchecked_bottom_error</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.ScottySpec.spec</code> (unsafe_bottom_function)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            Type Safety Hazard: Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead
+                        </div>
+                        <div class="evidence-box"><strong>+85% [UNCHECKED_BOTTOM_PANIC]</strong> Type Safety Hazard: Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1</span>
+                        <span class="ui mini green label">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="resilience" data-level="high">
-                    <td>#19</td>
-                    <td><strong><code>lazy_space_leak_risk</code></strong></td>
-                    <td><span class="cat-badge">resilience</span></td>
-                    <td><code>Web.Scotty.Trans.applyAll</code></td>
-                    <td><span class="badge high">80% [HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Trans.hs:179:1</small></td>
-                    <td>Resilience Risk (Lazy Space Leak): Function &#x27;applyAll&#x27; in &#x27;Web.Scotty.Trans&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.4);">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #19 <code>lazy_space_leak_risk</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.Scotty.Trans.applyAll</code> (space_leak_hazard_function)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            Resilience Risk (Lazy Space Leak): Function &#x27;applyAll&#x27; in &#x27;Web.Scotty.Trans&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`
+                        </div>
+                        <div class="evidence-box"><strong>+80% [LAZY_SPACE_LEAK_ACCUMULATOR]</strong> Resilience Risk (Lazy Space Leak): Function &#x27;applyAll&#x27; in &#x27;Web.Scotty.Trans&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Trans.hs:179:1</span>
+                        <span class="ui mini teal label">80% [HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="resilience" data-level="high">
-                    <td>#20</td>
-                    <td><strong><code>lazy_space_leak_risk</code></strong></td>
-                    <td><span class="cat-badge">resilience</span></td>
-                    <td><code>Web.Scotty.Route.matchAny</code></td>
-                    <td><span class="badge high">80% [HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:59:1</small></td>
-                    <td>Resilience Risk (Lazy Space Leak): Function &#x27;matchAny&#x27; in &#x27;Web.Scotty.Route&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.4);">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #20 <code>lazy_space_leak_risk</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.Scotty.Route.matchAny</code> (space_leak_hazard_function)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            Resilience Risk (Lazy Space Leak): Function &#x27;matchAny&#x27; in &#x27;Web.Scotty.Route&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`
+                        </div>
+                        <div class="evidence-box"><strong>+80% [LAZY_SPACE_LEAK_ACCUMULATOR]</strong> Resilience Risk (Lazy Space Leak): Function &#x27;matchAny&#x27; in &#x27;Web.Scotty.Route&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:59:1</span>
+                        <span class="ui mini teal label">80% [HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="resilience" data-level="high">
-                    <td>#21</td>
-                    <td><strong><code>lazy_space_leak_risk</code></strong></td>
-                    <td><span class="cat-badge">resilience</span></td>
-                    <td><code>Web.Scotty.Route.addroute</code></td>
-                    <td><span class="badge high">80% [HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:74:1</small></td>
-                    <td>Resilience Risk (Lazy Space Leak): Function &#x27;addroute&#x27; in &#x27;Web.Scotty.Route&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.4);">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #21 <code>lazy_space_leak_risk</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.Scotty.Route.addroute</code> (space_leak_hazard_function)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            Resilience Risk (Lazy Space Leak): Function &#x27;addroute&#x27; in &#x27;Web.Scotty.Route&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`
+                        </div>
+                        <div class="evidence-box"><strong>+80% [LAZY_SPACE_LEAK_ACCUMULATOR]</strong> Resilience Risk (Lazy Space Leak): Function &#x27;addroute&#x27; in &#x27;Web.Scotty.Route&#x27; uses unforced lazy accumulator (`foldl`/lazy `State`); replace with strict `foldl&#x27;` / `Control.Monad.State.Strict`</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Route.hs:74:1</span>
+                        <span class="ui mini teal label">80% [HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="resilience" data-level="very_high">
-                    <td>#22</td>
-                    <td><strong><code>catch_all_some_exception</code></strong></td>
-                    <td><span class="cat-badge">resilience</span></td>
-                    <td><code>Web.ScottySpec.spec</code></td>
-                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1</small></td>
-                    <td>Resilience Anti-Pattern: Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; catches `SomeException` without rethrowing async exceptions (`ThreadKilled`); use `Control.Exception.Safe`</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="resilience" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.4);">
+                            <i class="shield alternate icon"></i> RESILIENCE & SPACE LEAKS
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #22 <code>catch_all_some_exception</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.ScottySpec.spec</code> (defensive_catch_function)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            Resilience Anti-Pattern: Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; catches `SomeException` without rethrowing async exceptions (`ThreadKilled`); use `Control.Exception.Safe`
+                        </div>
+                        <div class="evidence-box"><strong>+85% [CATCH_ALL_SOME_EXCEPTION]</strong> Resilience Anti-Pattern: Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; catches `SomeException` without rethrowing async exceptions (`ThreadKilled`); use `Control.Exception.Safe`</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1</span>
+                        <span class="ui mini green label">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="principle" data-level="very_high">
-                    <td>#23</td>
-                    <td><strong><code>god_module_srp</code></strong></td>
-                    <td><span class="cat-badge">principle</span></td>
-                    <td><code>Web.Scotty</code></td>
-                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty.hs:1:1</small></td>
-                    <td>SRP Violation (God Module): Module &#x27;Web.Scotty&#x27; contains 78 declarations across 615 lines of code; decompose into focused domain modules</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="principle" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.4);">
+                            <i class="balance scale icon"></i> PRINCIPLES & QUALITY
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #23 <code>god_module_srp</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.Scotty</code> (god_module)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            SRP Violation (God Module): Module &#x27;Web.Scotty&#x27; contains 78 declarations across 615 lines of code; decompose into focused domain modules
+                        </div>
+                        <div class="evidence-box"><strong>+85% [SRP_GOD_MODULE]</strong> SRP Violation (God Module): Module &#x27;Web.Scotty&#x27; contains 78 declarations across 615 lines of code; decompose into focused domain modules</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty.hs:1:1</span>
+                        <span class="ui mini green label">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="principle" data-level="very_high">
-                    <td>#24</td>
-                    <td><strong><code>god_module_srp</code></strong></td>
-                    <td><span class="cat-badge">principle</span></td>
-                    <td><code>Web.Scotty.Action</code></td>
-                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:1:1</small></td>
-                    <td>SRP Violation (God Module): Module &#x27;Web.Scotty.Action&#x27; contains 60 declarations across 786 lines of code; decompose into focused domain modules</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="principle" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.4);">
+                            <i class="balance scale icon"></i> PRINCIPLES & QUALITY
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #24 <code>god_module_srp</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.Scotty.Action</code> (god_module)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            SRP Violation (God Module): Module &#x27;Web.Scotty.Action&#x27; contains 60 declarations across 786 lines of code; decompose into focused domain modules
+                        </div>
+                        <div class="evidence-box"><strong>+85% [SRP_GOD_MODULE]</strong> SRP Violation (God Module): Module &#x27;Web.Scotty.Action&#x27; contains 60 declarations across 786 lines of code; decompose into focused domain modules</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:1:1</span>
+                        <span class="ui mini green label">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="principle" data-level="very_high">
-                    <td>#25</td>
-                    <td><strong><code>god_module_srp</code></strong></td>
-                    <td><span class="cat-badge">principle</span></td>
-                    <td><code>Web.Scotty.Internal.Types</code></td>
-                    <td><span class="badge very_high">85% [VERY_HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</small></td>
-                    <td>SRP Violation (God Module): Module &#x27;Web.Scotty.Internal.Types&#x27; contains 38 declarations across 289 lines of code; decompose into focused domain modules</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="principle" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.4);">
+                            <i class="balance scale icon"></i> PRINCIPLES & QUALITY
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #25 <code>god_module_srp</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.Scotty.Internal.Types</code> (god_module)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            SRP Violation (God Module): Module &#x27;Web.Scotty.Internal.Types&#x27; contains 38 declarations across 289 lines of code; decompose into focused domain modules
+                        </div>
+                        <div class="evidence-box"><strong>+85% [SRP_GOD_MODULE]</strong> SRP Violation (God Module): Module &#x27;Web.Scotty.Internal.Types&#x27; contains 38 declarations across 289 lines of code; decompose into focused domain modules</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Internal/Types.hs:1:1</span>
+                        <span class="ui mini green label">85% [VERY_HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="principle" data-level="high">
-                    <td>#26</td>
-                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
-                    <td><span class="cat-badge">principle</span></td>
-                    <td><code>Web.ScottySpec.spec</code></td>
-                    <td><span class="badge high">75% [HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1</small></td>
-                    <td>KISS Violation (High Complexity): Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; has cyclomatic complexity of 43; refactor complex pattern branches</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="principle" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.4);">
+                            <i class="balance scale icon"></i> PRINCIPLES & QUALITY
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #26 <code>cyclomatic_complexity_kiss</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.ScottySpec.spec</code> (complex_function)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            KISS Violation (High Complexity): Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; has cyclomatic complexity of 43; refactor complex pattern branches
+                        </div>
+                        <div class="evidence-box"><strong>+75% [KISS_HIGH_CYCLOMATIC_COMPLEXITY]</strong> KISS Violation (High Complexity): Function &#x27;spec&#x27; in &#x27;Web.ScottySpec&#x27; has cyclomatic complexity of 43; refactor complex pattern branches</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/test/Web/ScottySpec.hs:64:1</span>
+                        <span class="ui mini teal label">75% [HIGH]</span>
+                    </div>
+                </div>
                 
 
-                <tr class="detection-row" data-category="principle" data-level="high">
-                    <td>#27</td>
-                    <td><strong><code>cyclomatic_complexity_kiss</code></strong></td>
-                    <td><span class="cat-badge">principle</span></td>
-                    <td><code>Web.Scotty.Action.scottyExceptionHandler</code></td>
-                    <td><span class="badge high">75% [HIGH]</span></td>
-                    <td><small>/Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:146:1</small></td>
-                    <td>KISS Violation (High Complexity): Function &#x27;scottyExceptionHandler&#x27; in &#x27;Web.Scotty.Action&#x27; has cyclomatic complexity of 20; refactor complex pattern branches</td>
-                </tr>
+                <div class="ui inverted card finding-card" data-category="principle" style="width: calc(50% - 1em); margin: 0.5em;">
+                    <div class="content">
+                        <div class="ui top right attached label mini" style="background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.4);">
+                            <i class="balance scale icon"></i> PRINCIPLES & QUALITY
+                        </div>
+                        <div class="header" style="color: #f8fafc; font-size: 15px; margin-top: 5px;">
+                            #27 <code>cyclomatic_complexity_kiss</code>
+                        </div>
+                        <div class="meta" style="color: var(--text-secondary); margin-top: 4px;">
+                            Target: <code class="code-snippet">Web.Scotty.Action.scottyExceptionHandler</code> (complex_function)
+                        </div>
+                        <div class="description" style="color: #cbd5e1; margin-top: 10px; font-size: 13px;">
+                            KISS Violation (High Complexity): Function &#x27;scottyExceptionHandler&#x27; in &#x27;Web.Scotty.Action&#x27; has cyclomatic complexity of 20; refactor complex pattern branches
+                        </div>
+                        <div class="evidence-box"><strong>+75% [KISS_HIGH_CYCLOMATIC_COMPLEXITY]</strong> KISS Violation (High Complexity): Function &#x27;scottyExceptionHandler&#x27; in &#x27;Web.Scotty.Action&#x27; has cyclomatic complexity of 20; refactor complex pattern branches</div>
+                    </div>
+                    <div class="extra content" style="border-top: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <span><i class="map marker alternate icon" style="color: #f43f5e;"></i> /Volumes/External/Code/DPX-Haskell/benchmarks_cache/scotty/Web/Scotty/Action.hs:146:1</span>
+                        <span class="ui mini teal label">75% [HIGH]</span>
+                    </div>
+                </div>
                 
-        </tbody>
-    </table>
+    </div>
+
+</div>
+
+<script>
+    const searchInput = document.getElementById('searchInput');
+    const cards = document.querySelectorAll('.finding-card');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+
+    let currentCategory = 'all';
+
+    function applyFilters() {
+        const query = searchInput.value.toLowerCase().trim();
+
+        cards.forEach(card => {
+            const category = card.dataset.category || '';
+            const text = card.textContent.toLowerCase();
+
+            const matchesCategory = (currentCategory === 'all' || category === currentCategory);
+            const matchesSearch = (!query || text.includes(query));
+
+            if (matchesCategory && matchesSearch) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentCategory = btn.dataset.filter;
+            applyFilters();
+        });
+    });
+
+    function copyLlmContext() {
+        const raw = document.getElementById('llmContextData').value;
+        const btn = document.getElementById('copyLlmBtn');
+        const oldHtml = btn.innerHTML;
+
+        navigator.clipboard.writeText(raw).then(() => {
+            btn.innerHTML = '<i class="check icon"></i> Copied to Clipboard!';
+            btn.classList.remove('purple');
+            btn.classList.add('green');
+            setTimeout(() => {
+                btn.innerHTML = oldHtml;
+                btn.classList.remove('green');
+                btn.classList.add('purple');
+            }, 2000);
+        }).catch(() => {
+            const ta = document.createElement('textarea');
+            ta.value = raw;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            document.body.removeChild(ta);
+            btn.innerHTML = '<i class="check icon"></i> Copied!';
+            setTimeout(() => { btn.innerHTML = oldHtml; }, 2000);
+        });
+    }
+</script>
+
 </body>
 </html>
