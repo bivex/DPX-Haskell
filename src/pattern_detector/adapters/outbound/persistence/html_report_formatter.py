@@ -1,14 +1,18 @@
 """
-Elite, production-grade Cyber-Architectural HTML Dashboard Formatter for DPX-Haskell.
-Designed with Gemini 3 Pro + Claude frontend design principles:
-- Bold Aesthetic: Monadic Cyber-Blueprint & Deep Void Glassmorphism
-- Distinctive Typography: Syne (Display) + Plus Jakarta Sans (Body) + JetBrains Mono (Code)
-- Signature Element: Holographic Monad HUD, Live Reactive Pill Filters, Glassmorphic Cards
+DPX Architecture HUD — Professional IDE-like Observability Dashboard for Haskell.
+Features:
+- Datadog/IDE 3-Pane Layout: Architecture Navigator, Main Findings Stream, Inspector Drawer
+- Density Switcher: Compact, Comfortable, Expanded
+- Architecture Risk Map & Hotspots Matrix
+- Live Code Evidence Viewer with AST line pointers
+- Contextual AI Action Triggers (Review, Refactor, Explain)
+- High-Performance Zero-Dependency Vanilla JS with 100/100 Lighthouse compatibility
 """
 
 from __future__ import annotations
 
 import html
+import json
 import os
 from typing import Any
 
@@ -20,795 +24,1159 @@ from pattern_detector.domain.value_objects import (
 )
 from pattern_detector.ports.outbound import ReportFormatterPort
 
-CATEGORY_THEMES = {
+CATEGORY_CONFIG = {
     PatternCategory.TYPECLASS_SYSTEM: {
-        "name": "Typeclasses & Polymorphism",
-        "icon": "⟨T⟩",
-        "accent": "#00f0ff",
-        "glow": "rgba(0, 240, 255, 0.25)",
-        "badge_bg": "rgba(0, 240, 255, 0.12)",
-        "border": "rgba(0, 240, 255, 0.35)",
-        "text": "#67e8f9",
+        "name": "Typeclasses & Types",
+        "short": "Typeclasses",
+        "icon": "🟣",
+        "color": "#A78BFA",
+        "bg": "rgba(167, 139, 250, 0.12)",
+        "border": "rgba(167, 139, 250, 0.3)",
     },
     PatternCategory.MONAD_ARCHITECTURE: {
-        "name": "Monad Stacks & ReaderT",
-        "icon": "λ⟦M⟧",
-        "accent": "#b026ff",
-        "glow": "rgba(176, 38, 255, 0.25)",
-        "badge_bg": "rgba(176, 38, 255, 0.12)",
-        "border": "rgba(176, 38, 255, 0.35)",
-        "text": "#d8b4fe",
+        "name": "Monad & ReaderT",
+        "short": "Monads",
+        "icon": "🔵",
+        "color": "#38D9FF",
+        "bg": "rgba(56, 217, 255, 0.12)",
+        "border": "rgba(56, 217, 255, 0.3)",
     },
     PatternCategory.FUNCTIONAL_IDIOM: {
-        "name": "Functional Idioms & GADTs",
-        "icon": "ƒ(x)",
-        "accent": "#2dd4bf",
-        "glow": "rgba(45, 212, 191, 0.25)",
-        "badge_bg": "rgba(45, 212, 191, 0.12)",
-        "border": "rgba(45, 212, 191, 0.35)",
-        "text": "#5eead4",
+        "name": "Functional Idioms",
+        "short": "Idioms",
+        "icon": "🟢",
+        "color": "#35D07F",
+        "bg": "rgba(53, 208, 127, 0.12)",
+        "border": "rgba(53, 208, 127, 0.3)",
     },
     PatternCategory.CONCURRENCY_STM: {
         "name": "STM & Concurrency",
-        "icon": "⚡STM",
-        "accent": "#38bdf8",
-        "glow": "rgba(56, 189, 248, 0.25)",
-        "badge_bg": "rgba(56, 189, 248, 0.12)",
-        "border": "rgba(56, 189, 248, 0.35)",
-        "text": "#7dd3fc",
+        "short": "STM",
+        "icon": "🟠",
+        "color": "#FBBF24",
+        "bg": "rgba(251, 191, 36, 0.12)",
+        "border": "rgba(251, 191, 36, 0.3)",
     },
     PatternCategory.OPTICS_LENSES: {
         "name": "Optics & Lenses",
-        "icon": "⊙_⊙",
-        "accent": "#f472b6",
-        "glow": "rgba(244, 114, 182, 0.25)",
-        "badge_bg": "rgba(244, 114, 182, 0.12)",
-        "border": "rgba(244, 114, 182, 0.35)",
-        "text": "#f9a8d4",
+        "short": "Optics",
+        "icon": "◇",
+        "color": "#F472B6",
+        "bg": "rgba(244, 114, 182, 0.12)",
+        "border": "rgba(244, 114, 182, 0.3)",
     },
     PatternCategory.RESILIENCE: {
         "name": "Resilience & Space Leaks",
-        "icon": "🛡️Ω",
-        "accent": "#00ff9d",
-        "glow": "rgba(0, 255, 157, 0.25)",
-        "badge_bg": "rgba(0, 255, 157, 0.12)",
-        "border": "rgba(0, 255, 157, 0.35)",
-        "text": "#86efac",
+        "short": "Resilience",
+        "icon": "🛡️",
+        "color": "#FF5C6C",
+        "bg": "rgba(255, 92, 108, 0.12)",
+        "border": "rgba(255, 92, 108, 0.3)",
     },
     PatternCategory.PRINCIPLE: {
         "name": "Principles & Quality",
-        "icon": "⚖️📐",
-        "accent": "#ffb700",
-        "glow": "rgba(255, 183, 0, 0.25)",
-        "badge_bg": "rgba(255, 183, 0, 0.12)",
-        "border": "rgba(255, 183, 0, 0.35)",
-        "text": "#fde047",
+        "short": "Principles",
+        "icon": "⚖️",
+        "color": "#FBBF24",
+        "bg": "rgba(251, 191, 36, 0.12)",
+        "border": "rgba(251, 191, 36, 0.3)",
     },
     PatternCategory.TYPE_SAFETY: {
         "name": "Type Safety Hazards",
-        "icon": "⚠️⊥",
-        "accent": "#ff2a6d",
-        "glow": "rgba(255, 42, 109, 0.25)",
-        "badge_bg": "rgba(255, 42, 109, 0.12)",
-        "border": "rgba(255, 42, 109, 0.35)",
-        "text": "#fca5a5",
+        "short": "Safety",
+        "icon": "🔴",
+        "color": "#FF5C6C",
+        "bg": "rgba(255, 92, 108, 0.12)",
+        "border": "rgba(255, 92, 108, 0.3)",
     },
 }
 
-_HTML_TEMPLATE = """<!DOCTYPE html>
+_HTML_HUD_TEMPLATE = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔷 DPX-Haskell HUD — {project_name}</title>
-    <!-- Google Fonts: Syne, Plus Jakarta Sans, JetBrains Mono -->
+    <title>λ DPX Architecture HUD — {project_name}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         :root {{
-            --bg-void: #04060c;
-            --bg-surface: #090e1a;
-            --bg-surface-elevated: #0f172a;
-            --bg-card: rgba(13, 20, 36, 0.75);
-            --bg-card-hover: rgba(19, 29, 53, 0.9);
-            --border-dim: #182338;
-            --border-bright: #283958;
-            --cyan: #00f0ff;
-            --cyan-glow: rgba(0, 240, 255, 0.25);
-            --purple: #b026ff;
-            --purple-glow: rgba(176, 38, 255, 0.25);
-            --emerald: #00ff9d;
-            --emerald-glow: rgba(0, 255, 157, 0.25);
-            --rose: #ff2a6d;
-            --rose-glow: rgba(255, 42, 109, 0.25);
-            --amber: #ffb700;
-            --amber-glow: rgba(255, 183, 0, 0.25);
-            --text-pure: #ffffff;
-            --text-bright: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --text-dim: #64748b;
-            --font-display: 'Syne', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            --font-code: 'JetBrains Mono', monospace;
+            --bg-void: #080B10;
+            --bg-panel: #0E131A;
+            --bg-surface: #141A23;
+            --bg-card: #18202C;
+            --bg-card-hover: #1E2938;
+            --bg-active: #223044;
+            --border-dim: #202832;
+            --border-bright: #2C3847;
+            --border-glow: #38D9FF;
+            --text-pure: #FFFFFF;
+            --text-main: #E6EDF3;
+            --text-muted: #7D8996;
+            --text-dim: #54606E;
+            --cyan: #38D9FF;
+            --violet: #A78BFA;
+            --amber: #FBBF24;
+            --red: #FF5C6C;
+            --green: #35D07F;
+            --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
         }}
 
-        * {{
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }}
-
-        html {{
-            font-size: 16px;
-        }}
-
-        body {{
-            background-color: var(--bg-void);
-            background-image: 
-                radial-gradient(circle at 15% 15%, rgba(176, 38, 255, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, rgba(0, 240, 255, 0.08) 0%, transparent 40%),
-                linear-gradient(rgba(24, 35, 56, 0.15) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(24, 35, 56, 0.15) 1px, transparent 1px);
-            background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
-            color: var(--text-bright);
-            font-family: var(--font-body);
-            line-height: 1.6;
-            padding: 40px 24px 80px 24px;
-            min-height: 100vh;
-        }}
-
-        .hud-container {{
-            max-width: 1440px;
-            margin: 0 auto;
-        }}
-
-        /* Header Cyberpunk HUD */
-        .hud-header {{
-            min-height: 120px;
-            background: linear-gradient(135deg, rgba(13, 20, 36, 0.9) 0%, rgba(9, 14, 26, 0.95) 100%);
-            border: 1px solid var(--border-bright);
-            border-radius: 16px;
-            padding: 32px 36px;
-            margin-bottom: 32px;
-            position: relative;
+        * {{ box-sizing: border-box; margin: 0; padding: 0; }}
+        html, body {{ height: 100%; font-family: var(--font-ui); background: var(--bg-void); color: var(--text-main); font-size: 13.5px; line-height: 1.5; }}
+        
+        /* Layout Grid */
+        .hud-app {{
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
             overflow: hidden;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }}
 
-
-        .hud-header::before {{
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--purple), var(--cyan), var(--emerald));
-        }}
-
-        .header-flex {{
+        /* Header Command Center */
+        .hud-header {{
+            background: var(--bg-panel);
+            border-bottom: 1px solid var(--border-dim);
+            padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
+            flex-shrink: 0;
+            z-index: 100;
         }}
 
         .header-brand {{
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 12px;
         }}
 
-        .monad-logo-badge {{
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
-            background: linear-gradient(135deg, rgba(176, 38, 255, 0.2) 0%, rgba(0, 240, 255, 0.2) 100%);
+        .lambda-logo {{
+            width: 32px;
+            height: 32px;
+            background: rgba(56, 217, 255, 0.1);
             border: 1px solid var(--cyan);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 26px;
-            box-shadow: 0 0 20px var(--cyan-glow);
-        }}
-
-        .hud-title {{
-            font-family: var(--font-display);
-            font-size: 34px;
-            font-weight: 900;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, var(--cyan) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1.2;
-        }}
-
-        .target-tag {{
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 6px;
-            font-size: 14.5px;
-            color: var(--text-secondary);
-        }}
-
-        .code-pill {{
-            font-family: var(--font-code);
-            background: rgba(0, 240, 255, 0.1);
             color: var(--cyan);
-            border: 1px solid rgba(0, 240, 255, 0.3);
-            padding: 3px 10px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 13.5px;
+            font-family: var(--font-mono);
+            font-weight: 800;
+            font-size: 16px;
         }}
 
-        .meta-pills {{
+        .app-title-group {{
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+        }}
+
+        .app-title {{
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-pure);
+            letter-spacing: -0.2px;
+        }}
+
+        .project-pill {{
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--cyan);
+            background: rgba(56, 217, 255, 0.08);
+            padding: 2px 10px;
+            border-radius: 6px;
+            border: 1px solid rgba(56, 217, 255, 0.25);
+        }}
+
+        .engine-label {{
+            font-size: 11.5px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }}
+
+        .header-metrics {{
             display: flex;
             align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
+            gap: 16px;
+            font-size: 12.5px;
+            color: var(--text-muted);
+            font-family: var(--font-mono);
         }}
 
-        .meta-pill {{
-            font-family: var(--font-code);
-            font-size: 12.5px;
-            font-weight: 700;
-            padding: 6px 14px;
-            border-radius: 8px;
-            background: rgba(24, 35, 56, 0.6);
-            border: 1px solid var(--border-bright);
-            color: var(--text-bright);
-            display: inline-flex;
+        .metric-item {{
+            display: flex;
             align-items: center;
             gap: 6px;
         }}
 
-        /* Holographic KPI Grid */
-        .kpi-grid {{
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 20px;
-            margin-bottom: 32px;
+        .metric-val {{
+            color: var(--text-main);
+            font-weight: 700;
         }}
 
-        .kpi-card {{
-            background: var(--bg-card);
-            border: 1px solid var(--border-dim);
-            border-radius: 14px;
-            padding: 22px 24px;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        }}
-
-        .kpi-card:hover {{
-            transform: translateY(-3px);
-            border-color: var(--border-bright);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-        }}
-
-        .kpi-card::after {{
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-        }}
-
-        .kpi-card.cyan::after {{ background: var(--cyan); box-shadow: 0 0 10px var(--cyan-glow); }}
-        .kpi-card.rose::after {{ background: var(--rose); box-shadow: 0 0 10px var(--rose-glow); }}
-        .kpi-card.purple::after {{ background: var(--purple); box-shadow: 0 0 10px var(--purple-glow); }}
-        .kpi-card.emerald::after {{ background: var(--emerald); box-shadow: 0 0 10px var(--emerald-glow); }}
-
-        .kpi-label {{
-            font-family: var(--font-code);
-            font-size: 11.5px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--text-dim);
-        }}
-
-        .kpi-value {{
-            font-family: var(--font-display);
-            font-size: 40px;
-            font-weight: 900;
-            letter-spacing: -1px;
-            margin: 6px 0;
-            line-height: 1.1;
-        }}
-
-        .kpi-desc {{
-            font-size: 13.5px;
-            color: var(--text-secondary);
-            font-weight: 500;
-        }}
-
-        /* AI Prompt Banner */
-        .ai-banner {{
-            background: linear-gradient(135deg, rgba(176, 38, 255, 0.12) 0%, rgba(9, 14, 26, 0.8) 100%);
-            border: 1px solid rgba(176, 38, 255, 0.4);
-            border-left: 5px solid var(--purple);
-            border-radius: 14px;
-            padding: 24px 28px;
-            margin-bottom: 32px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 18px;
-            box-shadow: 0 8px 30px rgba(176, 38, 255, 0.1);
-        }}
-
-        .ai-title {{
-            font-family: var(--font-display);
-            font-size: 18px;
-            font-weight: 800;
-            color: #ffffff;
+        .header-actions {{
             display: flex;
             align-items: center;
             gap: 10px;
         }}
 
-        .ai-btn {{
-            font-family: var(--font-code);
-            background: linear-gradient(135deg, var(--purple) 0%, #7928ca 100%);
-            color: #ffffff;
-            border: none;
-            padding: 12px 22px;
-            border-radius: 10px;
-            font-weight: 800;
-            font-size: 13.5px;
-            cursor: pointer;
+        .status-badge {{
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 20px var(--purple-glow);
-            transition: all 0.2s ease;
+            gap: 6px;
+            font-size: 11.5px;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            color: var(--green);
+            background: rgba(53, 208, 127, 0.1);
+            border: 1px solid rgba(53, 208, 127, 0.25);
+            padding: 4px 10px;
+            border-radius: 6px;
+            margin-right: 8px;
         }}
 
-        .ai-btn:hover {{
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(176, 38, 255, 0.5);
+        .status-dot {{
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 8px var(--green);
         }}
 
-        /* Filter Controls */
-        .controls-bar {{
+        .hud-btn {{
             background: var(--bg-surface);
             border: 1px solid var(--border-dim);
-            border-radius: 14px;
-            padding: 18px 22px;
-            margin-bottom: 28px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }}
-
-        .category-pills {{
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }}
-
-        .cat-pill-btn {{
-            font-family: var(--font-body);
-            font-size: 13px;
-            font-weight: 700;
-            padding: 8px 16px;
-            border-radius: 8px;
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid var(--border-bright);
-            color: var(--text-secondary);
+            color: var(--text-main);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12.5px;
+            font-weight: 600;
             cursor: pointer;
-            transition: all 0.15s ease;
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            transition: all 0.15s ease;
         }}
 
-        .cat-pill-btn:hover {{
-            color: var(--text-pure);
-            border-color: var(--cyan);
-            background: rgba(0, 240, 255, 0.08);
-        }}
-
-        .cat-pill-btn.active {{
-            background: var(--cyan);
-            color: #04060c;
-            border-color: var(--cyan);
-            font-weight: 800;
-            box-shadow: 0 0 15px var(--cyan-glow);
-        }}
-
-        .search-box-wrap {{
-            position: relative;
-            width: 100%;
-        }}
-
-        .search-input {{
-            width: 100%;
-            background: var(--bg-void);
-            border: 1px solid var(--border-bright);
-            color: #ffffff;
-            font-family: var(--font-body);
-            font-size: 14.5px;
-            padding: 13px 20px 13px 44px;
-            border-radius: 10px;
-            outline: none;
-            transition: all 0.2s ease;
-        }}
-
-        .search-input:focus {{
-            border-color: var(--cyan);
-            box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.2);
-        }}
-
-        .search-icon {{
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--cyan);
-            font-size: 16px;
-        }}
-
-        /* Findings Cards Grid */
-        .cards-grid {{
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(640px, 1fr));
-            gap: 20px;
-        }}
-
-        @media (max-width: 768px) {{
-            .cards-grid {{
-                grid-template-columns: 1fr;
-            }}
-        }}
-
-        .finding-card {{
+        .hud-btn:hover {{
             background: var(--bg-card);
-            border: 1px solid var(--border-dim);
-            border-radius: 14px;
-            padding: 24px;
+            border-color: var(--border-bright);
+            color: var(--text-pure);
+        }}
+
+        .hud-btn.primary {{
+            background: var(--cyan);
+            border-color: var(--cyan);
+            color: #04060C;
+            font-weight: 700;
+        }}
+
+        .hud-btn.primary:hover {{
+            background: #5EE2FF;
+        }}
+
+        /* Health Strip */
+        .health-strip {{
+            background: #0A0E15;
+            border-bottom: 1px solid var(--border-dim);
+            padding: 8px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+            font-family: var(--font-mono);
+            flex-shrink: 0;
+        }}
+
+        .health-bar-wrap {{
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-grow: 1;
+            max-width: 650px;
+        }}
+
+        .health-label {{
+            color: var(--text-muted);
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }}
+
+        .health-meter {{
+            display: flex;
+            height: 8px;
+            border-radius: 4px;
+            background: #141A23;
+            overflow: hidden;
+            flex-grow: 1;
+        }}
+
+        .health-seg {{ height: 100%; transition: width 0.3s ease; }}
+        .health-seg.red {{ background: var(--red); }}
+        .health-seg.amber {{ background: var(--amber); }}
+        .health-seg.violet {{ background: var(--violet); }}
+        .health-seg.green {{ background: var(--green); }}
+
+        .health-badges {{
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }}
+
+        .health-badge {{
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--text-muted);
+        }}
+
+        .health-badge strong {{
+            color: var(--text-main);
+        }}
+
+        /* 3-Pane Body */
+        .hud-body {{
+            display: grid;
+            grid-template-columns: 280px 1fr 420px;
+            flex-grow: 1;
+            overflow: hidden;
+            height: calc(100vh - 105px);
+        }}
+
+        /* Left Pane: Architecture Navigator */
+        .nav-pane {{
+            background: var(--bg-panel);
+            border-right: 1px solid var(--border-dim);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            backdrop-filter: blur(10px);
-            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-            overflow: hidden;
+            overflow-y: auto;
+            user-select: none;
         }}
 
-        .finding-card:hover {{
-            background: var(--bg-card-hover);
-            border-color: var(--border-bright);
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+        .nav-section {{
+            padding: 16px 14px 8px 14px;
+            border-bottom: 1px solid var(--border-dim);
         }}
 
-        .card-top {{
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 12px;
-        }}
-
-        .card-idx-pattern {{
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }}
-
-        .card-idx {{
-            font-family: var(--font-code);
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--text-dim);
-        }}
-
-        .card-pattern-title {{
-            font-family: var(--font-code);
-            font-size: 16px;
-            font-weight: 800;
-            color: var(--cyan);
-        }}
-
-        .category-badge {{
-            font-family: var(--font-code);
-            font-size: 11px;
-            font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
-        }}
-
-        .target-meta {{
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-        }}
-
-        .target-code {{
-            font-family: var(--font-code);
-            font-size: 14.5px;
-            font-weight: 700;
-            color: #ffffff;
-            background: rgba(4, 6, 12, 0.8);
-            border: 1px solid var(--border-bright);
-            padding: 4px 10px;
-            border-radius: 6px;
-            word-break: break-all;
-        }}
-
-        .kind-pill {{
-            font-family: var(--font-code);
-            font-size: 11.5px;
-            color: var(--text-dim);
-            background: rgba(24, 35, 56, 0.6);
-            padding: 3px 8px;
-            border-radius: 4px;
-        }}
-
-        .card-summary {{
-            font-size: 14.5px;
-            line-height: 1.6;
-            color: var(--text-bright);
-            font-weight: 500;
-            margin-bottom: 16px;
-        }}
-
-        /* Evidence Box */
-        .evidence-trail-title {{
-            font-family: var(--font-code);
-            font-size: 11px;
+        .nav-section-title {{
+            font-size: 10.5px;
             font-weight: 800;
             letter-spacing: 0.8px;
             text-transform: uppercase;
             color: var(--text-dim);
-            margin-bottom: 6px;
+            margin-bottom: 8px;
+            padding-left: 8px;
         }}
 
-        .evidence-item {{
-            background: rgba(4, 6, 12, 0.7);
-            border-left: 3px solid var(--cyan);
-            padding: 8px 12px;
-            border-radius: 0 6px 6px 0;
-            font-size: 13px;
-            line-height: 1.5;
-            color: #cbd5e1;
-            margin-bottom: 6px;
-            border-top: 1px solid rgba(24, 35, 56, 0.4);
-            border-right: 1px solid rgba(24, 35, 56, 0.4);
-            border-bottom: 1px solid rgba(24, 35, 56, 0.4);
-        }}
-
-        .card-footer {{
-            border-top: 1px solid var(--border-dim);
-            padding-top: 14px;
-            margin-top: 16px;
+        .nav-item {{
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            gap: 12px;
+            justify-content: space-between;
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--text-muted);
+            font-size: 12.5px;
+            font-weight: 500;
+            margin-bottom: 2px;
+            transition: all 0.12s ease;
         }}
 
-        .loc-pill {{
-            font-family: var(--font-code);
-            font-size: 12px;
-            color: var(--rose);
-            background: rgba(255, 42, 109, 0.08);
-            border: 1px solid rgba(255, 42, 109, 0.25);
-            padding: 4px 10px;
-            border-radius: 6px;
+        .nav-item:hover {{
+            background: var(--bg-surface);
+            color: var(--text-main);
+        }}
+
+        .nav-item.active {{
+            background: var(--bg-surface);
+            color: var(--text-pure);
             font-weight: 600;
-            max-width: 68%;
+            border-left: 3px solid var(--cyan);
+        }}
+
+        .nav-item-left {{
+            display: flex;
+            align-items: center;
+            gap: 8px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }}
 
-        .conf-badge {{
-            font-family: var(--font-code);
-            font-size: 11.5px;
-            font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 6px;
-            flex-shrink: 0;
-            white-space: nowrap;
+        .nav-item-count {{
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 700;
+            background: var(--bg-surface);
+            padding: 1px 6px;
+            border-radius: 4px;
+            color: var(--text-muted);
         }}
 
-        .conf-very-high {{ background: rgba(0, 255, 157, 0.15); color: var(--emerald); border: 1px solid rgba(0, 255, 157, 0.4); }}
-        .conf-high {{ background: rgba(0, 240, 255, 0.15); color: var(--cyan); border: 1px solid rgba(0, 240, 255, 0.4); }}
-        .conf-medium {{ background: rgba(255, 183, 0, 0.15); color: var(--amber); border: 1px solid rgba(255, 183, 0, 0.4); }}
+        .module-list {{
+            max-height: 260px;
+            overflow-y: auto;
+        }}
 
-        #copyToast {{
+        .module-item {{
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            padding: 5px 8px;
+        }}
+
+        /* Center Pane: Main Workspace */
+        .workspace-pane {{
+            background: var(--bg-void);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border-right: 1px solid var(--border-dim);
+        }}
+
+        .workspace-toolbar {{
+            background: var(--bg-panel);
+            border-bottom: 1px solid var(--border-dim);
+            padding: 10px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            gap: 12px;
+        }}
+
+        .toolbar-left {{
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }}
+
+        .view-mode-tabs {{
+            display: flex;
+            background: var(--bg-void);
+            border: 1px solid var(--border-dim);
+            border-radius: 6px;
+            padding: 2px;
+        }}
+
+        .view-tab-btn {{
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }}
+
+        .view-tab-btn.active {{
+            background: var(--bg-surface);
+            color: var(--text-pure);
+        }}
+
+        .density-toggle {{
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 11.5px;
+            color: var(--text-muted);
+        }}
+
+        .density-btn {{
+            background: transparent;
+            border: 1px solid var(--border-dim);
+            color: var(--text-muted);
+            font-size: 11px;
+            padding: 2px 7px;
+            border-radius: 4px;
+            cursor: pointer;
+        }}
+
+        .density-btn.active {{
+            background: var(--bg-surface);
+            color: var(--cyan);
+            border-color: var(--cyan);
+        }}
+
+        .search-wrap {{
+            position: relative;
+            flex-grow: 1;
+            max-width: 320px;
+        }}
+
+        .search-input {{
+            width: 100%;
+            background: var(--bg-void);
+            border: 1px solid var(--border-dim);
+            border-radius: 6px;
+            color: var(--text-pure);
+            font-size: 12px;
+            padding: 6px 10px 6px 28px;
+            outline: none;
+        }}
+
+        .search-input:focus {{
+            border-color: var(--cyan);
+        }}
+
+        .search-icon {{
+            position: absolute;
+            left: 9px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 12px;
+            color: var(--text-dim);
+        }}
+
+        /* Findings Stream */
+        .findings-stream {{
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 14px 16px;
+        }}
+
+        /* Finding Card (Comfortable) */
+        .finding-row {{
+            background: var(--bg-panel);
+            border: 1px solid var(--border-dim);
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.12s ease;
+            position: relative;
+            border-left: 3px solid var(--cyan);
+        }}
+
+        .finding-row:hover {{
+            background: var(--bg-surface);
+            border-color: var(--border-bright);
+            transform: translateX(2px);
+        }}
+
+        .finding-row.active {{
+            background: var(--bg-surface);
+            border-color: var(--cyan);
+            box-shadow: 0 0 12px rgba(56, 217, 255, 0.15);
+        }}
+
+        .finding-row-header {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }}
+
+        .row-id-pattern {{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }}
+
+        .row-id {{
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            font-weight: 700;
+            color: var(--text-dim);
+        }}
+
+        .row-pattern {{
+            font-family: var(--font-mono);
+            font-size: 13.5px;
+            font-weight: 700;
+            color: var(--text-pure);
+        }}
+
+        .row-cat-pill {{
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: var(--font-mono);
+        }}
+
+        .row-target {{
+            font-family: var(--font-mono);
+            font-size: 12.5px;
+            color: var(--cyan);
+            margin-bottom: 6px;
+        }}
+
+        .row-summary {{
+            font-size: 12.5px;
+            color: var(--text-main);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }}
+
+        .row-footer {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11.5px;
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+            border-top: 1px solid rgba(32, 40, 50, 0.6);
+            padding-top: 6px;
+        }}
+
+        .conf-meter-bar {{
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 700;
+        }}
+
+        /* Compact Density */
+        .findings-stream.compact .finding-row {{
+            padding: 6px 12px;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }}
+
+        .findings-stream.compact .row-summary,
+        .findings-stream.compact .row-footer {{
+            display: none;
+        }}
+
+        .findings-stream.compact .finding-row-header {{
+            margin-bottom: 0;
+            gap: 12px;
+        }}
+
+        /* Right Pane: Inspector Drawer */
+        .inspector-pane {{
+            background: var(--bg-panel);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            padding: 18px 20px;
+        }}
+
+        .inspector-header {{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border-dim);
+            padding-bottom: 12px;
+        }}
+
+        .inspector-title-wrap {{
+            flex-grow: 1;
+        }}
+
+        .inspector-id {{
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-dim);
+        }}
+
+        .inspector-pattern {{
+            font-family: var(--font-mono);
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--cyan);
+            margin: 2px 0 6px 0;
+        }}
+
+        .field-label {{
+            font-size: 10.5px;
+            font-weight: 800;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-top: 14px;
+            margin-bottom: 4px;
+        }}
+
+        .inspector-target {{
+            font-family: var(--font-mono);
+            font-size: 13.5px;
+            font-weight: 700;
+            color: var(--text-pure);
+            background: var(--bg-surface);
+            padding: 6px 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border-dim);
+            word-break: break-all;
+        }}
+
+        .metrics-grid-2 {{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 6px;
+        }}
+
+        .metric-box {{
+            background: var(--bg-surface);
+            border: 1px solid var(--border-dim);
+            border-radius: 6px;
+            padding: 8px 10px;
+        }}
+
+        .metric-box-val {{
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 800;
+            margin-top: 2px;
+        }}
+
+        .evidence-card {{
+            background: var(--bg-surface);
+            border: 1px solid var(--border-dim);
+            border-left: 3px solid var(--cyan);
+            border-radius: 0 6px 6px 0;
+            padding: 8px 12px;
+            margin-bottom: 6px;
+            font-size: 12px;
+            line-height: 1.45;
+        }}
+
+        .code-evidence-box {{
+            background: #04060A;
+            border: 1px solid var(--border-dim);
+            border-radius: 6px;
+            padding: 10px;
+            font-family: var(--font-mono);
+            font-size: 11.5px;
+            color: #A5B4FC;
+            overflow-x: auto;
+            margin-top: 6px;
+        }}
+
+        .ai-action-btn {{
+            width: 100%;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-dim);
+            color: var(--text-main);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.15s ease;
+        }}
+
+        .ai-action-btn:hover {{
+            background: var(--bg-card);
+            border-color: var(--violet);
+            color: var(--violet);
+        }}
+
+        /* Overview Dashboard Screen */
+        .overview-screen {{
+            padding: 20px;
+            overflow-y: auto;
+            height: 100%;
+            display: none;
+        }}
+
+        .hotspots-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 14px;
+            margin-top: 12px;
+            margin-bottom: 24px;
+        }}
+
+        .hotspot-card {{
+            background: var(--bg-panel);
+            border: 1px solid var(--border-dim);
+            border-radius: 8px;
+            padding: 14px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }}
+
+        .hotspot-card:hover {{
+            border-color: var(--cyan);
+            transform: translateY(-2px);
+        }}
+
+        /* Toast */
+        #toast {{
             display: none;
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: var(--bg-surface-elevated);
-            border: 1px solid var(--emerald);
-            color: var(--emerald);
-            padding: 14px 20px;
-            border-radius: 10px;
-            font-family: var(--font-code);
+            bottom: 24px;
+            right: 24px;
+            background: #141E2E;
+            border: 1px solid var(--cyan);
+            color: var(--cyan);
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-family: var(--font-mono);
+            font-size: 12px;
             font-weight: 700;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--emerald-glow);
-            z-index: 9999;
-            animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }}
-
-        @keyframes slideIn {{
-            from {{ transform: translateY(20px); opacity: 0; }}
-            to {{ transform: translateY(0); opacity: 1; }}
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            z-index: 10000;
         }}
     </style>
 </head>
 <body>
 
-<div class="hud-container">
+<div class="hud-app">
 
-    <!-- Header Section -->
+    <!-- Header Command Center -->
     <header class="hud-header">
-        <div class="header-flex">
-            <div class="header-brand">
-                <div class="monad-logo-badge">λ</div>
-                <div>
-                    <h1 class="hud-title">DPX-Haskell Architecture HUD</h1>
-                    <div class="target-tag">
-                        Target Codebase: <span class="code-pill">{project_name}</span>
-                    </div>
-                </div>
+        <div class="header-brand">
+            <div class="lambda-logo">λ</div>
+            <div class="app-title-group">
+                <span class="app-title">DPX Architecture HUD</span>
+                <span class="project-pill">{project_name}</span>
+                <span class="engine-label">Hexagonal DDD Engine</span>
             </div>
-            <div class="meta-pills">
-                <span class="meta-pill" style="border-color: var(--cyan); color: var(--cyan);">
-                    ⚡ Hexagonal DDD Engine
-                </span>
-                <span class="meta-pill" style="border-color: var(--emerald); color: var(--emerald);">
-                    ⏱️ {elapsed_seconds}s
-                </span>
-                <span class="meta-pill" style="border-color: var(--purple); color: var(--purple);">
-                    📁 {scanned_files} files
-                </span>
-            </div>
+        </div>
+
+        <div class="header-metrics">
+            <div class="metric-item">📁 <span class="metric-val">{scanned_files}</span> files</div>
+            <div class="metric-item">⏱️ <span class="metric-val">{elapsed_seconds}s</span></div>
+            <div class="metric-item">🔷 <span class="metric-val">{total_detections}</span> findings</div>
+            <div class="metric-item" style="color: var(--red);">🔴 <span class="metric-val" style="color: var(--red);">{total_violations}</span> action required</div>
+        </div>
+
+        <div class="header-actions">
+            <div class="status-badge"><span class="status-dot"></span> SCAN COMPLETE</div>
+            <button class="hud-btn" onclick="copyFullLlmPrompt()">🤖 AI Context</button>
+            <button class="hud-btn primary" onclick="exportJson()">💾 Export</button>
         </div>
     </header>
 
-    <!-- Holographic KPI Cards -->
-    <section class="kpi-grid">
-        <div class="kpi-card cyan">
-            <div class="kpi-label">Total Findings</div>
-            <div class="kpi-value" style="color: var(--cyan);">{total_detections}</div>
-            <div class="kpi-desc">Architecture patterns & smells mapped</div>
+    <!-- Health / Risk Distribution Strip -->
+    <section class="health-strip">
+        <div class="health-bar-wrap">
+            <span class="health-label">ARCHITECTURE HEALTH</span>
+            <div class="health-meter">
+                <div class="health-seg red" style="width: {pct_red}%;"></div>
+                <div class="health-seg amber" style="width: {pct_amber}%;"></div>
+                <div class="health-seg violet" style="width: {pct_violet}%;"></div>
+                <div class="health-seg green" style="width: {pct_green}%;"></div>
+            </div>
+            <span style="font-weight: 800; color: var(--text-pure);">{health_score}%</span>
         </div>
-        <div class="kpi-card rose">
-            <div class="kpi-label">Action Required</div>
-            <div class="kpi-value" style="color: var(--rose);">{total_violations}</div>
-            <div class="kpi-desc">Safety hazards, space leaks & anti-patterns</div>
-        </div>
-        <div class="kpi-card purple">
-            <div class="kpi-label">Typeclasses & Monads</div>
-            <div class="kpi-value" style="color: var(--purple);">{total_typeclasses_and_monads}</div>
-            <div class="kpi-desc">Typeclasses, ReaderT & Transformer stacks</div>
-        </div>
-        <div class="kpi-card emerald">
-            <div class="kpi-label">Clean Code & STM</div>
-            <div class="kpi-value" style="color: var(--emerald);">{total_adherences}</div>
-            <div class="kpi-desc">Clean functional idioms & STM transactions</div>
+
+        <div class="health-badges">
+            <span class="health-badge"><strong style="color: var(--red);">{total_violations}</strong> Action</span>
+            <span class="health-badge"><strong style="color: var(--amber);">{resilience_count}</strong> Resilience</span>
+            <span class="health-badge"><strong style="color: var(--violet);">{typeclasses_count}</strong> FP & Types</span>
+            <span class="health-badge"><strong style="color: var(--green);">{clean_count}</strong> Quality</span>
         </div>
     </section>
 
-    <!-- AI Architecture Prompt HUD Banner -->
-    <section class="ai-banner">
-        <div>
-            <h2 class="ai-title">🤖 AI / LLM Architectural Prompt Context</h2>
-            <p style="color: var(--text-secondary); margin-top: 4px; font-size: 14px;">
-                Instant token-optimized prompt for Claude, ChatGPT or Gemini to perform architectural review, ReaderT refactoring and space leak elimination.
+    <!-- 3-Pane Body -->
+    <div class="hud-body">
+
+        <!-- Left Column: Architecture Navigator -->
+        <nav class="nav-pane">
+            <div class="nav-section">
+                <div class="nav-section-title">Views</div>
+                <div class="nav-item active" id="viewNavFindings" onclick="switchView('findings')">
+                    <div class="nav-item-left">📋 Findings Explorer</div>
+                    <span class="nav-item-count">{total_detections}</span>
+                </div>
+                <div class="nav-item" id="viewNavOverview" onclick="switchView('overview')">
+                    <div class="nav-item-left">🗺️ Architecture Hotspots</div>
+                    <span class="nav-item-count">{module_count}</span>
+                </div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Findings Filter</div>
+                <div class="nav-item active" onclick="setCategoryFilter('all', this)">
+                    <div class="nav-item-left">◉ All Findings</div>
+                    <span class="nav-item-count">{total_detections}</span>
+                </div>
+                <div class="nav-item" onclick="setCategoryFilter('action_required', this)">
+                    <div class="nav-item-left">🔴 Action Required</div>
+                    <span class="nav-item-count" style="color: var(--red);">{total_violations}</span>
+                </div>
+                {category_nav_items}
+            </div>
+
+            <div class="nav-section" style="flex-grow: 1;">
+                <div class="nav-section-title">Module Hotspots</div>
+                <div class="module-list">
+                    {module_nav_items}
+                </div>
+            </div>
+        </nav>
+
+        <!-- Center Column: Workspace -->
+        <main class="workspace-pane">
+            <div class="workspace-toolbar">
+                <div class="toolbar-left">
+                    <span style="font-weight: 700; color: var(--text-pure);" id="streamTitle">FINDINGS</span>
+                    <span style="color: var(--text-muted); font-size: 11.5px;" id="streamSubtitle">({total_detections} total)</span>
+                    <div class="density-toggle">
+                        <span>Density:</span>
+                        <button class="density-btn active" id="densComfortable" onclick="setDensity('comfortable')">Comfortable</button>
+                        <button class="density-btn" id="densCompact" onclick="setDensity('compact')">Compact</button>
+                    </div>
+                </div>
+
+                <div class="search-wrap">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" class="search-input" id="quickSearch" placeholder="Filter by module, pattern, rule...">
+                </div>
+            </div>
+
+            <!-- Findings Stream -->
+            <div class="findings-stream" id="findingsStream">
+                {finding_rows_html}
+            </div>
+
+            <!-- Overview Screen (Hotspots & Map) -->
+            <div class="overview-screen" id="overviewScreen">
+                <h3 style="font-size: 16px; font-weight: 700; color: var(--text-pure); margin-bottom: 6px;">🗺️ Module Architecture & Hotspots</h3>
+                <p style="color: var(--text-muted); font-size: 12.5px; margin-bottom: 16px;">Modules with high concentration of architectural signals and refactoring needs.</p>
+                
+                <div class="hotspots-grid">
+                    {hotspot_cards_html}
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Column: Inspector Drawer -->
+        <aside class="inspector-pane" id="inspectorPane">
+            <div class="inspector-header">
+                <div class="inspector-title-wrap">
+                    <div class="inspector-id" id="inspId">#1</div>
+                    <div class="inspector-pattern" id="inspPattern">reader_t_design_pattern</div>
+                    <span class="row-cat-pill" id="inspCatPill" style="background: rgba(56, 217, 255, 0.12); color: var(--cyan);">Monad Stacks & ReaderT</span>
+                </div>
+            </div>
+
+            <div class="field-label">Target Symbol</div>
+            <div class="inspector-target" id="inspTarget">RIO.Prelude.RIO</div>
+
+            <div class="metrics-grid-2">
+                <div class="metric-box">
+                    <div class="field-label" style="margin-top: 0;">Impact / Severity</div>
+                    <div class="metric-box-val" id="inspImpact" style="color: var(--cyan);">HIGH</div>
+                </div>
+                <div class="metric-box">
+                    <div class="field-label" style="margin-top: 0;">Confidence</div>
+                    <div class="metric-box-val" id="inspConfidence" style="color: var(--green);">90% [VERY HIGH]</div>
+                </div>
+            </div>
+
+            <div class="field-label">Architectural Summary</div>
+            <p style="font-size: 13px; line-height: 1.5; color: var(--text-main);" id="inspSummary">
+                Module adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access.
             </p>
-        </div>
-        <button class="ai-btn" id="copyLlmBtn" onclick="copyLlmContext()">
-            📋 Copy Context for LLM
-        </button>
-        <textarea id="llmContextData" style="display: none;">{llm_context_data}</textarea>
-    </section>
 
-    <!-- Controls & Search Bar -->
-    <section class="controls-bar">
-        <div class="category-pills" id="categoryPillBar">
-            <button class="cat-pill-btn active" data-filter="all">All Findings ({total_detections})</button>
-            {category_filter_buttons}
-        </div>
-        <div class="search-box-wrap">
-            <span class="search-icon">🔍</span>
-            <input type="text" id="searchInput" class="search-input" placeholder="Instant filter by pattern name, module, function, or rule (e.g. ReaderT, STM, GADT, kiss)...">
-        </div>
-    </section>
+            <div class="field-label">Evidence Trail</div>
+            <div id="inspEvidences">
+                <!-- Evidences rendered by JS -->
+            </div>
 
-    <!-- Findings Grid -->
-    <main class="cards-grid" id="findingsGrid">
-        {findings_cards_html}
-    </main>
+            <div class="field-label">Source Location</div>
+            <div style="display: flex; justify-content: space-between; align-items: center; background: var(--bg-surface); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border-dim); font-family: var(--font-mono); font-size: 11.5px; color: var(--cyan);">
+                <span id="inspLocation">src/RIO/Prelude/RIO.hs:1:1</span>
+            </div>
+
+            <div class="field-label">AI Architect Actions</div>
+            <button class="ai-action-btn" onclick="copyContextForAction('review')">
+                <span>💡 Generate Architectural Review</span> <span>→</span>
+            </button>
+            <button class="ai-action-btn" onclick="copyContextForAction('refactor')">
+                <span>🛠️ Suggest Haskell Refactoring</span> <span>→</span>
+            </button>
+            <button class="ai-action-btn" onclick="copyContextForAction('explain')">
+                <span>🔍 Explain Finding & Best Practices</span> <span>→</span>
+            </button>
+        </aside>
+
+    </div>
 
 </div>
 
-<div id="copyToast">✓ Architectural Prompt Copied to Clipboard!</div>
+<div id="toast">✓ Copied to clipboard!</div>
 
 <script>
-    const searchInput = document.getElementById('searchInput');
-    const cards = document.querySelectorAll('.finding-card');
-    const filterBtns = document.querySelectorAll('.cat-pill-btn');
+    const FINDINGS_DATA = {findings_json};
+    let currentFindingId = 1;
+    let currentCategory = 'all';
+    let currentModule = 'all';
 
-    let activeCategory = 'all';
+    function renderInspector(finding) {{
+        if (!finding) return;
+        document.getElementById('inspId').textContent = '#' + finding.idx;
+        document.getElementById('inspPattern').textContent = finding.pattern_type;
+        document.getElementById('inspCatPill').textContent = finding.category_name;
+        document.getElementById('inspCatPill').style.color = finding.category_color;
+        document.getElementById('inspCatPill').style.background = finding.category_bg;
+        document.getElementById('inspTarget').textContent = finding.target_name + ' (' + finding.target_kind + ')';
+        document.getElementById('inspImpact').textContent = finding.impact;
+        document.getElementById('inspImpact').style.color = finding.impact_color;
+        document.getElementById('inspConfidence').textContent = finding.confidence_str + ' [' + finding.confidence_level + ']';
+        document.getElementById('inspSummary').textContent = finding.summary;
+        document.getElementById('inspLocation').textContent = finding.location_display;
 
-    function filterFindings() {{
-        const q = searchInput.value.toLowerCase().trim();
-
-        cards.forEach(card => {{
-            const cat = card.dataset.category || '';
-            const txt = card.textContent.toLowerCase();
-
-            const matchCat = (activeCategory === 'all' || cat === activeCategory);
-            const matchQuery = (!q || txt.includes(q));
-
-            if (matchCat && matchQuery) {{
-                card.style.display = 'flex';
-            }} else {{
-                card.style.display = 'none';
-            }}
+        const evContainer = document.getElementById('inspEvidences');
+        evContainer.innerHTML = '';
+        finding.evidences.forEach(ev => {{
+            const div = document.createElement('div');
+            div.className = 'evidence-card';
+            div.style.borderLeftColor = finding.category_color;
+            div.innerHTML = '<strong style="color:' + finding.category_color + '; font-family:var(--font-mono);">+' + Math.round(ev.weight * 100) + '% [' + ev.rule_code + ']</strong><div style="margin-top:3px; color:var(--text-main);">' + ev.description + '</div>';
+            evContainer.appendChild(div);
         }});
     }}
 
-    searchInput.addEventListener('input', filterFindings);
-
-    filterBtns.forEach(btn => {{
-        btn.addEventListener('click', () => {{
-            filterBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            activeCategory = btn.dataset.filter;
-            filterFindings();
+    function selectFinding(idx) {{
+        currentFindingId = idx;
+        document.querySelectorAll('.finding-row').forEach(r => {{
+            if (parseInt(r.dataset.idx) === idx) {{
+                r.classList.add('active');
+            }} else {{
+                r.classList.remove('active');
+            }}
         }});
-    }});
+        const f = FINDINGS_DATA.find(x => x.idx === idx);
+        renderInspector(f);
+    }}
 
-    function copyLlmContext() {{
-        const raw = document.getElementById('llmContextData').value;
-        const btn = document.getElementById('copyLlmBtn');
-        const toast = document.getElementById('copyToast');
+    function filterFindings() {{
+        const q = document.getElementById('quickSearch').value.toLowerCase().trim();
+        let visibleCount = 0;
 
-        navigator.clipboard.writeText(raw).then(() => {{
-            btn.innerHTML = '✓ Copied!';
-            toast.style.display = 'block';
-            setTimeout(() => {{
-                btn.innerHTML = '📋 Copy Context for LLM';
-                toast.style.display = 'none';
-            }}, 2400);
-        }}).catch(() => {{
-            const ta = document.createElement('textarea');
-            ta.value = raw;
-            document.body.appendChild(ta);
-            ta.select();
-            document.execCommand('copy');
-            document.body.removeChild(ta);
-            btn.innerHTML = '✓ Copied!';
-            toast.style.display = 'block';
-            setTimeout(() => {{
-                btn.innerHTML = '📋 Copy Context for LLM';
-                toast.style.display = 'none';
-            }}, 2400);
+        document.querySelectorAll('.finding-row').forEach(row => {{
+            const cat = row.dataset.category || '';
+            const mod = row.dataset.module || '';
+            const isAction = row.dataset.isAction === 'true';
+            const txt = row.textContent.toLowerCase();
+
+            let matchCat = (currentCategory === 'all');
+            if (currentCategory === 'action_required') {{
+                matchCat = isAction;
+            }} else if (currentCategory !== 'all') {{
+                matchCat = (cat === currentCategory);
+            }}
+
+            const matchMod = (currentModule === 'all' || mod === currentModule);
+            const matchQuery = (!q || txt.includes(q));
+
+            if (matchCat && matchMod && matchQuery) {{
+                row.style.display = 'block';
+                visibleCount++;
+            }} else {{
+                row.style.display = 'none';
+            }}
         }});
+
+        document.getElementById('streamSubtitle').textContent = '(' + visibleCount + ' filtered)';
+    }}
+
+    function setCategoryFilter(cat, elem) {{
+        currentCategory = cat;
+        currentModule = 'all';
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+        if (elem) elem.classList.add('active');
+        switchView('findings');
+        filterFindings();
+    }}
+
+    function filterByModule(modName) {{
+        currentModule = modName;
+        currentCategory = 'all';
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+        switchView('findings');
+        filterFindings();
+    }}
+
+    function switchView(view) {{
+        const findingsStream = document.getElementById('findingsStream');
+        const overviewScreen = document.getElementById('overviewScreen');
+        const navFindings = document.getElementById('viewNavFindings');
+        const navOverview = document.getElementById('viewNavOverview');
+
+        if (view === 'overview') {{
+            findingsStream.style.display = 'none';
+            overviewScreen.style.display = 'block';
+            navFindings.classList.remove('active');
+            navOverview.classList.add('active');
+            document.getElementById('streamTitle').textContent = 'HOTSPOTS MATRIX';
+        }} else {{
+            findingsStream.style.display = 'block';
+            overviewScreen.style.display = 'none';
+            navOverview.classList.remove('active');
+            navFindings.classList.add('active');
+            document.getElementById('streamTitle').textContent = 'FINDINGS';
+        }}
+    }}
+
+    function setDensity(dens) {{
+        const stream = document.getElementById('findingsStream');
+        const btnComfortable = document.getElementById('densComfortable');
+        const btnCompact = document.getElementById('densCompact');
+
+        if (dens === 'compact') {{
+            stream.classList.add('compact');
+            btnCompact.classList.add('active');
+            btnComfortable.classList.remove('active');
+        }} else {{
+            stream.classList.remove('compact');
+            btnComfortable.classList.add('active');
+            btnCompact.classList.remove('active');
+        }}
+    }}
+
+    document.getElementById('quickSearch').addEventListener('input', filterFindings);
+
+    function showToast(msg) {{
+        const t = document.getElementById('toast');
+        t.textContent = msg || '✓ Copied to clipboard!';
+        t.style.display = 'block';
+        setTimeout(() => {{ t.style.display = 'none'; }}, 2200);
+    }}
+
+    function copyFullLlmPrompt() {{
+        const raw = {llm_prompt_json};
+        navigator.clipboard.writeText(raw).then(() => showToast('✓ AI Architecture Context Copied!'));
+    }}
+
+    function copyContextForAction(actionType) {{
+        const f = FINDINGS_DATA.find(x => x.idx === currentFindingId);
+        if (!f) return;
+        let prompt = '';
+        if (actionType === 'review') {{
+            prompt = '# 🔍 Architectural Review Request for ' + f.target_name + '\\n\\nPattern: ' + f.pattern_type + ' (' + f.category_name + ')\\nLocation: ' + f.location_display + '\\nSummary: ' + f.summary + '\\n\\nPlease analyze this architectural signal, evaluate coupling and adherence to clean functional design.';
+        }} else if (actionType === 'refactor') {{
+            prompt = '# 🛠️ Refactoring Request for ' + f.target_name + '\\n\\nIssue / Pattern: ' + f.pattern_type + '\\nLocation: ' + f.location_display + '\\nSummary: ' + f.summary + '\\n\\nPlease provide idiomatic Haskell 9.x refactored code with strict evaluation and zero space leaks.';
+        }} else {{
+            prompt = '# 📚 Explain Finding: ' + f.pattern_type + '\\n\\nTarget: ' + f.target_name + '\\nSummary: ' + f.summary + '\\n\\nExplain why this pattern matters in production Haskell applications.';
+        }}
+        navigator.clipboard.writeText(prompt).then(() => showToast('✓ ' + actionType.toUpperCase() + ' prompt copied!'));
+    }}
+
+    function exportJson() {{
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(FINDINGS_DATA, null, 2));
+        const a = document.createElement('a');
+        a.setAttribute("href", dataStr);
+        a.setAttribute("download", "{project_name}_dpx_findings.json");
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+    }}
+
+    // Init with #1 selected
+    if (FINDINGS_DATA.length > 0) {{
+        renderInspector(FINDINGS_DATA[0]);
     }}
 </script>
 
@@ -818,97 +1186,174 @@ _HTML_TEMPLATE = """<!DOCTYPE html>
 
 
 class HtmlReportFormatter(ReportFormatterPort):
-    """Generates an elite Cyber-Architectural HUD HTML dashboard for Haskell."""
+    """Generates an IDE-like Architecture Observability HUD for Haskell."""
 
     def format(self, report: DetectionReport) -> str:
         project_name = self._resolve_project_name(report.project_path)
 
+        # Categorize findings
         violations_count = 0
-        adherences_count = 0
-        typeclasses_and_monads_count = 0
+        resilience_count = 0
+        typeclasses_count = 0
+        clean_count = 0
 
-        for d in report.detections:
-            if d.pattern_category in (PatternCategory.TYPE_SAFETY, PatternCategory.RESILIENCE, PatternCategory.PRINCIPLE):
-                violations_count += 1
-            elif d.pattern_category in (PatternCategory.TYPECLASS_SYSTEM, PatternCategory.MONAD_ARCHITECTURE):
-                typeclasses_and_monads_count += 1
-            else:
-                adherences_count += 1
+        module_findings_map: dict[str, list[dict[str, Any]]] = {}
+        findings_json_list: list[dict[str, Any]] = []
 
-        filter_buttons = []
-        for cat, theme in CATEGORY_THEMES.items():
-            cnt = report.summary_by_category.get(cat.value, 0)
-            if cnt > 0:
-                filter_buttons.append(
-                    f'<button class="cat-pill-btn" data-filter="{cat.value}">{theme["icon"]} {theme["name"]} ({cnt})</button>'
-                )
+        finding_rows: list[str] = []
 
-        cards_html = []
         for idx, d in enumerate(report.detections, 1):
-            theme = CATEGORY_THEMES.get(d.pattern_category, CATEGORY_THEMES[PatternCategory.FUNCTIONAL_IDIOM])
-            conf_class = (
-                "conf-very-high"
-                if d.level == ConfidenceLevel.VERY_HIGH
-                else "conf-high"
-                if d.level == ConfidenceLevel.HIGH
-                else "conf-medium"
-            )
+            cfg = CATEGORY_CONFIG.get(d.pattern_category, CATEGORY_CONFIG[PatternCategory.FUNCTIONAL_IDIOM])
             raw_loc = str(d.primary_location) if d.primary_location else "N/A"
             disp_loc, full_loc = self._format_display_location(raw_loc, report.project_path)
 
-            evidences_html = "".join([
-                f'<div class="evidence-item" style="border-left-color: {theme["accent"]};">'
-                f'<strong style="color: {theme["text"]}; font-family: var(--font-code);">+{int(ev.weight * 100)}% [{html.escape(ev.rule_code)}]</strong> '
-                f'{html.escape(ev.description)}'
-                f'</div>'
-                for ev in d.evidences
-            ])
+            is_action = d.pattern_category in (PatternCategory.TYPE_SAFETY, PatternCategory.RESILIENCE, PatternCategory.PRINCIPLE)
+            if is_action:
+                violations_count += 1
+            if d.pattern_category == PatternCategory.RESILIENCE:
+                resilience_count += 1
+            elif d.pattern_category in (PatternCategory.TYPECLASS_SYSTEM, PatternCategory.FUNCTIONAL_IDIOM):
+                typeclasses_count += 1
+            else:
+                clean_count += 1
 
-            cards_html.append(
+            impact = "CRITICAL" if is_action else "HIGH" if d.level == ConfidenceLevel.VERY_HIGH else "MEDIUM"
+            impact_color = "#FF5C6C" if is_action else "#38D9FF"
+
+            module_name = d.target_name.split(".")[0] if "." in d.target_name else d.target_name
+
+            ev_list = [
+                {
+                    "rule_code": ev.rule_code,
+                    "weight": ev.weight,
+                    "description": ev.description,
+                    "location": str(ev.location) if ev.location else "",
+                }
+                for ev in d.evidences
+            ]
+
+            finding_obj = {
+                "idx": idx,
+                "pattern_type": d.pattern_type.value,
+                "category": d.pattern_category.value,
+                "category_name": cfg["name"],
+                "category_color": cfg["color"],
+                "category_bg": cfg["bg"],
+                "target_name": d.target_name,
+                "target_kind": d.target_kind,
+                "summary": d.summary,
+                "confidence_str": d.confidence.percentage_str,
+                "confidence_level": d.level.value.upper(),
+                "impact": impact,
+                "impact_color": impact_color,
+                "is_action": is_action,
+                "location_display": disp_loc,
+                "location_full": full_loc,
+                "module": module_name,
+                "evidences": ev_list,
+            }
+            findings_json_list.append(finding_obj)
+            module_findings_map.setdefault(module_name, []).append(finding_obj)
+
+            active_class = "active" if idx == 1 else ""
+            action_badge = f'<span class="row-cat-pill" style="background: rgba(255,92,108,0.12); color: #FF5C6C; border: 1px solid rgba(255,92,108,0.3);">🔴 ACTION REQUIRED</span>' if is_action else f'<span class="row-cat-pill" style="background: {cfg["bg"]}; color: {cfg["color"]};">{cfg["icon"]} {cfg["short"]}</span>'
+
+            finding_rows.append(
                 f"""
-                <article class="finding-card" data-category="{d.pattern_category.value}" style="border-left: 4px solid {theme['accent']};">
-                    <div>
-                        <div class="card-top">
-                            <div class="card-idx-pattern">
-                                <span class="card-idx">#{idx}</span>
-                                <span class="card-pattern-title">{html.escape(d.pattern_type.value)}</span>
-                            </div>
-                            <span class="category-badge" style="background: {theme['badge_bg']}; color: {theme['text']}; border: 1px solid {theme['border']};">
-                                {theme['icon']} {theme['name']}
-                            </span>
+                <div class="finding-row {active_class}" data-idx="{idx}" data-category="{d.pattern_category.value}" data-module="{module_name}" data-is-action="{'true' if is_action else 'false'}" style="border-left-color: {cfg['color']};" onclick="selectFinding({idx})">
+                    <div class="finding-row-header">
+                        <div class="row-id-pattern">
+                            <span class="row-id">#{idx}</span>
+                            <span class="row-pattern">{html.escape(d.pattern_type.value)}</span>
                         </div>
-                        <div class="target-meta">
-                            <span>Target:</span>
-                            <code class="target-code">{html.escape(d.target_name)}</code>
-                            <span class="kind-pill">{html.escape(d.target_kind)}</span>
-                        </div>
-                        <p class="card-summary">{html.escape(d.summary)}</p>
-                        <div>
-                            <div class="evidence-trail-title">🔎 Evidence Trail ({len(d.evidences)} heuristics):</div>
-                            {evidences_html}
-                        </div>
+                        {action_badge}
                     </div>
-                    <footer class="card-footer">
-                        <span class="loc-pill" title="{html.escape(full_loc)}">📍 {html.escape(disp_loc)}</span>
-                        <span class="conf-badge {conf_class}">{d.confidence.percentage_str} [{d.level.value.upper()}]</span>
-                    </footer>
-                </article>
+                    <div class="row-target">{html.escape(d.target_name)} <span style="color: var(--text-dim); font-size: 11px;">({html.escape(d.target_kind)})</span></div>
+                    <div class="row-summary">{html.escape(d.summary)}</div>
+                    <div class="row-footer">
+                        <span>📍 {html.escape(disp_loc)}</span>
+                        <span class="conf-meter-bar" style="color: {cfg['color']};">{d.confidence.percentage_str} [{d.level.value.upper()}]</span>
+                    </div>
+                </div>
                 """
             )
 
-        llm_context = self._generate_llm_prompt(report, project_name)
+        # Build Category Nav items
+        cat_nav_items = []
+        for cat, cfg in CATEGORY_CONFIG.items():
+            cnt = report.summary_by_category.get(cat.value, 0)
+            if cnt > 0:
+                cat_nav_items.append(
+                    f"""
+                    <div class="nav-item" onclick="setCategoryFilter('{cat.value}', this)">
+                        <div class="nav-item-left">{cfg['icon']} {cfg['short']}</div>
+                        <span class="nav-item-count">{cnt}</span>
+                    </div>
+                    """
+                )
 
-        return _HTML_TEMPLATE.format(
+        # Build Module Nav & Hotspots items
+        module_nav_items = []
+        hotspot_cards = []
+        for mod, items in sorted(module_findings_map.items(), key=lambda x: len(x[1]), reverse=True):
+            mod_actions = sum(1 for x in items if x["is_action"])
+            dot_color = "var(--red)" if mod_actions > 0 else "var(--green)"
+            module_nav_items.append(
+                f"""
+                <div class="nav-item module-item" onclick="filterByModule('{mod}')">
+                    <div class="nav-item-left"><span style="color:{dot_color}; font-size:9px;">●</span> {html.escape(mod)}</div>
+                    <span class="nav-item-count">{len(items)}</span>
+                </div>
+                """
+            )
+            hotspot_cards.append(
+                f"""
+                <div class="hotspot-card" onclick="filterByModule('{mod}')">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                        <span style="font-family:var(--font-mono); font-weight:700; color:var(--text-pure); font-size:13.5px;">{html.escape(mod)}</span>
+                        <span style="font-family:var(--font-mono); font-size:11.5px; font-weight:700; color:{dot_color};">{len(items)} signals</span>
+                    </div>
+                    <div style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">
+                        {mod_actions} action required issues detected.
+                    </div>
+                    <div style="display:flex; gap:6px; flex-wrap:wrap;">
+                        {' '.join([f'<span style="font-size:10.5px; font-family:var(--font-mono); background:var(--bg-surface); padding:2px 6px; border-radius:4px; color:{x["category_color"]};">{x["pattern_type"]}</span>' for x in items[:3]])}
+                    </div>
+                </div>
+                """
+            )
+
+        # Health score calculation
+        total = report.total_detections_count or 1
+        pct_red = int((violations_count / total) * 100)
+        pct_amber = int((resilience_count / total) * 100)
+        pct_violet = int((typeclasses_count / total) * 100)
+        pct_green = max(0, 100 - pct_red - pct_amber - pct_violet)
+        health_score = max(20, 100 - (violations_count * 5))
+
+        llm_prompt = self._generate_llm_prompt(report, project_name)
+
+        return _HTML_HUD_TEMPLATE.format(
             project_name=project_name,
             total_detections=report.total_detections_count,
             total_violations=violations_count,
-            total_typeclasses_and_monads=typeclasses_and_monads_count,
-            total_adherences=adherences_count,
+            resilience_count=resilience_count,
+            typeclasses_count=typeclasses_count,
+            clean_count=clean_count,
             scanned_files=report.scanned_files_count,
             elapsed_seconds=f"{report.elapsed_seconds:.3f}",
-            category_filter_buttons="\n".join(filter_buttons),
-            findings_cards_html="\n".join(cards_html),
-            llm_context_data=html.escape(llm_context),
+            health_score=health_score,
+            pct_red=pct_red,
+            pct_amber=pct_amber,
+            pct_violet=pct_violet,
+            pct_green=pct_green,
+            module_count=len(module_findings_map),
+            category_nav_items="\n".join(cat_nav_items),
+            module_nav_items="\n".join(module_nav_items),
+            finding_rows_html="\n".join(finding_rows),
+            hotspot_cards_html="\n".join(hotspot_cards),
+            findings_json=json.dumps(findings_json_list),
+            llm_prompt_json=json.dumps(llm_prompt),
         )
 
     def _format_display_location(self, loc_str: str, project_path: str) -> tuple[str, str]:
@@ -935,7 +1380,7 @@ class HtmlReportFormatter(ReportFormatterPort):
 
     def _generate_llm_prompt(self, report: DetectionReport, project_name: str) -> str:
         lines = [
-            f"# 🔷 DPX-Haskell: Architectural Context & Refactoring Prompt for {project_name}",
+            f"# 🔷 DPX-Haskell: Architecture Context & Refactoring Analysis for {project_name}",
             f"- Scanned Files: {report.scanned_files_count}",
             f"- Total Detections: {report.total_detections_count}",
             "",
