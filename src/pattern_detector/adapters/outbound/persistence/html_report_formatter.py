@@ -1825,7 +1825,7 @@ class HtmlReportFormatter(ReportFormatterPort):
 
     def _build_uml_mermaid_diagram(self, report: DetectionReport) -> tuple[str, int]:
         """Constructs a Mermaid.js UML Class Diagram from Typeclasses, GADTs, Newtypes, and Instances."""
-        lines = ["classDiagram-v2"]
+        lines = ["classDiagram"]
         types_count = 0
         code_model = getattr(report, "code_model", None)
 
@@ -1835,12 +1835,13 @@ class HtmlReportFormatter(ReportFormatterPort):
 
         if code_model and hasattr(code_model, "modules") and code_model.modules:
             for mod_name, mod in code_model.modules.items():
-                # 1. Typeclasses
+                # 1. Typeclasses (Standard Mermaid <<interface>>)
                 for tc_name, tc in mod.typeclasses.items():
                     s_tc = sanitize(tc_name)
                     types_count += 1
                     lines.append(f"    class {s_tc} {{")
-                    lines.append("        <<Typeclass>>")
+                    lines.append("        <<interface>>")
+                    lines.append("        +typeclass")
                     if tc.methods:
                         for m in tc.methods[:6]:
                             clean_m = sanitize(m.split("::")[0].strip()) if "::" in m else sanitize(m)
@@ -1858,9 +1859,9 @@ class HtmlReportFormatter(ReportFormatterPort):
                 for t_name, t in mod.types.items():
                     s_t = sanitize(t_name)
                     types_count += 1
-                    stereotype = "GADT" if t.is_gadt else "Newtype" if t.is_newtype else "Data"
+                    kind_label = "gadt" if t.is_gadt else "newtype" if t.is_newtype else "data"
                     lines.append(f"    class {s_t} {{")
-                    lines.append(f"        <<{stereotype}>>")
+                    lines.append(f"        +{kind_label}")
                     if t.constructors:
                         for c in t.constructors[:6]:
                             c_clean = sanitize(c.name)
@@ -1883,13 +1884,13 @@ class HtmlReportFormatter(ReportFormatterPort):
                     types_count += 1
                     s_kind = sanitize(d.target_kind)
                     lines.append(f"    class {s_target} {{")
-                    lines.append(f"        <<{s_kind}>>")
+                    lines.append(f"        +{s_kind}")
                     lines.append(f"        +{s_target}()")
                     lines.append("    }")
 
         if types_count == 0:
             lines.append("    class HaskellApp {")
-            lines.append("        <<module>>")
+            lines.append("        <<interface>>")
             lines.append("        +main()")
             lines.append("    }")
             types_count = 1
