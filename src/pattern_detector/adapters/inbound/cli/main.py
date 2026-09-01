@@ -113,10 +113,17 @@ def scan(
             help="Enable verbose logging.",
         ),
     ] = False,
+    parser_backend: Annotated[
+        str,
+        typer.Option(
+            "--parser",
+            help="Parser backend: 'native' (default, fast layout-aware) or 'antlr' (ANTLR4 grammar).",
+        ),
+    ] = "native",
 ) -> None:
     """Scan a Haskell project or source file for typeclass idioms, monad stacks, STM concurrency, and space leak hazards."""
     target_path = str(Path(path).resolve())
-    container = create_container()
+    container = create_container(parser_type=parser_backend)
     options = ScanOptions(
         min_confidence=min_confidence,
         enabled_patterns=pattern or [],

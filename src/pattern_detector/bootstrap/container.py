@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from pattern_detector.adapters.outbound.parsers.antlr.antlr_haskell_parser_adapter import AntlrHaskellParserAdapter
 from pattern_detector.adapters.outbound.parsers.native_haskell_parser_adapter import NativeHaskellParserAdapter
 from pattern_detector.adapters.outbound.persistence.file_result_repositories import FileResultRepository
 from pattern_detector.adapters.outbound.persistence.file_source_provider import FileSourceProvider
@@ -23,11 +24,14 @@ class Container:
     """Hexagonal Dependency Injection container."""
 
     rules: list[PatternRule] = field(default_factory=lambda: list(DEFAULT_RULES))
+    parser_type: str = "native"
 
     def get_source_provider(self) -> SourceProviderPort:
         return FileSourceProvider()
 
     def get_parser(self) -> ParserPort:
+        if self.parser_type == "antlr":
+            return AntlrHaskellParserAdapter()
         return NativeHaskellParserAdapter()
 
     def get_detector(self) -> DetectorPort:
@@ -47,5 +51,11 @@ class Container:
         )
 
 
-def create_container(custom_rules: list[PatternRule] | None = None) -> Container:
-    return Container(rules=custom_rules if custom_rules is not None else list(DEFAULT_RULES))
+def create_container(
+    custom_rules: list[PatternRule] | None = None,
+    parser_type: str = "native",
+) -> Container:
+    return Container(
+        rules=custom_rules if custom_rules is not None else list(DEFAULT_RULES),
+        parser_type=parser_type,
+    )
