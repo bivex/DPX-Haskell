@@ -1825,7 +1825,7 @@ class HtmlReportFormatter(ReportFormatterPort):
 
     def _build_uml_mermaid_diagram(self, report: DetectionReport) -> tuple[str, int]:
         """Constructs a Mermaid.js UML Class Diagram from Typeclasses, GADTs, Newtypes, and Instances."""
-        lines = ["classDiagram", "    direction TB"]
+        lines = ["classDiagram"]
         types_count = 0
         code_model = getattr(report, "code_model", None)
 
