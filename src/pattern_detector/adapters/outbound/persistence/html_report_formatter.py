@@ -2011,20 +2011,27 @@ class HtmlReportFormatter(ReportFormatterPort):
                         lines.append(f"        +{s_t}()")
                     lines.append("    }")
 
-            # 3. Superclasses and Instances (only if both classes exist)
+            # 3. Superclasses and Instances (only if both classes exist, deduplicated)
+            seen_relations: set[str] = set()
             for mod_name, mod in sorted_modules:
                 for tc_name, tc in mod.typeclasses.items():
                     s_tc = sanitize(tc_name)
                     for sup in tc.superclasses:
                         s_sup = sanitize(sup.split()[0])
                         if s_sup in defined_classes and s_sup != s_tc:
-                            lines.append(f"    {s_sup} <|-- {s_tc} : superclass")
+                            rel_key = f"{s_sup} <|-- {s_tc}"
+                            if rel_key not in seen_relations:
+                                seen_relations.add(rel_key)
+                                lines.append(f"    {s_sup} <|-- {s_tc} : superclass")
 
                 for inst in mod.instances:
                     s_class = sanitize(inst.class_name)
                     s_target = sanitize(inst.target_type.split()[0] if inst.target_type else "Instance")
                     if s_class in defined_classes and s_target in defined_classes and s_class != s_target:
-                        lines.append(f"    {s_class} <|.. {s_target} : instance")
+                        rel_key = f"{s_class} <|.. {s_target}"
+                        if rel_key not in seen_relations:
+                            seen_relations.add(rel_key)
+                            lines.append(f"    {s_class} <|.. {s_target} : instance")
         else:
             # Synthetic fallback from detections
             for d in report.detections:
