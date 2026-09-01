@@ -1313,7 +1313,7 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
             document.getElementById('streamSubtitle').textContent = '(' + (GRAPH_ELEMENTS.nodes ? GRAPH_ELEMENTS.nodes.length : 0) + ' nodes)';
             initCytoscape();
         }} else if (view === 'uml') {{
-            umlScreen.style.display = 'block';
+            umlScreen.style.display = 'flex';
             if (navUml) navUml.classList.add('active');
             document.getElementById('streamTitle').textContent = 'UML CLASS & TYPE HIERARCHY';
             document.getElementById('streamSubtitle').textContent = '(Mermaid.js)';
@@ -1435,6 +1435,7 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
             if (typeof mermaid !== 'undefined') {{
                 mermaid.initialize({{
                     startOnLoad: false,
+                    securityLevel: 'loose',
                     theme: 'dark',
                     themeVariables: {{
                         darkMode: true,
@@ -1447,13 +1448,15 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
                         tertiaryColor: '#080B10'
                     }}
                 }});
-                mermaid.render('umlSvgGraph', RAW_UML_CODE).then(function(res) {{
+                const renderId = 'umlSvgGraph_' + Math.floor(Math.random() * 100000);
+                mermaid.render(renderId, RAW_UML_CODE).then(function(res) {{
                     const wrap = document.getElementById('umlWrapper');
                     if (wrap) {{
                         wrap.innerHTML = res.svg;
                         mermaidInitialized = true;
                         initUmlPanZoomEvents();
                         umlReset();
+                        setTimeout(umlFit, 80);
                     }}
                 }}).catch(function(err) {{
                     console.error('Mermaid render error:', err);
@@ -1937,15 +1940,37 @@ class HtmlReportFormatter(ReportFormatterPort):
         types_count = 0
         code_model = getattr(report, "code_model", None)
 
+        reserved_keywords = {
+            "true", "false", "null", "class", "style", "link", "direction",
+            "callback", "click", "cssclass", "interpolate", "acc_title",
+            "acc_descr", "title", "section", "end", "data", "type", "newtype", "instance"
+        }
+
         def sanitize(name: str) -> str:
             clean = re.sub(r"[^a-zA-Z0-9_]", "_", name).strip("_")
-            return clean if clean else "Anonymous"
+            if not clean:
+                clean = "Anonymous"
+            if clean.lower() in reserved_keywords or clean[0].isdigit():
+                clean = f"T_{clean}"
+            return clean
+
+        defined_classes: set[str] = set()
 
         if code_model and hasattr(code_model, "modules") and code_model.modules:
-            for mod_name, mod in code_model.modules.items():
-                # 1. Typeclasses (Standard Mermaid <<interface>>)
+            sorted_modules = sorted(
+                code_model.modules.items(),
+                key=lambda x: (0 if "src" in getattr(x[1], "file_path", "") else 1, x[0]),
+            )
+
+            # 1. Typeclasses (Standard Mermaid <<interface>>)
+            for mod_name, mod in sorted_modules:
                 for tc_name, tc in mod.typeclasses.items():
+                    if types_count >= 30:
+                        break
                     s_tc = sanitize(tc_name)
+                    if s_tc in defined_classes:
+                        continue
+                    defined_classes.add(s_tc)
                     types_count += 1
                     lines.append(f"    class {s_tc} {{")
                     lines.append("        <<interface>>")
@@ -1958,14 +1983,15 @@ class HtmlReportFormatter(ReportFormatterPort):
                         lines.append("        +method()")
                     lines.append("    }")
 
-                    for sup in tc.superclasses:
-                        s_sup = sanitize(sup.split()[0])
-                        if s_sup and s_sup != s_tc:
-                            lines.append(f"    {s_sup} <|-- {s_tc} : superclass")
-
-                # 2. Types / GADTs / Newtypes
+            # 2. Types / GADTs / Newtypes
+            for mod_name, mod in sorted_modules:
                 for t_name, t in mod.types.items():
+                    if types_count >= 45:
+                        break
                     s_t = sanitize(t_name)
+                    if s_t in defined_classes:
+                        continue
+                    defined_classes.add(s_t)
                     types_count += 1
                     kind_label = "gadt" if t.is_gadt else "newtype" if t.is_newtype else "data"
                     lines.append(f"    class {s_t} {{")
@@ -1978,17 +2004,28 @@ class HtmlReportFormatter(ReportFormatterPort):
                         lines.append(f"        +{s_t}()")
                     lines.append("    }")
 
-                # 3. Instances
+            # 3. Superclasses and Instances (only if both classes exist)
+            for mod_name, mod in sorted_modules:
+                for tc_name, tc in mod.typeclasses.items():
+                    s_tc = sanitize(tc_name)
+                    for sup in tc.superclasses:
+                        s_sup = sanitize(sup.split()[0])
+                        if s_sup in defined_classes and s_sup != s_tc:
+                            lines.append(f"    {s_sup} <|-- {s_tc} : superclass")
+
                 for inst in mod.instances:
                     s_class = sanitize(inst.class_name)
                     s_target = sanitize(inst.target_type.split()[0] if inst.target_type else "Instance")
-                    if s_class and s_target:
+                    if s_class in defined_classes and s_target in defined_classes and s_class != s_target:
                         lines.append(f"    {s_class} <|.. {s_target} : instance")
         else:
             # Synthetic fallback from detections
             for d in report.detections:
                 if d.pattern_category == PatternCategory.TYPECLASS_SYSTEM or "type" in d.target_kind:
                     s_target = sanitize(d.target_name.split(".")[-1])
+                    if s_target in defined_classes:
+                        continue
+                    defined_classes.add(s_target)
                     types_count += 1
                     s_kind = sanitize(d.target_kind)
                     lines.append(f"    class {s_target} {{")

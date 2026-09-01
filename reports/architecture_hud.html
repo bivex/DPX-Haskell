@@ -850,7 +850,7 @@
 
         <div class="header-metrics">
             <div class="metric-item">📁 <span class="metric-val">2</span> files</div>
-            <div class="metric-item">⏱️ <span class="metric-val">0.196s</span></div>
+            <div class="metric-item">⏱️ <span class="metric-val">0.192s</span></div>
             <div class="metric-item">🔷 <span class="metric-val">11</span> findings</div>
             <div class="metric-item" style="color: var(--red);">🔴 <span class="metric-val" style="color: var(--red);">0</span> action required</div>
         </div>
@@ -1470,7 +1470,7 @@
             document.getElementById('streamSubtitle').textContent = '(' + (GRAPH_ELEMENTS.nodes ? GRAPH_ELEMENTS.nodes.length : 0) + ' nodes)';
             initCytoscape();
         } else if (view === 'uml') {
-            umlScreen.style.display = 'block';
+            umlScreen.style.display = 'flex';
             if (navUml) navUml.classList.add('active');
             document.getElementById('streamTitle').textContent = 'UML CLASS & TYPE HIERARCHY';
             document.getElementById('streamSubtitle').textContent = '(Mermaid.js)';
@@ -1592,6 +1592,7 @@
             if (typeof mermaid !== 'undefined') {
                 mermaid.initialize({
                     startOnLoad: false,
+                    securityLevel: 'loose',
                     theme: 'dark',
                     themeVariables: {
                         darkMode: true,
@@ -1604,13 +1605,15 @@
                         tertiaryColor: '#080B10'
                     }
                 });
-                mermaid.render('umlSvgGraph', RAW_UML_CODE).then(function(res) {
+                const renderId = 'umlSvgGraph_' + Math.floor(Math.random() * 100000);
+                mermaid.render(renderId, RAW_UML_CODE).then(function(res) {
                     const wrap = document.getElementById('umlWrapper');
                     if (wrap) {
                         wrap.innerHTML = res.svg;
                         mermaidInitialized = true;
                         initUmlPanZoomEvents();
                         umlReset();
+                        setTimeout(umlFit, 80);
                     }
                 }).catch(function(err) {
                     console.error('Mermaid render error:', err);
