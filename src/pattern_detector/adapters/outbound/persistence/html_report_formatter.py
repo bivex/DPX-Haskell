@@ -1085,10 +1085,8 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
                     </div>
                 </div>
 
-                <div class="uml-card-container">
-                    <pre class="mermaid" id="umlMermaid">
-{uml_mermaid_code}
-                    </pre>
+                <div class="uml-card-container" id="umlContainer">
+                    <div style="color:var(--text-muted); font-family:var(--font-mono); font-size:12px;">Loading UML class diagram...</div>
                 </div>
             </div>
         </main>
@@ -1347,10 +1345,17 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
                         tertiaryColor: '#080B10'
                     }}
                 }});
-                mermaid.run({{ nodes: [document.getElementById('umlMermaid')] }});
-                mermaidInitialized = true;
+                mermaid.render('umlSvgGraph', RAW_UML_CODE).then(function(res) {{
+                    document.getElementById('umlContainer').innerHTML = res.svg;
+                    mermaidInitialized = true;
+                }}).catch(function(err) {{
+                    console.error('Mermaid render error:', err);
+                    document.getElementById('umlContainer').innerHTML = '<div style="color:var(--text-muted); padding:20px; font-family:var(--font-mono); font-size:12px;"><pre>' + RAW_UML_CODE + '</pre></div>';
+                }});
             }}
-        }} catch (e) {{}}
+        }} catch (e) {{
+            console.error(e);
+        }}
     }}
 
     function copyUmlSource() {{
@@ -1836,11 +1841,14 @@ class HtmlReportFormatter(ReportFormatterPort):
                     s_tc = sanitize(tc_name)
                     types_count += 1
                     lines.append(f"    class {s_tc} {{")
-                    lines.append("        <<typeclass>>")
-                    for m in tc.methods[:6]:
-                        clean_m = sanitize(m.split("::")[0].strip()) if "::" in m else sanitize(m)
-                        lines.append(f"        +{clean_m}()")
+                    if tc.methods:
+                        for m in tc.methods[:6]:
+                            clean_m = sanitize(m.split("::")[0].strip()) if "::" in m else sanitize(m)
+                            lines.append(f"        +{clean_m}()")
+                    else:
+                        lines.append("        +typeclassMethod()")
                     lines.append("    }")
+                    lines.append(f"    <<typeclass>> {s_tc}")
 
                     for sup in tc.superclasses:
                         s_sup = sanitize(sup.split()[0])
@@ -1853,11 +1861,14 @@ class HtmlReportFormatter(ReportFormatterPort):
                     types_count += 1
                     stereotype = "gadt" if t.is_gadt else "newtype" if t.is_newtype else "data"
                     lines.append(f"    class {s_t} {{")
-                    lines.append(f"        <<{stereotype}>>")
-                    for c in t.constructors[:6]:
-                        c_clean = sanitize(c.name)
-                        lines.append(f"        +{c_clean}()")
+                    if t.constructors:
+                        for c in t.constructors[:6]:
+                            c_clean = sanitize(c.name)
+                            lines.append(f"        +{c_clean}()")
+                    else:
+                        lines.append(f"        +{s_t}")
                     lines.append("    }")
+                    lines.append(f"    <<{stereotype}>> {s_t}")
 
                 # 3. Instances
                 for inst in mod.instances:
@@ -1871,15 +1882,17 @@ class HtmlReportFormatter(ReportFormatterPort):
                 if d.pattern_category == PatternCategory.TYPECLASS_SYSTEM or "type" in d.target_kind:
                     s_target = sanitize(d.target_name.split(".")[-1])
                     types_count += 1
+                    s_kind = sanitize(d.target_kind)
                     lines.append(f"    class {s_target} {{")
-                    lines.append(f"        <<{d.target_kind}>>")
+                    lines.append(f"        +{s_target}")
                     lines.append("    }")
+                    lines.append(f"    <<{s_kind}>> {s_target}")
 
         if types_count == 0:
             lines.append("    class HaskellApp {")
-            lines.append("        <<module>>")
             lines.append("        +main()")
             lines.append("    }")
+            lines.append("    <<module>> HaskellApp")
             types_count = 1
 
         return "\n".join(lines), types_count

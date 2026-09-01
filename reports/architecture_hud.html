@@ -1242,40 +1242,8 @@
                     </div>
                 </div>
 
-                <div class="uml-card-container">
-                    <pre class="mermaid" id="umlMermaid">
-classDiagram
-    direction TB
-    class AccountId {
-        <<newtype>>
-        +AccountId()
-    }
-    class Money {
-        <<newtype>>
-        +Money()
-    }
-    class Transaction {
-        <<gadt>>
-        +Deposit()
-        +Withdraw()
-        +Balance()
-    }
-    class Account {
-        <<data>>
-        +Account()
-    }
-    class BankEnv {
-        <<data>>
-        +BankEnv()
-    }
-    class BankM {
-        <<data>>
-    }
-    class Config {
-        <<data>>
-        +Config()
-    }
-                    </pre>
+                <div class="uml-card-container" id="umlContainer">
+                    <div style="color:var(--text-muted); font-family:var(--font-mono); font-size:12px;">Loading UML class diagram...</div>
                 </div>
             </div>
         </main>
@@ -1343,34 +1311,35 @@ classDiagram
     const RAW_UML_CODE = `classDiagram
     direction TB
     class AccountId {
-        <<newtype>>
         +AccountId()
     }
+    <<newtype>> AccountId
     class Money {
-        <<newtype>>
         +Money()
     }
+    <<newtype>> Money
     class Transaction {
-        <<gadt>>
         +Deposit()
         +Withdraw()
         +Balance()
     }
+    <<gadt>> Transaction
     class Account {
-        <<data>>
         +Account()
     }
+    <<data>> Account
     class BankEnv {
-        <<data>>
         +BankEnv()
     }
+    <<data>> BankEnv
     class BankM {
-        <<data>>
+        +BankM
     }
+    <<data>> BankM
     class Config {
-        <<data>>
         +Config()
-    }`;
+    }
+    <<data>> Config`;
     let currentFindingId = 1;
     let currentCategory = 'all';
     let currentModule = 'all';
@@ -1564,10 +1533,17 @@ classDiagram
                         tertiaryColor: '#080B10'
                     }
                 });
-                mermaid.run({ nodes: [document.getElementById('umlMermaid')] });
-                mermaidInitialized = true;
+                mermaid.render('umlSvgGraph', RAW_UML_CODE).then(function(res) {
+                    document.getElementById('umlContainer').innerHTML = res.svg;
+                    mermaidInitialized = true;
+                }).catch(function(err) {
+                    console.error('Mermaid render error:', err);
+                    document.getElementById('umlContainer').innerHTML = '<div style="color:var(--text-muted); padding:20px; font-family:var(--font-mono); font-size:12px;"><pre>' + RAW_UML_CODE + '</pre></div>';
+                });
             }
-        } catch (e) {}
+        } catch (e) {
+            console.error(e);
+        }
     }
 
     function copyUmlSource() {
