@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from pattern_detector.domain.code_model import CodeModel
 from pattern_detector.domain.detection import Detection
 from pattern_detector.domain.rules.base import BasePatternRule
@@ -19,8 +20,8 @@ class AsyncConcurrentFlowRule(BasePatternRule):
         detections: list[Detection] = []
 
         for m in model.all_modules():
-            src = m.raw_source
-            if "Control.Concurrent.Async" in src or "concurrently " in src or "race " in src or "async " in src:
+            src = m.clean_source or m.raw_source
+            if "Control.Concurrent.Async" in m.imports or re.search(r"\b(concurrently|race|async|waitBoth|withAsync)\b", src):
                 evidences = [
                     Evidence(
                         description=f"Module '{m.name}' manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation",

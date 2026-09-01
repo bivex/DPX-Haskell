@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from pattern_detector.domain.code_model import CodeModel
 from pattern_detector.domain.detection import Detection
 from pattern_detector.domain.rules.base import BasePatternRule
@@ -19,8 +20,8 @@ class StreamProcessingPipelineRule(BasePatternRule):
         detections: list[Detection] = []
 
         for m in model.all_modules():
-            src = m.raw_source
-            if ".|" in src or "Conduit" in src or "Pipes" in src or "Streaming.Prelude" in src:
+            src = m.clean_source or m.raw_source
+            if any(imp.startswith("Data.Conduit") or imp.startswith("Pipes") or imp.startswith("Streaming") for imp in m.imports) or ".|" in src or re.search(r"\b(ConduitT|Producer|Consumer|Pipe)\b", src):
                 evidences = [
                     Evidence(
                         description=f"Module '{m.name}' constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees",

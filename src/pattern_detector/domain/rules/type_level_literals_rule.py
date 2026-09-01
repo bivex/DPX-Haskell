@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from pattern_detector.domain.code_model import CodeModel
 from pattern_detector.domain.detection import Detection
 from pattern_detector.domain.rules.base import BasePatternRule
@@ -19,8 +20,8 @@ class TypeLevelLiteralsRule(BasePatternRule):
         detections: list[Detection] = []
 
         for m in model.all_modules():
-            src = m.raw_source
-            if "DataKinds" in m.pragmas or "GHC.TypeLits" in src or "GHC.TypeNats" in src or "KnownNat" in src or "KnownSymbol" in src:
+            src = m.clean_source or m.raw_source
+            if "DataKinds" in m.pragmas or "GHC.TypeLits" in m.imports or "GHC.TypeNats" in m.imports or re.search(r"\b(KnownNat|KnownSymbol)\b", src):
                 evidences = [
                     Evidence(
                         description=f"Module '{m.name}' implements Type-Level Programming (`DataKinds`/`GHC.TypeLits`) enforcing compile-time dimensionality and protocol invariants",

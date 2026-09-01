@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from pattern_detector.domain.code_model import CodeModel
 from pattern_detector.domain.detection import Detection
 from pattern_detector.domain.rules.base import BasePatternRule
@@ -19,8 +20,8 @@ class ContinuationMonadRule(BasePatternRule):
         detections: list[Detection] = []
 
         for m in model.all_modules():
-            src = m.raw_source
-            if "ContT" in src or "callCC" in src or "runCont" in src:
+            src = m.clean_source or m.raw_source
+            if "Control.Monad.Cont" in m.imports or re.search(r"\b(ContT|callCC|runCont|runContT)\b", src):
                 evidences = [
                     Evidence(
                         description=f"Module '{m.name}' employs Continuation Monad (`ContT`/`callCC`) for non-local control transfer and coroutine composition",

@@ -20,8 +20,8 @@ class ExistentialQuantificationRule(BasePatternRule):
         detections: list[Detection] = []
 
         for m in model.all_modules():
-            src = m.raw_source
-            if re.search(r"data\s+[A-Z][a-zA-Z0-9_]*\s*=\s*forall\s+[a-z0-9_]+", src) or ("ExistentialQuantification" in m.pragmas and "forall " in src):
+            src = m.clean_source or m.raw_source
+            if re.search(r"\bdata\s+[A-Z][a-zA-Z0-9_]*\s*=\s*(?:forall\b|[A-Z][a-zA-Z0-9_]*\s+(?:forall|\bforall\b))", src) or ("ExistentialQuantification" in m.pragmas and re.search(r"\bdata\s+[A-Z][a-zA-Z0-9_]*[\s\S]*?\bforall\b", src)):
                 evidences = [
                     Evidence(
                         description=f"Module '{m.name}' adopts Existential Quantification wrapping heterogeneous types satisfying a common typeclass constraint",

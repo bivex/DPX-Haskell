@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from pattern_detector.domain.code_model import CodeModel
 from pattern_detector.domain.detection import Detection
 from pattern_detector.domain.rules.base import BasePatternRule
@@ -19,8 +20,9 @@ class DerivingStrategiesRule(BasePatternRule):
         detections: list[Detection] = []
 
         for m in model.all_modules():
+            src = m.clean_source or m.raw_source
             has_strategies = any(t.deriving_strategies for t in m.types.values())
-            if has_strategies or "DerivingStrategies" in m.pragmas or "deriving stock" in m.raw_source or "deriving newtype" in m.raw_source:
+            if has_strategies or "DerivingStrategies" in m.pragmas or re.search(r"\bderiving\s+(stock|newtype|anyclass)\b", src):
                 evidences = [
                     Evidence(
                         description=f"Module '{m.name}' explicitly specifies Deriving Strategies (stock/newtype/anyclass) ensuring deterministic typeclass derivation",

@@ -38,6 +38,7 @@ class NativeHaskellParserAdapter(ParserPort):
             name=mod_name,
             file_path=file_path,
             raw_source=source_text,
+            clean_source=clean_text,
             location=loc,
         )
 
@@ -64,11 +65,74 @@ class NativeHaskellParserAdapter(ParserPort):
     # -------------------------------------------------------------------------
 
     def _strip_comments_and_strings(self, text: str) -> str:
-        # Strip block comments {- ... -}
-        clean = re.sub(r"\{-(?!#)[\s\S]*?-\}", " ", text)
-        # Strip line comments -- ...
-        clean = re.sub(r"--.*$", "", clean, flags=re.MULTILINE)
-        return clean
+        i = 0
+        n = len(text)
+        out: list[str] = []
+
+        while i < n:
+            # Check for LANGUAGE / OPTIONS pragma {-# ... #-} -> preserve
+            if text[i:i+3] == "{-#":
+                end = text.find("#-}", i + 3)
+                if end != -1:
+                    out.append(text[i:end+3])
+                    i = end + 3
+                else:
+                    out.append(text[i:])
+                    break
+            # Check for block comment {- ... -} (supports nested comments)
+            elif text[i:i+2] == "{-":
+                depth = 1
+                i += 2
+                while i < n and depth > 0:
+                    if text[i:i+2] == "{-":
+                        depth += 1
+                        i += 2
+                    elif text[i:i+2] == "-}":
+                        depth -= 1
+                        i += 2
+                    elif text[i] == "\n":
+                        out.append("\n")
+                        i += 1
+                    else:
+                        i += 1
+                out.append(" ")
+            # Check for line comment --
+            elif text[i:i+2] == "--":
+                while i < n and text[i] != "\n":
+                    i += 1
+            # Check for string literal "..."
+            elif text[i] == '"':
+                i += 1
+                out.append('""')
+                while i < n:
+                    if text[i] == '\\' and i + 1 < n:
+                        if text[i+1] == "\n":
+                            out.append("\n")
+                        i += 2
+                    elif text[i] == '"':
+                        i += 1
+                        break
+                    elif text[i] == "\n":
+                        out.append("\n")
+                        i += 1
+                    else:
+                        i += 1
+            # Check for character literal 'c'
+            elif text[i] == "'":
+                if i + 2 < n and text[i+1] != "'" and text[i+2] == "'":
+                    i += 3
+                    out.append(" ' ' ")
+                elif i + 3 < n and text[i+1] == "\\" and text[i+3] == "'":
+                    i += 4
+                    out.append(" ' ' ")
+                else:
+                    out.append(text[i])
+                    i += 1
+            else:
+                out.append(text[i])
+                i += 1
+
+        return "".join(out)
 
     def _parse_module_name(self, text: str, file_path: str) -> str:
         m = re.search(r"^\s*module\s+([A-Z][a-zA-Z0-9_.]*)", text, re.MULTILINE)
@@ -219,7 +283,7 @@ class NativeHaskellParserAdapter(ParserPort):
                 body=body,
                 cyclomatic_complexity=complexity,
                 calls=calls,
-                has_error=bool(re.search(r"\berror\s+\"[^\"]+\"", body)),
+                has_error=bool(re.search(r"\berror\b", body)),
                 has_undefined=bool(re.search(r"\bundefined\b", body)),
                 has_from_just=bool(re.search(r"\bfromJust\b", body)),
                 has_lazy_foldl=bool(re.search(r"\bfoldl\s+[^\'\s]", body)),

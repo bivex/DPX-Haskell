@@ -95,6 +95,7 @@ class ModuleModel:
     instances: list[TypeClassInstanceModel] = field(default_factory=list)
     functions: dict[str, FunctionModel] = field(default_factory=dict)
     raw_source: str = ""
+    clean_source: str = ""
     location: SourceLocation | None = None
 
     def find_function(self, name: str) -> FunctionModel | None:

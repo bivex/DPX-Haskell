@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from pattern_detector.domain.code_model import CodeModel
 from pattern_detector.domain.detection import Detection
 from pattern_detector.domain.rules.base import BasePatternRule
@@ -19,8 +20,8 @@ class StmTransactionalMemoryRule(BasePatternRule):
         detections: list[Detection] = []
 
         for m in model.all_modules():
-            src = m.raw_source
-            if "atomically " in src or "TVar " in src or "TMVar " in src or "retry" in src or "orElse" in src or "Control.Concurrent.STM" in src:
+            src = m.clean_source or m.raw_source
+            if "Control.Concurrent.STM" in m.imports or re.search(r"\b(atomically|TVar|TMVar|retry|orElse)\b", src):
                 evidences = [
                     Evidence(
                         description=f"Module '{m.name}' coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity",

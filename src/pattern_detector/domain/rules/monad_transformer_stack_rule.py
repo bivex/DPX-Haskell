@@ -20,7 +20,7 @@ class MonadTransformerStackRule(BasePatternRule):
         detections: list[Detection] = []
 
         for m in model.all_modules():
-            src = m.raw_source
+            src = m.clean_source or m.raw_source
             transformers = re.findall(r"\b(ExceptT|StateT|ReaderT|WriterT|MaybeT|IdentityT|ContT|RWST)\b", src)
             unique_t = set(transformers)
             if len(unique_t) >= 2 or ("type " in src and len(transformers) >= 2):

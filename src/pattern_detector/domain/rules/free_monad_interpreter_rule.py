@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from pattern_detector.domain.code_model import CodeModel
 from pattern_detector.domain.detection import Detection
 from pattern_detector.domain.rules.base import BasePatternRule
@@ -19,8 +20,8 @@ class FreeMonadInterpreterRule(BasePatternRule):
         detections: list[Detection] = []
 
         for m in model.all_modules():
-            src = m.raw_source
-            if ("Free " in src or "Control.Monad.Free" in src or "liftF" in src) and ("type " in src or "data " in src):
+            src = m.clean_source or m.raw_source
+            if ("Control.Monad.Free" in m.imports or re.search(r"\b(Free\s+[A-Z]|liftF|iterM)\b", src)) and re.search(r"\b(type|data|newtype)\b", src):
                 evidences = [
                     Evidence(
                         description=f"Module '{m.name}' implements Free Monad DSL Interpreter separating program description from operational interpretation",

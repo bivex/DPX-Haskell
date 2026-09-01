@@ -22,7 +22,7 @@ class UncheckedBottomErrorRule(BasePatternRule):
         for m in model.all_modules():
             for fn in m.functions.values():
                 body = fn.body
-                if re.search(r"\berror\s+\"[^\"]+\"", body) or re.search(r"\bundefined\b", body):
+                if re.search(r"\berror\b", body) or re.search(r"\bundefined\b", body):
                     evidences = [
                         Evidence(
                             description=f"Type Safety Hazard: Function '{fn.id_str}' in '{m.name}' introduces runtime bottom panic (`error`/`undefined`); return typed `Either` or `Maybe` instead",

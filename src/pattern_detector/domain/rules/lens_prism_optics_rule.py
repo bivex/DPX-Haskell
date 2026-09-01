@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from pattern_detector.domain.code_model import CodeModel
 from pattern_detector.domain.detection import Detection
 from pattern_detector.domain.rules.base import BasePatternRule
@@ -19,8 +20,8 @@ class LensPrismOpticsRule(BasePatternRule):
         detections: list[Detection] = []
 
         for m in model.all_modules():
-            src = m.raw_source
-            if "makeLenses " in src or "makePrisms " in src or "makeFields " in src or "^." in src or ".~" in src or "%~" in src:
+            src = m.clean_source or m.raw_source
+            if "Control.Lens" in m.imports or "Optics" in m.imports or re.search(r"\b(makeLenses|makePrisms|makeFields)\b", src) or re.search(r"(\^\.|\.~|%~)", src):
                 evidences = [
                     Evidence(
                         description=f"Module '{m.name}' integrates Functional Optics (Lenses/Prisms) for composable immutable data access and transformation",

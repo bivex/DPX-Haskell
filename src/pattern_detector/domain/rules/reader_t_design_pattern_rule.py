@@ -20,8 +20,8 @@ class ReaderTDesignPatternRule(BasePatternRule):
         detections: list[Detection] = []
 
         for m in model.all_modules():
-            src = m.raw_source
-            if "ReaderT " in src and " IO" in src:
+            src = m.clean_source or m.raw_source
+            if re.search(r"\bReaderT\s+[A-Za-z0-9_().\s]+\bIO\b", src) or ("Control.Monad.Reader" in m.imports and re.search(r"\bReaderT\b", src) and re.search(r"\bIO\b", src)):
                 evidences = [
                     Evidence(
                         description=f"Module '{m.name}' adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access",

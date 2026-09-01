@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from pattern_detector.domain.code_model import CodeModel
 from pattern_detector.domain.detection import Detection
 from pattern_detector.domain.rules.base import BasePatternRule
@@ -19,8 +20,8 @@ class RecursionSchemesRule(BasePatternRule):
         detections: list[Detection] = []
 
         for m in model.all_modules():
-            src = m.raw_source
-            if "Data.Functor.Foldable" in src or "cata " in src or "ana " in src or "Fix " in src or "hylo " in src:
+            src = m.clean_source or m.raw_source
+            if "Data.Functor.Foldable" in m.imports or re.search(r"\b(cata|ana|hylo|Fix)\b", src):
                 evidences = [
                     Evidence(
                         description=f"Module '{m.name}' adopts Recursion Schemes (`cata`/`ana`/`Fix`) abstracting explicit recursive AST traversals into generic morphisms",

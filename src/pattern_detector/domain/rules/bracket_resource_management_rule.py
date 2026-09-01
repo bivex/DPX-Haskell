@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from pattern_detector.domain.code_model import CodeModel
 from pattern_detector.domain.detection import Detection
 from pattern_detector.domain.rules.base import BasePatternRule
@@ -19,8 +20,8 @@ class BracketResourceManagementRule(BasePatternRule):
         detections: list[Detection] = []
 
         for m in model.all_modules():
-            src = m.raw_source
-            if "bracket " in src or "bracketOnError" in src or "ResourceT" in src or "withFile" in src or "withBinaryFile" in src or "withSocketsDo" in src:
+            src = m.clean_source or m.raw_source
+            if re.search(r"\b(bracket|bracketOnError|bracket_|ResourceT|withFile|withBinaryFile|withSocketsDo)\b", src):
                 evidences = [
                     Evidence(
                         description=f"Module '{m.name}' enforces deterministic resource cleanup via Bracket Pattern (`bracket`/`ResourceT`) guaranteeing cleanup even under asynchronous exceptions",

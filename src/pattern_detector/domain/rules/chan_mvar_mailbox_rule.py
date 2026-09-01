@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 from pattern_detector.domain.code_model import CodeModel
 from pattern_detector.domain.detection import Detection
 from pattern_detector.domain.rules.base import BasePatternRule
@@ -19,8 +20,8 @@ class ChanMvarMailboxRule(BasePatternRule):
         detections: list[Detection] = []
 
         for m in model.all_modules():
-            src = m.raw_source
-            if "TQueue " in src or "TChan " in src or "newChan" in src or "writeChan" in src or "readChan" in src or "newTQueue" in src:
+            src = m.clean_source or m.raw_source
+            if re.search(r"\b(TQueue|TChan|newChan|writeChan|readChan|newTQueue|newMVar|takeMVar|putMVar)\b", src):
                 evidences = [
                     Evidence(
                         description=f"Module '{m.name}' coordinates worker synchronization via Actor Mailbox Channel (`TQueue`/`TChan`/`Chan`)",

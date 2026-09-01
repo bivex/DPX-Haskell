@@ -20,8 +20,8 @@ class TypeFamilyAssociatedRule(BasePatternRule):
         detections: list[Detection] = []
 
         for m in model.all_modules():
-            src = m.raw_source
-            if "type family " in src or "data family " in src or any(tc.associated_types for tc in m.typeclasses.values()):
+            src = m.clean_source or m.raw_source
+            if re.search(r"\b(type|data)\s+family\s+[A-Z]", src) or any(tc.associated_types for tc in m.typeclasses.values()) or any(t.is_type_family for t in m.types.values()):
                 evidences = [
                     Evidence(
                         description=f"Module '{m.name}' implements Type Families / Associated Types for type-level computation and indexed type mappings",
