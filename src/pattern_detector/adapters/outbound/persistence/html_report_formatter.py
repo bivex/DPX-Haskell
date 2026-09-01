@@ -1151,7 +1151,7 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
 <script>
     const FINDINGS_DATA = {findings_json};
     const GRAPH_ELEMENTS = {graph_elements_json};
-    const RAW_UML_CODE = `{uml_mermaid_raw}`;
+    const RAW_UML_CODE = {uml_mermaid_json};
     let currentFindingId = 1;
     let currentCategory = 'all';
     let currentModule = 'all';
@@ -1751,8 +1751,7 @@ class HtmlReportFormatter(ReportFormatterPort):
             hotspot_cards_html="\n".join(hotspot_cards),
             findings_json=json.dumps(findings_json_list),
             graph_elements_json=json.dumps(graph_elements),
-            uml_mermaid_code=uml_mermaid_code,
-            uml_mermaid_raw=uml_mermaid_code.replace("`", "'"),
+            uml_mermaid_json=json.dumps(uml_mermaid_code),
             llm_prompt_json=json.dumps(llm_prompt),
         )
 
@@ -1841,6 +1840,7 @@ class HtmlReportFormatter(ReportFormatterPort):
                     s_tc = sanitize(tc_name)
                     types_count += 1
                     lines.append(f"    class {s_tc} {{")
+                    lines.append("        <<typeclass>>")
                     if tc.methods:
                         for m in tc.methods[:6]:
                             clean_m = sanitize(m.split("::")[0].strip()) if "::" in m else sanitize(m)
@@ -1848,7 +1848,6 @@ class HtmlReportFormatter(ReportFormatterPort):
                     else:
                         lines.append("        +typeclassMethod()")
                     lines.append("    }")
-                    lines.append(f"    <<typeclass>> {s_tc}")
 
                     for sup in tc.superclasses:
                         s_sup = sanitize(sup.split()[0])
@@ -1861,14 +1860,14 @@ class HtmlReportFormatter(ReportFormatterPort):
                     types_count += 1
                     stereotype = "gadt" if t.is_gadt else "newtype" if t.is_newtype else "data"
                     lines.append(f"    class {s_t} {{")
+                    lines.append(f"        <<{stereotype}>>")
                     if t.constructors:
                         for c in t.constructors[:6]:
                             c_clean = sanitize(c.name)
                             lines.append(f"        +{c_clean}()")
                     else:
-                        lines.append(f"        +{s_t}")
+                        lines.append(f"        +{s_t}()")
                     lines.append("    }")
-                    lines.append(f"    <<{stereotype}>> {s_t}")
 
                 # 3. Instances
                 for inst in mod.instances:
@@ -1884,15 +1883,15 @@ class HtmlReportFormatter(ReportFormatterPort):
                     types_count += 1
                     s_kind = sanitize(d.target_kind)
                     lines.append(f"    class {s_target} {{")
-                    lines.append(f"        +{s_target}")
+                    lines.append(f"        <<{s_kind}>>")
+                    lines.append(f"        +{s_target}()")
                     lines.append("    }")
-                    lines.append(f"    <<{s_kind}>> {s_target}")
 
         if types_count == 0:
             lines.append("    class HaskellApp {")
+            lines.append("        <<module>>")
             lines.append("        +main()")
             lines.append("    }")
-            lines.append("    <<module>> HaskellApp")
             types_count = 1
 
         return "\n".join(lines), types_count
