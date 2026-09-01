@@ -1825,7 +1825,7 @@ class HtmlReportFormatter(ReportFormatterPort):
 
     def _build_uml_mermaid_diagram(self, report: DetectionReport) -> tuple[str, int]:
         """Constructs a Mermaid.js UML Class Diagram from Typeclasses, GADTs, Newtypes, and Instances."""
-        lines = ["classDiagram"]
+        lines = ["classDiagram-v2"]
         types_count = 0
         code_model = getattr(report, "code_model", None)
 
@@ -1840,13 +1840,13 @@ class HtmlReportFormatter(ReportFormatterPort):
                     s_tc = sanitize(tc_name)
                     types_count += 1
                     lines.append(f"    class {s_tc} {{")
-                    lines.append("        <<typeclass>>")
+                    lines.append("        <<Typeclass>>")
                     if tc.methods:
                         for m in tc.methods[:6]:
                             clean_m = sanitize(m.split("::")[0].strip()) if "::" in m else sanitize(m)
                             lines.append(f"        +{clean_m}()")
                     else:
-                        lines.append("        +typeclassMethod()")
+                        lines.append("        +method()")
                     lines.append("    }")
 
                     for sup in tc.superclasses:
@@ -1858,7 +1858,7 @@ class HtmlReportFormatter(ReportFormatterPort):
                 for t_name, t in mod.types.items():
                     s_t = sanitize(t_name)
                     types_count += 1
-                    stereotype = "gadt" if t.is_gadt else "newtype" if t.is_newtype else "data"
+                    stereotype = "GADT" if t.is_gadt else "Newtype" if t.is_newtype else "Data"
                     lines.append(f"    class {s_t} {{")
                     lines.append(f"        <<{stereotype}>>")
                     if t.constructors:
