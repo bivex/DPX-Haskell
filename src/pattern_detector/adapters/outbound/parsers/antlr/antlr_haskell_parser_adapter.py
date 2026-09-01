@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 from pathlib import Path
-from antlr4 import CommonTokenStream, InputStream
+from antlr4 import CommonTokenStream, InputStream, PredictionMode
 from antlr4.error.ErrorListener import ErrorListener
 
 from pattern_detector.adapters.outbound.parsers.antlr.generated.HaskellLexer import HaskellLexer
@@ -49,10 +49,11 @@ class AntlrHaskellParserAdapter(ParserPort):
 
             token_stream = CommonTokenStream(lexer)
 
-            # 3. Parse with ANTLR4 HaskellParser
+            # 3. Parse with ANTLR4 HaskellParser using SLL prediction mode for O(N) performance
             parser = HaskellParser(token_stream)
             parser.removeErrorListeners()
             parser.addErrorListener(SilentErrorListener())
+            parser._interp.predictionMode = PredictionMode.SLL
 
             tree = parser.haskellModule()
 

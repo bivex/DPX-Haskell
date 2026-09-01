@@ -64,14 +64,27 @@ Designed with **Hexagonal Architecture (Ports & Adapters)** and **Domain-Driven 
 
 ## ⚡ Performance Benchmarks on Real-World Haskell Repositories
 
+### 🔷 ANTLR4 Parser Backend (Default AST Engine)
+
 | Open-Source Project | Files Scanned | Architectural Detections | Scan Time (s) | Typeclasses | Monad Stacks | STM / Async | Safety / Leaks |
 |---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| [**aeson**](https://github.com/haskell/aeson) *(JSON engine)* | 129 | 161 | **0.312s** | 53 | 2 | 0 | 30 |
-| [**wai**](https://github.com/yesodweb/wai) *(Web server engine)* | 204 | 166 | **0.295s** | 2 | 5 | 23 | 16 |
-| [**rio**](https://github.com/commercialhaskell/rio) *(Standard Library)* | 86 | 42 | **0.120s** | 9 | 3 | 1 | 2 |
-| [**megaparsec**](https://github.com/mrkkrp/megaparsec) *(Parser combinators)* | 42 | 64 | **0.166s** | 11 | 9 | 1 | 5 |
-| [**scotty**](https://github.com/scotty-web/scotty) *(Web Framework)* | 31 | 27 | **0.115s** | 3 | 4 | 4 | 5 |
-| **TOTAL** | **492** | **460** | **1.009s** | **78** | **23** | **29** | **58** |
+| [**aeson**](https://github.com/haskell/aeson) *(JSON engine)* | 129 | 146 | **3.057s** | 42 | 16 | 6 | 82 |
+| [**wai**](https://github.com/yesodweb/wai) *(Web server engine)* | 204 | 144 | **5.059s** | 5 | 41 | 29 | 69 |
+| [**rio**](https://github.com/commercialhaskell/rio) *(Standard Library)* | 86 | 37 | **0.895s** | 7 | 14 | 4 | 12 |
+| [**megaparsec**](https://github.com/mrkkrp/megaparsec) *(Parser combinators)* | 42 | 48 | **0.889s** | 10 | 12 | 1 | 25 |
+| [**scotty**](https://github.com/scotty-web/scotty) *(Web Framework)* | 31 | 22 | **0.434s** | 1 | 4 | 6 | 11 |
+| **TOTAL** | **492** | **397** | **10.335s** | **65** | **87** | **46** | **199** |
+
+### ⚡ Native Parser Backend (`--parser native`)
+
+| Open-Source Project | Files Scanned | Architectural Detections | Scan Time (s) | Typeclasses | Monad Stacks | STM / Async | Safety / Leaks |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| [**aeson**](https://github.com/haskell/aeson) *(JSON engine)* | 129 | 173 | **0.271s** | 56 | 26 | 6 | 85 |
+| [**wai**](https://github.com/yesodweb/wai) *(Web server engine)* | 204 | 187 | **0.290s** | 2 | 93 | 29 | 63 |
+| [**rio**](https://github.com/commercialhaskell/rio) *(Standard Library)* | 86 | 49 | **0.060s** | 9 | 25 | 4 | 11 |
+| [**megaparsec**](https://github.com/mrkkrp/megaparsec) *(Parser combinators)* | 42 | 63 | **0.113s** | 11 | 24 | 1 | 27 |
+| [**scotty**](https://github.com/scotty-web/scotty) *(Web Framework)* | 31 | 31 | **0.044s** | 3 | 9 | 6 | 13 |
+| **TOTAL** | **492** | **503** | **0.778s** | **81** | **177** | **46** | **199** |
 
 ---
 
