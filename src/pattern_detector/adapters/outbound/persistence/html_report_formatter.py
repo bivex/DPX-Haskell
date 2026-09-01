@@ -857,43 +857,57 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
             border-radius: 50%;
         }}
 
-        /* 📐 UML Class Diagram View */
+        /* 📐 UML Class Diagram View with Interactive Pan & Zoom */
         .uml-screen {{
             display: none;
             flex-direction: column;
             width: 100%;
             height: 100%;
             background: #080B10;
-            overflow-y: auto;
-            padding: 20px;
+            overflow: hidden;
+            padding: 16px 20px;
             position: relative;
-        }}
-
-        .uml-card-container {{
-            background: var(--bg-panel);
-            border: 1px solid var(--border-dim);
-            border-radius: 10px;
-            padding: 24px;
-            overflow-x: auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 480px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }}
 
         .uml-toolbar {{
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
+            flex-shrink: 0;
         }}
 
-        .mermaid {{
-            width: 100%;
+        .uml-card-container {{
+            background: var(--bg-panel);
+            border: 1px solid var(--border-dim);
+            border-radius: 10px;
+            flex-grow: 1;
+            overflow: hidden;
+            position: relative;
+            cursor: grab;
             display: flex;
+            align-items: center;
             justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            user-select: none;
+        }}
+
+        .uml-card-container.grabbing {{
+            cursor: grabbing;
+        }}
+
+        #umlWrapper {{
+            position: absolute;
+            transform-origin: center center;
+            transition: transform 0.05s ease-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }}
+
+        #umlWrapper svg {{
+            max-width: none !important;
+            height: auto;
         }}
 
         /* Toast */
@@ -1080,13 +1094,20 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
                         <h3 style="font-size: 16px; font-weight: 700; color: var(--text-pure); margin-bottom: 4px;">📐 Haskell Typeclasses & Data Model (UML)</h3>
                         <p style="font-size: 12px; color: var(--text-muted);">UML Class Diagram visualizing Typeclasses, GADTs, Newtypes, and Instance Realizations.</p>
                     </div>
-                    <div style="display: flex; gap: 8px;">
-                        <button class="hud-btn" onclick="copyUmlSource()">📋 Copy Mermaid / PlantUML</button>
+                    <div style="display: flex; gap: 8px; align-items: center;">
+                        <span style="font-family: var(--font-mono); font-size: 11.5px; font-weight: 700; color: var(--cyan); margin-right: 4px;" id="umlZoomLevel">100%</span>
+                        <button class="hud-btn" style="padding: 4px 10px; font-size: 12px;" onclick="umlZoom(1.25)" title="Zoom In (Ctrl + Wheel Up)">＋</button>
+                        <button class="hud-btn" style="padding: 4px 10px; font-size: 12px;" onclick="umlZoom(0.8)" title="Zoom Out (Ctrl + Wheel Down)">－</button>
+                        <button class="hud-btn" style="padding: 4px 10px; font-size: 12px;" onclick="umlFit()" title="Fit View">⛶ Fit</button>
+                        <button class="hud-btn" style="padding: 4px 10px; font-size: 12px;" onclick="umlReset()" title="Reset Zoom & Pan">↺ Reset</button>
+                        <button class="hud-btn" onclick="copyUmlSource()">📋 Copy Mermaid</button>
                     </div>
                 </div>
 
                 <div class="uml-card-container" id="umlContainer">
-                    <div style="color:var(--text-muted); font-family:var(--font-mono); font-size:12px;">Loading UML class diagram...</div>
+                    <div id="umlWrapper">
+                        <div style="color:var(--text-muted); font-family:var(--font-mono); font-size:12px;">Loading UML class diagram...</div>
+                    </div>
                 </div>
             </div>
         </main>
@@ -1327,6 +1348,87 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
         }}
     }}
 
+    let umlScale = 1.0;
+    let umlTranslateX = 0;
+    let umlTranslateY = 0;
+    let isUmlPanning = false;
+    let umlStartX = 0;
+    let umlStartY = 0;
+
+    function applyUmlTransform() {{
+        const wrap = document.getElementById('umlWrapper');
+        if (wrap) {{
+            wrap.style.transform = 'translate(' + umlTranslateX + 'px, ' + umlTranslateY + 'px) scale(' + umlScale + ')';
+            const lbl = document.getElementById('umlZoomLevel');
+            if (lbl) lbl.textContent = Math.round(umlScale * 100) + '%';
+        }}
+    }}
+
+    function umlZoom(factor) {{
+        umlScale = Math.max(0.15, Math.min(6.0, umlScale * factor));
+        applyUmlTransform();
+    }}
+
+    function umlReset() {{
+        umlScale = 1.0;
+        umlTranslateX = 0;
+        umlTranslateY = 0;
+        applyUmlTransform();
+    }}
+
+    function umlFit() {{
+        const container = document.getElementById('umlContainer');
+        const svg = document.querySelector('#umlWrapper svg');
+        if (container && svg) {{
+            const cWidth = container.clientWidth - 40;
+            const cHeight = container.clientHeight - 40;
+            const sWidth = svg.viewBox ? svg.viewBox.baseVal.width || svg.clientWidth : svg.clientWidth;
+            const sHeight = svg.viewBox ? svg.viewBox.baseVal.height || svg.clientHeight : svg.clientHeight;
+            if (sWidth > 0 && sHeight > 0) {{
+                const scaleX = cWidth / sWidth;
+                const scaleY = cHeight / sHeight;
+                umlScale = Math.min(scaleX, scaleY, 1.2);
+                umlTranslateX = 0;
+                umlTranslateY = 0;
+                applyUmlTransform();
+            }}
+        }}
+    }}
+
+    function initUmlPanZoomEvents() {{
+        const container = document.getElementById('umlContainer');
+        if (!container || container.dataset.panZoomInit) return;
+        container.dataset.panZoomInit = 'true';
+
+        container.addEventListener('mousedown', function(e) {{
+            if (e.button !== 0) return;
+            isUmlPanning = true;
+            umlStartX = e.clientX - umlTranslateX;
+            umlStartY = e.clientY - umlTranslateY;
+            container.classList.add('grabbing');
+        }});
+
+        window.addEventListener('mousemove', function(e) {{
+            if (!isUmlPanning) return;
+            umlTranslateX = e.clientX - umlStartX;
+            umlTranslateY = e.clientY - umlStartY;
+            applyUmlTransform();
+        }});
+
+        window.addEventListener('mouseup', function() {{
+            if (isUmlPanning) {{
+                isUmlPanning = false;
+                container.classList.remove('grabbing');
+            }}
+        }});
+
+        container.addEventListener('wheel', function(e) {{
+            e.preventDefault();
+            const factor = e.deltaY < 0 ? 1.15 : 0.85;
+            umlZoom(factor);
+        }}, {{ passive: false }});
+    }}
+
     function initMermaid() {{
         if (mermaidInitialized) return;
         try {{
@@ -1346,11 +1448,17 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
                     }}
                 }});
                 mermaid.render('umlSvgGraph', RAW_UML_CODE).then(function(res) {{
-                    document.getElementById('umlContainer').innerHTML = res.svg;
-                    mermaidInitialized = true;
+                    const wrap = document.getElementById('umlWrapper');
+                    if (wrap) {{
+                        wrap.innerHTML = res.svg;
+                        mermaidInitialized = true;
+                        initUmlPanZoomEvents();
+                        umlReset();
+                    }}
                 }}).catch(function(err) {{
                     console.error('Mermaid render error:', err);
-                    document.getElementById('umlContainer').innerHTML = '<div style="color:var(--text-muted); padding:20px; font-family:var(--font-mono); font-size:12px;"><pre>' + RAW_UML_CODE + '</pre></div>';
+                    const wrap = document.getElementById('umlWrapper');
+                    if (wrap) wrap.innerHTML = '<div style="color:var(--text-muted); padding:20px; font-family:var(--font-mono); font-size:12px;"><pre>' + RAW_UML_CODE + '</pre></div>';
                 }});
             }}
         }} catch (e) {{
