@@ -1,8 +1,9 @@
 """
-DPX Architecture HUD — Professional IDE-like Observability Dashboard for Haskell with Cytoscape.js + Dagre.
+DPX Architecture HUD — Professional IDE-like Observability Dashboard for Haskell.
 Features:
 - Datadog/IDE 3-Pane Layout: Architecture Navigator, Main Findings Stream, Inspector Drawer
-- 🗺️ Interactive Cytoscape.js + Dagre Architecture Graph Explorer (Compound Namespace Nodes, Zoom/Pan, Dependency Flow)
+- 🕸️ Interactive Cytoscape.js + Dagre Architecture Graph Explorer (Compound Namespace Nodes, Zoom/Pan, Dependency Flow)
+- 📐 UML Class & Type Hierarchy Diagram (Mermaid.js Typeclasses, GADTs, Newtypes, and Instances)
 - Density Switcher: Compact, Comfortable
 - Architecture Risk Map & Hotspots Matrix
 - Live Code Evidence Viewer with AST line pointers
@@ -15,6 +16,7 @@ from __future__ import annotations
 import html
 import json
 import os
+import re
 from typing import Any
 
 from pattern_detector.domain.detection import Detection, DetectionReport
@@ -106,6 +108,9 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dagre/0.8.5/dagre.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/cytoscape-dagre@2.5.0/cytoscape-dagre.min.js"></script>
+
+    <!-- Mermaid.js for UML Class & Type Diagrams -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
 
     <style>
         :root {{
@@ -780,7 +785,7 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
             transform: translateY(-2px);
         }}
 
-        /* 🗺️ Cytoscape Architecture Graph View */
+        /* 🕸️ Cytoscape Architecture Graph View */
         .graph-screen {{
             display: none;
             flex-direction: column;
@@ -852,6 +857,45 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
             border-radius: 50%;
         }}
 
+        /* 📐 UML Class Diagram View */
+        .uml-screen {{
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            background: #080B10;
+            overflow-y: auto;
+            padding: 20px;
+            position: relative;
+        }}
+
+        .uml-card-container {{
+            background: var(--bg-panel);
+            border: 1px solid var(--border-dim);
+            border-radius: 10px;
+            padding: 24px;
+            overflow-x: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 480px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }}
+
+        .uml-toolbar {{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }}
+
+        .mermaid {{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }}
+
         /* Toast */
         #toast {{
             display: none;
@@ -882,7 +926,7 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
             <div class="app-title-group">
                 <span class="app-title">DPX Architecture HUD</span>
                 <span class="project-pill">{project_name}</span>
-                <span class="engine-label">Cytoscape + Dagre Engine</span>
+                <span class="engine-label">Cytoscape + UML Engine</span>
             </div>
         </div>
 
@@ -935,6 +979,10 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
                 <div class="nav-item" id="viewNavGraph" onclick="switchView('graph')">
                     <div class="nav-item-left">🕸️ Architecture Graph (Dagre)</div>
                     <span class="nav-item-count" style="color: var(--cyan);">{module_count}</span>
+                </div>
+                <div class="nav-item" id="viewNavUml" onclick="switchView('uml')">
+                    <div class="nav-item-left">📐 UML Class & Types</div>
+                    <span class="nav-item-count" style="color: var(--violet);">{uml_types_count}</span>
                 </div>
                 <div class="nav-item" id="viewNavOverview" onclick="switchView('overview')">
                     <div class="nav-item-left">🗺️ Hotspots Matrix</div>
@@ -1024,6 +1072,25 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
                     <div class="legend-item"><span class="legend-dot" style="background: #FF5C6C;"></span> Action Required</div>
                 </div>
             </div>
+
+            <!-- 📐 UML Class & Type Hierarchy Screen -->
+            <div class="uml-screen" id="umlScreen">
+                <div class="uml-toolbar">
+                    <div>
+                        <h3 style="font-size: 16px; font-weight: 700; color: var(--text-pure); margin-bottom: 4px;">📐 Haskell Typeclasses & Data Model (UML)</h3>
+                        <p style="font-size: 12px; color: var(--text-muted);">UML Class Diagram visualizing Typeclasses, GADTs, Newtypes, and Instance Realizations.</p>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="hud-btn" onclick="copyUmlSource()">📋 Copy Mermaid / PlantUML</button>
+                    </div>
+                </div>
+
+                <div class="uml-card-container">
+                    <pre class="mermaid" id="umlMermaid">
+{uml_mermaid_code}
+                    </pre>
+                </div>
+            </div>
         </main>
 
         <!-- Right Column: Inspector Drawer -->
@@ -1086,10 +1153,12 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
 <script>
     const FINDINGS_DATA = {findings_json};
     const GRAPH_ELEMENTS = {graph_elements_json};
+    const RAW_UML_CODE = `{uml_mermaid_raw}`;
     let currentFindingId = 1;
     let currentCategory = 'all';
     let currentModule = 'all';
     let cy = null;
+    let mermaidInitialized = false;
 
     function renderInspector(finding) {{
         if (!finding) return;
@@ -1201,17 +1270,21 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
         const findingsStream = document.getElementById('findingsStream');
         const overviewScreen = document.getElementById('overviewScreen');
         const graphScreen = document.getElementById('graphScreen');
+        const umlScreen = document.getElementById('umlScreen');
         const navFindings = document.getElementById('viewNavFindings');
         const navOverview = document.getElementById('viewNavOverview');
         const navGraph = document.getElementById('viewNavGraph');
+        const navUml = document.getElementById('viewNavUml');
         const densityWrap = document.getElementById('densityWrap');
 
         findingsStream.style.display = 'none';
         overviewScreen.style.display = 'none';
         graphScreen.style.display = 'none';
+        umlScreen.style.display = 'none';
         navFindings.classList.remove('active');
         navOverview.classList.remove('active');
         if (navGraph) navGraph.classList.remove('active');
+        if (navUml) navUml.classList.remove('active');
         densityWrap.style.display = 'none';
 
         if (view === 'graph') {{
@@ -1220,6 +1293,12 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
             document.getElementById('streamTitle').textContent = 'ARCHITECTURE GRAPH (DAGRE)';
             document.getElementById('streamSubtitle').textContent = '(' + (GRAPH_ELEMENTS.nodes ? GRAPH_ELEMENTS.nodes.length : 0) + ' nodes)';
             initCytoscape();
+        }} else if (view === 'uml') {{
+            umlScreen.style.display = 'block';
+            if (navUml) navUml.classList.add('active');
+            document.getElementById('streamTitle').textContent = 'UML CLASS & TYPE HIERARCHY';
+            document.getElementById('streamSubtitle').textContent = '(Mermaid.js)';
+            initMermaid();
         }} else if (view === 'overview') {{
             overviewScreen.style.display = 'block';
             navOverview.classList.add('active');
@@ -1248,6 +1327,34 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
             btnComfortable.classList.add('active');
             btnCompact.classList.remove('active');
         }}
+    }}
+
+    function initMermaid() {{
+        if (mermaidInitialized) return;
+        try {{
+            if (typeof mermaid !== 'undefined') {{
+                mermaid.initialize({{
+                    startOnLoad: false,
+                    theme: 'dark',
+                    themeVariables: {{
+                        darkMode: true,
+                        background: '#0E131A',
+                        primaryColor: '#18202C',
+                        primaryTextColor: '#FFFFFF',
+                        primaryBorderColor: '#38D9FF',
+                        lineColor: '#38D9FF',
+                        secondaryColor: '#141A23',
+                        tertiaryColor: '#080B10'
+                    }}
+                }});
+                mermaid.run({{ nodes: [document.getElementById('umlMermaid')] }});
+                mermaidInitialized = true;
+            }}
+        }} catch (e) {{}}
+    }}
+
+    function copyUmlSource() {{
+        navigator.clipboard.writeText(RAW_UML_CODE).then(() => showToast('✓ UML Mermaid / PlantUML code copied!'));
     }}
 
     function initCytoscape() {{
@@ -1465,7 +1572,7 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
 
 
 class HtmlReportFormatter(ReportFormatterPort):
-    """Generates an IDE-like Architecture Observability HUD for Haskell with Cytoscape.js + Dagre."""
+    """Generates an IDE-like Architecture Observability HUD for Haskell with Cytoscape.js + Dagre and Mermaid UML."""
 
     def format(self, report: DetectionReport) -> str:
         project_name = self._resolve_project_name(report.project_path)
@@ -1604,6 +1711,9 @@ class HtmlReportFormatter(ReportFormatterPort):
         # Build Cytoscape.js Graph Elements (Nodes and Directed Edges)
         graph_elements = self._build_graph_elements(report, module_findings_map)
 
+        # Build UML Mermaid Class Diagram
+        uml_mermaid_code, uml_types_count = self._build_uml_mermaid_diagram(report)
+
         # Health score calculation
         total = report.total_detections_count or 1
         pct_red = int((violations_count / total) * 100)
@@ -1629,12 +1739,15 @@ class HtmlReportFormatter(ReportFormatterPort):
             pct_violet=pct_violet,
             pct_green=pct_green,
             module_count=len(module_findings_map) or report.scanned_files_count,
+            uml_types_count=uml_types_count,
             category_nav_items="\n".join(cat_nav_items),
             module_nav_items="\n".join(module_nav_items),
             finding_rows_html="\n".join(finding_rows),
             hotspot_cards_html="\n".join(hotspot_cards),
             findings_json=json.dumps(findings_json_list),
             graph_elements_json=json.dumps(graph_elements),
+            uml_mermaid_code=uml_mermaid_code,
+            uml_mermaid_raw=uml_mermaid_code.replace("`", "'"),
             llm_prompt_json=json.dumps(llm_prompt),
         )
 
@@ -1661,7 +1774,7 @@ class HtmlReportFormatter(ReportFormatterPort):
                 has_action = any(x["is_action"] for x in items)
 
                 # Determine node color by dominant pattern category
-                node_color = "#38D9FF"  # Default cyan
+                node_color = "#38D9FF"
                 if has_action:
                     node_color = "#FF5C6C"
                 elif items:
@@ -1678,10 +1791,8 @@ class HtmlReportFormatter(ReportFormatterPort):
                     "signals_count": len(items),
                 })
 
-                # Build dependency edges from imports
                 for imp in mod.imports:
                     target_mod = imp.split()[0] if " " in imp else imp
-                    # If target is in the project
                     if target_mod in code_model.modules and (mod_name, target_mod) not in existing_edges:
                         existing_edges.add((mod_name, target_mod))
                         edges.append({
@@ -1690,7 +1801,6 @@ class HtmlReportFormatter(ReportFormatterPort):
                             "target": target_mod,
                         })
         else:
-            # Fallback when code_model is not attached
             for mod_name, items in module_findings_map.items():
                 if mod_name in existing_nodes:
                     continue
@@ -1708,6 +1818,71 @@ class HtmlReportFormatter(ReportFormatterPort):
                 })
 
         return {"nodes": nodes, "edges": edges}
+
+    def _build_uml_mermaid_diagram(self, report: DetectionReport) -> tuple[str, int]:
+        """Constructs a Mermaid.js UML Class Diagram from Typeclasses, GADTs, Newtypes, and Instances."""
+        lines = ["classDiagram", "    direction TB"]
+        types_count = 0
+        code_model = getattr(report, "code_model", None)
+
+        def sanitize(name: str) -> str:
+            clean = re.sub(r"[^a-zA-Z0-9_]", "_", name).strip("_")
+            return clean if clean else "Anonymous"
+
+        if code_model and hasattr(code_model, "modules") and code_model.modules:
+            for mod_name, mod in code_model.modules.items():
+                # 1. Typeclasses
+                for tc_name, tc in mod.typeclasses.items():
+                    s_tc = sanitize(tc_name)
+                    types_count += 1
+                    lines.append(f"    class {s_tc} {{")
+                    lines.append("        <<typeclass>>")
+                    for m in tc.methods[:6]:
+                        clean_m = sanitize(m.split("::")[0].strip()) if "::" in m else sanitize(m)
+                        lines.append(f"        +{clean_m}()")
+                    lines.append("    }")
+
+                    for sup in tc.superclasses:
+                        s_sup = sanitize(sup.split()[0])
+                        if s_sup and s_sup != s_tc:
+                            lines.append(f"    {s_sup} <|-- {s_tc} : superclass")
+
+                # 2. Types / GADTs / Newtypes
+                for t_name, t in mod.types.items():
+                    s_t = sanitize(t_name)
+                    types_count += 1
+                    stereotype = "gadt" if t.is_gadt else "newtype" if t.is_newtype else "data"
+                    lines.append(f"    class {s_t} {{")
+                    lines.append(f"        <<{stereotype}>>")
+                    for c in t.constructors[:6]:
+                        c_clean = sanitize(c.name)
+                        lines.append(f"        +{c_clean}()")
+                    lines.append("    }")
+
+                # 3. Instances
+                for inst in mod.instances:
+                    s_class = sanitize(inst.class_name)
+                    s_target = sanitize(inst.target_type.split()[0] if inst.target_type else "Instance")
+                    if s_class and s_target:
+                        lines.append(f"    {s_class} <|.. {s_target} : instance")
+        else:
+            # Synthetic fallback from detections
+            for d in report.detections:
+                if d.pattern_category == PatternCategory.TYPECLASS_SYSTEM or "type" in d.target_kind:
+                    s_target = sanitize(d.target_name.split(".")[-1])
+                    types_count += 1
+                    lines.append(f"    class {s_target} {{")
+                    lines.append(f"        <<{d.target_kind}>>")
+                    lines.append("    }")
+
+        if types_count == 0:
+            lines.append("    class HaskellApp {")
+            lines.append("        <<module>>")
+            lines.append("        +main()")
+            lines.append("    }")
+            types_count = 1
+
+        return "\n".join(lines), types_count
 
     def _format_display_location(self, loc_str: str, project_path: str) -> tuple[str, str]:
         if not loc_str or loc_str == "N/A":

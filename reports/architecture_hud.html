@@ -13,6 +13,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dagre/0.8.5/dagre.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/cytoscape-dagre@2.5.0/cytoscape-dagre.min.js"></script>
 
+    <!-- Mermaid.js for UML Class & Type Diagrams -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.9.0/mermaid.min.js"></script>
+
     <style>
         :root {
             --bg-void: #080B10;
@@ -686,7 +689,7 @@
             transform: translateY(-2px);
         }
 
-        /* 🗺️ Cytoscape Architecture Graph View */
+        /* 🕸️ Cytoscape Architecture Graph View */
         .graph-screen {
             display: none;
             flex-direction: column;
@@ -758,6 +761,45 @@
             border-radius: 50%;
         }
 
+        /* 📐 UML Class Diagram View */
+        .uml-screen {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            background: #080B10;
+            overflow-y: auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .uml-card-container {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-dim);
+            border-radius: 10px;
+            padding: 24px;
+            overflow-x: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 480px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .uml-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .mermaid {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
         /* Toast */
         #toast {
             display: none;
@@ -788,13 +830,13 @@
             <div class="app-title-group">
                 <span class="app-title">DPX Architecture HUD</span>
                 <span class="project-pill">haskell_samples</span>
-                <span class="engine-label">Cytoscape + Dagre Engine</span>
+                <span class="engine-label">Cytoscape + UML Engine</span>
             </div>
         </div>
 
         <div class="header-metrics">
             <div class="metric-item">📁 <span class="metric-val">2</span> files</div>
-            <div class="metric-item">⏱️ <span class="metric-val">0.200s</span></div>
+            <div class="metric-item">⏱️ <span class="metric-val">0.192s</span></div>
             <div class="metric-item">🔷 <span class="metric-val">11</span> findings</div>
             <div class="metric-item" style="color: var(--red);">🔴 <span class="metric-val" style="color: var(--red);">0</span> action required</div>
         </div>
@@ -841,6 +883,10 @@
                 <div class="nav-item" id="viewNavGraph" onclick="switchView('graph')">
                     <div class="nav-item-left">🕸️ Architecture Graph (Dagre)</div>
                     <span class="nav-item-count" style="color: var(--cyan);">2</span>
+                </div>
+                <div class="nav-item" id="viewNavUml" onclick="switchView('uml')">
+                    <div class="nav-item-left">📐 UML Class & Types</div>
+                    <span class="nav-item-count" style="color: var(--violet);">7</span>
                 </div>
                 <div class="nav-item" id="viewNavOverview" onclick="switchView('overview')">
                     <div class="nav-item-left">🗺️ Hotspots Matrix</div>
@@ -1183,6 +1229,55 @@
                     <div class="legend-item"><span class="legend-dot" style="background: #FF5C6C;"></span> Action Required</div>
                 </div>
             </div>
+
+            <!-- 📐 UML Class & Type Hierarchy Screen -->
+            <div class="uml-screen" id="umlScreen">
+                <div class="uml-toolbar">
+                    <div>
+                        <h3 style="font-size: 16px; font-weight: 700; color: var(--text-pure); margin-bottom: 4px;">📐 Haskell Typeclasses & Data Model (UML)</h3>
+                        <p style="font-size: 12px; color: var(--text-muted);">UML Class Diagram visualizing Typeclasses, GADTs, Newtypes, and Instance Realizations.</p>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="hud-btn" onclick="copyUmlSource()">📋 Copy Mermaid / PlantUML</button>
+                    </div>
+                </div>
+
+                <div class="uml-card-container">
+                    <pre class="mermaid" id="umlMermaid">
+classDiagram
+    direction TB
+    class AccountId {
+        <<newtype>>
+        +AccountId()
+    }
+    class Money {
+        <<newtype>>
+        +Money()
+    }
+    class Transaction {
+        <<gadt>>
+        +Deposit()
+        +Withdraw()
+        +Balance()
+    }
+    class Account {
+        <<data>>
+        +Account()
+    }
+    class BankEnv {
+        <<data>>
+        +BankEnv()
+    }
+    class BankM {
+        <<data>>
+    }
+    class Config {
+        <<data>>
+        +Config()
+    }
+                    </pre>
+                </div>
+            </div>
         </main>
 
         <!-- Right Column: Inspector Drawer -->
@@ -1245,10 +1340,42 @@
 <script>
     const FINDINGS_DATA = [{"idx": 1, "pattern_type": "gadts_type_safe_ast", "category": "typeclass_system", "category_name": "Typeclasses & Types", "category_color": "#A78BFA", "category_bg": "rgba(167, 139, 250, 0.12)", "target_name": "BankApp.Transaction", "target_kind": "gadt_data_type", "summary": "Data type 'Transaction' in 'BankApp' implements Generalized Algebraic Data Type (GADT) ensuring compile-time type preservation", "confidence_str": "85%", "confidence_level": "VERY_HIGH", "impact": "HIGH", "impact_color": "#38D9FF", "is_action": false, "location_display": "BankApp.hs:30:1", "location_full": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:30:1", "module": "BankApp", "evidences": [{"rule_code": "GADT_TYPE_SAFE_AST", "weight": 0.85, "description": "Data type 'Transaction' in 'BankApp' implements Generalized Algebraic Data Type (GADT) ensuring compile-time type preservation", "location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:30:1"}]}, {"idx": 2, "pattern_type": "newtype_strong_typing", "category": "typeclass_system", "category_name": "Typeclasses & Types", "category_color": "#A78BFA", "category_bg": "rgba(167, 139, 250, 0.12)", "target_name": "BankApp", "target_kind": "newtype_domain_module", "summary": "Module 'BankApp' enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost", "confidence_str": "80%", "confidence_level": "HIGH", "impact": "MEDIUM", "impact_color": "#38D9FF", "is_action": false, "location_display": "BankApp.hs:3:1", "location_full": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:3:1", "module": "BankApp", "evidences": [{"rule_code": "NEWTYPE_DOMAIN_VALUE_OBJECT", "weight": 0.8, "description": "Module 'BankApp' enforces DDD Value Object strong typing via 2 newtype wrapper(s) at zero runtime cost", "location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:3:1"}]}, {"idx": 3, "pattern_type": "deriving_strategies", "category": "typeclass_system", "category_name": "Typeclasses & Types", "category_color": "#A78BFA", "category_bg": "rgba(167, 139, 250, 0.12)", "target_name": "BankApp", "target_kind": "deriving_strategies_module", "summary": "Module 'BankApp' explicitly specifies Deriving Strategies (stock/newtype/anyclass) ensuring deterministic typeclass derivation", "confidence_str": "80%", "confidence_level": "HIGH", "impact": "MEDIUM", "impact_color": "#38D9FF", "is_action": false, "location_display": "BankApp.hs:3:1", "location_full": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:3:1", "module": "BankApp", "evidences": [{"rule_code": "EXPLICIT_DERIVING_STRATEGIES", "weight": 0.8, "description": "Module 'BankApp' explicitly specifies Deriving Strategies (stock/newtype/anyclass) ensuring deterministic typeclass derivation", "location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:3:1"}]}, {"idx": 4, "pattern_type": "reader_t_design_pattern", "category": "monad_architecture", "category_name": "Monad & ReaderT", "category_color": "#38D9FF", "category_bg": "rgba(56, 217, 255, 0.12)", "target_name": "BankApp", "target_kind": "reader_t_architecture", "summary": "Module 'BankApp' adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access", "confidence_str": "90%", "confidence_level": "VERY_HIGH", "impact": "HIGH", "impact_color": "#38D9FF", "is_action": false, "location_display": "BankApp.hs:3:1", "location_full": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:3:1", "module": "BankApp", "evidences": [{"rule_code": "READER_T_PATTERN_DI", "weight": 0.9, "description": "Module 'BankApp' adopts The ReaderT Design Pattern (`ReaderT Env IO`) for clean dependency injection and static environment access", "location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:3:1"}]}, {"idx": 5, "pattern_type": "monad_transformer_stack", "category": "monad_architecture", "category_name": "Monad & ReaderT", "category_color": "#38D9FF", "category_bg": "rgba(56, 217, 255, 0.12)", "target_name": "BankApp", "target_kind": "monad_transformer_module", "summary": "Module 'BankApp' layers a Monad Transformer Stack combining 2 distinct computational capabilities (ExceptT, ReaderT)", "confidence_str": "85%", "confidence_level": "VERY_HIGH", "impact": "HIGH", "impact_color": "#38D9FF", "is_action": false, "location_display": "BankApp.hs:3:1", "location_full": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:3:1", "module": "BankApp", "evidences": [{"rule_code": "MONAD_TRANSFORMER_LAYER_STACK", "weight": 0.85, "description": "Module 'BankApp' layers a Monad Transformer Stack combining 2 distinct computational capabilities (ExceptT, ReaderT)", "location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:3:1"}]}, {"idx": 6, "pattern_type": "lens_prism_optics", "category": "optics_lenses", "category_name": "Optics & Lenses", "category_color": "#F472B6", "category_bg": "rgba(244, 114, 182, 0.12)", "target_name": "OpticsStreamService", "target_kind": "lens_optics_module", "summary": "Module 'OpticsStreamService' integrates Functional Optics (Lenses/Prisms) for composable immutable data access and transformation", "confidence_str": "85%", "confidence_level": "VERY_HIGH", "impact": "HIGH", "impact_color": "#38D9FF", "is_action": false, "location_display": "OpticsStreamService.hs:3:1", "location_full": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:3:1", "module": "OpticsStreamService", "evidences": [{"rule_code": "FUNCTIONAL_OPTICS_LENSES", "weight": 0.85, "description": "Module 'OpticsStreamService' integrates Functional Optics (Lenses/Prisms) for composable immutable data access and transformation", "location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:3:1"}]}, {"idx": 7, "pattern_type": "stm_transactional_memory", "category": "concurrency_stm", "category_name": "STM & Concurrency", "category_color": "#FBBF24", "category_bg": "rgba(251, 191, 36, 0.12)", "target_name": "BankApp", "target_kind": "stm_concurrency_module", "summary": "Module 'BankApp' coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity", "confidence_str": "90%", "confidence_level": "VERY_HIGH", "impact": "HIGH", "impact_color": "#38D9FF", "is_action": false, "location_display": "BankApp.hs:3:1", "location_full": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:3:1", "module": "BankApp", "evidences": [{"rule_code": "SOFTWARE_TRANSACTIONAL_MEMORY", "weight": 0.9, "description": "Module 'BankApp' coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity", "location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs:3:1"}]}, {"idx": 8, "pattern_type": "stm_transactional_memory", "category": "concurrency_stm", "category_name": "STM & Concurrency", "category_color": "#FBBF24", "category_bg": "rgba(251, 191, 36, 0.12)", "target_name": "OpticsStreamService", "target_kind": "stm_concurrency_module", "summary": "Module 'OpticsStreamService' coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity", "confidence_str": "90%", "confidence_level": "VERY_HIGH", "impact": "HIGH", "impact_color": "#38D9FF", "is_action": false, "location_display": "OpticsStreamService.hs:3:1", "location_full": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:3:1", "module": "OpticsStreamService", "evidences": [{"rule_code": "SOFTWARE_TRANSACTIONAL_MEMORY", "weight": 0.9, "description": "Module 'OpticsStreamService' coordinates concurrency via Software Transactional Memory (STM) ensuring composable, deadlock-free transactional atomicity", "location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:3:1"}]}, {"idx": 9, "pattern_type": "async_concurrent_flow", "category": "concurrency_stm", "category_name": "STM & Concurrency", "category_color": "#FBBF24", "category_bg": "rgba(251, 191, 36, 0.12)", "target_name": "OpticsStreamService", "target_kind": "async_concurrency_module", "summary": "Module 'OpticsStreamService' manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation", "confidence_str": "85%", "confidence_level": "VERY_HIGH", "impact": "HIGH", "impact_color": "#38D9FF", "is_action": false, "location_display": "OpticsStreamService.hs:3:1", "location_full": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:3:1", "module": "OpticsStreamService", "evidences": [{"rule_code": "STRUCTURED_ASYNC_CONCURRENCY", "weight": 0.85, "description": "Module 'OpticsStreamService' manages concurrent tasks via Structured Async Concurrency (`async`/`concurrently`/`race`) with automatic cancellation propagation", "location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:3:1"}]}, {"idx": 10, "pattern_type": "stream_processing_pipeline", "category": "functional_idiom", "category_name": "Functional Idioms", "category_color": "#35D07F", "category_bg": "rgba(53, 208, 127, 0.12)", "target_name": "OpticsStreamService", "target_kind": "streaming_pipeline_module", "summary": "Module 'OpticsStreamService' constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees", "confidence_str": "85%", "confidence_level": "VERY_HIGH", "impact": "HIGH", "impact_color": "#38D9FF", "is_action": false, "location_display": "OpticsStreamService.hs:3:1", "location_full": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:3:1", "module": "OpticsStreamService", "evidences": [{"rule_code": "STREAM_PROCESSING_PIPELINE", "weight": 0.85, "description": "Module 'OpticsStreamService' constructs a Stream Processing Pipeline ensuring constant-memory processing and backpressure guarantees", "location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:3:1"}]}, {"idx": 11, "pattern_type": "chan_mvar_mailbox", "category": "concurrency_stm", "category_name": "STM & Concurrency", "category_color": "#FBBF24", "category_bg": "rgba(251, 191, 36, 0.12)", "target_name": "OpticsStreamService", "target_kind": "mailbox_channel_module", "summary": "Module 'OpticsStreamService' coordinates worker synchronization via Actor Mailbox Channel (`TQueue`/`TChan`/`Chan`)", "confidence_str": "85%", "confidence_level": "VERY_HIGH", "impact": "HIGH", "impact_color": "#38D9FF", "is_action": false, "location_display": "OpticsStreamService.hs:3:1", "location_full": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:3:1", "module": "OpticsStreamService", "evidences": [{"rule_code": "ACTOR_MAILBOX_CHANNEL", "weight": 0.85, "description": "Module 'OpticsStreamService' coordinates worker synchronization via Actor Mailbox Channel (`TQueue`/`TChan`/`Chan`)", "location": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs:3:1"}]}];
     const GRAPH_ELEMENTS = {"nodes": [{"id": "BankApp", "label": "BankApp", "color": "#A78BFA", "size": 70, "file_path": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/BankApp.hs", "signals_count": 6}, {"id": "OpticsStreamService", "label": "OpticsStreamService", "color": "#F472B6", "size": 65, "file_path": "/Volumes/External/Code/DPX-Haskell/examples/haskell_samples/OpticsStreamService.hs", "signals_count": 5}], "edges": []};
+    const RAW_UML_CODE = `classDiagram
+    direction TB
+    class AccountId {
+        <<newtype>>
+        +AccountId()
+    }
+    class Money {
+        <<newtype>>
+        +Money()
+    }
+    class Transaction {
+        <<gadt>>
+        +Deposit()
+        +Withdraw()
+        +Balance()
+    }
+    class Account {
+        <<data>>
+        +Account()
+    }
+    class BankEnv {
+        <<data>>
+        +BankEnv()
+    }
+    class BankM {
+        <<data>>
+    }
+    class Config {
+        <<data>>
+        +Config()
+    }`;
     let currentFindingId = 1;
     let currentCategory = 'all';
     let currentModule = 'all';
     let cy = null;
+    let mermaidInitialized = false;
 
     function renderInspector(finding) {
         if (!finding) return;
@@ -1360,17 +1487,21 @@
         const findingsStream = document.getElementById('findingsStream');
         const overviewScreen = document.getElementById('overviewScreen');
         const graphScreen = document.getElementById('graphScreen');
+        const umlScreen = document.getElementById('umlScreen');
         const navFindings = document.getElementById('viewNavFindings');
         const navOverview = document.getElementById('viewNavOverview');
         const navGraph = document.getElementById('viewNavGraph');
+        const navUml = document.getElementById('viewNavUml');
         const densityWrap = document.getElementById('densityWrap');
 
         findingsStream.style.display = 'none';
         overviewScreen.style.display = 'none';
         graphScreen.style.display = 'none';
+        umlScreen.style.display = 'none';
         navFindings.classList.remove('active');
         navOverview.classList.remove('active');
         if (navGraph) navGraph.classList.remove('active');
+        if (navUml) navUml.classList.remove('active');
         densityWrap.style.display = 'none';
 
         if (view === 'graph') {
@@ -1379,6 +1510,12 @@
             document.getElementById('streamTitle').textContent = 'ARCHITECTURE GRAPH (DAGRE)';
             document.getElementById('streamSubtitle').textContent = '(' + (GRAPH_ELEMENTS.nodes ? GRAPH_ELEMENTS.nodes.length : 0) + ' nodes)';
             initCytoscape();
+        } else if (view === 'uml') {
+            umlScreen.style.display = 'block';
+            if (navUml) navUml.classList.add('active');
+            document.getElementById('streamTitle').textContent = 'UML CLASS & TYPE HIERARCHY';
+            document.getElementById('streamSubtitle').textContent = '(Mermaid.js)';
+            initMermaid();
         } else if (view === 'overview') {
             overviewScreen.style.display = 'block';
             navOverview.classList.add('active');
@@ -1407,6 +1544,34 @@
             btnComfortable.classList.add('active');
             btnCompact.classList.remove('active');
         }
+    }
+
+    function initMermaid() {
+        if (mermaidInitialized) return;
+        try {
+            if (typeof mermaid !== 'undefined') {
+                mermaid.initialize({
+                    startOnLoad: false,
+                    theme: 'dark',
+                    themeVariables: {
+                        darkMode: true,
+                        background: '#0E131A',
+                        primaryColor: '#18202C',
+                        primaryTextColor: '#FFFFFF',
+                        primaryBorderColor: '#38D9FF',
+                        lineColor: '#38D9FF',
+                        secondaryColor: '#141A23',
+                        tertiaryColor: '#080B10'
+                    }
+                });
+                mermaid.run({ nodes: [document.getElementById('umlMermaid')] });
+                mermaidInitialized = true;
+            }
+        } catch (e) {}
+    }
+
+    function copyUmlSource() {
+        navigator.clipboard.writeText(RAW_UML_CODE).then(() => showToast('✓ UML Mermaid / PlantUML code copied!'));
     }
 
     function initCytoscape() {
