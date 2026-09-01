@@ -24,15 +24,15 @@ class Container:
     """Hexagonal Dependency Injection container."""
 
     rules: list[PatternRule] = field(default_factory=lambda: list(DEFAULT_RULES))
-    parser_type: str = "native"
+    parser_type: str = "antlr"
 
     def get_source_provider(self) -> SourceProviderPort:
         return FileSourceProvider()
 
     def get_parser(self) -> ParserPort:
-        if self.parser_type == "antlr":
-            return AntlrHaskellParserAdapter()
-        return NativeHaskellParserAdapter()
+        if self.parser_type == "native":
+            return NativeHaskellParserAdapter()
+        return AntlrHaskellParserAdapter()
 
     def get_detector(self) -> DetectorPort:
         return PatternDetectorService(self.rules)
@@ -53,7 +53,7 @@ class Container:
 
 def create_container(
     custom_rules: list[PatternRule] | None = None,
-    parser_type: str = "native",
+    parser_type: str = "antlr",
 ) -> Container:
     return Container(
         rules=custom_rules if custom_rules is not None else list(DEFAULT_RULES),

@@ -102,8 +102,18 @@ transferMoney fromAcc toAcc amount = atomically $ do
     assert PatternType.STM_TRANSACTIONAL_MEMORY in detected_types
 
 
-def test_container_with_antlr_parser():
-    """Verify that Container with parser_type='antlr' provides AntlrHaskellParserAdapter."""
-    container = create_container(parser_type="antlr")
+def test_container_default_parser_is_antlr():
+    """Verify that Container defaults to AntlrHaskellParserAdapter."""
+    container = create_container()
     parser = container.get_parser()
     assert isinstance(parser, AntlrHaskellParserAdapter)
+
+
+def test_container_with_native_parser_option():
+    """Verify that Container with parser_type='native' provides NativeHaskellParserAdapter."""
+    from pattern_detector.adapters.outbound.parsers.native_haskell_parser_adapter import NativeHaskellParserAdapter
+
+    container = create_container(parser_type="native")
+    parser = container.get_parser()
+    assert isinstance(parser, NativeHaskellParserAdapter)
+

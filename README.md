@@ -14,7 +14,7 @@ Designed with **Hexagonal Architecture (Ports & Adapters)** and **Domain-Driven 
 
 ## 🚀 Key Features
 
-* **⚡ Ultra-Fast Layout-Aware Parser:** Parses pure Haskell files, language pragmas (`{-# LANGUAGE #-}`), GADTs, type families, typeclasses, and monad pipelines in microseconds.
+* **⚡ Robust ANTLR4 & Native AST Parsers:** Full ANTLR4 grammar backend (default) supporting GHC 9.2 - 9.10+, language pragmas (`{-# LANGUAGE #-}`), GADTs, type families, typeclasses, and monad pipelines in milliseconds.
 * **🛡️ 26 Specialized Rules:** Comprehensive static pattern detection spanning Typeclass Systems, Monad Architecture, Functional Optics, STM Concurrency, and Space Leak Hazards.
 * **📁 Directory Exclusions (`-e / --exclude`):** Prunes `.stack-work`, `dist-newstyle`, `test`, `benchmarks` on the fly.
 * **📊 Multi-Format Reporting:** Instant interactive **Dark HTML Dashboards**, **OASIS SARIF v2.1.0** (GitHub Code Scanning), **JSON**, **Markdown**, and **LLM XML prompt context**.
@@ -131,8 +131,9 @@ uv run dpx-haskell scan . --llm
              │ implemented by        │ implemented by
 ┌────────────▼──────────────┐ ┌──────▼───────────────────┐
 │     Driven Adapters       │ │       Persistence        │
-│ NativeHaskellParserAdapter│ │ HTML, SARIF, JSON, MD    │
-│ FileSourceProvider        │ │ FileResultRepository     │
+│ AntlrHaskellParserAdapter │ │ HTML, SARIF, JSON, MD    │
+│ NativeHaskellParserAdapter│ │ FileResultRepository     │
+│ FileSourceProvider        │ │                          │
 └───────────────────────────┘ └──────────────────────────┘
 ```
 

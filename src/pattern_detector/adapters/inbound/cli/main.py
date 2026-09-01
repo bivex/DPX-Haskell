@@ -117,9 +117,9 @@ def scan(
         str,
         typer.Option(
             "--parser",
-            help="Parser backend: 'native' (default, fast layout-aware) or 'antlr' (ANTLR4 grammar).",
+            help="Parser backend: 'antlr' (default, ANTLR4 grammar) or 'native' (fast layout-aware).",
         ),
-    ] = "native",
+    ] = "antlr",
 ) -> None:
     """Scan a Haskell project or source file for typeclass idioms, monad stacks, STM concurrency, and space leak hazards."""
     target_path = str(Path(path).resolve())
