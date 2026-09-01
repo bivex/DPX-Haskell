@@ -1095,10 +1095,12 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
                         <p style="font-size: 12px; color: var(--text-muted);">UML Class Diagram visualizing Typeclasses, GADTs, Newtypes, and Instance Realizations.</p>
                     </div>
                     <div style="display: flex; gap: 8px; align-items: center;">
-                        <span style="font-family: var(--font-mono); font-size: 11.5px; font-weight: 700; color: var(--cyan); margin-right: 4px;" id="umlZoomLevel">100%</span>
+                        <span style="font-family: var(--font-mono); font-size: 11.5px; font-weight: 700; color: var(--cyan); margin-right: 4px; min-width: 48px; text-align: right;" id="umlZoomLevel">100%</span>
                         <button class="hud-btn" style="padding: 4px 10px; font-size: 12px;" onclick="umlZoom(1.25)" title="Zoom In (Ctrl + Wheel Up)">＋</button>
                         <button class="hud-btn" style="padding: 4px 10px; font-size: 12px;" onclick="umlZoom(0.8)" title="Zoom Out (Ctrl + Wheel Down)">－</button>
                         <button class="hud-btn" style="padding: 4px 10px; font-size: 12px;" onclick="umlFit()" title="Fit View">⛶ Fit</button>
+                        <button class="hud-btn" style="padding: 4px 10px; font-size: 12px;" onclick="umlSetZoom(1.0)" title="Zoom to 100%">100%</button>
+                        <button class="hud-btn" style="padding: 4px 10px; font-size: 12px; border-color: rgba(167, 139, 250, 0.4); color: var(--purple);" onclick="umlSetZoom(20.0)" title="Zoom to 2000%">⚡ 2000%</button>
                         <button class="hud-btn" style="padding: 4px 10px; font-size: 12px;" onclick="umlReset()" title="Reset Zoom & Pan">↺ Reset</button>
                         <button class="hud-btn" onclick="copyUmlSource()">📋 Copy Mermaid</button>
                     </div>
@@ -1364,8 +1366,13 @@ _HTML_HUD_TEMPLATE = """<!DOCTYPE html>
         }}
     }}
 
+    function umlSetZoom(val) {{
+        umlScale = Math.max(0.05, Math.min(25.0, val));
+        applyUmlTransform();
+    }}
+
     function umlZoom(factor) {{
-        umlScale = Math.max(0.15, Math.min(6.0, umlScale * factor));
+        umlScale = Math.max(0.05, Math.min(25.0, umlScale * factor));
         applyUmlTransform();
     }}
 
