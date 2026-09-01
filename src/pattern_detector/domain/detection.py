@@ -48,6 +48,7 @@ class DetectionReport:
     scanned_files_count: int
     detections: list[Detection] = field(default_factory=list)
     elapsed_seconds: float = 0.0
+    code_model: Any = None
 
     @property
     def total_detections_count(self) -> int:

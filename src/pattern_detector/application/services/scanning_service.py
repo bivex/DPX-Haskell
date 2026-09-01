@@ -51,6 +51,7 @@ class ScanningService(ScannerPort):
             scanned_files_count=len(sources),
             detections=detections,
             elapsed_seconds=round(elapsed, 4),
+            code_model=code_model,
         )
 
         self._save_report(report, opts)
@@ -69,6 +70,7 @@ class ScanningService(ScannerPort):
             scanned_files_count=len(sources),
             detections=detections,
             elapsed_seconds=round(elapsed, 4),
+            code_model=code_model,
         )
 
     def _save_report(self, report: DetectionReport, options: ScanOptions) -> None:
